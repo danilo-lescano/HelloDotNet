@@ -52,6 +52,20 @@ namespace tacertoforms
             app.UseStaticFiles();
             app.UseCookiePolicy();
 
+            Console.WriteLine("------------------------------");
+            Console.WriteLine("------------------------------");
+            Console.WriteLine("------------------------------");
+            Console.WriteLine("------------------------------");
+            Console.WriteLine("------------------------------");
+
+            Console.WriteLine("");
+            
+            Console.WriteLine("------------------------------");
+            Console.WriteLine("------------------------------");
+            Console.WriteLine("------------------------------");
+            Console.WriteLine("------------------------------");
+            Console.WriteLine("------------------------------");
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
