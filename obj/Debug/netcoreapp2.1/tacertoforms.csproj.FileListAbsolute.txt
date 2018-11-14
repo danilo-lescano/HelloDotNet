@@ -30,3 +30,9 @@
 /Users/estagioeducacao1/Desktop/Documentos/git projects/tacertoforms/obj/Debug/netcoreapp2.1/tacertoforms.pdb
 /Users/estagioeducacao1/Desktop/Documentos/git projects/tacertoforms/obj/Debug/netcoreapp2.1/tacertoforms.csproj.CopyComplete
 /Users/estagioeducacao1/Desktop/Documentos/git projects/tacertoforms/obj/Debug/netcoreapp2.1/Razor/Views/Shared/Error.g.cshtml.cs
+/Users/estagioeducacao1/Desktop/Documentos/git projects/tacertoforms/obj/Debug/netcoreapp2.1/Razor/Views/Home/Huehue.g.cshtml.cs
+/Users/estagioeducacao1/Desktop/Documentos/git projects/tacertoforms/obj/Debug/netcoreapp2.1/Razor/Views/Teste/About.g.cshtml.cs
+/Users/estagioeducacao1/Desktop/Documentos/git projects/tacertoforms/obj/Debug/netcoreapp2.1/Razor/Views/Teste/Contact.g.cshtml.cs
+/Users/estagioeducacao1/Desktop/Documentos/git projects/tacertoforms/obj/Debug/netcoreapp2.1/Razor/Views/Teste/Huehue.g.cshtml.cs
+/Users/estagioeducacao1/Desktop/Documentos/git projects/tacertoforms/obj/Debug/netcoreapp2.1/Razor/Views/Teste/Index.g.cshtml.cs
+/Users/estagioeducacao1/Desktop/Documentos/git projects/tacertoforms/obj/Debug/netcoreapp2.1/Razor/Views/Teste/Privacy.g.cshtml.cs

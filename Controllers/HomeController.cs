@@ -29,6 +29,13 @@ namespace tacertoforms.Controllers
             return View();
         }
 
+        public IActionResult Huehue()
+        {
+            ViewData["Message"] = "huehuehuheuheuheuheuheuehueheuheu.";
+
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();

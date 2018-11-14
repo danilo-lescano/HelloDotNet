@@ -52,25 +52,11 @@ namespace tacertoforms
             app.UseStaticFiles();
             app.UseCookiePolicy();
 
-            Console.WriteLine("------------------------------");
-            Console.WriteLine("------------------------------");
-            Console.WriteLine("------------------------------");
-            Console.WriteLine("------------------------------");
-            Console.WriteLine("------------------------------");
-
-            Console.WriteLine("");
-            
-            Console.WriteLine("------------------------------");
-            Console.WriteLine("------------------------------");
-            Console.WriteLine("------------------------------");
-            Console.WriteLine("------------------------------");
-            Console.WriteLine("------------------------------");
-
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Teste}/{action=Index}/{id?}");
             });
         }
     }
