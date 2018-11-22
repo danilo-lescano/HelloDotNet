@@ -12,6 +12,7 @@ namespace tacertoforms.Controllers
     {
         public IActionResult Index()
         {
+            //return RedirectToAction("About");
             return View();
         }
 

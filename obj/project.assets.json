@@ -11507,11 +11507,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/estagioeducacao1/Desktop/Documentos/git projects/tacertoforms/tacertoforms.csproj",
+      "projectUniqueName": "/Users/estagioeducacao1/Desktop/Documentos/git projects/tacertoforms-dotnet/tacertoforms.csproj",
       "projectName": "tacertoforms",
-      "projectPath": "/Users/estagioeducacao1/Desktop/Documentos/git projects/tacertoforms/tacertoforms.csproj",
+      "projectPath": "/Users/estagioeducacao1/Desktop/Documentos/git projects/tacertoforms-dotnet/tacertoforms.csproj",
       "packagesPath": "/Users/estagioeducacao1/.nuget/packages/",
-      "outputPath": "/Users/estagioeducacao1/Desktop/Documentos/git projects/tacertoforms/obj/",
+      "outputPath": "/Users/estagioeducacao1/Desktop/Documentos/git projects/tacertoforms-dotnet/obj/",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
