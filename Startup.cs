@@ -56,7 +56,7 @@ namespace tacertoforms
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Teste}/{action=Index}/{id?}");
+                    template: "{controller=Home}/{action=Login}/{id?}");
             });
         }
     }

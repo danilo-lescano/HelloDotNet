@@ -1,0 +1,230 @@
+<body>
+	<div id="imageDB"></div>
+	<div id="soundDB"><audio src="resources/media/audio/clock.mp3" preload="auto" controls="none" style="display: none;"></audio><audio src="resources/media/audio/freeze.mp3" preload="auto" controls="none" style="display: none;"></audio><audio src="resources/media/audio/vassoura.mp3" preload="auto" controls="none" style="display: none;"></audio><audio src="resources/media/audio/clickcarta.mp3" preload="auto" controls="none" style="display: none;"></audio><audio src="resources/media/audio/combo2.mp3" preload="auto" controls="none" style="display: none;"></audio><audio src="resources/media/audio/combo3.mp3" preload="auto" controls="none" style="display: none;"></audio><audio src="resources/media/audio/clicklacuna.mp3" preload="auto" controls="none" style="display: none;"></audio></div>
+	<div class="layer whiteBG" style="display: none;"></div>
+	<div class="layer brownGradient" style="display: none;"></div>
+	<div class="layer softBlue" style="display: none;"></div>
+	<div class="layer marineBlue" style="display: none;"></div>
+	<div class="layer gameBlend" style="display: block;">
+		<div class="layer JogoBg1" style="display: block;"></div>
+		<div class="layer JogoBg2" style="display: block;"></div>
+		<div class="layer JogoBg3" style="display: block;"></div>
+		<div class="layer JogoBg3" style="display: none;"></div>
+		<div class="layer JogoBg4-1x1" style="display: block;"></div>
+		<div class="layer JogoBg4-1x2" style="display: block;"></div>
+		<div class="layer JogoBg4-2x1" style="display: none;"></div>
+		<div class="layer JogoBg4-2x2" style="display: none;"></div>
+		<div class="layer JogoBg4-3x1" style="display: none;"></div>
+		<div class="layer JogoBg4-3x2" style="display: none;"></div>
+		<div class="layer JogoBg4-4x1" style="display: none;"></div>
+		<div class="layer JogoBg4-4x2" style="display: none;"></div>
+		<div class="layer JogoBg5" style="display: block;"></div>
+		<div class="layer JogoBg5-3x1" style="display: none;"></div>
+		<div class="layer JogoBg5-4x1" style="display: none;"></div>
+		<div class="layer JogoBg6" style="display: block;"></div>
+		<div class="layer JogoBg6-3x1" style="display: none;"></div>
+		<div class="layer JogoBg6-4x1" style="display: none;"></div>
+		<div class="layer JogoBg7" style="display: block;"></div>
+
+	</div>
+	<div class="layer loading" style="display: none;">
+		<div class="verticalAlign">
+			<span class="one"></span>
+			<span class="two"></span>
+			<span class="three"></span>
+			<span class="four"></span>
+			<span class="five"></span>
+			<span class="six"></span>
+			<span class="seven"></span>
+			<span class="eight"></span>
+			<span class="nine"></span>
+		</div>
+	</div>
+	<div class="corpo"><!-- MODAL PAUSE -->
+<div id="pauseModal" class="modalBlur" onclick="TaCerto.Controladora.Jogo.Geral.pauseModalClick()">
+	<!-- conteudo do modal-->
+	<div class="modalWrapper">
+		<img class="modalBtn" onclick="TaCerto.Controladora.Jogo.Geral.pauseModalClick(this, 'home')" src="~/images/home.png" alt="Botão ir para página inicial">
+		<img class="modalBtn" onclick="TaCerto.Controladora.Jogo.Geral.pauseModalClick(this, 'reiniciar')" src="~/images/reiniciar.png" alt="Botão reiniciar o jogo">
+		<img class="modalBtn" onclick="TaCerto.Controladora.Jogo.Geral.pauseModalClick(this, 'loja')" src="~/images/carrinho.png" alt="Botão abrir loja">
+		<img id="modalBtnMissao" style="display: none;" class="modalBtn" onclick="TaCerto.Controladora.Jogo.Geral.pauseModalClick(this, 'missao')" src="~/images/menumissaobtn.png" alt="Botão ir para página missões">
+		<img id="modalBtnCasual" class="modalBtn" onclick="TaCerto.Controladora.Jogo.Geral.pauseModalClick(this, 'casual')" src="~/images/menucasual.png" alt="Botão ir para página menu casual">
+		<img class="modalBtn" onclick="TaCerto.Controladora.Jogo.Geral.pauseModalClick(this)" src="~/images/voltar_ao_jogo.png" alt="Botão voltar ao jogo">
+	</div>
+</div>
+
+<!-- ERROR MODAL -->
+<div id="errorModal" class="animated fadeIn" onclick="TaCerto.Controladora.Jogo.Geral.showMeMeuErro(this, false);">
+	<!-- conteudo do modal-->
+	<div class="modalWrapper">
+		<div class="centerPanel">
+				<h4>Explicação</h4>
+				<h6>Aqui vai a explicação da questão que você errou</h6>
+				<img class="modalBtn" onclick="TaCerto.Controladora.Jogo.Geral.showMeMeuErro(this, false);" src="~/images/voltar_ao_jogo.png" alt="Botão voltar ao jogo">
+		</div>
+		
+	</div>
+</div>
+
+<!-- SIGNIFICADO MODAL -->
+<div id="significadoModal" class="animated fadeIn" onclick="TaCerto.Controladora.Jogo.Geral.showMeOSignificado(this, false);">
+		<!-- conteudo do modal-->
+		<div class="modalWrapper">
+			<div class="centerPanel">
+					<h4>Significado</h4>
+					<h6>Aqui vai o significado da palavra que você está</h6>
+					<img class="modalBtn" onclick="TaCerto.Controladora.Jogo.Geral.showMeOSignificado(this, false);" src="~/images/voltar_ao_jogo.png" alt="Botão voltar ao jogo">
+			</div>
+			
+		</div>
+	</div>
+
+<!-- MODAL start -->
+<div id="despauseModal" class="modalBlur">
+	<div class="modalWrapper">
+		<span id="despauseCountdown"></span>
+	</div>
+</div>
+
+<div class="comboWrapper">
+	<div id="combo2x" data-timing="1000" data-tada="false" data-animacoestotal="12" data-framesx="3" data-framesy="5"></div>
+	<div id="combo3x" data-timing="1000" data-tada="false" data-animacoestotal="12" data-framesx="3" data-framesy="4"></div>
+</div>
+
+<div class="jogo_wrapper">
+	<div class="h20">
+		<div class="jogoPlacarWrapper">
+			<div class="spanWrapper" id="acertosSpan">
+				<div class="jogoPlacar" id="acertos"> 0 </div>
+			</div>
+			<div id="clockIce" data-timing="3000" data-tada="false" data-animacoestotal="21" data-framesx="4" data-framesy="6"></div>
+
+			<div class="spanWrapper" id="economiaSpan">
+				<!--<div class="jogoPlacar" id="economia"> 0 </div>-->
+				<div class="jogoPlacar" id="tempo">01:07</div>		
+			</div>
+
+			<div class="spanWrapper" id="errosSpan">
+				<div class="jogoPlacar" id="erros"> 0 </div>
+			</div>
+			<div id="jogoPause" onclick="TaCerto.Controladora.Jogo.Geral.pauseBtn(this)">
+				<img class="pause" src="~/images/pause.png" alt="botão para pausar o jogo">
+			</div>
+		</div>
+		<div class="barraProgressoWrapper">
+			<div class="barraProgressoBack"></div>
+			<div class="barraProgressoFront"></div>
+			<div id="moneyIcon"></div>
+		</div>
+	</div>
+	<div class="h10">
+		<div id="achievementPanel" onclick="TaCerto.Controladora.MenuConquistas.SaiDaqui(this);" class="achievementWrapper">
+		</div>
+		<div id="botaoInformacao">
+				<img onclick="TaCerto.Controladora.Jogo.Geral.showMeMeuErro(this, true);" src="~/images/botaoInformacao2.png" alt="botão mostra a questão que errou">
+		</div>
+		<div id="botaoSignificado">
+			<img onclick="TaCerto.Controladora.Jogo.Geral.showMeOSignificado(this, true);" src="~/images/botaoSignificado.png" alt="botão mostra o significado da palavra">
+		</div>
+	</div>
+
+	<div id="flagCardExists" class="cartaWrapper">
+		<div class="barraCartaBG">
+			<div class="bucketCards">
+				<div id="cartaVermelha" class="cardSpan"><div class="imgCard bgcartaVermelha" onclick="TaCerto.Controladora.Jogo.Geral.clickCarta('cartaVermelha');"></div><div class="imgCard bgcartaVermelha" onclick="TaCerto.Controladora.Jogo.Geral.clickCarta('cartaVermelha');"></div></div>
+				<div id="cartaAzul" class="cardSpan"><div class="imgCard bgcartaAzul" onclick="TaCerto.Controladora.Jogo.Geral.clickCarta('cartaAzul');"></div><div class="imgCard bgcartaAzul" onclick="TaCerto.Controladora.Jogo.Geral.clickCarta('cartaAzul');"></div></div>
+				<div id="cartaAmarela" class="cardSpan"><div class="imgCard bgcartaAmarela" onclick="TaCerto.Controladora.Jogo.Geral.clickCarta('cartaAmarela');"></div><div class="imgCard bgcartaAmarela" onclick="TaCerto.Controladora.Jogo.Geral.clickCarta('cartaAmarela');"></div></div>
+				<div id="cartaVerde" class="cardSpan"><div class="imgCard bgcartaVerde" onclick="TaCerto.Controladora.Jogo.Geral.clickCarta('cartaVerde');"></div><div class="imgCard bgcartaVerde" onclick="TaCerto.Controladora.Jogo.Geral.clickCarta('cartaVerde');"></div></div>
+			</div>
+			<div class="invBtn" onclick="TaCerto.Controladora.Jogo.Geral.toggleBarraCarta();"></div>
+		</div>
+	</div>
+
+	<!--conteudo do tipo de jogo abaixo-->
+	<div id="JogoTipo"><div class="JogoPalavraDiv">
+	<div id="cardBG" class="cardBG animated">
+		<h4 id="palavra">Cadarço</h4>
+		<h6 id="significado">descricao</h6>
+		<div id="bottomStuff">
+			<div class="leftDivJogo">
+				<img src="~/images/missoes_atalho.png" alt="ilustracao dinheiro">
+				<span id="moneyDaQuestao">1</span>
+			</div>
+			<div class="rightDivJogo">
+					<span id="nivelDaQuestao">Nível 0</span>
+			</div>
+		</div>
+	</div>
+	<img src="~/images/card_normal.svg" id="imgCarta1" class="imgCardsJogo">
+	<img src="~/images/card_normal.svg" id="imgCarta2" class="imgCardsJogo">
+	<img src="~/images/card_normal.svg" id="imgCarta3" class="imgCardsJogo">
+</div>
+<div class="JogoBotoesDiv">
+	<div id="botoes">
+		<img src="~/images/CERTO.png" onclick="TaCerto.Controladora.Jogo.Normal.btnResposta(true)" class="action-button animate" id="botao2">
+		<img src="~/images/cliqueerrado.png" onclick="TaCerto.Controladora.Jogo.Normal.btnResposta(false)" class="action-button animate" id="botao1">
+	</div>
+</div>
+</div>
+	<div id="block" data-timing="1000" data-tada="false" data-animacoestotal="21" data-framesx="4" data-framesy="6"></div>
+	<div id="vassoura" data-timing="1000" data-tada="false" data-animacoestotal="32" data-framesx="5" data-framesy="7"></div>
+</div></div>
+	<div id="loja">
+		<div class="lojaHeader absolutediv">
+			<img class="btnVoltarLoja" src="~/images/btn-voltar.png" alt="botao voltar" onclick="TaCerto.Controladora.Loja.voltarBtn(this)">
+			<div class="rightDiv">
+				<div id="moedasLoja">100</div>
+				<img src="~/images/missoes_atalho.png" alt="ilustracao dinheiro">
+			</div>
+		</div>
+
+		<div class="lojaCartaWrapper absolutediv">
+			<div class="lojaImgWrapper">
+				<img src="~/images/modal-loja.png">
+			</div>
+			<div class="cartaBtnWrapper">
+				<div class="blockLojaModal">
+					<div class="inviBtnCloseLoja" onclick="TaCerto.Controladora.Loja.voltarBtn(this)"></div>
+				</div>
+				<div class="blockLojaModal">
+					<img class="cardBtnLoja" src="~/images/btn-carta-vermelha.png" onclick="TaCerto.Controladora.Loja.openCardModal(this)" id="cartaVermelhaLoja">
+					<div class="lojaPrecoCartaBigModal">25</div>
+				</div>
+				<div class="blockLojaModal">
+					<img class="cardBtnLoja" src="~/images/btn-carta-azul.png" onclick="TaCerto.Controladora.Loja.openCardModal(this)" id="cartaAzulLoja">
+					<div class="lojaPrecoCartaBigModal">25</div>
+				</div>
+				<div class="blockLojaModal">
+					<img class="cardBtnLoja" src="~/images/btn-carta-amarela.png" onclick="TaCerto.Controladora.Loja.openCardModal(this)" id="cartaAmarelaLoja">
+					<div class="lojaPrecoCartaBigModal">25</div>
+				</div>
+				<div class="blockLojaModal">
+					<img class="cardBtnLoja" src="~/images/btn-carta-verde.png" onclick="TaCerto.Controladora.Loja.openCardModal(this)" id="cartaVerdeLoja">
+					<div class="lojaPrecoCartaBigModal">25</div>
+				</div>
+				<div class="blockLojaModal"></div>
+			</div>
+		</div>
+
+		<div id="cartaVermelhaLoja-modal" class="modalComprarCarta">
+			<img class="modalComprarCartaImg" src="~/images/modalComprarCartaImgVermelha.png">
+		</div>
+		<div id="cartaAzulLoja-modal" class="modalComprarCarta">
+			<img class="modalComprarCartaImg" src="~/images/modalComprarCartaImgAzul.png">
+		</div>
+		<div id="cartaAmarelaLoja-modal" class="modalComprarCarta">
+			<img class="modalComprarCartaImg" src="~/images/modalComprarCartaImgAmarela.png">
+		</div>
+		<div id="cartaVerdeLoja-modal" class="modalComprarCarta">
+			<img class="modalComprarCartaImg" src="~/images/modalComprarCartaImgVerde.png">
+		</div>
+
+		<div class="cartaLojaModalBtn1" onclick="TaCerto.Controladora.Loja.buyCard(this)">
+			<img class="modalBtnComprarCartaImg" src="~/images/modalcomprarbtn.png">
+			<div class="lojaPrecoCartaMiniModal">25</div>
+		</div>
+		<div class="cartaLojaModalBtn2" onclick="TaCerto.Controladora.Loja.closeMiniModal()"></div>
+
+	</div>
+
+</body></html>

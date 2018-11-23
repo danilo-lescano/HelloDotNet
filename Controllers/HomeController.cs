@@ -20,6 +20,24 @@ namespace tacertoforms.Controllers
             return View();
         }
 
+        public IActionResult CriarFaseNormal()
+        {
+            bool verificado = true;
+
+            if(verificado)
+                return View();
+            else
+                return RedirectToAction("Login");
+        }
+        public IActionResult NormalIFrame()
+        {
+            bool verificado = true;
+            if(verificado)
+                return View();
+            else
+                return RedirectToAction("Login");
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

@@ -1,0 +1,81 @@
+﻿<div id="logged-navbar">
+    <nav>
+        <div class="nav-wrapper">
+            <a href="#!" class="brand-logo">Tá Certo Forms</a>
+            <a href="#" data-target="mobileMenu" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        </div>
+    </nav>
+</div>
+<ul class="sidenav" id="mobileMenu">
+    <li class="sidenav-header">
+        <h6 class="title">Meu Nome</h6>
+        <p>meunome@gmail.com</p>
+    </li>
+    <div class="divider"></div>
+    <li><a href="#minhasfases">Minhas Fases</a></li>
+    <div class="divider"></div>
+    <li><a href="#configurações">Configurações</a></li>
+    <div class="divider"></div>
+    <li><a href="#sobre">Sobre</a></li>
+    <div class="divider"></div>
+    <li><a href="#sair">Sair</a></li>
+</ul>
+
+<div id="tipoForm" class="container center-align">
+        
+        <div id="normalAndHardcore" class="row">
+            <div id="mainText" class="col s12 m12 l12 xl12 card-panel blue darken-4">
+                <h4>Criando fase do modo normal</h3>
+            </div>
+            <div id="formNormalAndHardcore" class="col s12 m8 l8">
+                <form class="col s12">
+                    <div class="row card-panel teal lighten-2">
+                        <h5 class="titulo-questao">Questão 1</h5>
+                    </div>
+                                <div class="row">
+                                        <div class="input-field col s6">
+                                                <i class="material-icons prefix">add_circle</i>
+                                                <input placeholder="ex: Cambito" id="palavraText" type="text" class="validate" onkeyup
+                                                ="trocaTextoPalavra(this.value);">
+                                                <label for="palavraText">Palavra</label>
+                                        </div>
+                                        <label>
+                                            <input name="group1" type="radio" checked />
+                                            <span>Certo</span>
+                                        </label>
+                                        <label>
+                                            <input name="group1" type="radio" />
+                                            <span>Errado</span>
+                                        </label>
+                                </div>
+                                <div class="row">
+                                        <div class="input-field col s12">
+                                        <textarea id="textarea1" class="materialize-textarea"></textarea>
+                                        <label for="textarea1">Significado (Opcional)</label>
+                                        </div>
+                                </div>
+                                <div class="row">
+                                        <div class="input-field col s12">
+                                        <textarea id="textarea1" class="materialize-textarea"></textarea>
+                                        <label for="textarea1">Dica (Opcional)</label>
+                                        </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <a class="waves-effect waves-light btn btn-large" onclick="TaCertoForms.Salvar(this, true);">Adicionar</a>
+                                    </div>
+                                </div>
+                                <div class="divider"></div>
+                                <div class="left-align">
+                                    Número de questões atual: 0
+                                </div>
+                        </form>
+        
+                </div>
+                
+            <div id="telaNormalAndHardcore" class="col s12 m4 l4 hide-on-small-only">
+                <iframe id="normalIframe" src="https://localhost:5001/Iframe/NormalIFrame" frameborder="0"></iframe>
+            </div>
+        </div>
+</div>
