@@ -74,3 +74,41 @@
 /Users/estagioeducacao1/Desktop/Documentos/git projects/tacertoforms-dotnet/obj/Debug/netcoreapp2.1/tacertoforms.dll
 /Users/estagioeducacao1/Desktop/Documentos/git projects/tacertoforms-dotnet/obj/Debug/netcoreapp2.1/tacertoforms.pdb
 /Users/estagioeducacao1/Desktop/Documentos/git projects/tacertoforms-dotnet/obj/Debug/netcoreapp2.1/tacertoforms.csproj.CopyComplete
+/Users/estagioeducacao8/Documents/tacertoforms-dotnet/bin/Debug/netcoreapp2.1/tacertoforms.deps.json
+/Users/estagioeducacao8/Documents/tacertoforms-dotnet/bin/Debug/netcoreapp2.1/tacertoforms.runtimeconfig.json
+/Users/estagioeducacao8/Documents/tacertoforms-dotnet/bin/Debug/netcoreapp2.1/tacertoforms.runtimeconfig.dev.json
+/Users/estagioeducacao8/Documents/tacertoforms-dotnet/bin/Debug/netcoreapp2.1/tacertoforms.dll
+/Users/estagioeducacao8/Documents/tacertoforms-dotnet/bin/Debug/netcoreapp2.1/tacertoforms.pdb
+/Users/estagioeducacao8/Documents/tacertoforms-dotnet/bin/Debug/netcoreapp2.1/tacertoforms.Views.dll
+/Users/estagioeducacao8/Documents/tacertoforms-dotnet/bin/Debug/netcoreapp2.1/tacertoforms.Views.pdb
+/Users/estagioeducacao8/Documents/tacertoforms-dotnet/obj/Debug/netcoreapp2.1/tacertoforms.csprojAssemblyReference.cache
+/Users/estagioeducacao8/Documents/tacertoforms-dotnet/obj/Debug/netcoreapp2.1/tacertoforms.csproj.CoreCompileInputs.cache
+/Users/estagioeducacao8/Documents/tacertoforms-dotnet/obj/Debug/netcoreapp2.1/tacertoforms.RazorAssemblyInfo.cache
+/Users/estagioeducacao8/Documents/tacertoforms-dotnet/obj/Debug/netcoreapp2.1/tacertoforms.RazorAssemblyInfo.cs
+/Users/estagioeducacao8/Documents/tacertoforms-dotnet/obj/Debug/netcoreapp2.1/tacertoforms.AssemblyInfoInputs.cache
+/Users/estagioeducacao8/Documents/tacertoforms-dotnet/obj/Debug/netcoreapp2.1/tacertoforms.AssemblyInfo.cs
+/Users/estagioeducacao8/Documents/tacertoforms-dotnet/obj/Debug/netcoreapp2.1/tacertoforms.TagHelpers.input.cache
+/Users/estagioeducacao8/Documents/tacertoforms-dotnet/obj/Debug/netcoreapp2.1/tacertoforms.TagHelpers.output.cache
+/Users/estagioeducacao8/Documents/tacertoforms-dotnet/obj/Debug/netcoreapp2.1/tacertoforms.RazorCoreGenerate.cache
+/Users/estagioeducacao8/Documents/tacertoforms-dotnet/obj/Debug/netcoreapp2.1/Razor/Views/Home/About.g.cshtml.cs
+/Users/estagioeducacao8/Documents/tacertoforms-dotnet/obj/Debug/netcoreapp2.1/Razor/Views/Home/Contact.g.cshtml.cs
+/Users/estagioeducacao8/Documents/tacertoforms-dotnet/obj/Debug/netcoreapp2.1/Razor/Views/Home/Huehue.g.cshtml.cs
+/Users/estagioeducacao8/Documents/tacertoforms-dotnet/obj/Debug/netcoreapp2.1/Razor/Views/Home/Index.g.cshtml.cs
+/Users/estagioeducacao8/Documents/tacertoforms-dotnet/obj/Debug/netcoreapp2.1/Razor/Views/Home/Privacy.g.cshtml.cs
+/Users/estagioeducacao8/Documents/tacertoforms-dotnet/obj/Debug/netcoreapp2.1/Razor/Views/Shared/Error.g.cshtml.cs
+/Users/estagioeducacao8/Documents/tacertoforms-dotnet/obj/Debug/netcoreapp2.1/Razor/Views/Shared/_CookieConsentPartial.g.cshtml.cs
+/Users/estagioeducacao8/Documents/tacertoforms-dotnet/obj/Debug/netcoreapp2.1/Razor/Views/Shared/_Layout.g.cshtml.cs
+/Users/estagioeducacao8/Documents/tacertoforms-dotnet/obj/Debug/netcoreapp2.1/Razor/Views/Shared/_ValidationScriptsPartial.g.cshtml.cs
+/Users/estagioeducacao8/Documents/tacertoforms-dotnet/obj/Debug/netcoreapp2.1/Razor/Views/Teste/About.g.cshtml.cs
+/Users/estagioeducacao8/Documents/tacertoforms-dotnet/obj/Debug/netcoreapp2.1/Razor/Views/Teste/Contact.g.cshtml.cs
+/Users/estagioeducacao8/Documents/tacertoforms-dotnet/obj/Debug/netcoreapp2.1/Razor/Views/Teste/Huehue.g.cshtml.cs
+/Users/estagioeducacao8/Documents/tacertoforms-dotnet/obj/Debug/netcoreapp2.1/Razor/Views/Teste/Index.g.cshtml.cs
+/Users/estagioeducacao8/Documents/tacertoforms-dotnet/obj/Debug/netcoreapp2.1/Razor/Views/Teste/Privacy.g.cshtml.cs
+/Users/estagioeducacao8/Documents/tacertoforms-dotnet/obj/Debug/netcoreapp2.1/Razor/Views/_ViewImports.g.cshtml.cs
+/Users/estagioeducacao8/Documents/tacertoforms-dotnet/obj/Debug/netcoreapp2.1/Razor/Views/_ViewStart.g.cshtml.cs
+/Users/estagioeducacao8/Documents/tacertoforms-dotnet/obj/Debug/netcoreapp2.1/tacertoforms.RazorTargetAssemblyInfo.cache
+/Users/estagioeducacao8/Documents/tacertoforms-dotnet/obj/Debug/netcoreapp2.1/tacertoforms.RazorTargetAssemblyInfo.cs
+/Users/estagioeducacao8/Documents/tacertoforms-dotnet/obj/Debug/netcoreapp2.1/tacertoforms.Views.pdb
+/Users/estagioeducacao8/Documents/tacertoforms-dotnet/obj/Debug/netcoreapp2.1/tacertoforms.dll
+/Users/estagioeducacao8/Documents/tacertoforms-dotnet/obj/Debug/netcoreapp2.1/tacertoforms.pdb
+/Users/estagioeducacao8/Documents/tacertoforms-dotnet/obj/Debug/netcoreapp2.1/tacertoforms.csproj.CopyComplete
