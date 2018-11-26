@@ -25,8 +25,9 @@
             <img id="randomImg" src="~/images/botaoRandom.png" alt="">
             <img id="casualImg" src="~/images/menucasual.png" alt="">
         </div>	
+        
         <div id="loginForm" class="container">
-            <form class="col s12">
+            <form class="col s12" method="post">
                 <div class="row emailRow">
                 <div class="input-field col s12">
                     <i class="material-icons prefix">account_circle</i>
@@ -54,11 +55,12 @@
                             <a href="#esqueciasenha">Esqueci a senha</a>
                         </div>
                     </p>	
-                    <!--<a href="#">Esquecia a senha</a>-->
                 </div>
                 <div class="row right-align buttonRow">
                 <div class="input-field col s12">
-                    <a class="waves-effect waves-light btn" onclick="TaCertoForms.Salvar(this, true);">Entrar</a>
+                    <a class="waves-effect waves-light btn">
+                        <%= Html.ActionLink("Autenticar", "autenticar", "LoginController", new {login = Request.Form["email"],senha = Request.Form["password"]}, null) %>
+                        </a>
                 </div>
                 </div>
             </form>
