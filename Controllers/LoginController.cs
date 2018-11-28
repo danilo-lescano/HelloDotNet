@@ -11,14 +11,21 @@ namespace tacertoforms.Controllers
     public class LoginController : Controller
     {
 
-        public ActionResult Index(){
+        public ActionResult Index(string returnUrl = null){
+
+            this.ViewBag.ReturnUrl = returnUrl;
             return View("Login");
         }
 
-        public ActionResult autenticar(string login, string senha){
-            System.Diagnostics.Debug.WriteLine("Vamos logar" + login + " " + senha);
+        public ActionResult autenticar(LoginModel model, string returnUrl){
 
-            return View("CriarFaseNormal");
+            if(this.ModelState.IsValid && Membership.ValidateUser(model.UserName, model.Password)){
+                FormsAuthentication.SetAuthCookie(model.UserName, false);
+                return this.Redirect(returnUrl);
+            }
+
+            this.ModelState.AddModelError("", "The user name or password providedis incorrect.");
+            return this.View(model);
         }
         
     }

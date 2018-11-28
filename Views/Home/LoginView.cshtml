@@ -1,0 +1,50 @@
+﻿<div class="row rowParaFixarAltura"> </div>
+<div class="row">
+    <div class=" col xl3 l3 m2">
+    </div>
+    <div class="rowPrincipalDoLogin col xl6 l6 m8 s12">
+        <div class="imagensDoLogin">
+            <img id="loginImg" src="~/images/panel.png" alt="">
+            <img id="logoImg" src="~/images/LOGO-ABERTURA.png" alt="">
+            <img id="cardImg" src="~/images/cartaVermelhaBack.png" alt="">
+            <img id="relogioImg" src="~/images/relogio_solo.png" alt="">
+            <img id="trofeuImg" src="~/images/botaoTrofeu.png" alt="">
+            <img id="lacunasImg" src="~/images/botaoLacunas.png" alt="">
+            <img id="certoImg" src="~/images/botaoCerto.png" alt="">
+            <img id="erradoImg" src="~/images/botaoErrado.png" alt="">
+            <!--FALTA--><img id="estrela" src="~/images/estrela.png" alt="">
+            <img id="exploradorImg" src="~/images/botaoExplorador.png" alt="">
+            <img id="hardcoreImg" src="~/images/botaoHardcore.png" alt="">
+            <img id="jogarImg" src="~/images/botaoJogar.png" alt="">
+            <img id="geloImg" src="~/images/cartaAzulBack.png" alt="">
+            <img id="yellowImg" src="~/images/cartaAmarelaBack.png" alt="">
+            <img id="greenImg" src="~/images/cartaVerdeBack.png" alt="">
+            <!--FALTA--><img id="moeda1Img" src="~/images/moedaImg.png" alt="">
+            <!--FALTA--><img id="moeda2Img" src="~/images/moedaImg.png" alt="">
+            <img id="aurelioImg" src="~/images/botaoAurelio.png" alt="">
+            <img id="randomImg" src="~/images/botaoRandom.png" alt="">
+            <img id="casualImg" src="~/images/menucasual.png" alt="">
+        </div>
+
+        <div id="loginForm" class="container">
+            @page
+            @model LoginModel
+            @using (Html.BeginForm(new string { ReturnUrl = ViewBag.ReturnUrl }))
+            {
+
+                @Html.ValiationSummary()
+                <h2>Please sign in</h2>
+                <div>
+                    @Html.DisplayNameFor(model => model.UserName)
+                    @Html.EditorFor(model => model.UserName)
+                </div>
+                <div>
+                    @Html.DisplayNameFor(model => model.Password)
+                    @Html.EditorFor(model => model.Password)
+                </div>
+                <button type="submit">Sign in</button>
+
+            }
+        </div>
+    </div>
+</div>

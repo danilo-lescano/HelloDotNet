@@ -12,7 +12,7 @@ namespace tacertoforms.Controllers
     {
         public IActionResult Index()
         {
-            return RedirectToAction("Login");
+            return RedirectToAction("LoginView");
         }
 
         public IActionResult Login()
@@ -27,7 +27,7 @@ namespace tacertoforms.Controllers
             if(verificado)
                 return View();
             else
-                return RedirectToAction("Login");
+                return RedirectToAction("LoginView");
         }
         public IActionResult NormalIFrame()
         {
@@ -35,7 +35,7 @@ namespace tacertoforms.Controllers
             if(verificado)
                 return View();
             else
-                return RedirectToAction("Login");
+                return RedirectToAction("LoginView");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

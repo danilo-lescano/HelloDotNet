@@ -9,4 +9,12 @@
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Remove="Models\Teste.cshtml" />
+    <Content Remove="Models\TesteRazor.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Models\Teste.cshtml.cs" />
+    <Compile Remove="Controllers\TesteMiddleware.cs" />
+  </ItemGroup>
 </Project>
