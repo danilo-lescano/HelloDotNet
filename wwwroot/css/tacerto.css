@@ -3,7 +3,7 @@ body, html {
 	padding: 0;
 }
 body {
-	background-image: url("../media/image/fundo_branco.png");
+	background-image: url("../images/fundo_branco.png");
 	background-size: 320px;
 }
 *{
@@ -116,15 +116,15 @@ body {
 	display: none;
 }
 .whiteBG{
-	background-image: url("../media/image/fundo_branco.png");
+	background-image: url("../images/fundo_branco.png");
 	background-size: 320px;
 }
 .softBlue{
-	background-image: url("../media/image/fundo.png");
+	background-image: url("../images/fundo.png");
 	background-size: 320px;
 }
 .marineBlue{
-	background: url("../media/image/fundo.png") 0% 0% repeat;
+	background: url("../images/fundo.png") 0% 0% repeat;
 	filter: brightness(.5);
 	background-size: 310px;
 }
@@ -156,11 +156,11 @@ body {
 	margin: 0 auto;
 }
 .JogoBg1, .JogoBg2, .JogoBg6, .JogoBg6-3x1, .JogoBg6-4x1, .JogoBg7{
-	background: url("../media/image/fundo.png") 0% 0% repeat;
+	background: url("../images/fundo.png") 0% 0% repeat;
 	background-size: 320px;
 }
 .JogoBg3, .JogoBg4-1x1, .JogoBg4-2x1, .JogoBg4-3x1, .JogoBg4-4x1, .JogoBg5, .JogoBg5-3x1, .JogoBg5-4x1{
-	background: url("../media/image/fundo_branco.png");
+	background: url("../images/fundo_branco.png");
 	background-size: 320px;
 }
 .JogoBg1{
@@ -260,7 +260,7 @@ span {
 
 
 .centerPanel{
-	background-image: url("../media/image/panel.png");
+	background-image: url("../images/panel.png");
 	background-size: 100%;
 	width: 100%;
 	height: 36%;
@@ -446,7 +446,7 @@ span {
 	padding-top: 5%;
 }
 .countdownBG{
-	background: url("../media/image/fundo.png") 0% 0% repeat;
+	background: url("../images/fundo.png") 0% 0% repeat;
 	filter: brightness(.5);
 	background-size: 310px;
 	height: 10000px;
@@ -669,7 +669,7 @@ span {
 	width: 100%;
 	height: 5.5vh;
 	background-size: 100% 100%;
-	background-image: url("../media/image/barra_xp.png");
+	background-image: url("../images/barra_xp.png");
 }
 .absoluteDiv{
 	position: absolute;
@@ -950,10 +950,10 @@ span {
     padding: 2.5% 4% 2% 14%;
 }
 #acertos {
-	background-image: url("../media/image/placar_acertos.png");
+	background-image: url("../images/placar_acertos.png");
 }
 #erros {
-	background-image: url("../media/image/placar_erros.png");
+	background-image: url("../images/placar_erros.png");
 }
 #erros, #acertos{
 	font-size: 5vw;
@@ -970,7 +970,7 @@ span {
 	color: rgb(255,255,255);
 	font-size: 5vw;
 	font-family: 'panton',  'Pacifico', cursive;
-	background-image: url("../media/image/relogio.png");
+	background-image: url("../images/relogio.png");
 }
 .cartaWrapper{
 	position: absolute;
@@ -993,7 +993,7 @@ span {
 	position: relative;
 	width: 81%;
 	left: -63%;/*//*/
-	background-image: url("../media/image/barra_cartas.svg");
+	background-image: url("../images/barra_cartas.svg");
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-position: center;
@@ -1020,33 +1020,33 @@ span {
 	background-repeat: no-repeat;
 }
 .bgcartaVermelha{
-	background-image: url('../media/image/cartaVermelha.png');
+	background-image: url('../images/cartaVermelha.png');
 }
 .bgcartaAzul{
-	background-image: url('../media/image/cartaAzul.png');
+	background-image: url('../images/cartaAzul.png');
 }
 .bgcartaAmarela{
-	background-image: url('../media/image/cartaAmarela.png');
+	background-image: url('../images/cartaAmarela.png');
 }
 .bgcartaVerde{
-	background-image: url('../media/image/cartaVerde.png');
+	background-image: url('../images/cartaVerde.png');
 }
 /*PRECISA DO ANIMATE*/
 @keyframes flipCardcartaAmarela {
-	from, 80%, to {background-image: url('../media/image/cartaAmarela.png');}
-	40%, 50% {background-image: url('../media/image/cartaAmarelaBack.png');}
+	from, 80%, to {background-image: url('../images/cartaAmarela.png');}
+	40%, 50% {background-image: url('../images/cartaAmarelaBack.png');}
 }
 @keyframes flipCardcartaVerde {
-	from, 80%, to {background-image: url('../media/image/cartaVerde.png');}
-	40%, 50% {background-image: url('../media/image/cartaVerdeBack.png');}
+	from, 80%, to {background-image: url('../images/cartaVerde.png');}
+	40%, 50% {background-image: url('../images/cartaVerdeBack.png');}
 }
 @keyframes flipCardcartaAzul {
-	from, 80%, to {background-image: url('../media/image/cartaAzul.png');}
-	40%, 50% {background-image: url('../media/image/cartaAzulBack.png');}
+	from, 80%, to {background-image: url('../images/cartaAzul.png');}
+	40%, 50% {background-image: url('../images/cartaAzulBack.png');}
 }
 @keyframes flipCardcartaVermelha {
-	from, 80%, to {background-image: url('../media/image/cartaVermelha.png');}
-	40%, 50% {background-image: url('../media/image/cartaVermelhaBack.png');}
+	from, 80%, to {background-image: url('../images/cartaVermelha.png');}
+	40%, 50% {background-image: url('../images/cartaVermelhaBack.png');}
 }
 @keyframes flipCard{
 	from {
@@ -1122,7 +1122,7 @@ span {
 	width: 100%;
 	height: 5.5vh;
 	background-size: 100% 100%;
-	background-image: url("../media/image/barraMoney.png"); /* barra_xp.png se for na tela de missoes */
+	background-image: url("../images/barraMoney.png"); /* barra_xp.png se for na tela de missoes */
 }
 
 #moneyIcon{
@@ -1131,7 +1131,7 @@ span {
 	left: -2%;
 	padding: 5.5%;
 	background-size: auto 100%;
-	background-image: url("../media/image/missoes_atalho.png");
+	background-image: url("../images/missoes_atalho.png");
 }
 
 .combo1{
@@ -1235,7 +1235,7 @@ span {
 	
 	height: 0;
 	padding-bottom: 30%;
-	background-image: url("../media/image/x2COMBO.png");
+	background-image: url("../images/x2COMBO.png");
 	background-size: 300% auto;
 	background-repeat: no-repeat;
 	background-position: 100% 100%;
@@ -1250,7 +1250,7 @@ span {
 	
 	height: 0;
 	padding-bottom: 30%;
-	background-image: url("../media/image/x3COMBO.png");
+	background-image: url("../images/x3COMBO.png");
 	background-size: 300% auto;
 	background-repeat: no-repeat;
 	background-position: 0% 0%;
@@ -1503,7 +1503,7 @@ span {
 	padding-bottom: 40%;
 	z-index: -99;
 
-	background-image: url("../media/image/ICE.png");
+	background-image: url("../images/ICE.png");
 	background-size: 400% auto;
 	background-repeat: no-repeat;
 	background-position: 100% 100%;
@@ -1519,7 +1519,7 @@ span {
 	padding-bottom: 70%;
 	z-index: -99;
 
-	background-image: url("../media/image/block.png");
+	background-image: url("../images/block.png");
 	background-size: 400% auto;
 	background-repeat: no-repeat;
 	background-position: 100% 100%;
@@ -1535,7 +1535,7 @@ span {
 	padding-bottom: 70%;
 	z-index: -99;
 
-	background-image: url("../media/image/vassoura.png");
+	background-image: url("../images/vassoura.png");
 	background-size: 500% auto;
 	background-repeat: no-repeat;
 	background-position: 100% 100%;
@@ -1844,7 +1844,7 @@ span {
 	position: absolute;
 	width: 100%;
 	height: 100px;
-	background-image: url("../media/image/box_janela.png");
+	background-image: url("../images/box_janela.png");
 	background-repeat: no-repeat;
 	border: 1px solid #e1e1e1;
 	background-size: 100% 100%;
@@ -2470,7 +2470,7 @@ span {
 	transform: translate(-50%, -50%);
 	width: 90%;
 	height: 70%;
-	background-image: url("../media/image/card_normal.svg");
+	background-image: url("~/images/card_normal.svg");
 }
 
 #bottomStuff{
