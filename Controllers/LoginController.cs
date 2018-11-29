@@ -14,16 +14,16 @@ namespace tacertoforms.Controllers
         public ActionResult Index(string returnUrl = null){
 
             this.ViewBag.ReturnUrl = returnUrl;
-            return View("Login");
+            return View("LoginView");
         }
 
         public ActionResult autenticar(LoginModel model, string returnUrl){
 
-            if(this.ModelState.IsValid && Membership.ValidateUser(model.UserName, model.Password)){
+            /*if(this.ModelState.IsValid && Membership.ValidateUser(model.UserName, model.Password)){
                 FormsAuthentication.SetAuthCookie(model.UserName, false);
                 return this.Redirect(returnUrl);
             }
-
+*/
             this.ModelState.AddModelError("", "The user name or password providedis incorrect.");
             return this.View(model);
         }
