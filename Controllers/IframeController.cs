@@ -4,16 +4,16 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using tacertoforms.Models;
+using tacertoforms_dotnet.Models;
 
 namespace tacertoforms.Controllers
 {
     public class IframeController : Controller
     {
 
-        public IActionResult NormalIFrame()
+        public IActionResult NormalIframe()
         {
-            return View("~/Views/Iframe/NormalIFrame.cshtml");
+            return View("~/Views/Iframe/NormalIframe.cshtml");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

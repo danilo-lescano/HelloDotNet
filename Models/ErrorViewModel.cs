@@ -1,6 +1,6 @@
 using System;
 
-namespace tacertoforms.Models
+namespace tacertoforms_dotnet.Models
 {
     public class ErrorViewModel
     {
