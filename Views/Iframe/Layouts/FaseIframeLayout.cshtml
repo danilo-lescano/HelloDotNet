@@ -15,8 +15,110 @@
 	<link href="~/lib/animate/animate.min.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-    @RenderBody()
+	<div id="imageDB"></div>
+	<div class="layer whiteBG" style="display: none;"></div>
+	<div class="layer brownGradient" style="display: none;"></div>
+	<div class="layer softBlue" style="display: none;"></div>
+	<div class="layer marineBlue" style="display: none;"></div>
+	<div class="layer gameBlend" style="display: block;">
+		<div class="layer JogoBg1" style="display: block;"></div>
+		<div class="layer JogoBg2" style="display: block;"></div>
+		<div class="layer JogoBg3" style="display: block;"></div>
+		<div class="layer JogoBg3" style="display: none;"></div>
+		<div class="layer JogoBg4-1x1" style="display: block;"></div>
+		<div class="layer JogoBg4-1x2" style="display: block;"></div>
+		<div class="layer JogoBg4-2x1" style="display: none;"></div>
+		<div class="layer JogoBg4-2x2" style="display: none;"></div>
+		<div class="layer JogoBg4-3x1" style="display: none;"></div>
+		<div class="layer JogoBg4-3x2" style="display: none;"></div>
+		<div class="layer JogoBg4-4x1" style="display: none;"></div>
+		<div class="layer JogoBg4-4x2" style="display: none;"></div>
+		<div class="layer JogoBg5" style="display: block;"></div>
+		<div class="layer JogoBg5-3x1" style="display: none;"></div>
+		<div class="layer JogoBg5-4x1" style="display: none;"></div>
+		<div class="layer JogoBg6" style="display: block;"></div>
+		<div class="layer JogoBg6-3x1" style="display: none;"></div>
+		<div class="layer JogoBg6-4x1" style="display: none;"></div>
+		<div class="layer JogoBg7" style="display: block;"></div>
 
+	</div>
+	<div class="layer loading" style="display: none;">
+		<div class="verticalAlign">
+			<span class="one"></span>
+			<span class="two"></span>
+			<span class="three"></span>
+			<span class="four"></span>
+			<span class="five"></span>
+			<span class="six"></span>
+			<span class="seven"></span>
+			<span class="eight"></span>
+			<span class="nine"></span>
+		</div>
+	</div>
+	<div class="corpo"><!-- MODAL PAUSE -->
+    	<div class="container body-content">
+	
+    		@RenderBody()
+
+		</div>
+	</div>
+	<div id="loja">
+		<div class="lojaHeader absolutediv">
+			<img class="btnVoltarLoja" src="~/tacertoforms/images/btn-voltar.png" alt="botao voltar" onclick="TaCerto.Controladora.Loja.voltarBtn(this)">
+			<div class="rightDiv">
+				<div id="moedasLoja">100</div>
+				<img src="~/tacertoforms/images/missoes_atalho.png" alt="ilustracao dinheiro">
+			</div>
+		</div>
+
+		<div class="lojaCartaWrapper absolutediv">
+			<div class="lojaImgWrapper">
+				<img src="~/tacertoforms/images/modal-loja.png">
+			</div>
+			<div class="cartaBtnWrapper">
+				<div class="blockLojaModal">
+					<div class="inviBtnCloseLoja" onclick="TaCerto.Controladora.Loja.voltarBtn(this)"></div>
+				</div>
+				<div class="blockLojaModal">
+					<img class="cardBtnLoja" src="~/tacertoforms/images/btn-carta-vermelha.png" onclick="TaCerto.Controladora.Loja.openCardModal(this)" id="cartaVermelhaLoja">
+					<div class="lojaPrecoCartaBigModal">25</div>
+				</div>
+				<div class="blockLojaModal">
+					<img class="cardBtnLoja" src="~/tacertoforms/images/btn-carta-azul.png" onclick="TaCerto.Controladora.Loja.openCardModal(this)" id="cartaAzulLoja">
+					<div class="lojaPrecoCartaBigModal">25</div>
+				</div>
+				<div class="blockLojaModal">
+					<img class="cardBtnLoja" src="~/tacertoforms/images/btn-carta-amarela.png" onclick="TaCerto.Controladora.Loja.openCardModal(this)" id="cartaAmarelaLoja">
+					<div class="lojaPrecoCartaBigModal">25</div>
+				</div>
+				<div class="blockLojaModal">
+					<img class="cardBtnLoja" src="~/tacertoforms/images/btn-carta-verde.png" onclick="TaCerto.Controladora.Loja.openCardModal(this)" id="cartaVerdeLoja">
+					<div class="lojaPrecoCartaBigModal">25</div>
+				</div>
+				<div class="blockLojaModal"></div>
+			</div>
+		</div>
+
+		<div id="cartaVermelhaLoja-modal" class="modalComprarCarta">
+			<img class="modalComprarCartaImg" src="~/tacertoforms/images/modalComprarCartaImgVermelha.png">
+		</div>
+		<div id="cartaAzulLoja-modal" class="modalComprarCarta">
+			<img class="modalComprarCartaImg" src="~/tacertoforms/images/modalComprarCartaImgAzul.png">
+		</div>
+		<div id="cartaAmarelaLoja-modal" class="modalComprarCarta">
+			<img class="modalComprarCartaImg" src="~/tacertoforms/images/modalComprarCartaImgAmarela.png">
+		</div>
+		<div id="cartaVerdeLoja-modal" class="modalComprarCarta">
+			<img class="modalComprarCartaImg" src="~/tacertoforms/images/modalComprarCartaImgVerde.png">
+		</div>
+
+		<div class="cartaLojaModalBtn1" onclick="TaCerto.Controladora.Loja.buyCard(this)">
+			<img class="modalBtnComprarCartaImg" src="~/tacertoforms/images/modalcomprarbtn.png">
+			<div class="lojaPrecoCartaMiniModal">25</div>
+		</div>
+		<div class="cartaLojaModalBtn2" onclick="TaCerto.Controladora.Loja.closeMiniModal()"></div>
+
+	</div>
     @RenderSection("Scripts", required: false)
 </body>
 </html>
