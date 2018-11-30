@@ -10,6 +10,12 @@ namespace tacertoforms.Controllers
 {
     public class HomeController : Controller
     {
+        
+        public IActionResult About()
+        {
+            return View();
+        }
+
         public IActionResult Index()
         {
             return RedirectToAction("Login");
@@ -20,11 +26,15 @@ namespace tacertoforms.Controllers
             return View();
         }
 
-        public IActionResult About()
-        {
-            return View();
-        }
+        // Usado para autenticar o login do Usuário
+        public ActionResult autenticar(){
 
+            for(int i =0; i < 50; i++)
+            Console.WriteLine(Request.Form["email"]);
+            this.ModelState.AddModelError("", "The user name or password providedis incorrect.");
+            return RedirectToAction("TelaPrincipal","Home");
+        }
+        
         public IActionResult TelaPrincipal()
         {
             return View();
