@@ -13,7 +13,7 @@ namespace tacertoforms.Controllers
 
         public IActionResult NormalIFrame()
         {
-            return View("~/Views/Iframe/NormalIFrame.cshtml", "~/Views/Iframe/_Layout.cshtml");
+            return View("~/Views/Iframe/NormalIFrame.cshtml");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
