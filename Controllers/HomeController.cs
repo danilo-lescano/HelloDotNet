@@ -17,7 +17,17 @@ namespace tacertoforms.Controllers
 
         public IActionResult Login()
         {
-            return View("~/Views/Home/LoginView.cshtml");
+            return View();
+        }
+
+        public IActionResult About()
+        {
+            return View();
+        }
+
+        public IActionResult TelaPrincipal()
+        {
+            return View();
         }
 
         public IActionResult CriarFaseNormal()

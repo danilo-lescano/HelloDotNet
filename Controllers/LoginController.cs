@@ -14,7 +14,7 @@ namespace tacertoforms.Controllers
         public ActionResult Index(string returnUrl = null){
 
             this.ViewBag.ReturnUrl = returnUrl;
-            return View("LoginView");
+            return View("Login");
         }
 
         public ActionResult autenticar(LoginModel model, string returnUrl){
@@ -24,8 +24,10 @@ namespace tacertoforms.Controllers
                 return this.Redirect(returnUrl);
             }
 */
+            for(int i =0; i < 50; i++)
+            Console.WriteLine(Request.Form["email"]);
             this.ModelState.AddModelError("", "The user name or password providedis incorrect.");
-            return this.View(model);
+            return RedirectToAction("TelaPrincipal","Home");
         }
         
     }
