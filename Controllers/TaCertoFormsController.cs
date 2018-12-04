@@ -42,6 +42,24 @@ namespace tacertoforms_dotnet.Controllers
             return View();
         }
 
+        //IFRAMES AQUI
+        public IActionResult AurelioIframe()
+        {
+            return View("~/Views/TaCertoForms/Iframe/AurelioIframe.cshtml");
+        }
+        public IActionResult ExploradorIframe()
+        {
+            return View("~/Views/TaCertoForms/Iframe/ExploradorIframe.cshtml");
+        }
+        public IActionResult LacunaIframe()
+        {
+            return View("~/Views/TaCertoForms/Iframe/LacunaIframe.cshtml");
+        }
+        public IActionResult NormalIframe()
+        {
+            return View("~/Views/TaCertoForms/Iframe/NormalIframe.cshtml");
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
