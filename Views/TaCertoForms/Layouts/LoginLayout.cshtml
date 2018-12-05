@@ -46,32 +46,6 @@
         <script src="~/lib/materialize/js/materialize.min.js"></script>
         <script src="~/tacertoforms/js/tacertoforms.js"></script>
 
-		<script>
-			$(document).ready(function(){
-				$('.sidenav').sidenav();
-			});
-			
-			let pessoa = new Pessoa("Carlinhos");
-
-			let faseNormal = new NorCore(pessoa.getID());
-			let faseLacuna = new Lacuna(pessoa.getID());
-			let faseAurelio = new Aurelio(pessoa.getID());
-			let faseExplorador = new Explorador(pessoa.getID());
-
-			// Funções para o Modo Normal
-			function trocaTextoPalavra(palavra){
-				let iframe = document.getElementById('normalIframe');
-				let innerDoc = (iframe.contentDocument) ? iframe.contentDocument : iframe.contentWindow.document;
-				innerDoc.getElementById('palavra').innerHTML = palavra;
-			}
-
-			// Funções para o Modo Lacuna
-
-			// Funções para o Modo Aurélio
-
-			// Funções para o Modo Explorador
-			
-	    </script>
     </environment>
 
     @RenderSection("Scripts", required: false)

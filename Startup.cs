@@ -67,7 +67,7 @@ namespace tacertoforms_dotnet
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=tacertoforms}/{action=Login}/{id?}");
+                    template: "{controller=TaCertoForms}/{action=Index}/{id?}");
             });
         }
     }

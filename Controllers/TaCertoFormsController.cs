@@ -19,12 +19,25 @@ namespace tacertoforms_dotnet.Controllers
 
             if(!logado){
                 // Não está logado, logo deve redirecionar para a página de login
-                return Login();
+                return RedirectToAction("Login");
             }else{
                 // Está logago, logo deve redirecionar para a página principal
-                return TelaPrincipal();
+                return RedirectToAction("TelaPrincipal");
             }
             
+        }
+
+        public IActionResult Menu(int op){
+
+            if(op == 1){ // Tela Minhas Fases
+                return RedirectToAction("MinhasFases");
+            }else if(op == 2){ // Tela Configurações
+                return RedirectToAction("Configuracoes");
+            }else if(op == 3){ // Tela About
+                return RedirectToAction("Sobre");
+            }else{ // Sair -> Tela de Login
+                return RedirectToAction("Login");
+            }
         }
 
 
@@ -42,10 +55,8 @@ namespace tacertoforms_dotnet.Controllers
         // Autentica o login do Usuário
         public ActionResult autenticar(){
             for(int i = 0; i < 50; i++)
-                Console.WriteLine(Request.Form["email"]);
+                Console.WriteLine("Tenho que autenticar a seguinte pessoa: "+Request.Form["email"]);
                 
-            this.ModelState.AddModelError("", "The user name or password provided is incorrect.");
-
             return RedirectToAction("TelaPrincipal","TaCertoForms");
         }
 
@@ -105,6 +116,47 @@ namespace tacertoforms_dotnet.Controllers
         {
             return View();
         }
+
+
+
+
+        /*
+        ******* Métodos para a Tela Minhas Fases *******
+        */
+
+        public IActionResult MinhasFases()
+        {
+            return View();
+        }
+
+
+
+
+        /*
+        ******* Métodos para a Tela Minhas Fases *******
+        */
+
+        public IActionResult Configuracoes()
+        {
+            return View();
+        }
+
+
+
+        /*
+        ******* Métodos para a Tela Minhas Fases *******
+        */
+
+        public IActionResult Sobre()
+        {
+            return View();
+        }
+
+
+
+
+
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
        public IActionResult Error()

@@ -81,3 +81,15 @@ if ( ( browser.name === 'Chrome' && browser.version <= 67 )
 } else {
     //Supported or Undefined Browser
 }
+
+
+$(document).ready(function(){
+    $('.sidenav').sidenav();
+  });
+
+// Funções para o Modo Normal
+function trocaTextoPalavra(palavra){
+    let iframe = document.getElementById('normalIframe');
+    let innerDoc = (iframe.contentDocument) ? iframe.contentDocument : iframe.contentWindow.document;
+    innerDoc.getElementById('palavra').innerHTML = palavra;
+}
