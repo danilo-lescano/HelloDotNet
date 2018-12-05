@@ -24,7 +24,7 @@
     <div id="logged-navbar">
     <nav>
         <div class="nav-wrapper">
-            <a href="#!" class="brand-logo">Tá Certo Forms</a>
+            <a asp-controller="TaCertoForms" asp-action="TelaPrincipal" class="brand-logo">Tá Certo Forms</a>
             <a href="#" data-target="mobileMenu" class="sidenav-trigger"><i class="material-icons">menu</i></a>
         </div>
     </nav>
@@ -47,10 +47,13 @@
 <div id="tipoForm" class="container center-align">
     
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; 2018 - tacertoforms</p>
-        </footer>
+       <div class="footer-copyright">
+            <hr />
+            <footer> 
+                <p>&copy; 2018 - tacertoforms</p>
+            </footer>
+       </div>
+        
 </div>
 
     <environment include="Development">
