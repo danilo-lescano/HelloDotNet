@@ -20,27 +20,24 @@ namespace tacertoforms_dotnet.Controllers
             return View();
         }
 
-        public IActionResult CriarFaseNormal()
+        public IActionResult CriarFase(int id)
         {
-            ViewData["Message"] = "Your contact page.";
+            string view;
+            if(id == 1)
+                view = "~/Views/TaCertoForms/CriarFaseNormal.cshtml";
+            else if(id == 2)
+                view = "~/Views/TaCertoForms/CriarFaseLacuna.cshtml";
+            else if(id == 3)
+                view = "~/Views/TaCertoForms/CriarFaseAurelio.cshtml";
+            else if(id == 4)
+                view = "~/Views/TaCertoForms/CriarFaseExplorador.cshtml";
+            else 
+                return RedirectToAction("Login");
 
-            return View();
+            return View(view);
         }
 
-        public IActionResult CriarFaseLacuna()
-        {
-            return View();
-        }
-
-        public IActionResult CriarFaseAurelio()
-        {
-            return View();
-        }
-
-        public IActionResult CriarFaseExplorador()
-        {
-            return View();
-        }
+        
 
         //IFRAMES AQUI
         public IActionResult AurelioIframe()
