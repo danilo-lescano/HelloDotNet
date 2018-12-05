@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/tacertoforms.csproj"
+                "${workspaceFolder}/tacertoforms-dotnet.csproj"
             ],
             "problemMatcher": "$msCompile"
         }

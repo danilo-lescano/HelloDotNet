@@ -35,13 +35,13 @@
         <p>meunome@gmail.com</p>
     </li>
     <div class="divider"></div>
-    <li><a href="#minhasfases">Minhas Fases</a></li>
+    <li><a asp-controller="TaCertoForms" asp-action="Menu" asp-route-op="1">Minhas Fases</a></li>
     <div class="divider"></div>
-    <li><a href="#configurações">Configurações</a></li>
+    <li><a asp-controller="TaCertoForms" asp-action="Menu" asp-route-op="2">Configurações</a></li>
     <div class="divider"></div>
-    <li><a href="#sobre">Sobre</a></li>
+    <li><a asp-controller="TaCertoForms" asp-action="Menu" asp-route-op="3">Sobre</a></li>
     <div class="divider"></div>
-    <li><a href="#sair">Sair</a></li>
+    <li><a asp-controller="TaCertoForms" asp-action="Menu" asp-route-op="4">Sair</a></li>
 </ul>
 
 <div id="tipoForm" class="container center-align">
@@ -68,33 +68,6 @@
         </script>
         <script src="~/lib/materialize/js/materialize.min.js"></script>
         <script src="~/tacertoforms/js/tacertoforms.js"></script>
-
-		<script>
-			$(document).ready(function(){
-				$('.sidenav').sidenav();
-			});
-			
-			let pessoa = new Pessoa("Carlinhos");
-
-			let faseNormal = new NorCore(pessoa.getID());
-			let faseLacuna = new Lacuna(pessoa.getID());
-			let faseAurelio = new Aurelio(pessoa.getID());
-			let faseExplorador = new Explorador(pessoa.getID());
-
-			// Funções para o Modo Normal
-			function trocaTextoPalavra(palavra){
-				let iframe = document.getElementById('normalIframe');
-				let innerDoc = (iframe.contentDocument) ? iframe.contentDocument : iframe.contentWindow.document;
-				innerDoc.getElementById('palavra').innerHTML = palavra;
-			}
-
-			// Funções para o Modo Lacuna
-
-			// Funções para o Modo Aurélio
-
-			// Funções para o Modo Explorador
-			
-	    </script>
     </environment>
 
     @RenderSection("Scripts", required: false)

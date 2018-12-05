@@ -1,6 +1,9 @@
 ﻿@{
     Layout = "/Views/TaCertoForms/Layouts/LoginLayout.cshtml";
 }
+@{
+    ViewBag.Title = "Login";
+}
 <div class="row rowParaFixarAltura"> </div>
         <div class="row">
     <div class=" col xl3 l3 m2">
@@ -30,7 +33,7 @@
         </div>	
         
         <div id="loginForm" class="container">
-            <form class="col s12" action="@Url.Action("autenticar", "Home")" method="post">
+            <form class="col s12" action="@Url.Action("autenticar", "TaCertoForms")" method="post">
                 <div class="row emailRow">
                 <div class="input-field col s12">
                     <i class="material-icons prefix">account_circle</i>
