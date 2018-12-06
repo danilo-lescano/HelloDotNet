@@ -160,6 +160,22 @@ nav .brand-logo{
 	color: white;
 }
 
+.footer-copyright{
+	position: fixed;
+	bottom: 4%;
+	width: 100%;
+}
+
+.footer-copyright>.container{
+	color: #e0f2f1;
+}
+
+.user-info{
+	position: relative;
+	width: 100%;
+	padding-top: 25px;
+	text-align: center;
+}
 
 /*--------------------------------------------------------------*/
 /*classes gerais*//*fim*/

@@ -31,8 +31,10 @@
 </div>
 <ul class="sidenav" id="mobileMenu">
     <li class="sidenav-header">
-        <h6 class="title">Meu Nome</h6>
-        <p>meunome@gmail.com</p>
+        <div class="user-info">
+            <h6 class="title">Meu Nome</h6>
+            <p>meunome@gmail.com</p>
+        </div>
     </li>
     <div class="divider"></div>
     <li><a asp-controller="TaCertoForms" asp-action="Menu" asp-route-op="1">Minhas Fases</a></li>
@@ -44,17 +46,20 @@
     <li><a asp-controller="TaCertoForms" asp-action="Menu" asp-route-op="4">Sair</a></li>
 </ul>
 
-<div id="tipoForm" class="container center-align">
+<!--<div id="tipoForm" class="container center-align">-->
     
-        @RenderBody()
+    	<div class="body-content center-align">
+
+            @RenderBody()
+        </div>
        <div class="footer-copyright">
             <hr />
-            <footer> 
+            <div class="container  center-align"> 
                 <p>&copy; 2018 - tacertoforms</p>
-            </footer>
+            </div>
        </div>
         
-</div>
+
 
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
