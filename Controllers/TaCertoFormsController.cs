@@ -28,7 +28,6 @@ namespace tacertoforms_dotnet.Controllers
         }
 
         public IActionResult Menu(int op){
-
             if(op == 1){ // Tela Minhas Fases
                 return RedirectToAction("MinhasFases");
             }else if(op == 2){ // Tela Configurações
@@ -71,16 +70,17 @@ namespace tacertoforms_dotnet.Controllers
             return View();
         }
 
-        public IActionResult CriarFase(int id)
+        //Procura a tela de id que representa a fase pra ser criada
+        public IActionResult CriarFase(string fase)
         {
             string view;
-            if(id == 1)
+            if(fase == "normal")
                 view = "~/Views/TaCertoForms/CriarFaseNormal.cshtml";
-            else if(id == 2)
+            else if(fase == "lacuna")
                 view = "~/Views/TaCertoForms/CriarFaseLacuna.cshtml";
-            else if(id == 3)
+            else if(fase == "aurelio")
                 view = "~/Views/TaCertoForms/CriarFaseAurelio.cshtml";
-            else if(id == 4)
+            else if(fase == "explorador")
                 view = "~/Views/TaCertoForms/CriarFaseExplorador.cshtml";
             else 
                 return RedirectToAction("Login");
