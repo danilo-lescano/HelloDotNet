@@ -68,7 +68,7 @@
 			<div class="spanWrapper" id="errosSpan">
 				<div class="jogoPlacar" id="erros"> 0 </div>
 			</div>
-			<div id="jogoPause" onclick="TaCerto.Controladora.Jogo.Geral.pauseBtn(this)">
+			<div id="jogoPause" onclick="event.stopPropagation();">
 				<img class="pause" src="~/tacertoforms/images/pause.png" alt="botão para pausar o jogo">
 			</div>
 		</div>
@@ -79,13 +79,13 @@
 		</div>
 	</div>
 	<div class="h10">
-		<div id="achievementPanel" onclick="TaCerto.Controladora.MenuConquistas.SaiDaqui(this);" class="achievementWrapper">
+		<div id="achievementPanel" onclick="event.stopPropagation();" class="achievementWrapper">
 		</div>
 		<div id="botaoInformacao">
-				<img onclick="TaCerto.Controladora.Jogo.Geral.showMeMeuErro(this, true);" src="~/tacertoforms/images/botaoInformacao2.png" alt="botão mostra a questão que errou">
+				<img onclick="event.stopPropagation();" src="~/tacertoforms/images/botaoInformacao2.png" alt="botão mostra a questão que errou">
 		</div>
 		<div id="botaoSignificado">
-			<img onclick="TaCerto.Controladora.Jogo.Geral.showMeOSignificado(this, true);" src="~/tacertoforms/images/botaoSignificado.png" alt="botão mostra o significado da palavra">
+			<img onclick="event.stopPropagation();" src="~/tacertoforms/images/botaoSignificado.png" alt="botão mostra o significado da palavra">
 		</div>
 	</div>
 
@@ -97,7 +97,7 @@
 				<div id="cartaAmarela" class="cardSpan"><div class="imgCard bgcartaAmarela" onclick="TaCerto.Controladora.Jogo.Geral.clickCarta('cartaAmarela');"></div><div class="imgCard bgcartaAmarela" onclick="TaCerto.Controladora.Jogo.Geral.clickCarta('cartaAmarela');"></div></div>
 				<div id="cartaVerde" class="cardSpan"><div class="imgCard bgcartaVerde" onclick="TaCerto.Controladora.Jogo.Geral.clickCarta('cartaVerde');"></div><div class="imgCard bgcartaVerde" onclick="TaCerto.Controladora.Jogo.Geral.clickCarta('cartaVerde');"></div></div>
 			</div>
-			<div class="invBtn" onclick="TaCerto.Controladora.Jogo.Geral.toggleBarraCarta();"></div>
+			<div class="invBtn" onclick="event.stopPropagation();"></div>
 		</div>
 	</div>
 
@@ -122,8 +122,8 @@
 </div>
 <div class="JogoBotoesDiv">
 	<div id="botoes">
-		<img src="~/tacertoforms/images/CERTO.png" onclick="TaCerto.Controladora.Jogo.Normal.btnResposta(true)" class="action-button animate" id="botao2">
-		<img src="~/tacertoforms/images/cliqueerrado.png" onclick="TaCerto.Controladora.Jogo.Normal.btnResposta(false)" class="action-button animate" id="botao1">
+		<img src="~/tacertoforms/images/CERTO.png" onclick="event.stopPropagation()" class="action-button animate" id="botao2">
+		<img src="~/tacertoforms/images/cliqueerrado.png" onclick="event.stopPropagation()" class="action-button animate" id="botao1">
 	</div>
 </div>
 </div>

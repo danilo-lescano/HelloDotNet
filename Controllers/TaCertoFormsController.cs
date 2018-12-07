@@ -59,6 +59,9 @@ namespace tacertoforms_dotnet.Controllers
             for(int i = 0; i < 50; i++)
                 Console.WriteLine("Tenho que autenticar a seguinte pessoa: "+Request.Form["email"]);
                 
+            //string temp = Request.Form["email"];
+            //TempData["email"] = temp;
+
             return RedirectToAction("TelaPrincipal","TaCertoForms");
         }
 
@@ -70,6 +73,9 @@ namespace tacertoforms_dotnet.Controllers
 
         public IActionResult TelaPrincipal()
         {
+           
+            //ViewBag.EmailLogado = TempData["email"].ToString();
+
             return View();
         }
 

@@ -82,10 +82,16 @@ if ( ( browser.name === 'Chrome' && browser.version <= 67 )
     //Supported or Undefined Browser
 }
 
+    // Inicializa o SideNav
+    $(document).ready(function(){
+        $('.sidenav').sidenav();
+    });
 
-$(document).ready(function(){
-    $('.sidenav').sidenav();
-  });
+    // Inicializa o ToolTip
+    $(document).ready(function(){
+        $('.tooltipped').tooltip();
+    });
+
 
 // Funções para o Modo Normal
 function trocaTextoPalavra(palavra){
