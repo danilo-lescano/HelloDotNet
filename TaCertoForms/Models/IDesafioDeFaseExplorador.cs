@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
-namespace tacertoforms_dotnet.TaCertoFormsModels
+using TaCertoForms.Models;
+namespace TaCertoForms.Models
 {
     public interface IDesafioDeFaseExplorador : IDesafioDeFase
     {

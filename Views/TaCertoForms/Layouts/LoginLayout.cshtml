@@ -21,18 +21,10 @@
 </head>
 <body>
     <partial name="_CookieConsentPartial" />
-    	<div class="body-content">
+    <div class="body-content">
+    @RenderBody()
+    </div>
 
-        @RenderBody()
-        
-        
-       </div>
-        <!--<div class="footer-copyright">
-            <hr />
-            <div class="container center-align"> 
-                <p>&copy; 2018 - tacertoforms</p>
-            </div>
-       </div>-->
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/materialize/js/materialize.min.js"></script>

@@ -1,8 +1,9 @@
 using System;
 using System.Collections.Generic;
-namespace tacertoforms_dotnet.TaCertoFormsModels
+
+namespace TaCertoForms.Models
 {
-    public class DesafioDeFaseExploradorColuna : IDesafioDeFaseExplorador
+    public class DesafioDeFaseAurelio : IDesafioDeFase
     {
         private int id { get; set; }
         private string nome { get; set; }

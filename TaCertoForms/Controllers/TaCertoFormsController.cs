@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using TaCertoForms.Models;
 using tacertoforms_dotnet.Models;
 
 namespace tacertoforms_dotnet.Controllers
@@ -24,7 +25,6 @@ namespace tacertoforms_dotnet.Controllers
                 // Está logago, logo deve redirecionar para a página principal
                 return RedirectToAction("TelaPrincipal");
             }
-            
         }
 
         public IActionResult Menu(int op){
