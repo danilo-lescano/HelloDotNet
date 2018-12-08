@@ -28,18 +28,15 @@ namespace tacertoforms_dotnet.Controllers
         }
 
         public IActionResult Menu(int op){
-
-            string view;
-            if(op == 1) // Tela Minhas Fases
-                view = "~/Views/TaCertoForms/MinhasFases.cshtml";
-            else if(op == 2) // Tela Configurações
-                view = "~/Views/TaCertoForms/Configuracoes.cshtml";
-            else if(op == 3) // Tela About
-                view = "~/Views/TaCertoForms/Sobre.cshtml";
-            else // Sair -> Tela de Login
-                view = "~/Views/TaCertoForms/Login.cshtml";
-                
-            return View(view);
+            if(op == 1){ // Tela Minhas Fases
+                return RedirectToAction("MinhasFases");
+            }else if(op == 2){ // Tela Configurações
+                return RedirectToAction("Configuracoes");
+            }else if(op == 3){ // Tela About
+                return RedirectToAction("Sobre");
+            }else{ // Sair -> Tela de Login
+                return RedirectToAction("Login");
+            }
         }
 
 
@@ -79,16 +76,17 @@ namespace tacertoforms_dotnet.Controllers
             return View();
         }
 
-        public IActionResult CriarFase(int id)
+        //Procura a tela de id que representa a fase pra ser criada
+        public IActionResult CriarFase(string fase)
         {
             string view;
-            if(id == 1)
+            if(fase == "normal")
                 view = "~/Views/TaCertoForms/CriarFaseNormal.cshtml";
-            else if(id == 2)
+            else if(fase == "lacuna")
                 view = "~/Views/TaCertoForms/CriarFaseLacuna.cshtml";
-            else if(id == 3)
+            else if(fase == "aurelio")
                 view = "~/Views/TaCertoForms/CriarFaseAurelio.cshtml";
-            else if(id == 4)
+            else if(fase == "explorador")
                 view = "~/Views/TaCertoForms/CriarFaseExplorador.cshtml";
             else 
                 return RedirectToAction("Login");
