@@ -9,7 +9,7 @@ namespace Util
         private static List<MultitonSession> sessionList = new List<MultitonSession>();
 
         private string IdSession { get; }
-        private DateTime lastUpdate;
+        private DateTime lastUpdate { get; set; }
 
         private Dictionary<string, string> sessionVariables = new Dictionary<string, string>();
 

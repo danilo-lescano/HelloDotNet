@@ -149,11 +149,20 @@ namespace tacertoforms_dotnet.Controllers
 
         public IActionResult Sobre()
         {
+            Set("key", "Hello from cookie", 10);
             return View();
         }
 
 
-
+public void Set(string key, string value, int? expireTime)  
+    {  
+        CookieOptions option = new CookieOptions();  
+        if (expireTime.HasValue)  
+            option.Expires = DateTime.Now.AddMinutes(expireTime.Value);  
+        else  
+            option.Expires = DateTime.Now.AddMilliseconds(10);  
+            Response.Cookies.Append(key, value, option);  
+    }
 
 
 
