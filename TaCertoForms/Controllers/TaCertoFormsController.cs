@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TaCertoForms.Models;
 using tacertoforms_dotnet.Models;
@@ -138,6 +139,7 @@ namespace tacertoforms_dotnet.Controllers
 
         public IActionResult Configuracoes()
         {
+            Set("key", "Hello from cookie", 10);
             return View();
         }
 
@@ -149,20 +151,24 @@ namespace tacertoforms_dotnet.Controllers
 
         public IActionResult Sobre()
         {
-            Set("key", "Hello from cookie", 10);
+            string temp = Request.Cookies["Key"];
+            for(int i = 0; i < 50; i++)
+                Console.WriteLine("COOKIE: "+temp);
+                
+            ViewData["chave"] = temp;
             return View();
         }
 
 
-public void Set(string key, string value, int? expireTime)  
-    {  
-        CookieOptions option = new CookieOptions();  
-        if (expireTime.HasValue)  
-            option.Expires = DateTime.Now.AddMinutes(expireTime.Value);  
-        else  
-            option.Expires = DateTime.Now.AddMilliseconds(10);  
-            Response.Cookies.Append(key, value, option);  
-    }
+        public void Set(string key, string value, int? expireTime)  
+        {  
+            CookieOptions option = new CookieOptions();  
+            if (expireTime.HasValue)  
+                option.Expires = DateTime.Now.AddMinutes(expireTime.Value);  
+            else  
+                option.Expires = DateTime.Now.AddMilliseconds(10);  
+                Response.Cookies.Append(key, value, option);  
+        }
 
 
 
