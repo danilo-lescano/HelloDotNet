@@ -1,6 +1,11 @@
 using System;
 using System.Collections.Generic;
-
+using System.Diagnostics;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using TaCertoForms.Models;
+using tacertoforms_dotnet.Models;
 
 namespace Util
 {
@@ -8,19 +13,26 @@ namespace Util
     {
         private static List<MultitonSession> sessionList = new List<MultitonSession>();
 
-        private string IdSession { get; }
-        private DateTime lastUpdate { get; set; }
+        private string SessionKey { get; set; }
+        private DateTime LastUpdate { get; set; }
 
-        private Dictionary<string, string> sessionVariables = new Dictionary<string, string>();
+        private Dictionary<string, string> SessionVariables { get; set; } = new Dictionary<string, string>();
 
+        private MultitonSession(string sessionKey){
+            this.SessionKey = sessionKey;
+        }
 
-        private MultitonSession(){}
-
-        public static MultitonSession getSession(string sessionId){
+        public static Dictionary<string, string> GetSession(string sessionKey){
             for (int i = 0; i < sessionList.Count; i++)
-                if (sessionList[i].IdSession == sessionId)
-                    return sessionList[i];
-            return null;
+                if (sessionList[i].SessionKey == sessionKey){
+                    sessionList[i].LastUpdate = DateTime.Now;
+                    return sessionList[i].SessionVariables;
+                }
+
+            MultitonSession newSession = new MultitonSession(sessionKey);
+            sessionList.Add(newSession);
+
+            return newSession.SessionVariables;
         }
     }
 }

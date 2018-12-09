@@ -3,15 +3,17 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 using TaCertoForms.Models;
 using tacertoforms_dotnet.Models;
+using Util;
 
 namespace tacertoforms_dotnet.Controllers
 {
     public class TaCertoFormsController : Controller
     {
+        private Dictionary<string, string> Session { get; set; }
 
         public IActionResult Index()
         {
@@ -139,7 +141,8 @@ namespace tacertoforms_dotnet.Controllers
 
         public IActionResult Configuracoes()
         {
-            Set("key", "Hello from cookie", 10);
+            Session = GetSession();
+            Session.Add("email", "danilo@mail.com");
             return View();
         }
 
@@ -151,24 +154,12 @@ namespace tacertoforms_dotnet.Controllers
 
         public IActionResult Sobre()
         {
-            string temp = Request.Cookies["Key"];
-            for(int i = 0; i < 50; i++)
-                Console.WriteLine("COOKIE: "+temp);
-                
-            ViewData["chave"] = temp;
+            Session = GetSession();
+            if(Session.ContainsKey("email"))
+                ViewData["email"] = Session["email"];
             return View();
         }
 
-
-        public void Set(string key, string value, int? expireTime)  
-        {  
-            CookieOptions option = new CookieOptions();  
-            if (expireTime.HasValue)  
-                option.Expires = DateTime.Now.AddMinutes(expireTime.Value);  
-            else  
-                option.Expires = DateTime.Now.AddMilliseconds(10);  
-                Response.Cookies.Append(key, value, option);  
-        }
 
 
 
@@ -178,5 +169,28 @@ namespace tacertoforms_dotnet.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        private Dictionary<string, string> GetSession(){
+            string sessionKey = Request.Cookies["tacertosessionkey"];
+            if(sessionKey == null || sessionKey == ""){
+                sessionKey = SetSession();
+            }
+            return MultitonSession.GetSession(sessionKey);
+        }
+        private string SetSession()  
+        {  
+            string key = "tacertosessionkey";
+            Random random = new Random();
+            string value = new string(Enumerable.Repeat("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789", 16).Select(s => s[random.Next(s.Length)]).ToArray());
+
+            CookieOptions option = new CookieOptions();
+            option.Expires = DateTime.Now.AddMinutes(60);
+
+            Response.Cookies.Append(key, value, option);
+
+            return value;
+        }
+
+
     }
 }
