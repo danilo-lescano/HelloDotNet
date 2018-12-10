@@ -14,6 +14,7 @@ namespace tacertoforms_dotnet.Controllers
     public class TaCertoFormsController : Controller
     {
         private Dictionary<string, string> Session { get; set; }
+        private UsuarioManager usuarioManager = new UsuarioManager();
 
         public IActionResult Index()
         {
@@ -50,17 +51,19 @@ namespace tacertoforms_dotnet.Controllers
         // Mostra a tela de Login
         public IActionResult Login()
         {
-
             return View();
         }
 
         // Autentica o login do Usuário
         public ActionResult autenticar(){
-            for(int i = 0; i < 50; i++)
-                Console.WriteLine("Tenho que autenticar a seguinte pessoa: "+Request.Form["email"]);
-                
-            //string temp = Request.Form["email"];
-            //TempData["email"] = temp;
+            Session = GetSession();
+
+            string email = Request.Form["email"];
+            string password = Request.Form["password"];
+
+            Usuario usuario = usuarioManager.AutenticarLogin(email, senha);
+
+            if(Session.ContainsKey("email"));
 
             return RedirectToAction("TelaPrincipal","TaCertoForms");
         }
@@ -141,8 +144,6 @@ namespace tacertoforms_dotnet.Controllers
 
         public IActionResult Configuracoes()
         {
-            Session = GetSession();
-            Session.Add("email", "danilo@mail.com");
             return View();
         }
 
@@ -155,6 +156,9 @@ namespace tacertoforms_dotnet.Controllers
         public IActionResult Sobre()
         {
             Session = GetSession();
+            if(!Session.ContainsKey("email"))
+                Session.Add("email", "danilo@mail.com");
+
             if(Session.ContainsKey("email"))
                 ViewData["email"] = Session["email"];
             return View();
@@ -165,7 +169,7 @@ namespace tacertoforms_dotnet.Controllers
 
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-         public IActionResult Error()
+        public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
@@ -184,13 +188,11 @@ namespace tacertoforms_dotnet.Controllers
             string value = new string(Enumerable.Repeat("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789", 16).Select(s => s[random.Next(s.Length)]).ToArray());
 
             CookieOptions option = new CookieOptions();
-            option.Expires = DateTime.Now.AddMinutes(60);
+            option.Expires = DateTime.Now.AddDays(14);
 
             Response.Cookies.Append(key, value, option);
 
             return value;
         }
-
-
     }
 }
