@@ -92,10 +92,8 @@ if ( ( browser.name === 'Chrome' && browser.version <= 67 )
         $('.tooltipped').tooltip();
     });
 
-
-// Funções para o Modo Normal
-function trocaTextoPalavra(palavra){
-    let iframe = document.getElementById('normalIframe');
-    let innerDoc = (iframe.contentDocument) ? iframe.contentDocument : iframe.contentWindow.document;
-    innerDoc.getElementById('palavra').innerHTML = palavra;
+// Troca texto do Header
+function trocaTextoHeader(text){
+    let texto = document.getElementById('header-text');
+    texto.innerHTML = text;
 }

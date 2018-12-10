@@ -31,17 +31,22 @@ namespace tacertoforms_dotnet.Controllers
 
             string view;
             if(op == 1) // Tela Minhas Fases
+            {
+                ViewBag.HeaderTexto = "Minhas Fases";
                 view = "~/Views/TaCertoForms/MinhasFases.cshtml";
-            else if(op == 2) // Tela Configurações
+            }else if(op == 2) // Tela Configurações
+            {
+                ViewBag.HeaderTexto = "Configurações";
                 view = "~/Views/TaCertoForms/Configuracoes.cshtml";
-            else if(op == 3) // Tela About
+            }else if(op == 3) // Tela About
+            {
+                ViewBag.HeaderTexto = "Sobre";
                 view = "~/Views/TaCertoForms/Sobre.cshtml";
-            else // Sair -> Tela de Login
+            }else // Sair -> Tela de Login
                 view = "~/Views/TaCertoForms/Login.cshtml";
                 
             return View(view);
         }
-
 
         /*
         ******* Métodos para a Tela de Login *******
@@ -73,8 +78,8 @@ namespace tacertoforms_dotnet.Controllers
 
         public IActionResult TelaPrincipal()
         {
-           
             //ViewBag.EmailLogado = TempData["email"].ToString();
+            ViewBag.HeaderTexto = "Tá Certo Forms";
 
             return View();
         }
@@ -82,25 +87,24 @@ namespace tacertoforms_dotnet.Controllers
         public IActionResult CriarFase(int id)
         {
             string view;
-            if(id == 1)
+            if(id == 1){
+                ViewBag.HeaderTexto = "Modo Normal";
                 view = "~/Views/TaCertoForms/CriarFaseNormal.cshtml";
-            else if(id == 2)
+            }else if(id == 2){
+                ViewBag.HeaderTexto = "Modo Lacuna";
                 view = "~/Views/TaCertoForms/CriarFaseLacuna.cshtml";
-            else if(id == 3)
+            }
+            else if(id == 3){
+                ViewBag.HeaderTexto = "Modo Aurélio";
                 view = "~/Views/TaCertoForms/CriarFaseAurelio.cshtml";
-            else if(id == 4)
+            }else if(id == 4){
+                ViewBag.HeaderTexto = "Modo Explorador";
                 view = "~/Views/TaCertoForms/CriarFaseExplorador.cshtml";
-            else 
+            }else 
                 return RedirectToAction("Login");
 
             return View(view);
         }
-
-
-
-
-
-
 
         /*
         ******* Métodos incializar os iframes *******
@@ -128,6 +132,7 @@ namespace tacertoforms_dotnet.Controllers
 
         public IActionResult MinhasFases()
         {
+            ViewBag.HeaderTexto = "Minhas Fases";
             return View();
         }
 
@@ -140,6 +145,7 @@ namespace tacertoforms_dotnet.Controllers
 
         public IActionResult Configuracoes()
         {
+            ViewBag.HeaderTexto = "Configurações";
             return View();
         }
 
@@ -151,13 +157,9 @@ namespace tacertoforms_dotnet.Controllers
 
         public IActionResult Sobre()
         {
+            ViewBag.HeaderTexto = "Sobre";
             return View();
         }
-
-
-
-
-
 
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
