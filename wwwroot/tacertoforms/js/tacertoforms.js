@@ -92,6 +92,11 @@ if ( ( browser.name === 'Chrome' && browser.version <= 67 )
         $('.tooltipped').tooltip();
     });
 
+    // Inicializa o Modal
+    $(document).ready(function(){
+        $('.modal').modal();
+    });
+
 
 // Funções para o Modo Normal
 function trocaTextoPalavra(palavra){
