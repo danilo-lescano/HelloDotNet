@@ -183,7 +183,9 @@ namespace tacertoforms_dotnet.Controllers
             return MultitonSession.GetSession(sessionKey);
         }
         private string SetSession()  
-        {  
+        {
+            //deletar cookies com js
+            //document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
             string key = "tacertosessionkey";
             Random random = new Random();
             string value = new string(Enumerable.Repeat("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789", 16).Select(s => s[random.Next(s.Length)]).ToArray());

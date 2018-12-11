@@ -20,7 +20,7 @@
     </environment>
 </head>
 <body>
-    <partial name="_CookieConsentPartial" />
+    @await Html.PartialAsync("~/TaCertoForms/Views/Partial/_CookieConsentPartial.cshtml")
     <div class="body-content">
     @RenderBody()
     </div>
