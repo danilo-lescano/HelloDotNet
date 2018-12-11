@@ -1,5 +1,5 @@
 @{
-    Layout = "/Views/TaCertoForms/Layouts/FaseIframeLayout.cshtml";
+    Layout = "~/TaCertoForms/Views/Layouts/FaseIframeLayout.cshtml";
 }
 <div id="pauseModal" class="modalBlur" onclick="TaCerto.Controladora.Jogo.Geral.pauseModalClick()">
 	<!-- conteudo do modal-->
@@ -61,7 +61,7 @@
 
 			<div class="spanWrapper" id="economiaSpan">
 				<!--<div class="jogoPlacar" id="economia"> 0 </div>-->
-				<div class="jogoPlacar" id="tempo">00:03</div>		
+				<div class="jogoPlacar" id="tempo">01:07</div>		
 			</div>
 
 			<div class="spanWrapper" id="errosSpan">
@@ -89,9 +89,9 @@
 	</div>
 
 	<div id="flagCardExists" class="cartaWrapper">
-		<div class="barraCartaBG">
+		<div class="barraCartaBG" style="left: 0px;">
 			<div class="bucketCards">
-				<div id="cartaVermelha" class="cardSpan"><div class="imgCard bgcartaVermelha" onclick="TaCerto.Controladora.Jogo.Geral.clickCarta('cartaVermelha');"></div><div class="imgCard bgcartaVermelha" onclick="TaCerto.Controladora.Jogo.Geral.clickCarta('cartaVermelha');"></div></div>
+				<div id="cartaVermelha" class="cardSpan"></div>
 				<div id="cartaAzul" class="cardSpan"><div class="imgCard bgcartaAzul" onclick="TaCerto.Controladora.Jogo.Geral.clickCarta('cartaAzul');"></div><div class="imgCard bgcartaAzul" onclick="TaCerto.Controladora.Jogo.Geral.clickCarta('cartaAzul');"></div></div>
 				<div id="cartaAmarela" class="cardSpan"><div class="imgCard bgcartaAmarela" onclick="TaCerto.Controladora.Jogo.Geral.clickCarta('cartaAmarela');"></div><div class="imgCard bgcartaAmarela" onclick="TaCerto.Controladora.Jogo.Geral.clickCarta('cartaAmarela');"></div></div>
 				<div id="cartaVerde" class="cardSpan"><div class="imgCard bgcartaVerde" onclick="TaCerto.Controladora.Jogo.Geral.clickCarta('cartaVerde');"></div><div class="imgCard bgcartaVerde" onclick="TaCerto.Controladora.Jogo.Geral.clickCarta('cartaVerde');"></div></div>
@@ -101,12 +101,40 @@
 	</div>
 
 	<!--conteudo do tipo de jogo abaixo-->
-	<div id="JogoTipo"><div class="JogoPalavraDiv">
-	<h4 id="lacConteudoWrapper" class="fraseLacuna">Você não vale nada,<div class="padThis"><div id="lacuna1" class="emptyLacuna droppableLacuna ui-draggable"></div></div>eu gosto de você.</h4>
+	<div id="JogoTipo"><div class="mesaExpl">
+	<!--caixa de linhas que ligam as colunas-->
+	<div id="lineWrapper" class="lineWrapper"></div>
+
+	<!--onde fica a palavra do jogo explorador tipo palavra-->
+	<!--OU onde fica um texto avisando que o jogo é do tipo ligar colunas-->
+	<div id="explCabecalho" class="explCabecalho">Prosear</div>
+
+	<!--explPWrapper-->
+	<div id="explPWrapper" class="explPWrapper" style="display: block;">
+		<!--explPCountWordWrapper-->
+		<div class="explPCountWordWrapper">
+			<div class="explPCountContent">
+				<div id="explPCountContentDinamico" class="explPCountContentShadow">0</div>
+				/
+				<div id="explPCountContentDinamicoBase" class="explPCountContentShadow">2</div>
+			</div>
+		</div>
+		<!--explPWordWrapper-->
+		<div id="explPWordWrapper" class="explPWordWrapper"><div class="explPItemWrapper animated zoomInRight fadeIn"><div class="explPItem explPalavraItem" id="0explItem" data-equivalente="e">Briba</div></div><div class="explPItemWrapper animated zoomInDown fadeIn"><div class="explPItem explPalavraItem" id="1explItem" data-equivalente="e">Magrela</div></div><div class="explPItemWrapper animated zoomInLeft fadeIn"><div class="explPItem explPalavraItem" id="2explItem" data-equivalente="e">Groselha</div></div><div class="explPItemWrapper animated zoomInRight fadeIn"><div class="explPItem explPalavraItem" id="3explItem" data-equivalente="e">Tangerina</div></div><div class="explPItemWrapper animated zoomInUp fadeIn"><div class="explPItem explPalavraItem" id="4explItem" data-equivalente="c">Charlar</div></div><div class="explPItemWrapper animated zoomInRight fadeIn"><div class="explPItem explPalavraItem" id="5explItem" data-equivalente="c">Conversar</div></div></div>
+	</div>
+
+	<!--explCWrapper-->
+	<div id="explCWrapper" class="explCWrapper" style="display: none;">
+		<!--explCWordWrapper-->
+		<div class="explCWordWrapper">
+			<!--explCCol1-->
+			<div id="explCCol1" class="explCCol1"></div>
+			<!--explCCol2-->
+			<div id="explCCol2" class="explCCol2"></div>
+		</div>
+	</div>
 </div>
-<div class="JogoBotoesDiv">
-	<div id="lacunaResp" class="lacunaChoiceWrapper"><div class="padThis"><div class="draggableLacuna lacunaAlternativa ui-draggable" style="position: relative;">mais</div></div><div class="padThis"><div class="draggableLacuna lacunaAlternativa ui-draggable" style="position: relative;">mas</div></div></div>
-</div></div>
+</div>
 	<div id="block" data-timing="1000" data-tada="false" data-animacoestotal="21" data-framesx="4" data-framesy="6"></div>
 	<div id="vassoura" data-timing="1000" data-tada="false" data-animacoestotal="32" data-framesx="5" data-framesy="7"></div>
 </div>

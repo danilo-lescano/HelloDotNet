@@ -51,7 +51,7 @@ namespace tacertoforms_dotnet.Controllers
         // Mostra a tela de Login
         public IActionResult Login()
         {
-            return View();
+            return View("~/TaCertoForms/Views/Login.cshtml");
         }
 
         // Autentica o login do Usuário
@@ -60,10 +60,11 @@ namespace tacertoforms_dotnet.Controllers
 
             string email = Request.Form["email"];
             string password = Request.Form["password"];
+            if(Session.ContainsKey("email"))
+                Session.Remove("email");
+            Session.Add("email", email);
 
-            Usuario usuario = usuarioManager.AutenticarLogin(email, senha);
-
-            if(Session.ContainsKey("email"));
+            //Usuario usuario = usuarioManager.AutenticarLogin(email, password);
 
             return RedirectToAction("TelaPrincipal","TaCertoForms");
         }
@@ -79,7 +80,7 @@ namespace tacertoforms_dotnet.Controllers
            
             //ViewBag.EmailLogado = TempData["email"].ToString();
 
-            return View();
+            return View("~/TaCertoForms/Views/TelaPrincipal.cshtml");
         }
 
         //Procura a tela de id que representa a fase pra ser criada
@@ -87,13 +88,13 @@ namespace tacertoforms_dotnet.Controllers
         {
             string view;
             if(fase == "normal")
-                view = "~/Views/TaCertoForms/CriarFaseNormal.cshtml";
+                view = "~/TaCertoForms/Views/CriarFaseNormal.cshtml";
             else if(fase == "lacuna")
-                view = "~/Views/TaCertoForms/CriarFaseLacuna.cshtml";
+                view = "~/TaCertoForms/Views/CriarFaseLacuna.cshtml";
             else if(fase == "aurelio")
-                view = "~/Views/TaCertoForms/CriarFaseAurelio.cshtml";
+                view = "~/TaCertoForms/Views/CriarFaseAurelio.cshtml";
             else if(fase == "explorador")
-                view = "~/Views/TaCertoForms/CriarFaseExplorador.cshtml";
+                view = "~/TaCertoForms/Views/CriarFaseExplorador.cshtml";
             else 
                 return RedirectToAction("Login");
 
@@ -113,13 +114,13 @@ namespace tacertoforms_dotnet.Controllers
         {
             string view;
             if(id == 1)
-                view = "~/Views/TaCertoForms/Iframe/NormalIframe.cshtml";
+                view = "~/TaCertoForms/Views/Iframe/NormalIframe.cshtml";
             else if(id == 2)
-                view = "~/Views/TaCertoForms/Iframe/LacunaIframe.cshtml";
+                view = "~/TaCertoForms/Views/Iframe/LacunaIframe.cshtml";
             else if(id == 3)
-                view = "~/Views/TaCertoForms/Iframe/AurelioIframe.cshtml";
+                view = "~/TaCertoForms/Views/Iframe/AurelioIframe.cshtml";
             else if(id == 4)
-                view = "~/Views/TaCertoForms/Iframe/ExploradorIframe.cshtml";
+                view = "~/TaCertoForms/Views/Iframe/ExploradorIframe.cshtml";
             else 
                 return RedirectToAction("Login");
 
@@ -132,7 +133,7 @@ namespace tacertoforms_dotnet.Controllers
 
         public IActionResult MinhasFases()
         {
-            return View();
+            return View("~/TaCertoForms/Views/MinhasFases.cshtml");
         }
 
 
@@ -144,7 +145,7 @@ namespace tacertoforms_dotnet.Controllers
 
         public IActionResult Configuracoes()
         {
-            return View();
+            return View("~/TaCertoForms/Views/Configuracoes.cshtml");
         }
 
 
@@ -156,12 +157,10 @@ namespace tacertoforms_dotnet.Controllers
         public IActionResult Sobre()
         {
             Session = GetSession();
-            if(!Session.ContainsKey("email"))
-                Session.Add("email", "danilo@mail.com");
 
             if(Session.ContainsKey("email"))
                 ViewData["email"] = Session["email"];
-            return View();
+            return View("~/TaCertoForms/Views/Sobre.cshtml");
         }
 
 
