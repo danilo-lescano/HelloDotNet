@@ -15,6 +15,8 @@ namespace tacertoforms_dotnet.Controllers
     {
         private Dictionary<string, string> Session { get; set; }
         private UsuarioManager usuarioManager = new UsuarioManager();
+        private FaseManager faseManager = new FaseManager();
+        private DesafioDeFaseManager desafioDeFaseManager = new DesafioDeFaseManager();
 
         public IActionResult Index()
         {
@@ -57,16 +59,16 @@ namespace tacertoforms_dotnet.Controllers
         // Autentica o login do Usuário
         public ActionResult autenticar(){
             Session = GetSession();
+            usuarioManager.Session = Session;
 
             string email = Request.Form["email"];
             string password = Request.Form["password"];
-            if(Session.ContainsKey("email"))
-                Session.Remove("email");
-            Session.Add("email", email);
 
-            //Usuario usuario = usuarioManager.AutenticarLogin(email, password);
-
-            return RedirectToAction("TelaPrincipal","TaCertoForms");
+            bool logado = usuarioManager.AutenticarLogin(email, password);
+            if(logado)
+                return RedirectToAction("TelaPrincipal","TaCertoForms");
+            else
+                return RedirectToAction("Login","TaCertoForms");
         }
 
 

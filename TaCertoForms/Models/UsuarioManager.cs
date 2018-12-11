@@ -5,8 +5,13 @@ namespace TaCertoForms.Models
 {
     public class UsuarioManager
     {
-        public Usuario AutenticarLogin(string login, string senha){
-            return new Usuario();
+        public Dictionary<string, string> Session { get; set; }
+
+        public bool AutenticarLogin(string email, string senha){
+            if(Session.ContainsKey("email"))
+                Session.Remove("email");
+            Session.Add("email", email);
+            return true;
         }
     }
 }
