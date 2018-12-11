@@ -120,7 +120,7 @@ body{
 	position: absolute;
 	width: 100%;
 }
-#mainText h4{
+#helperText h4{
 	color: whitesmoke;
 }
 #normalAndHardcore{
@@ -211,6 +211,49 @@ nav .brand-logo{
 	height: 100%;
 }
 
+.rightSpace{
+	margin-right: 10px;
+}
+
+.leftSpace{
+	margin-left: 2rem;
+}
+
+.bottomSpace{
+	margin-bottom: 2rem;
+}
+
+#info-fase-modal {
+	height: 40% !important;
+}
+
+.modal {
+    background-color: #fff;
+    .modal-fixed-header {
+        padding: 0;
+        height: 70%;
+        .modal-header {
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            position: absolute;
+            top: 0;
+        }
+        .modal-header {
+            border-radius: 0 0 2px 2px;
+            background-color: #fafafa;
+            padding: 4px 6px;
+            height: 56px;
+            width: 100%;
+        }
+        .modal-content {
+            position: absolute;
+            top:56px;
+            height: calc(100% - 56px);
+            max-height: 100%;
+            width: 100%;
+            overflow-y: auto;
+        }
+    }
+}
 /*--------------------------------------------------------------*/
 /*classes gerais*//*fim*/
 /*--------------------------------------------------------------*/

@@ -81,6 +81,7 @@ namespace tacertoforms_dotnet.Controllers
         {
            
             //ViewBag.EmailLogado = TempData["email"].ToString();
+            ViewBag.HeaderTexto = "Tá Certo Forms";
 
             return View("~/TaCertoForms/Views/TelaPrincipal.cshtml");
         }
@@ -89,14 +90,22 @@ namespace tacertoforms_dotnet.Controllers
         public IActionResult CriarFase(string fase)
         {
             string view;
-            if(fase == "normal")
+            if(fase == "normal"){
+                ViewBag.HeaderTexto = "Modo Normal";
                 view = "~/TaCertoForms/Views/CriarFaseNormal.cshtml";
-            else if(fase == "lacuna")
+            }
+            else if(fase == "lacuna"){
+                ViewBag.HeaderTexto = "Modo Lacuna";
                 view = "~/TaCertoForms/Views/CriarFaseLacuna.cshtml";
-            else if(fase == "aurelio")
+            }
+            else if(fase == "aurelio"){
+                ViewBag.HeaderTexto = "Modo Aurélio";
                 view = "~/TaCertoForms/Views/CriarFaseAurelio.cshtml";
-            else if(fase == "explorador")
+            }
+            else if(fase == "explorador"){
+                ViewBag.HeaderTexto = "Modo Explorador";
                 view = "~/TaCertoForms/Views/CriarFaseExplorador.cshtml";
+            }
             else 
                 return RedirectToAction("Login");
 
@@ -135,6 +144,7 @@ namespace tacertoforms_dotnet.Controllers
 
         public IActionResult MinhasFases()
         {
+            ViewBag.HeaderTexto = "Minhas Fases";
             return View("~/TaCertoForms/Views/MinhasFases.cshtml");
         }
 
@@ -147,6 +157,7 @@ namespace tacertoforms_dotnet.Controllers
 
         public IActionResult Configuracoes()
         {
+            ViewBag.HeaderTexto = "Configurações";
             return View("~/TaCertoForms/Views/Configuracoes.cshtml");
         }
 
@@ -162,6 +173,9 @@ namespace tacertoforms_dotnet.Controllers
 
             if(Session.ContainsKey("email"))
                 ViewData["email"] = Session["email"];
+
+            ViewBag.HeaderTexto = "Sobre";
+                
             return View("~/TaCertoForms/Views/Sobre.cshtml");
         }
 

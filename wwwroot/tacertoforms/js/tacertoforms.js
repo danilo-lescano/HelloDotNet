@@ -92,10 +92,23 @@ if ( ( browser.name === 'Chrome' && browser.version <= 67 )
         $('.tooltipped').tooltip();
     });
 
+    // Inicializa o Modal
+    $(document).ready(function(){
+        $('.modal').modal();
+    });
 
-// Funções para o Modo Normal
+
+// Funções para o Modo Normal *********************************************************
 function trocaTextoPalavra(palavra){
     let iframe = document.getElementById('normalIframe');
     let innerDoc = (iframe.contentDocument) ? iframe.contentDocument : iframe.contentWindow.document;
     innerDoc.getElementById('palavra').innerHTML = palavra;
+}
+
+
+// Funções para o Modo Aurélio *********************************************************
+function trocaTextoFrase(texto){
+    let iframe = document.getElementById('aureliolIframe');
+    let innerDoc = (iframe.contentDocument) ? iframe.contentDocument : iframe.contentWindow.document;
+    innerDoc.getElementById('aurPhraseWrap').innerHTML = texto;
 }
