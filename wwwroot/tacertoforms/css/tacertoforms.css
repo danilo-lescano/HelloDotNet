@@ -254,6 +254,23 @@ nav .brand-logo{
         }
     }
 }
+
+.navbar-text{
+	line-height: 15px;
+	margin-top: 0;
+	margin-bottom: 0;
+	padding-top: 35px;
+	width: 84%;
+}
+
+#cookieConsent{
+	position: absolute;
+	height: 104px;
+}
+
+.botaoAceitarCookie{
+	line-height: 0;
+}
 /*--------------------------------------------------------------*/
 /*classes gerais*//*fim*/
 /*--------------------------------------------------------------*/

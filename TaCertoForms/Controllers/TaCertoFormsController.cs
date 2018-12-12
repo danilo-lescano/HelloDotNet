@@ -65,6 +65,7 @@ namespace tacertoforms_dotnet.Controllers
             string password = Request.Form["password"];
 
             bool logado = usuarioManager.AutenticarLogin(email, password);
+            
             if(logado)
                 return RedirectToAction("TelaPrincipal","TaCertoForms");
             else
