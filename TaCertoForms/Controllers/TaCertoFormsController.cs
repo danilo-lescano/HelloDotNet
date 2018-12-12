@@ -13,7 +13,7 @@ namespace tacertoforms_dotnet.Controllers
 {
     public class TaCertoFormsController : Controller
     {
-        private Dictionary<string, string> Session { get; set; }
+        private Dictionary<string, Object> Session { get; set; }
         private UsuarioManager usuarioManager = new UsuarioManager();
         private FaseManager faseManager = new FaseManager();
         private DesafioDeFaseManager desafioDeFaseManager = new DesafioDeFaseManager();
@@ -172,7 +172,7 @@ namespace tacertoforms_dotnet.Controllers
             Session = GetSession();
 
             if(Session.ContainsKey("email"))
-                ViewData["email"] = Session["email"];
+                ViewData["email"] = (string) Session["email"];
 
             ViewBag.HeaderTexto = "Sobre";
                 
@@ -189,7 +189,7 @@ namespace tacertoforms_dotnet.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        private Dictionary<string, string> GetSession(){
+        private Dictionary<string, Object> GetSession(){
             string sessionKey = Request.Cookies["tacertosessionkey"];
             if(sessionKey == null || sessionKey == ""){
                 sessionKey = SetSession();

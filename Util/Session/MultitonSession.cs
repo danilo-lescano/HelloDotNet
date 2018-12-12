@@ -10,13 +10,13 @@ namespace Util
         private string SessionKey { get; set; }
         private DateTime LastUpdate { get; set; }
 
-        private Dictionary<string, string> SessionVariables { get; set; } = new Dictionary<string, string>();
+        private Dictionary<string, Object> SessionVariables { get; set; } = new Dictionary<string, Object>();
 
         private MultitonSession(string sessionKey){
             this.SessionKey = sessionKey;
         }
 
-        public static Dictionary<string, string> GetSession(string sessionKey){
+        public static Dictionary<string, Object> GetSession(string sessionKey){
             for (int i = 0; i < sessionList.Count; i++)
                 if (sessionList[i].SessionKey == sessionKey){
                     sessionList[i].LastUpdate = DateTime.Now;

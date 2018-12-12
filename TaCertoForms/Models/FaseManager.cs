@@ -5,6 +5,6 @@ namespace TaCertoForms.Models
 {
     public class FaseManager
     {
-        private Dictionary<string, string> Session { get; set; }
+        private Dictionary<string, Object> Session { get; set; }
     }
 }
