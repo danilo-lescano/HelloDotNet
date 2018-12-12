@@ -12,12 +12,12 @@ namespace tacertoforms_dotnet.Controllers
     {
 
          // Autentica o login do Usuário
-        public IActionResult adicionar(){
+        public IActionResult AdicionarDesafioDeFase(){
             for(int i = 0; i < 50; i++)
                 Console.WriteLine("Add palavra =  "+Request.Form["palavraText"]+" na fase");
                 
-            string temp = Request.Form["palavraText"];
-            TempData["palavra"] = temp;
+            string idFase = Request.Form["idFase"];
+            TempData["palavra"] = idFase;
 
             return RedirectToAction("incrementaPalavrasNaTela");
         }

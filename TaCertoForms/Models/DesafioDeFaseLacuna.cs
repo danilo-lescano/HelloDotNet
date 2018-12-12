@@ -5,7 +5,7 @@ namespace TaCertoForms.Models
 {
     public class DesafioDeFaseLacuna : IDesafioDeFase
     {
-        private int id { get; set; }
-        private int faseId { get; set; }
+        int Id { get; set; }
+        int FaseId { get; set; }
     }
 }
