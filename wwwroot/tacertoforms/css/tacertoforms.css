@@ -281,6 +281,10 @@ nav .brand-logo{
 
 .rowParaFixarAltura{
 	height: 50vh;
+	margin-bottom: 0;
+}
+.noMargin{
+	margin-bottom: 0;
 }
 .loginContainer{
 	position: absolute;
