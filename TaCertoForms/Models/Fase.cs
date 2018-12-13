@@ -7,7 +7,9 @@ namespace TaCertoForms.Models
     {
         public int Id { get; set; }
         public int UsuarioId { get; set; }
-        public string Nome { get; set; }
+        public string Chave { get; set; }
+        public int IdTipoFase { get; set; }
         public string Descricao { get; set; }
+        public List<IDesafioDeFase> ListaDeDesafios { get; set; }
     }
 }

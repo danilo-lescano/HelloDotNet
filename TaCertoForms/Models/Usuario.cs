@@ -9,6 +9,7 @@ namespace TaCertoForms.Models
         private string nome { get; set; }
         private string email { get; set; }
         private string senha { get; set; }
+        public List<Fase> ListaDeFases { get; set; }
         
     }
 }

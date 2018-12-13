@@ -3,9 +3,18 @@ using System.Collections.Generic;
 using TaCertoForms.Models;
 namespace TaCertoForms.Models
 {
-    public class DesafioDeFaseExploradorEscolha : IDesafioDeFaseExplorador
+    public class DesafioDeFaseExploradorEscolha : IDesafioDeFase
     {
-        private int id { get; set; }
-        private string nome { get; set; }
+        public struct PalavraExWrapper{
+            int equivalente;
+            bool emoji;
+            string conteudo;
+        }
+        private int Id { get; set; }
+        public int FaseId { get; set; }
+        public List<PalavraExWrapper> Coluna1 { get; set; }
+        public List<PalavraExWrapper> Coluna2 { get; set; }
+        public string Significado { get; set; }
+        public string Dica { get; set; }
     }
 }
