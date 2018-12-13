@@ -21,10 +21,16 @@ var ScriptsCriarFaseNormal = {
             let palavrasContainer = document.getElementById('palavrasAdicionadas');
             palavrasContainer.innerHTML += '<div class="palavraBox '+cor+'"><h6>'+palavra+'</h6></div>';
             let significado = document.getElementById('textoSignificado').value;
+            document.getElementById('textoSignificado').value = "";
+
             let dica = document.getElementById('textoDica').value;
+            document.getElementById('textoDica').value = "";
             
             this.listaDeDesafios[this.quantidade++] = new this.desafio(this.quantidade-1, palavra, this.correto, significado, dica);
             console.log(this.listaDeDesafios[this.quantidade - 1]);
+
+            document.getElementById('numeroDePalavras').innerHTML = this.quantidade;
+
         }else{
             console.log("Chama o toast para o usuario lembrar que tem que escrever uma palavra");
             this.mostraToast(1);
