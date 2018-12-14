@@ -596,6 +596,19 @@ nav .brand-logo{
 	display: inline-block;
 }
 
+.palavraFaltandoModoNormal{
+
+	
+}
+
+.editandoPalavraModoNormal{
+	animation-name: corPulse;
+}
+
+@keyframes example {
+	from {}
+}
+
 /*--------------------------------------------------------------*/
 /* MODO NORMAL *//* fim */
 /*--------------------------------------------------------------*/

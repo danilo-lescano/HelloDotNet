@@ -1,7 +1,7 @@
 ﻿@{
     Layout = "~/TaCertoForms/Views/Layouts/CriarFaseLayout.cshtml";
 }        
-<div id="normalAndHardcore" class="row center-align">
+<div id="normalAndHardcore" class="row center-align" onload="ScriptsCriarFaseNormal.loadData();">
     <div id="helperText" class="col s12 m12 l12 xl12 card-panel blue darken-4">
         <h4>Adicionando questões</h4>
     </div>
@@ -13,8 +13,7 @@
                         <div class="row">
                                 <div class="input-field col s6">
                                         <i class="material-icons prefix">add_circle</i>
-                                        <input placeholder="ex: Cambito" id="palavraText" name="palavraText" type="text" class="validate" onkeyup
-                                        ="trocaTextoPalavra(this.value);">
+                                        <input placeholder="ex: Cambito" id="palavraText" name="palavraText" type="text" class="validate" onkeyup="ScriptsCriarFaseNormal.trocaTextoPalavra(this.value);" onfocus="ScriptsCriarFaseNormal.trocaTextoPalavra(this.value);">
                                         <label for="palavraText">Palavra</label>
                                 </div>
                                 <label>
@@ -58,7 +57,7 @@
         
     <div id="telaNormalAndHardcore" class="col s12 m4 l4 hide-on-small-only">
         <iframe id="normalIframe" src="~/TaCertoForms/ChamarIframe?id=1" frameborder="0"></iframe>
-        <div onclick="M.toast({html: 'Esse é apenas um exemplo de como ficará no jogo.', classes: 'rounded'})"  class="ghostDivJustForClick">
+        <div onclick="M.toast({html: 'Esse é apenas um exemplo de como ficará no jogo.', classes: 'rounded red lighten-1'})"  class="ghostDivJustForClick">
         </div>
     </div>
 </div>

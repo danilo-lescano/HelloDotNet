@@ -83,6 +83,7 @@ namespace tacertoforms_dotnet.Controllers
            
             //ViewBag.EmailLogado = TempData["email"].ToString();
             ViewBag.HeaderTexto = "Tá Certo Forms";
+            //ViewBag.OpModo = "Te";
 
             return View("~/TaCertoForms/Views/TelaPrincipal.cshtml");
         }
@@ -91,6 +92,7 @@ namespace tacertoforms_dotnet.Controllers
         public IActionResult CriarFase(string fase)
         {
             string view;
+            ViewBag.OpModo = fase;
             if(fase == "normal"){
                 ViewBag.HeaderTexto = "Modo Normal";
                 view = "~/TaCertoForms/Views/CriarFaseNormal.cshtml";
