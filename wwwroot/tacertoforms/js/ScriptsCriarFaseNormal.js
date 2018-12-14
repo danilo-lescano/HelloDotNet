@@ -35,53 +35,59 @@ var ScriptsCriarFaseNormal = {
         let palavra = this.checaPalavra();
 
         if(palavra != 0){
-            var elemento = document.getElementById(this.editando); // Elemento que estou editando
 
-            let cor = this.pegaCor(); // Pega a cor caso a palavra esteja certa ou errada
+            if(!this.palavraNaoExiste(palavra)){
 
-            let significado = this.significadoTextEdit.value;
-            this.significadoTextEdit.value = "";
+                var elemento = document.getElementById(this.editando); // Elemento que estou editando
 
-            let dica = this.dicaTextEdit.value;
-            this.dicaTextEdit.value = "";
+                let cor = this.pegaCor(); // Pega a cor caso a palavra esteja certa ou errada
 
-            if(this.editando == -1){ // Não está editando
+                let significado = this.significadoTextEdit.value;
+                this.significadoTextEdit.value = "";
 
-                let palavrasContainer = this.palavrasContainer;
-                palavrasContainer.innerHTML += '<div id = "' + this.quantidade+'" class="palavraBox '+cor+'" onclick="ScriptsCriarFaseNormal.carregaParaEditar(this.id)"><h6>'+palavra+'</h6></div>';
-                
-                this.listaDeDesafios[this.quantidade++] = new this.desafio(this.quantidade-1, palavra, this.correto, -1, significado, dica);
-                console.log(this.listaDeDesafios[this.quantidade - 1]);
+                let dica = this.dicaTextEdit.value;
+                this.dicaTextEdit.value = "";
 
-                document.getElementById('numeroDePalavras').innerHTML = this.quantidade;
+                if(this.editando == -1){ // Não está editando
 
-                this.mostraToast(2);        
-            }else{ // Está editando
-
-                if(this.listaDeDesafios[this.editando].palavra != palavra){
-                    elemento.childNodes[0].innerHTML = palavra;
-                    this.listaDeDesafios[this.editando].palavra = palavra; 
-                }
-                
-                if(this.listaDeDesafios[this.editando].eCorreto == true){
-                    if(this.correto == false){
-                        elemento.classList.remove("green");
-                        elemento.classList.add("red");
-                        this.listaDeDesafios[this.editando].eCorreto = this.correto;
-                    }
-                }else{
-                    if(this.correto == true){
-                        elemento.classList.remove("red");
-                        elemento.classList.add("green");
-                        this.listaDeDesafios[this.editando].eCorreto = this.correto;
-                    }
-                }
+                    let palavrasContainer = this.palavrasContainer;
+                    palavrasContainer.innerHTML += '<div id = "' + this.quantidade+'" class="palavraBox '+cor+'" onclick="ScriptsCriarFaseNormal.carregaParaEditar(this.id)"><h6>'+palavra+'</h6></div>';
                     
-                this.listaDeDesafios[this.editando].significado = significado;
-                this.listaDeDesafios[this.editando].dica = dica;
+                    this.listaDeDesafios[this.quantidade++] = new this.desafio(this.quantidade-1, palavra, this.correto, -1, significado, dica);
+                    console.log(this.listaDeDesafios[this.quantidade - 1]);
 
-                this.editando = -1;
-                this.mostraToast(3);    
+                    document.getElementById('numeroDePalavras').innerHTML = this.quantidade;
+
+                    this.mostraToast(2);        
+                }else{ // Está editando
+
+                    if(this.listaDeDesafios[this.editando].palavra != palavra){
+                        elemento.childNodes[0].innerHTML = palavra;
+                        this.listaDeDesafios[this.editando].palavra = palavra; 
+                    }
+                    
+                    if(this.listaDeDesafios[this.editando].eCorreto == true){
+                        if(this.correto == false){
+                            elemento.classList.remove("green");
+                            elemento.classList.add("red");
+                            this.listaDeDesafios[this.editando].eCorreto = this.correto;
+                        }
+                    }else{
+                        if(this.correto == true){
+                            elemento.classList.remove("red");
+                            elemento.classList.add("green");
+                            this.listaDeDesafios[this.editando].eCorreto = this.correto;
+                        }
+                    }
+                        
+                    this.listaDeDesafios[this.editando].significado = significado;
+                    this.listaDeDesafios[this.editando].dica = dica;
+
+                    this.editando = -1;
+                    this.mostraToast(3);    
+                }
+            }else{
+                this.mostraToast(4);    
             }
         }else{
             console.log("Chama o toast para o usuario lembrar que tem que escrever uma palavra");
@@ -107,6 +113,8 @@ var ScriptsCriarFaseNormal = {
             M.toast({html: 'Palavra adicionada!', classes: 'rounded green lighten-1'});
         }else if(op == 3){ // Palavra foi adicionada
             M.toast({html: 'Palavra modificada!', classes: 'rounded lime'});
+        }else if(op == 4){ // Palavra foi adicionada
+            M.toast({html: 'Palavra já foi adicionada!', classes: 'rounded red lighten-1'});
         }
     },
     pegaCor: function(){
@@ -151,9 +159,18 @@ var ScriptsCriarFaseNormal = {
     trocaTextoPalavra: function(palavra){
         let innerDoc = (this.iframe.contentDocument) ? this.iframe.contentDocument : this.iframe.contentWindow.document;
         innerDoc.getElementById('palavra').innerHTML = palavra;
+    },
+    palavraNaoExiste: function(palavra){
+        let jatem = false;
+        console.log("ver se a palavra já foi adicionada");
+        for(let i = 0; i < this.quantidade && !jatem; i++){
+            if(palavra.toLowerCase() == this.listaDeDesafios[i].palavra.toLowerCase())
+                jatem = true;
+        }
+
+        return jatem;
     }
 }
-
 
 window.onload = ()=>{
     ScriptsCriarFaseNormal.loadData();
