@@ -4,20 +4,12 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TaCerto Forms</title>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="~/lib/materialize/css/materialize.css" />
+    <link rel="stylesheet" href="~/tacertoforms/css/fonts.css" />
+    <link rel="stylesheet" href="~/tacertoforms/css/tacertoforms.css" />
+    <link rel="stylesheet" href="~/lib/animate/animate.min.css" />
 
-    <environment include="Development">
-		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <link rel="stylesheet" href="~/lib/materialize/css/materialize.css" />
-        <link rel="stylesheet" href="~/tacertoforms/css/fonts.css" />
-        <link rel="stylesheet" href="~/tacertoforms/css/tacertoforms.css" />
-		<link rel="stylesheet" href="~/lib/animate/animate.min.css" />
-    </environment>
-    <environment exclude="Development">
-        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
-              asp-fallback-href="~/lib/materialize/css/materialize.min.css"
-              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
-        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
-    </environment>
 </head>
 <body>
     @await Html.PartialAsync("~/TaCertoForms/Views/Partial/_CookieConsentPartial.cshtml")
@@ -31,20 +23,20 @@
 </div>
 <ul class="sidenav" id="mobileMenu">
     <li class="sidenav-header">
-        <a asp-controller="TaCertoForms" asp-action="TelaPrincipal" class="brand-logo">Tá Certo Forms</a>
+        <a href="/TaCertoForms/TelaPrincipal" class="brand-logo">Tá Certo Forms</a>
         <div class="user-info">
             <h6 class="title">Meu Nome</h6>
             <p>@ViewBag.EmailLogado</p>
         </div>
     </li>
     <div class="divider"></div>
-    <li><a asp-controller="TaCertoForms" asp-action="Menu" asp-route-op="1">Minhas Fases</a></li>
+    <li><a href="/TaCertoForms/Menu/?op=1">Minhas Fases</a></li>
     <div class="divider"></div>
-    <li><a asp-controller="TaCertoForms" asp-action="Menu" asp-route-op="2">Configurações</a></li>
+    <li><a href="/TaCertoForms/Menu/?op=2">Configurações</a></li>
     <div class="divider"></div>
-    <li><a asp-controller="TaCertoForms" asp-action="Menu" asp-route-op="3">Sobre</a></li>
+    <li><a href="/TaCertoForms/Menu/?op=3">Sobre</a></li>
     <div class="divider"></div>
-    <li><a asp-controller="TaCertoForms" asp-action="Menu" asp-route-op="4">Sair</a></li>
+    <li><a href="/TaCertoForms/Menu/?op=4">Sair</a></li>
 </ul>
 
 <!--<div id="tipoForm" class="container center-align">-->
@@ -60,24 +52,14 @@
             </div>
        </div>
         
-
-
-    <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/materialize/js/materialize.min.js"></script>
         <script src="~/js/site.js" asp-append-version="true"></script>
         <script src="~/tacertoforms/js/tacertoforms.js"></script>
-    </environment>
-    <environment exclude="Development">
-        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"
-                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
-                asp-fallback-test="window.jQuery"
-                crossorigin="anonymous"
-                integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT">
-        </script>
-        <script src="~/lib/materialize/js/materialize.min.js"></script>
-        <script src="~/tacertoforms/js/tacertoforms.js"></script>
-    </environment>
+        @if(@ViewBag.OpModo == "normal"){
+            <script src="~/tacertoforms/js/ScriptsCriarFaseNormal.js"></script>
+        }
+
 
     @RenderSection("Scripts", required: false)
 </body>

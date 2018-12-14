@@ -1,63 +1,70 @@
 ﻿@{
     Layout = "~/TaCertoForms/Views/Layouts/CriarFaseLayout.cshtml";
 }        
-<div id="normalAndHardcore" class="row center-align">
+<div id="normalAndHardcore" class="row center-align" onload="ScriptsCriarFaseNormal.loadData();">
     <div id="helperText" class="col s12 m12 l12 xl12 card-panel blue darken-4">
         <h4>Adicionando questões</h4>
     </div>
     <div id="formNormalAndHardcore" class="col s12 m8 l8">
-        <form class="col s12" action="@Url.Action("adicionar", "CriarFaseNormal")" method="post">
+        <div class="col s12" name="palavraNormalForm">
             <div class="row card-panel teal lighten-2">
                 <h5 class="titulo-questao">Questão 1</h5>
             </div>
                         <div class="row">
                                 <div class="input-field col s6">
                                         <i class="material-icons prefix">add_circle</i>
-                                        <input placeholder="ex: Cambito" id="palavraText" name="palavraText" type="text" class="validate" onkeyup
-                                        ="trocaTextoPalavra(this.value);">
+                                        <input placeholder="ex: Cambito" id="palavraText" name="palavraText" type="text" class="validate" onkeyup="ScriptsCriarFaseNormal.trocaTextoPalavra(this.value);" onfocus="ScriptsCriarFaseNormal.trocaTextoPalavra(this.value);">
                                         <label for="palavraText">Palavra</label>
                                 </div>
                                 <label>
-                                    <input name="group1" type="radio" checked />
+                                    <input id="certo" name="alternativaPalavra" type="radio" checked />
                                     <span>Certo</span>
                                 </label>
                                 <label>
-                                    <input name="group1" type="radio" />
+                                    <input id="errado" name="alternativaPalavra" type="radio" />
                                     <span>Errado</span>
                                 </label>
                         </div>
                         <div class="row">
                                 <div class="input-field col s12">
-                                <textarea id="textarea1" class="materialize-textarea"></textarea>
-                                <label for="textarea1">Significado (Opcional)</label>
+                                <textarea id="textoSignificado" class="materialize-textarea"></textarea>
+                                <label for="textoSignificado">Significado (Opcional)</label>
                                 </div>
                         </div>
                         <div class="row">
                                 <div class="input-field col s12">
-                                <textarea id="textarea1" class="materialize-textarea"></textarea>
-                                <label for="textarea1">Dica (Opcional)</label>
+                                <textarea id="textoDica" class="materialize-textarea"></textarea>
+                                <label for="textoDica">Dica (Opcional)</label>
                                 </div>
                         </div>
                         
                         <div class="row">
                             <div class="input-field col s12">
-                                <button class="btn waves-effect waves-light" type="submit" name="action">
-                                            Adicionar
-                                </button>
+                               <a class="waves-effect waves-light btn" onclick="ScriptsCriarFaseNormal.addPalavra()">Adicionar</a>
                                <!-- <a class="waves-effect waves-light btn btn-large" type="submit" name="action"></a>-->
                             </div>
                         </div>
                         <div class="divider"></div>
                         <div class="left-align">
-                            Número de questões atual: 0
+                            <h6>Número de questões atual: <span id="numeroDePalavras">0</span></h6>
                         </div>
-                </form>
-
+                        <div id="palavrasAdicionadas" class="left-align">
+                            <h6>Palavras adicionadas:</h6>
+                        </div>
+                </div>   
     </div>
+    
         
     <div id="telaNormalAndHardcore" class="col s12 m4 l4 hide-on-small-only">
         <iframe id="normalIframe" src="~/TaCertoForms/ChamarIframe?id=1" frameborder="0"></iframe>
-        <div onclick="M.toast({html: 'Esse é apenas um exemplo de como ficará no jogo.', classes: 'rounded'})"  class="ghostDivJustForClick">
+        <div onclick="M.toast({html: 'Esse é apenas um exemplo de como ficará no jogo.', classes: 'rounded red lighten-1'})"  class="ghostDivJustForClick">
         </div>
     </div>
 </div>
+
+<script>
+    function addPalavra(){
+        
+    }
+
+</script>

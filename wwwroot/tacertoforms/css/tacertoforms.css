@@ -229,30 +229,30 @@ nav .brand-logo{
 
 .modal {
     background-color: #fff;
-    .modal-fixed-header {
-        padding: 0;
-        height: 70%;
-        .modal-header {
-            border-top: 1px solid rgba(0, 0, 0, 0.1);
-            position: absolute;
-            top: 0;
-        }
-        .modal-header {
-            border-radius: 0 0 2px 2px;
-            background-color: #fafafa;
-            padding: 4px 6px;
-            height: 56px;
-            width: 100%;
-        }
-        .modal-content {
-            position: absolute;
-            top:56px;
-            height: calc(100% - 56px);
-            max-height: 100%;
-            width: 100%;
-            overflow-y: auto;
-        }
-    }
+   
+}
+
+.modal-header{
+	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+	background-color: #6e9bff;
+	padding-top: 1px;
+}
+
+.navbar-text{
+	line-height: 15px;
+	margin-top: 0;
+	margin-bottom: 0;
+	padding-top: 35px;
+	width: 84%;
+}
+
+#cookieConsent{
+	position: absolute;
+	height: 104px;
+}
+
+.botaoAceitarCookie{
+	line-height: 0;
 }
 /*--------------------------------------------------------------*/
 /*classes gerais*//*fim*/
@@ -264,6 +264,10 @@ nav .brand-logo{
 
 .rowParaFixarAltura{
 	height: 50vh;
+	margin-bottom: 0;
+}
+.noMargin{
+	margin-bottom: 0;
 }
 .loginContainer{
 	position: absolute;
@@ -576,4 +580,35 @@ nav .brand-logo{
 }
 /*--------------------------------------------------------------*/
 /*LOGIN*//*fim*/
+/*--------------------------------------------------------------*/
+
+
+ 
+/****************************************************************/
+/* MODO NORMAL *//* inicio */
+/****************************************************************/
+
+.palavraBox{
+	border: 1px solid #ffffff;
+	color: white;
+	padding: 2px;
+	margin: 2px;
+	display: inline-block;
+}
+
+.palavraFaltandoModoNormal{
+
+	
+}
+
+.editandoPalavraModoNormal{
+	animation-name: corPulse;
+}
+
+@keyframes example {
+	from {}
+}
+
+/*--------------------------------------------------------------*/
+/* MODO NORMAL *//* fim */
 /*--------------------------------------------------------------*/

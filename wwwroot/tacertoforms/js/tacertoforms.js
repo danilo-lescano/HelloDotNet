@@ -99,11 +99,7 @@ if ( ( browser.name === 'Chrome' && browser.version <= 67 )
 
 
 // Funções para o Modo Normal *********************************************************
-function trocaTextoPalavra(palavra){
-    let iframe = document.getElementById('normalIframe');
-    let innerDoc = (iframe.contentDocument) ? iframe.contentDocument : iframe.contentWindow.document;
-    innerDoc.getElementById('palavra').innerHTML = palavra;
-}
+
 
 
 // Funções para o Modo Aurélio *********************************************************
