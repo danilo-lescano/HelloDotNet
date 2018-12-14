@@ -28,5 +28,17 @@ namespace Util
 
             return newSession.SessionVariables;
         }
+
+        public static void DeleteSession(Dictionary<string, Object> sessionToDelete){
+            MultitonSession aux = null;
+            foreach (MultitonSession session in sessionList){
+                if(Object.ReferenceEquals(session.SessionVariables, sessionToDelete)){
+                    aux = session;
+                    break;
+                }
+            }
+            if(aux != null)
+                sessionList.Remove(aux);
+        }
     }
 }

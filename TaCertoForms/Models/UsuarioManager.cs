@@ -11,6 +11,10 @@ namespace TaCertoForms.Models
             if(Session.ContainsKey("email"))
                 Session.Remove("email");
             Session.Add("email", email);
+            if(!Session.ContainsKey("isLoged"))
+                Session.Add("isLoged", true);
+            else
+                Session["isLoged"] = true;
             return true;
         }
     }

@@ -18,18 +18,24 @@ namespace tacertoforms_dotnet.Controllers
         private FaseManager faseManager = new FaseManager();
         private DesafioDeFaseManager desafioDeFaseManager = new DesafioDeFaseManager();
 
-        public IActionResult Index()
-        {
-            bool logado = false;
+        public IActionResult Index(){
+            Session = GetSession();
+            usuarioManager.Session = Session;
 
-            Console.WriteLine("Checa se já está logado.");
+            bool isLoged;
 
-            if(!logado){
+            if(Session.ContainsKey("isLoged") && (bool)Session["isLoged"])
+                isLoged = true;
+            else
+                isLoged = false;
+
+
+            if(isLoged){
                 // Não está logado, logo deve redirecionar para a página de login
-                return RedirectToAction("Login");
+                return RedirectToAction("TelaPrincipal");
             }else{
                 // Está logago, logo deve redirecionar para a página principal
-                return RedirectToAction("TelaPrincipal");
+                return RedirectToAction("Login");
             }
         }
 
@@ -51,11 +57,14 @@ namespace tacertoforms_dotnet.Controllers
         */
        
         // Mostra a tela de Login
-        public IActionResult Login()
-        {
+        public IActionResult Login(){
             return View("~/TaCertoForms/Views/Login.cshtml");
         }
-
+        public IActionResult Logout(){
+            Session = GetSession();
+            MultitonSession.DeleteSession(Session);
+            return RedirectToAction("Login");
+        }
         // Autentica o login do Usuário
         public ActionResult autenticar(){
             Session = GetSession();
@@ -121,8 +130,7 @@ namespace tacertoforms_dotnet.Controllers
         /*
         ******* Métodos incializar os iframes *******
         */
-        public IActionResult ChamarIframe(int id)
-        {
+        public IActionResult ChamarIframe(int id){
             string view;
             if(id == 1)
                 view = "~/TaCertoForms/Views/Iframe/NormalIframe.cshtml";
@@ -142,8 +150,7 @@ namespace tacertoforms_dotnet.Controllers
         ******* Métodos para a Tela Minhas Fases *******
         */
 
-        public IActionResult MinhasFases()
-        {
+        public IActionResult MinhasFases(){
             ViewBag.HeaderTexto = "Minhas Fases";
             return View("~/TaCertoForms/Views/MinhasFases.cshtml");
         }
@@ -196,8 +203,7 @@ namespace tacertoforms_dotnet.Controllers
             }
             return MultitonSession.GetSession(sessionKey);
         }
-        private string SetSession()  
-        {
+        private string SetSession(){
             //deletar cookies com js
             //document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
             string key = "tacertosessionkey";
