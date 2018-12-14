@@ -47,7 +47,7 @@ namespace tacertoforms_dotnet.Controllers
             }else if(op == 3){ // Tela About
                 return RedirectToAction("Sobre");
             }else{ // Sair -> Tela de Login
-                return RedirectToAction("Login");
+                return RedirectToAction("logout");
             }
         }
 
