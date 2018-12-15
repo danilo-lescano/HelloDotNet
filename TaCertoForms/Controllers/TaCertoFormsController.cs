@@ -18,88 +18,118 @@ namespace tacertoforms_dotnet.Controllers
         private FaseManager faseManager = new FaseManager();
         private DesafioDeFaseManager desafioDeFaseManager = new DesafioDeFaseManager();
 
+        //Index: redireciona para a TelaPrincipal ou para a tela de login
+        //Tipo: Redirecionador
+        //OBSERVAÇÕES:
+        //Estados logado = sim (redireciona para TelaPrincipal) || não (redireciona para Login)
         public IActionResult Index(){
             Session = GetSession();
             usuarioManager.Session = Session;
 
-            bool isLoged;
-
-            if(Session.ContainsKey("isLoged") && (bool)Session["isLoged"])
-                isLoged = true;
-            else
-                isLoged = false;
-
-
-            if(isLoged){
-                // Não está logado, logo deve redirecionar para a página de login
+            if(usuarioManager.isLoged())
                 return RedirectToAction("TelaPrincipal");
-            }else{
-                // Está logago, logo deve redirecionar para a página principal
+            else
                 return RedirectToAction("Login");
-            }
         }
 
+        //Menu: recebe uma operação(op) e redireciona para sua respectiva página
+        //Tipo: Redirecionador
+        //OBSERVAÇÕES:
+        //Estado logado = sim
+        //op = 1 - MinhasFases; op = 2 - Configuracoes; op = 3 - Sobre; op = 4 - logout; op invalido redireciona para index
         public IActionResult Menu(int op){
-            if(op == 1){ // Tela Minhas Fases
+            Session = GetSession();
+            usuarioManager.Session = Session;
+
+            if(!usuarioManager.isLoged())
+                return RedirectToAction("Index");
+
+            if(op == 1)
                 return RedirectToAction("MinhasFases");
-            }else if(op == 2){ // Tela Configurações
+            else if(op == 2)
                 return RedirectToAction("Configuracoes");
-            }else if(op == 3){ // Tela About
+            else if(op == 3)
                 return RedirectToAction("Sobre");
-            }else{ // Sair -> Tela de Login
-                return RedirectToAction("logout");
-            }
+            else if(op == 4)
+                return RedirectToAction("Logout");
+            else
+                return RedirectToAction("Index");
         }
-
-
-        /*
-        ******* Métodos para a Tela de Login *******
-        */
        
-        // Mostra a tela de Login
+        //Login: renderiza a view do login
+        //Tipo: Reder
+        //OBSERVAÇÕES:
+        //Estado logado = nao
         public IActionResult Login(){
+            Session = GetSession();
+            usuarioManager.Session = Session;
+
+            if(usuarioManager.isLoged())
+                return RedirectToAction("Index");
+
             return View("~/TaCertoForms/Views/Login.cshtml");
         }
+        
+        //Logout: realiza o logout do usuario
+        //Tipo: Ação
+        //OBSERVAÇÕES:
+        //Lógica de logout no objeto usuario manager!
         public IActionResult Logout(){
             Session = GetSession();
-            MultitonSession.DeleteSession(Session);
-            return RedirectToAction("Login");
+            usuarioManager.Session = Session;
+
+            usuarioManager.Logout();
+            //MultitonSession.DeleteSession(Session);
+            return RedirectToAction("Index");
         }
-        // Autentica o login do Usuário
-        public ActionResult autenticar(){
+        
+        //Autenticar - recebe form de login e valida autenticidade
+        //Tipo: Ação
+        //OBSERVAÇÕES:
+        //Form - email OU login E senha
+        //Melhoria - redirecionar para view login com mensagem de login e senha invalidos
+        public ActionResult Autenticar(){
             Session = GetSession();
             usuarioManager.Session = Session;
 
             string email = Request.Form["email"];
             string password = Request.Form["password"];
 
-            bool logado = usuarioManager.AutenticarLogin(email, password);
-            
-            if(logado)
+            if(usuarioManager.AutenticarLogin(email, password))
                 return RedirectToAction("TelaPrincipal","TaCertoForms");
             else
-                return RedirectToAction("Login","TaCertoForms");
+                return RedirectToAction("Index","TaCertoForms");
         }
 
+        //TelaPrincipal - renderiza tela principal
+        //Tipo: Render
+        //OBSERVAÇÕES:
+        //Estado logado = sim
+        public IActionResult TelaPrincipal(){
+           Session = GetSession();
+            usuarioManager.Session = Session;
 
+            if(!usuarioManager.isLoged())
+                return RedirectToAction("Index");
 
-        /*
-        ******* Métodos para a Tela Principal *******
-        */
-
-        public IActionResult TelaPrincipal()
-        {
-           
-            //ViewBag.EmailLogado = TempData["email"].ToString();
             ViewBag.HeaderTexto = "Tá Certo Forms";
-            //ViewBag.OpModo = "Te";
 
             return View("~/TaCertoForms/Views/TelaPrincipal.cshtml");
         }
 
-        //Procura a tela de id que representa a fase pra ser criada
-        public IActionResult CriarFase(string fase)
-        {
+        //CriarFase - Procura a tela de id que representa a fase pra ser criada e renderiza ela
+        //Tipo: Render
+        //OBSERVAÇÕES:
+        //Estado logado = sim
+        //Fases normal, lacuna, aurelio, explorador
+        //Esse metoro é um Render, mas pode ser transformado num redirecionar caso alguma lógica mais complexa precise ser acressentada
+        public IActionResult CriarFase(string fase){
+            Session = GetSession();
+            usuarioManager.Session = Session;
+
+            if(!usuarioManager.isLoged())
+                return RedirectToAction("Index");
+
             string view;
             ViewBag.OpModo = fase;
             if(fase == "normal"){
@@ -119,20 +149,17 @@ namespace tacertoforms_dotnet.Controllers
                 view = "~/TaCertoForms/Views/CriarFaseExplorador.cshtml";
             }
             else 
-                return RedirectToAction("Login");
+                return RedirectToAction("Index");
 
             return View(view);
         }
 
-
-
-
-
-
-
-        /*
-        ******* Métodos incializar os iframes *******
-        */
+        //ChamarIframe - renderiza uma imitação de alguma fase do TaCerto
+        //Tipo: Render
+        //OBSERVAÇÕES:
+        //Estado logado = sim
+        //Renderiza tela NormalIframe, LacunaIframe, AurelioIframe, ExploradorIframe
+        //Esse método deveria ser invocado apenas ao ser carregado a fase normal. Cabe alguma validação mais interessante ou um metodo diferente do iframe usado
         public IActionResult ChamarIframe(int id){
             string view;
             if(id == 1)
@@ -144,16 +171,24 @@ namespace tacertoforms_dotnet.Controllers
             else if(id == 4)
                 view = "~/TaCertoForms/Views/Iframe/ExploradorIframe.cshtml";
             else 
-                return RedirectToAction("Login");
+                return RedirectToAction("Index");
 
             return View(view);
         }
 
-        /*
-        ******* Métodos para a Tela Minhas Fases *******
-        */
-
+        //MinhasFases - carrega as fases do usuario (banco e sessao) e renderiza elas
+        //Tipo: Ação / Render
+        //OBSERVAÇÕES:
+        //Estado logado = sim
         public IActionResult MinhasFases(){
+            Session = GetSession();
+            usuarioManager.Session = Session;
+
+            if(!usuarioManager.isLoged())
+                return RedirectToAction("Index");
+
+            usuarioManager.CarregaFases();
+
             ViewBag.HeaderTexto = "Minhas Fases";
             return View("~/TaCertoForms/Views/MinhasFases.cshtml");
         }
