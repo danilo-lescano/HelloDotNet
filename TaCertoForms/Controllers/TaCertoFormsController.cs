@@ -193,54 +193,42 @@ namespace tacertoforms_dotnet.Controllers
             return View("~/TaCertoForms/Views/MinhasFases.cshtml");
         }
 
-
-
-
-        /*
-        ******* Métodos para a Tela Minhas Fases *******
-        */
-
-        public IActionResult Configuracoes()
-        {
+        //Configuracoes - configurações???
+        //Tipo: Render
+        //OBSERVAÇÕES:
+        //Estado logado = sim
+        //Precisa carregar as opções do usuario se é que essa página vai existir
+        public IActionResult Configuracoes(){
             ViewBag.HeaderTexto = "Configurações";
             return View("~/TaCertoForms/Views/Configuracoes.cshtml");
         }
 
-
-
-        /*
-        ******* Métodos para a Tela Minhas Fases *******
-        */
-
-        public IActionResult Sobre()
-        {
-            Session = GetSession();
-
-            if(Session.ContainsKey("email"))
-                ViewData["email"] = (string) Session["email"];
-
+        //Sobre - mostra página descrevendo o tacertoforms
+        //Tipo: Render
+        public IActionResult Sobre(){
             ViewBag.HeaderTexto = "Sobre";
-                
             return View("~/TaCertoForms/Views/Sobre.cshtml");
         }
 
-
-
-
-
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
+        public IActionResult Error(){
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
+        //GetSession - verifica se client possui sessão e cria uma caso não tenha
+        //Tipo: Util
+        //OBSERVAÇÕES:
+        //Utilidade geral que os outros metodos podem utilizar
         private Dictionary<string, Object> GetSession(){
             string sessionKey = Request.Cookies["tacertosessionkey"];
-            if(sessionKey == null || sessionKey == ""){
+            if(sessionKey == null || sessionKey == "")
                 sessionKey = SetSession();
-            }
             return MultitonSession.GetSession(sessionKey);
         }
+        //SetSession - cria uma chave unica de sessão no computador do cliente
+        //Tipo: Util
+        //OBSERVAÇÕES:
+        //Criado para extender o metodo GetSession
         private string SetSession(){
             //deletar cookies com js
             //document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
