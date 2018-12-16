@@ -10,6 +10,5 @@ namespace TaCertoForms.Models
         public string Chave { get; set; }
         public int IdTipoFase { get; set; }
         public string Descricao { get; set; }
-        public List<IDesafioDeFase> ListaDeDesafios { get; set; }
     }
 }

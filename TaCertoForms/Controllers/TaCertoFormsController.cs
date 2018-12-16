@@ -79,7 +79,6 @@ namespace tacertoforms_dotnet.Controllers
             usuarioManager.Session = Session;
 
             usuarioManager.Logout();
-            //MultitonSession.DeleteSession(Session);
             return RedirectToAction("Index");
         }
         
@@ -183,12 +182,20 @@ namespace tacertoforms_dotnet.Controllers
         public IActionResult MinhasFases(){
             Session = GetSession();
             usuarioManager.Session = Session;
+            faseManager.Session = Session;
+            desafioDeFaseManager.Session = Session;
 
             if(!usuarioManager.isLoged())
                 return RedirectToAction("Index");
 
-            usuarioManager.CarregaFases();
-
+            List<Fase> listaFases = faseManager.CarregaFases();
+            foreach (Fase fase in listaFases){
+                List<IDesafioDeFase> listaDeDesafios = desafioDeFaseManager.CarregaDesafios(fase.Id);
+                foreach (IDesafioDeFase desafio in listaDeDesafios){
+                    // TO DO
+                    ViewBag.HeaderTexto = "Minhas Fases";
+                }
+            }
             ViewBag.HeaderTexto = "Minhas Fases";
             return View("~/TaCertoForms/Views/MinhasFases.cshtml");
         }
