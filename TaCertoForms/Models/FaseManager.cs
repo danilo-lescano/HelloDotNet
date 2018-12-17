@@ -1,8 +1,7 @@
 using System;
 using System.Collections.Generic;
 using TaCertoForms.Models;
-namespace TaCertoForms.Models
-{
+namespace TaCertoForms.Models{
     public class FaseManager{
         public Dictionary<string, Object> Session { get; set; }
         private FaseFactory faseFactory = new FaseFactory();
