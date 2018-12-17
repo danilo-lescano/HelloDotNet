@@ -18,6 +18,7 @@ var ScriptsCriarFaseNormal = {
     dicaTextEdit: "",
     palavrasContainer: "",
     iframe: "",
+    elemento: "", // Elemento que está sendo editado
     loadData: function(){
         console.log("sdfsdfsdfs");
         this.palavraTextEdit = document.getElementById('palavraText');
@@ -36,9 +37,7 @@ var ScriptsCriarFaseNormal = {
 
         if(palavra != 0){
 
-            if(!this.palavraNaoExiste(palavra)){
-
-                var elemento = document.getElementById(this.editando); // Elemento que estou editando
+            if(this.palavraNaoExiste(palavra) || this.editando >= 0){
 
                 let cor = this.pegaCor(); // Pega a cor caso a palavra esteja certa ou errada
 
@@ -60,22 +59,24 @@ var ScriptsCriarFaseNormal = {
 
                     this.mostraToast(2);        
                 }else{ // Está editando
+                
+                    // var elemento = document.getElementById(this.editando); // Elemento que estou editando
 
                     if(this.listaDeDesafios[this.editando].palavra != palavra){
-                        elemento.childNodes[0].innerHTML = palavra;
+                        this.elemento.childNodes[0].innerHTML = palavra;
                         this.listaDeDesafios[this.editando].palavra = palavra; 
                     }
                     
                     if(this.listaDeDesafios[this.editando].eCorreto == true){
                         if(this.correto == false){
-                            elemento.classList.remove("green");
-                            elemento.classList.add("red");
+                            this.elemento.classList.remove("green");
+                            this.elemento.classList.add("red");
                             this.listaDeDesafios[this.editando].eCorreto = this.correto;
                         }
                     }else{
                         if(this.correto == true){
-                            elemento.classList.remove("red");
-                            elemento.classList.add("green");
+                            this.elemento.classList.remove("red");
+                            this.elemento.classList.add("green");
                             this.listaDeDesafios[this.editando].eCorreto = this.correto;
                         }
                     }
@@ -84,6 +85,9 @@ var ScriptsCriarFaseNormal = {
                     this.listaDeDesafios[this.editando].dica = dica;
 
                     this.editando = -1;
+
+                    this.elemento.classList.remove("editandoPalavraModoNormal");
+
                     this.mostraToast(3);    
                 }
             }else{
@@ -133,6 +137,10 @@ var ScriptsCriarFaseNormal = {
         this.editando = id_clicado;
         elementos = this.listaDeDesafios[this.editando];
 
+        this.elemento = document.getElementById(this.editando); // Elemento que estou editando
+
+        this.elemento.classList.add("editandoPalavraModoNormal");
+
         console.log("estou editando = "+ this.editando);
         console.log(elementos);
 
@@ -161,14 +169,14 @@ var ScriptsCriarFaseNormal = {
         innerDoc.getElementById('palavra').innerHTML = palavra;
     },
     palavraNaoExiste: function(palavra){
-        let jatem = false;
+        let naoexiste = true;
         console.log("ver se a palavra já foi adicionada");
-        for(let i = 0; i < this.quantidade && !jatem; i++){
+        for(let i = 0; i < this.quantidade && naoexiste; i++){
             if(palavra.toLowerCase() == this.listaDeDesafios[i].palavra.toLowerCase())
-                jatem = true;
+                naoexiste = false;
         }
 
-        return jatem;
+        return naoexiste;
     }
 }
 

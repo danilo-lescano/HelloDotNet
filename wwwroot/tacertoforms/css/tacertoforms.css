@@ -602,12 +602,17 @@ nav .brand-logo{
 }
 
 .editandoPalavraModoNormal{
-	animation-name: corPulse;
+	animation: flash 2s infinite;
 }
-
-@keyframes example {
-	from {}
-}
+/*
+@keyframes pulse {
+	0% {
+		opacity: 0.5;
+	}
+	100% {
+		opacity: 1;
+	}
+}*/
 
 /*--------------------------------------------------------------*/
 /* MODO NORMAL *//* fim */
