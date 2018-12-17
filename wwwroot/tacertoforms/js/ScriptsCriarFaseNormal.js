@@ -10,7 +10,6 @@ var ScriptsCriarFaseNormal = {
         this.faseId = faseId;
         this.significado = significado;
         this.dica = dica;
-    
     },
     palavraTextEdit: "",
     radioResposta: "",
@@ -19,6 +18,9 @@ var ScriptsCriarFaseNormal = {
     palavrasContainer: "",
     iframe: "",
     elemento: "", // Elemento que está sendo editado
+    botaoAdd: "", // Elemento do botão de Adicionar
+    botaoEdit: null, // Elemento do botão de Editar
+    botaoSave: null, // Elemento do botão de Salvar
     loadData: function(){
         console.log("sdfsdfsdfs");
         this.palavraTextEdit = document.getElementById('palavraText');
@@ -27,6 +29,10 @@ var ScriptsCriarFaseNormal = {
         this.dicaTextEdit = document.getElementById('textoDica');
         this.palavrasContainer = document.getElementById('palavrasAdicionadas');
 
+        this.botaoAdd = document.getElementById('botaoAdd');
+        this.botaoEdit = document.getElementById('botaoEdit');
+        this.botaoSave = document.getElementById('botaoSave');
+        
         this.iframe = document.getElementById('normalIframe');
         this.palavraTextEdit.focus();  
         
@@ -57,7 +63,8 @@ var ScriptsCriarFaseNormal = {
 
                     document.getElementById('numeroDePalavras').innerHTML = this.quantidade;
 
-                    this.mostraToast(2);        
+                    this.mostraToast(2); // Palavra adicionada
+
                 }else{ // Está editando
                 
                     // var elemento = document.getElementById(this.editando); // Elemento que estou editando
@@ -86,19 +93,24 @@ var ScriptsCriarFaseNormal = {
 
                     this.editando = -1;
 
+                    this.botaoAdd.classList.remove("ghostElement");
+                    this.botaoEdit.classList.add("ghostElement");
+
                     this.elemento.classList.remove("editandoPalavraModoNormal");
 
-                    this.mostraToast(3);    
+                    this.mostraToast(3); // Palavra editada   
                 }
             }else{
                 this.mostraToast(4);    
             }
         }else{
             console.log("Chama o toast para o usuario lembrar que tem que escrever uma palavra");
-            this.mostraToast(1);
+            this.mostraToast(1); // Usuário não escreveu uma palavra
         }
 
         this.palavraTextEdit.focus();
+
+        this.mostraBotaoSalvar();
     },
     checaPalavra: function(){
         let palavra = this.palavraTextEdit.value;
@@ -115,9 +127,9 @@ var ScriptsCriarFaseNormal = {
             M.toast({html: 'Você precisa digitar uma palavra!', classes: 'rounded red lighten-1 palavraFaltandoModoNormal'});
         }else if(op == 2){ // Palavra foi adicionada
             M.toast({html: 'Palavra adicionada!', classes: 'rounded green lighten-1'});
-        }else if(op == 3){ // Palavra foi adicionada
+        }else if(op == 3){ // Palavra foi modificada
             M.toast({html: 'Palavra modificada!', classes: 'rounded lime'});
-        }else if(op == 4){ // Palavra foi adicionada
+        }else if(op == 4){ // Palavra já foi adicionada
             M.toast({html: 'Palavra já foi adicionada!', classes: 'rounded red lighten-1'});
         }
     },
@@ -134,7 +146,12 @@ var ScriptsCriarFaseNormal = {
         return cor;
     },
     carregaParaEditar: function(id_clicado){
+        if(this.editando >= 0){ // Já tem alguém editando logo devo mudar
+            this.elemento.classList.remove("editandoPalavraModoNormal");         
+        }
+
         this.editando = id_clicado;
+            
         elementos = this.listaDeDesafios[this.editando];
 
         this.elemento = document.getElementById(this.editando); // Elemento que estou editando
@@ -161,8 +178,12 @@ var ScriptsCriarFaseNormal = {
         else
             this.dicaTextEdit.value = elementos.dica;
 
-        this.palavraTextEdit.focus();        
-        
+        // Dá display num botão e tira o display do outro
+        this.botaoAdd.classList.add("ghostElement");
+        this.botaoEdit.classList.remove("ghostElement");
+
+        this.palavraTextEdit.focus();  
+                        
     },
     trocaTextoPalavra: function(palavra){
         let innerDoc = (this.iframe.contentDocument) ? this.iframe.contentDocument : this.iframe.contentWindow.document;
@@ -177,6 +198,14 @@ var ScriptsCriarFaseNormal = {
         }
 
         return naoexiste;
+    },
+    mostraBotaoSalvar: function(){
+
+        if(this.quantidade == 0){
+            this.botaoSave.classList.add("ghostElement");
+        }else if(this.quantidade == 1){
+            this.botaoSave.classList.remove("ghostElement");
+        }
     }
 }
 

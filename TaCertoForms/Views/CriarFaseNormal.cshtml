@@ -39,10 +39,15 @@
                         </div>
                         
                         <div class="row">
-                            <div class="input-field col s12">
+                            <!--<div class="input-field col s12">
                                <a class="waves-effect waves-light btn" onclick="ScriptsCriarFaseNormal.addPalavra()">Adicionar</a>
-                               <!-- <a class="waves-effect waves-light btn btn-large" type="submit" name="action"></a>-->
-                            </div>
+                            </div>-->
+                            <button id="botaoAdd" class="btn waves-effect waves-light" type="submit" name="action" onclick="ScriptsCriarFaseNormal.addPalavra()">Adicionar<i id="iconeAdd" class="material-icons right">add</i>
+                            </button>
+                            <button id="botaoEdit" class="btn waves-effect waves-light ghostElement" type="submit" name="action" onclick="ScriptsCriarFaseNormal.addPalavra()">Editar<i id="iconeAdd" class="material-icons right">edit</i>
+                            </button>
+                            <button id="botaoSave" class="btn waves-effect waves-light ghostElement" type="submit" name="action" onclick="ScriptsCriarFaseNormal.salverFase()">Salvar<i id="iconeAdd" class="material-icons right">save</i>
+                            </button>
                         </div>
                         <div class="divider"></div>
                         <div class="left-align">

@@ -604,15 +604,10 @@ nav .brand-logo{
 .editandoPalavraModoNormal{
 	animation: flash 2s infinite;
 }
-/*
-@keyframes pulse {
-	0% {
-		opacity: 0.5;
-	}
-	100% {
-		opacity: 1;
-	}
-}*/
+
+.ghostElement{
+	display: none;
+}
 
 /*--------------------------------------------------------------*/
 /* MODO NORMAL *//* fim */
