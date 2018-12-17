@@ -5,9 +5,9 @@ namespace TaCertoForms.Models
 {
     public class Usuario
     {
-        private int id { get; set; }
-        private string nome { get; set; }
-        private string email { get; set; }
-        private string senha { get; set; }
+        public int Id { get; set; }
+        public string Nome { get; set; }
+        public string Email { get; set; }
+        public string Senha { get; set; }
     }
 }

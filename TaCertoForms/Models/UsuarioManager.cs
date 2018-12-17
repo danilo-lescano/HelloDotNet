@@ -5,7 +5,7 @@ using Util;
 namespace TaCertoForms.Models{
     public class UsuarioManager{
         public Dictionary<string, Object> Session { get; set; }
-        public UsuarioFactory usuarioFactory = new UsuarioFactory();
+        private UsuarioFactory usuarioFactory = new UsuarioFactory();
         public bool AutenticarLogin(string email, string senha){
             Usuario usuario = usuarioFactory.GetByEmailAndPassword(email, senha);
             bool isAutenticado = false;
