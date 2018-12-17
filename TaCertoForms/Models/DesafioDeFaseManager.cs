@@ -4,7 +4,7 @@ using TaCertoForms.Models;
 namespace TaCertoForms.Models
 {
     public class DesafioDeFaseManager{
-        private Dictionary<string, Object> Session { get; set; }
+        public Dictionary<string, Object> Session { get; set; }
 
         public List<IDesafioDeFase> CarregaDesafios(int idFase){
             // TO DO
