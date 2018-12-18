@@ -6,28 +6,46 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using tacertoforms_dotnet.Models;
 
+
+// Macoratti
+using System.Text;
+using System.IO;
+using System.Runtime.Serialization.Json;
+
 namespace tacertoforms_dotnet.Controllers
 {
     public class CriarFaseNormalController : Controller
     {
 
          // Autentica o login do Usuário
-        public IActionResult AdicionarDesafioDeFase(){
-            for(int i = 0; i < 50; i++)
-                Console.WriteLine("Add palavra =  "+Request.Form["palavraText"]+" na fase");
-                
-            string idFase = Request.Form["idFase"];
-            TempData["palavra"] = idFase;
+        public ActionResult SalvarFase(){
+            
+            try
+            {               
+                for(int i = 0; i < 1000; i++)
+                    Console.WriteLine(Request.Form["0"]);
+                    //Console.WriteLine(listaDeDesafios + "  asdas dsadasas as as asd as da ");
 
-            return RedirectToAction("incrementaPalavrasNaTela");
+                return Json(new{ message = "OK"});
+            }
+            catch (Exception e)
+            {
+                for(int i = 0; i < 1000; i++)
+                    Console.WriteLine(e.ToString());
+                return Json(new{ message = "NOTOK"});
+            }     
+            
+        }  
+
+        public T ConverteJSonParaObject<T>(string jsonString) {
+            try{
+                DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(T));
+                MemoryStream ms = new MemoryStream(Encoding.UTF8.GetBytes(jsonString));
+                T obj = (T)serializer.ReadObject(ms);
+                return obj;
+            }catch{
+                throw;
+            }
         }
-
-        // Adiciona uma tag "a" com a palavra adicionada
-        // Caso o usuário clique na tag, ele poderá editá-la
-        public ActionResult incrementaPalavrasNaTela(){
-
-            return new EmptyResult();
-        }
-        
     }
 }

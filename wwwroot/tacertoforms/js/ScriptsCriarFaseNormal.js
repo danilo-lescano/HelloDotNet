@@ -252,9 +252,46 @@ var ScriptsCriarFaseNormal = {
         this.radioResposta[0].checked = true;
         this.significadoTextEdit.value = "";
         this.dicaTextEdit.value = "";
+    },
+    serialize: function(obj, prefix){
+        var str = [],p;
+        for (p in obj) {
+            if (obj.hasOwnProperty(p)) {
+            var k = prefix ? prefix + "[" + p + "]" : p,
+                v = obj[p];
+            str.push((v !== null && typeof v === "object") ?
+                this.serialize(v, k) :
+                encodeURIComponent(k) + "=" + encodeURIComponent(v));
+            }
+        }
+        return str.join("&");
+    },
+    salvarFase: function(){
+        console.log("Devo chamar o controller apropriada para salvar a fase da pessoa");
+                    
+          // Post a user
+          var url = "/CriarFaseNormal/SalvarFase";
+          
+          var json = JSON.stringify(this.listaDeDesafios);
+          //var json = this.listaDeDesafios;
+          console.log(json);
+          
+          var xhr = new XMLHttpRequest();
+          xhr.open("POST", url, true);
+          //xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+          xhr.setRequestHeader('Content-type','application/json');
+          xhr.onload = function () {
+              if (xhr.readyState == 4 && xhr.status == "201") {
+                  console.log(xhr.responseText);
+              } else {
+                  console.error(xhr.responseText);
+              }
+          }
+          xhr.send(json);
     }
 }
 
 window.onload = ()=>{
     ScriptsCriarFaseNormal.loadData();
 };
+
