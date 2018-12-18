@@ -210,13 +210,15 @@ var ScriptsCriarFaseNormal = {
             console.log("apagar alguem sem ser o ultimo");
             for(var i = this.editando; i < this.quantidade-1; ++i){
                 console.log(this.listaDeDesafios);
-                var aux = ScriptsCriarFaseNormal.listaDeDesafios[i+1];
+                var aux = this.listaDeDesafios[i+1];
                 console.log((i+1)+ "    "+aux + "       " + this.listaDeDesafios[i+1]);
                 this.listaDeDesafios[i] =  new this.desafio(aux.index-1, aux.id-1, aux.palavra, aux.eCorreto, aux.faseId, aux.significado, aux.dica);
+                document.getElementById(i+1).id = i;
             }
         }
 
         this.quantidade -= 1;
+        this.listaDeDesafios.length = this.quantidade;
         this.editando = -1;
 
         console.log(this.listaDeDesafios);
