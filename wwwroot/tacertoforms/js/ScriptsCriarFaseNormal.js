@@ -47,15 +47,11 @@ var ScriptsCriarFaseNormal = {
         if(palavra != 0){
 
             if(this.palavraNaoExiste(palavra) || this.editando >= 0){
-
                 let cor = this.pegaCor(); // Pega a cor caso a palavra esteja certa ou errada
-
                 let significado = this.significadoTextEdit.value;
-
                 let dica = this.dicaTextEdit.value;
 
                 if(this.editando == -1){ // Não está editando
-
                     let palavrasContainer = this.palavrasContainer;
                     palavrasContainer.innerHTML += '<div id = "' + this.quantidade+'" class="palavraBox '+cor+'" onclick="ScriptsCriarFaseNormal.carregaParaEditar(this.id)"><h6>'+palavra+'</h6></div>';
                     
@@ -64,16 +60,12 @@ var ScriptsCriarFaseNormal = {
                     document.getElementById('numeroDePalavras').innerHTML = this.quantidade;
 
                     this.mostraToast(2); // Palavra adicionada
-
                 }else{ // Está editando
-                
                     // var elemento = document.getElementById(this.editando); // Elemento que estou editando
-
                     if(this.listaDeDesafios[this.editando].palavra != palavra){
                         this.elemento.childNodes[0].innerHTML = palavra;
                         this.listaDeDesafios[this.editando].palavra = palavra; 
                     }
-                    
                     if(this.listaDeDesafios[this.editando].eCorreto == true){
                         if(this.correto == false){
                             this.elemento.classList.remove("green");
@@ -92,12 +84,10 @@ var ScriptsCriarFaseNormal = {
                     this.listaDeDesafios[this.editando].dica = dica;
 
                     this.estaEditando(0);
-
                     this.mostraToast(3); // Palavra editada   
                 }
 
                 this.limpaElementos();
-
             }else{
                 this.mostraToast(4);    
             }
@@ -107,7 +97,6 @@ var ScriptsCriarFaseNormal = {
         }
 
         this.palavraTextEdit.focus();
-
         this.mostraBotaoSalvar();
     },
     checaPalavra: function(){
@@ -158,11 +147,10 @@ var ScriptsCriarFaseNormal = {
         this.elemento.classList.add("editandoPalavraModoNormal");
 
         document.getElementById('palavraText').value = elementos.palavra;
-        if(elementos.eCorreto == true){
+        if(elementos.eCorreto == true)
             this.radioResposta[0].checked = true;
-        }else{
+        else
             this.radioResposta[1].checked = true;
-        }
 
         if(elementos.significado == undefined)
             this.significadoTextEdit.value = "";
@@ -175,7 +163,6 @@ var ScriptsCriarFaseNormal = {
             this.dicaTextEdit.value = elementos.dica;
 
         this.estaEditando(1); 
-                        
     },
     trocaTextoPalavra: function(palavra){
         let innerDoc = (this.iframe.contentDocument) ? this.iframe.contentDocument : this.iframe.contentWindow.document;

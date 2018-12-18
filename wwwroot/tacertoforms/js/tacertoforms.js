@@ -108,3 +108,10 @@ function trocaTextoFrase(texto){
     let innerDoc = (iframe.contentDocument) ? iframe.contentDocument : iframe.contentWindow.document;
     innerDoc.getElementById('aurPhraseWrap').innerHTML = texto;
 }
+
+
+
+//operacao / dados
+function fetchTCF(){
+
+}

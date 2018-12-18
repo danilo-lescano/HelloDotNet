@@ -49,17 +49,20 @@ namespace tacertoforms_dotnet.Controllers
             }
         }
 
-        public ActionResult xxx(){
-            try
-            {
-                for (int i = 0; i < 100; i++)
-                {
-                    Console.WriteLine(Request.Form["0"]);
-                    
+        [HttpPost]
+        public ActionResult xxx([FromBody] string x){
+            try{
+                var body = new StreamReader(Request.Body);
+                //The modelbinder has already read the stream and need to reset the stream index
+                body.BaseStream.Seek(0, SeekOrigin.Begin); 
+                var requestBody = body.ReadToEnd();
+                //etc, we use this for an audit trail
+                //dynamic x = content;
+                for (int i = 0; i < 100; i++){
+                    Console.WriteLine(requestBody);
                 }
             }
-            catch (System.Exception)
-            {
+            catch (System.Exception){
                 
             }
             
