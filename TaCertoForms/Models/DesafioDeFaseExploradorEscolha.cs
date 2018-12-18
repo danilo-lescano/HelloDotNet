@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TaCertoForms.Models;
 namespace TaCertoForms.Models
 {
-    public class DesafioDeFaseExploradorEscolha : IDesafioDeFase
+    public class DesafioDeFaseExploradorEscolha //: IDesafioDeFase
     {
         public struct PalavraExWrapper{
             int equivalente;

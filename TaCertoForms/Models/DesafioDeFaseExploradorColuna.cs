@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TaCertoForms.Models;
 namespace TaCertoForms.Models
 {
-    public class DesafioDeFaseExploradorColuna : IDesafioDeFase
+    public class DesafioDeFaseExploradorColuna //: IDesafioDeFase
     {
         public struct Coluna{
             int equivalente;

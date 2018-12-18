@@ -5,10 +5,11 @@ namespace TaCertoForms.Models
 {
     public class DesafioDeFaseManager{
         public Dictionary<string, Object> Session { get; set; }
+        private DesafioDeFaseFactory desafioFactory = new DesafioDeFaseFactory();
 
         public List<IDesafioDeFase> CarregaDesafios(int idFase){
-            // TO DO
-            return new List<IDesafioDeFase>();
+            List<IDesafioDeFase> listaDeDesafios = desafioFactory.GetDesafiosByFaseId(idFase);
+            return listaDeDesafios;
         }
 
     }
