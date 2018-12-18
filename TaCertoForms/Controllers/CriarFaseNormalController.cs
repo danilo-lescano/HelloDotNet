@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Runtime.Serialization.Json;
 using Microsoft.AspNetCore.Mvc;
 using tacertoforms_dotnet.Models;
 
@@ -28,6 +29,22 @@ namespace tacertoforms_dotnet.Controllers
 
             return new EmptyResult();
         }
-        
+
+        public ActionResult xxx(){
+            try
+            {
+                for (int i = 0; i < 100; i++)
+                {
+                    Console.WriteLine(Request.Form["0"]);
+                    
+                }
+            }
+            catch (System.Exception)
+            {
+                
+            }
+            
+            return Json(new {msg = "ok"});
+        }
     }
 }

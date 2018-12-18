@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TaCertoForms.Models;
 namespace TaCertoForms.Models
 {
-    public interface IDesafioDeFase<T>{
+    public interface IDesafioDeFase{
 
         int Id { get; set; }
         int FaseId { get; set; }

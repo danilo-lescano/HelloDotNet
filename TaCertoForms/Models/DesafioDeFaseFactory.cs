@@ -11,8 +11,8 @@ namespace TaCertoForms.Models{
                 des1 = new DesafioDeFaseNormal();
                 des1.Id = 100;
                 des1.FaseId = idFase;
-                des1.Palavra = "Cambito";
-                des1.eCorreto = true;
+                ((DesafioDeFaseNormal) des1).Palavra = "Cambito";
+                ((DesafioDeFaseNormal) des1).eCorreto = true;
                 des1.Significado = "é uma canela";
                 des1.Dica = "antes de p e b se usa m";
                 des2 = new DesafioDeFaseNormal();

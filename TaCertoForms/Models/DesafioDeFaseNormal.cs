@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using TaCertoForms.Models;
 namespace TaCertoForms.Models
 {
-    public class DesafioDeFaseNormal : IDesafioDeFase<DesafioDeFaseNormal>
-    {
+    public class DesafioDeFaseNormal : IDesafioDeFase{
         private int id;
         public int Id {
             get{ return id; }
