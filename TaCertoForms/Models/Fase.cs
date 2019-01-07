@@ -11,4 +11,5 @@ namespace TaCertoForms.Models
         public int IdTipoFase { get; set; }
         public string Descricao { get; set; }
     }
+    
 }

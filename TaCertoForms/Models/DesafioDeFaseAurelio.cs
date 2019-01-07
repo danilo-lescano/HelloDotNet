@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace TaCertoForms.Models
 {
-    public class DesafioDeFaseAurelio : IDesafioDeFase
+    public class DesafioDeFaseAurelio : DesafioDeFase
     {
         public struct ConteudoResposta{
             int index;
@@ -11,11 +11,12 @@ namespace TaCertoForms.Models
             bool eApendice;
             string apendice;
         }
-        public int Id { get; set; }
-        public int FaseId { get; set; }
+        public DesafioDeFaseAurelio(int id, int faseId, string significado, string dica,
+            int index, string palavra, bool eApendice, string apendice,
+            string fraseParaCorrecao, int totalSize){
+
+        }
         public string FraseParaCorrecao { get; set; }
         public int TotalSize { get; set; }
-        public string Significado { get; set; }
-        public string Dica { get; set; }
     }
 }

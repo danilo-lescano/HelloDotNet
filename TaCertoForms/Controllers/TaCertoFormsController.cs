@@ -190,8 +190,8 @@ namespace tacertoforms_dotnet.Controllers
 
             List<Fase> listaFases = faseManager.CarregaFases();
             foreach (Fase fase in listaFases){
-                List<IDesafioDeFase> listaDeDesafios = desafioDeFaseManager.CarregaDesafios(fase.Id);
-                foreach (IDesafioDeFase desafio in listaDeDesafios){
+                List<DesafioDeFase> listaDeDesafios = desafioDeFaseManager.CarregaDesafios(fase.Id);
+                foreach (DesafioDeFase desafio in listaDeDesafios){
                     // TO DO
                     ViewBag.HeaderTexto = "Minhas Fases";
                 }

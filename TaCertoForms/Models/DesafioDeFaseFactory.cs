@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using TaCertoForms.Models;
 namespace TaCertoForms.Models{
     public class DesafioDeFaseFactory{
-        public List<IDesafioDeFase> GetDesafiosByFaseId(int idFase){
-            IDesafioDeFase des1 = null, des2 = null, des3 = null, des4 = null, des5 = null;
-            List<IDesafioDeFase> listaDeDesafios = new List<IDesafioDeFase>();
+        public List<DesafioDeFase> GetDesafiosByFaseId(int idFase){
+            DesafioDeFase des1 = null, des2 = null, des3 = null, des4 = null, des5 = null;
+            List<DesafioDeFase> listaDeDesafios = new List<DesafioDeFase>();
 
             if(idFase == 1){
                 des1 = new DesafioDeFaseNormal();
