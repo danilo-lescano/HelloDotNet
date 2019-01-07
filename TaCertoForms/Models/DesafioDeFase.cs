@@ -1,13 +1,10 @@
 using System;
 using System.Collections.Generic;
 using TaCertoForms.Models;
-namespace TaCertoForms.Models
-{
-    public class DesafioDeFase{
+using Util;
 
-        public DesafioDeFase(){
-        
-        }
+namespace TaCertoForms.Models{
+    public class DesafioDeFase{
         public int Id { get; set; }
         public int FaseId { get; set; }
         public string Significado { get; set; }

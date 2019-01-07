@@ -1,7 +1,7 @@
 namespace Util
 {
     //Necessário para DesafioDeFaseAurelio
-    public struct ConteudoResposta{
+    public struct ConteudoRespostaStruct{
         int index;
         string palavra;
         bool eApendice;
@@ -9,26 +9,26 @@ namespace Util
     }
 
     //Necessário para DesafioDeFaseExploradorColuna
-    public struct Coluna{
+    public struct ColunaStruct{
         int equivalente;
         bool emoji;
         string conteudo;
     }
 
     //Necessário para DesafioDeFaseExploradorEscolha
-    public struct PalavraExWrapper{
+    public struct PalavraExWrapperStruct{
         int equivalente;
         bool emoji;
         string conteudo;
     }
 
     //Necessário para DesafioDeFaseLacuna
-    public struct Resposta{
+    public struct RespostaStruct{
         string conteudo;
         int posicao;
     }
     //Necessário para DesafioDeFaseLacuna
-    public struct FraseXlacuna{
+    public struct FraseXlacunaStruct{
         bool eFrase;
         string conteudo;
     }
