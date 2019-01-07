@@ -7,8 +7,8 @@ namespace TaCertoForms.Models
         public Dictionary<string, Object> Session { get; set; }
         private DesafioDeFaseFactory desafioFactory = new DesafioDeFaseFactory();
 
-        public List<DesafioDeFase> CarregaDesafios(int idFase){
-            List<DesafioDeFase> listaDeDesafios = desafioFactory.GetDesafiosByFaseId(idFase);
+        public List<IDesafioDeFase> CarregaDesafios(int idFase){
+            List<IDesafioDeFase> listaDeDesafios = desafioFactory.GetDesafiosByFaseId(idFase);
             return listaDeDesafios;
         }
 

@@ -4,10 +4,10 @@ using TaCertoForms.Models;
 using Util;
 
 namespace TaCertoForms.Models{
-    public class DesafioDeFase{
-        public int Id { get; set; }
-        public int FaseId { get; set; }
-        public string Significado { get; set; }
-        public string Dica { get; set; }
+    public interface IDesafioDeFase{
+        int Id { get; set; }
+        int FaseId { get; set; }
+        string Significado { get; set; }
+        string Dica { get; set; }
     }
 }
