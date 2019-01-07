@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using System.Runtime.Serialization.Json;
 using Microsoft.AspNetCore.Mvc;
 using tacertoforms_dotnet.Models;
+using TaCertoForms.Models;
+
 
 
 // Macoratti
@@ -18,23 +20,24 @@ namespace tacertoforms_dotnet.Controllers
     public class CriarFaseNormalController : Controller
     {
 
-         // Autentica o login do Usuário
-        public ActionResult SalvarFase(){
+        private Fase _fase = new Fase();
+        
+        public IActionResult Index(){
+            return View(_fase);
+        }
+        [HttpPost]
+        public JsonResult SalvarFase([FromBody] Fase fase){
             
-            try
-            {               
-                for(int i = 0; i < 1000; i++)
-                    Console.WriteLine(Request.Form["0"]);
-                    //Console.WriteLine(listaDeDesafios + "  asdas dsadasas as as asd as da ");
+               if(fase != null){
+                   _fase = fase;
+               }
+                for(int i = 0; i < 100; i++)
+                    Console.WriteLine(_fase.Chave + "   " + _fase.desafios.First().Palavra);
 
-                return Json(new{ message = "OK"});
-            }
-            catch (Exception e)
-            {
-                for(int i = 0; i < 1000; i++)
-                    Console.WriteLine(e.ToString());
-                return Json(new{ message = "NOTOK"});
-            }     
+               return Json(new {
+                   state = 0,
+                   msg = string.Empty
+               });
             
         }  
 

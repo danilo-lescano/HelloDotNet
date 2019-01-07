@@ -4,7 +4,8 @@ var ScriptsCriarFaseNormal = {
     correto: false,
     editando: -1,
     desafio: function(index, id, palavra, eCorreto, faseId, significado, dica){
-        this.index = index,
+        if(index !== null)
+            this.index = index;
         this.id = id;
         this.palavra = palavra;
         this.eCorreto = eCorreto;
@@ -258,8 +259,22 @@ var ScriptsCriarFaseNormal = {
                     
           // Post a user
           var url = "/CriarFaseNormal/SalvarFase";
+        
+          fase = {
+              id: 123,
+              usuarioId: 13,
+              chave: "key13",
+              idTipoFase: 0,
+              descricao: "Uma fase",
+              desafios: []
+          };
+          var listaDeDesafiosParaEnviar = [];
+          for(var i = 0; i < this.listaDeDesafios.length;i++){
+                listaDeDesafiosParaEnviar[i] = new this.desafio(null, this.listaDeDesafios[i].id, this.listaDeDesafios[i].palavra, this.listaDeDesafios[i].eCorreto, this.listaDeDesafios[i].faseId, this.listaDeDesafios[i].significado, this.listaDeDesafios[i].dica);
+            }
           
-          var json = JSON.stringify(this.listaDeDesafios);
+            fase.desafios = listaDeDesafiosParaEnviar;
+            var json = JSON.stringify(fase);
           //var json = this.listaDeDesafios;
           console.log(json);
           
