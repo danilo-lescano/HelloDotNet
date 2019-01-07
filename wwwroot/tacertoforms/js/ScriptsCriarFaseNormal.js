@@ -258,7 +258,7 @@ var ScriptsCriarFaseNormal = {
         console.log("Devo chamar o controller apropriada para salvar a fase da pessoa");
                     
           // Post a user
-          var url = "/CriarFaseNormal/SalvarFase";
+          var url = "/CriarFase/SalvarFaseNormal";
         
           fase = {
               id: 123,
@@ -290,6 +290,8 @@ var ScriptsCriarFaseNormal = {
               }
           }
           xhr.send(json);
+
+          window.location.href = '/TaCertoForms/MinhasFases';
     }
 }
 

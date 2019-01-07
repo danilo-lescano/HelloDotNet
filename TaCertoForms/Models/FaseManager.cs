@@ -14,5 +14,10 @@ namespace TaCertoForms.Models{
             }
             return listaDeFases;
         }
+
+        public void SalvarFaseNormal(Fase fase){
+
+            Console.WriteLine("chamar o factory para salvar a fase");
+        }
     }
 }
