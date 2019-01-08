@@ -192,6 +192,7 @@ namespace tacertoforms_dotnet.Controllers
                 if((int)Session["FaseCriadaFlag"] == 1){
                     ViewBag.Toast = "23523523523";
                 }
+                Session.Remove("FaseCriadaFlag");
             }
         
             List<Fase> listaFases = faseManager.CarregaFases();
