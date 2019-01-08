@@ -82,20 +82,20 @@ if ( ( browser.name === 'Chrome' && browser.version <= 67 )
     //Supported or Undefined Browser
 }
 
-    // Inicializa o SideNav
-    $(document).ready(function(){
-        $('.sidenav').sidenav();
-    });
+// Inicializa o SideNav
+$(document).ready(function(){
+    $('.sidenav').sidenav();
+});
 
-    // Inicializa o ToolTip
-    $(document).ready(function(){
-        $('.tooltipped').tooltip();
-    });
+// Inicializa o ToolTip
+$(document).ready(function(){
+    $('.tooltipped').tooltip();
+});
 
-    // Inicializa o Modal
-    $(document).ready(function(){
-        $('.modal').modal();
-    });
+// Inicializa o Modal
+$(document).ready(function(){
+    $('.modal').modal();
+});
 
 
 // Funções para o Modo Normal *********************************************************
@@ -115,3 +115,10 @@ function trocaTextoFrase(texto){
 function fetchTCF(){
 
 }
+
+//Toast!
+var Toast = Toast || null;
+document.addEventListener("DOMContentLoaded", ()=>{
+    if(Toast !== null)
+        M.toast({html: Toast});
+});
