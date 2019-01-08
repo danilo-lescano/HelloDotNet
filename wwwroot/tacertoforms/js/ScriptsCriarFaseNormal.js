@@ -266,14 +266,14 @@ var ScriptsCriarFaseNormal = {
               chave: "key13",
               idTipoFase: 0,
               descricao: "Uma fase",
-              desafios: []
+              desafiosNormal: []
           };
           var listaDeDesafiosParaEnviar = [];
           for(var i = 0; i < this.listaDeDesafios.length;i++){
                 listaDeDesafiosParaEnviar[i] = new this.desafio(null, this.listaDeDesafios[i].id, this.listaDeDesafios[i].palavra, this.listaDeDesafios[i].eCorreto, this.listaDeDesafios[i].faseId, this.listaDeDesafios[i].significado, this.listaDeDesafios[i].dica);
             }
           
-            fase.desafios = listaDeDesafiosParaEnviar;
+            fase.desafiosNormal = listaDeDesafiosParaEnviar;
             var json = JSON.stringify(fase);
           //var json = this.listaDeDesafios;
           console.log(json);

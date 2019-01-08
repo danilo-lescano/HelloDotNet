@@ -8,18 +8,13 @@ using Microsoft.AspNetCore.Mvc;
 using tacertoforms_dotnet.Models;
 using TaCertoForms.Models;
 
-
-
-// Macoratti
-using System.Text;
-using System.IO;
-
 namespace tacertoforms_dotnet.Controllers
 {
     public class CriarFaseController : Controller
     {
 
         private Fase _fase = new Fase();
+        private FaseManager _faseManager = new FaseManager();
 
         [HttpPost]
         public JsonResult SalvarFaseNormal([FromBody] Fase fase){
@@ -27,11 +22,8 @@ namespace tacertoforms_dotnet.Controllers
             if(fase != null){
                 _fase = fase;
             }
-            
-            for(int i = 0; i < 100; i++)
-                Console.WriteLine(_fase.Chave + "   " + _fase.desafios[0].Palavra);
 
-            SalvarFaseNormal 
+            _faseManager.SalvarFaseNormal(_fase); 
 
             return Json(new {
                 state = 0,
