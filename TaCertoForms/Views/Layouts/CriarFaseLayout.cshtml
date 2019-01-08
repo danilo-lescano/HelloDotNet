@@ -57,12 +57,8 @@
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/materialize/js/materialize.min.js"></script>
         <script src="~/tacertoforms/js/tacertoforms.js"></script>
-        @if(@ViewBag.OpModo == "normal"){
-            <script src="~/tacertoforms/js/ScriptsCriarFaseNormal.js"></script>
-        }else if(@ViewBag.OpModo == "lacuna"){
-            <script src="~/tacertoforms/js/ScriptsCriarFaseLacuna.js"></script>
-        }
-
+        
+        @await Html.PartialAsync("~/TaCertoForms/Views/Partial/_ScriptCriarFase.cshtml")
 
     @RenderSection("Scripts", required: false)
 </body>
