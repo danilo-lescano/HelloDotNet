@@ -14,13 +14,16 @@
 <body>
     @await Html.PartialAsync("~/TaCertoForms/Views/Partial/_CookieConsentPartial.cshtml")
     <div class="body-content">
-    @RenderBody()
+        @RenderBody()
     </div>
 
-        <script src="~/lib/jquery/dist/jquery.js"></script>
-        <script src="~/lib/materialize/js/materialize.min.js"></script>
-        <script src="~/tacertoforms/js/tacertoforms.js"></script>
+    @await Html.PartialAsync("~/TaCertoForms/Views/Partial/_Toast.cshtml")
+
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/materialize/js/materialize.min.js"></script>
+    <script src="~/tacertoforms/js/tacertoforms.js"></script>
 
     @RenderSection("Scripts", required: false)
+    
 </body>
 </html>

@@ -23,7 +23,7 @@ namespace tacertoforms_dotnet.Controllers
         //OBSERVAÇÕES:
         //Estados logado = sim (redireciona para TelaPrincipal) || não (redireciona para Login)
         public IActionResult Index(){
-            Session = GetSession();
+            GetSession();
             usuarioManager.Session = Session;
 
             if(usuarioManager.isLoged())
@@ -38,7 +38,7 @@ namespace tacertoforms_dotnet.Controllers
         //Estado logado = sim
         //op = 1 - MinhasFases; op = 2 - Configuracoes; op = 3 - Sobre; op = 4 - logout; op invalido redireciona para index
         public IActionResult Menu(int op){
-            Session = GetSession();
+            GetSession();
             usuarioManager.Session = Session;
 
             if(!usuarioManager.isLoged())
@@ -61,7 +61,7 @@ namespace tacertoforms_dotnet.Controllers
         //OBSERVAÇÕES:
         //Estado logado = nao
         public IActionResult Login(){
-            Session = GetSession();
+            GetSession();
             usuarioManager.Session = Session;
 
             if(usuarioManager.isLoged())
@@ -75,7 +75,7 @@ namespace tacertoforms_dotnet.Controllers
         //OBSERVAÇÕES:
         //Lógica de logout no objeto usuario manager!
         public IActionResult Logout(){
-            Session = GetSession();
+            GetSession();
             usuarioManager.Session = Session;
 
             usuarioManager.Logout();
@@ -88,7 +88,7 @@ namespace tacertoforms_dotnet.Controllers
         //Form - email OU login E senha
         //Melhoria - redirecionar para view login com mensagem de login e senha invalidos
         public ActionResult Autenticar(){
-            Session = GetSession();
+            GetSession();
             usuarioManager.Session = Session;
 
             string email = Request.Form["email"];
@@ -105,7 +105,7 @@ namespace tacertoforms_dotnet.Controllers
         //OBSERVAÇÕES:
         //Estado logado = sim
         public IActionResult TelaPrincipal(){
-           Session = GetSession();
+           GetSession();
             usuarioManager.Session = Session;
 
             if(!usuarioManager.isLoged())
@@ -123,7 +123,7 @@ namespace tacertoforms_dotnet.Controllers
         //Fases normal, lacuna, aurelio, explorador
         //Esse metoro é um Render, mas pode ser transformado num redirecionar caso alguma lógica mais complexa precise ser acressentada
         public IActionResult CriarFase(string fase){
-            Session = GetSession();
+            GetSession();
             usuarioManager.Session = Session;
 
             if(!usuarioManager.isLoged())
@@ -180,7 +180,7 @@ namespace tacertoforms_dotnet.Controllers
         //OBSERVAÇÕES:
         //Estado logado = sim
         public IActionResult MinhasFases(){
-            Session = GetSession();
+            GetSession();
             usuarioManager.Session = Session;
             faseManager.Session = Session;
             desafioDeFaseManager.Session = Session;
@@ -226,11 +226,11 @@ namespace tacertoforms_dotnet.Controllers
         //Tipo: Util
         //OBSERVAÇÕES:
         //Utilidade geral que os outros metodos podem utilizar
-        private Dictionary<string, Object> GetSession(){
+        private void GetSession(){
             string sessionKey = Request.Cookies["tacertosessionkey"];
             if(sessionKey == null || sessionKey == "")
                 sessionKey = SetSession();
-            return MultitonSession.GetSession(sessionKey);
+            Session = MultitonSession.GetSession(sessionKey);
         }
         //SetSession - cria uma chave unica de sessão no computador do cliente
         //Tipo: Util
