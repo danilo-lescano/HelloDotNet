@@ -17,7 +17,9 @@ namespace TaCertoForms.Models
 
         public List<DesafioDeFaseAurelio> desafiosAurelio { get; set; }
 
-        public List<DesafioDeFaseExploradorEscolha> desafiosExplorador
+        public List<DesafioDeFaseExploradorEscolha> desafiosExploradorEscolha { get; set; }
+
+        public List<DesafioDeFaseExploradorColuna> desafiosExploradorColuna { get; set; }
         
     }
     

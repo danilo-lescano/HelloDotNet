@@ -188,6 +188,12 @@ namespace tacertoforms_dotnet.Controllers
             if(!usuarioManager.isLoged())
                 return RedirectToAction("Index");
 
+            if(Session.ContainsKey("FaseCriadaFlag")){
+                if((int)Session["FaseCriadaFlag"] == 1){
+                    ViewBag.Toast = "23523523523";
+                }
+            }
+        
             List<Fase> listaFases = faseManager.CarregaFases();
             foreach (Fase fase in listaFases){
                 List<IDesafioDeFase> listaDeDesafios = desafioDeFaseManager.CarregaDesafios(fase.Id);
