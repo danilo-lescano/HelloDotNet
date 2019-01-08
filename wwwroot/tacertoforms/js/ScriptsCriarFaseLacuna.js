@@ -1,7 +1,6 @@
-var ScriptsCriarFaseNormal = {
+var ScriptsCriarFaseLacuna = {
     listaDeDesafios: [],
     quantidade: 0,
-    correto: false,
     editando: -1,
     desafio: function(index, id, palavra, eCorreto, faseId, significado, dica){
         if(index !== null)
@@ -13,11 +12,11 @@ var ScriptsCriarFaseNormal = {
         this.significado = significado;
         this.dica = dica;
     },
-    palavraTextEdit: "",
-    radioResposta: "",
+    lacunaFirstText: "",
+    lacunaSecondText: "",
+    newLacunaText: "",
     significadoTextEdit: "",
     dicaTextEdit: "",
-    palavrasContainer: "",
     iframe: null,
     elemento: null, // Elemento que está sendo editado
     botaoAdd: null, // Elemento do botão de Adicionar palavra
@@ -26,12 +25,12 @@ var ScriptsCriarFaseNormal = {
     botaoDeletar: null, // Elemento do botão de Deletar palavra
     loadData: function(){
         console.log("sdfsdfsdfs");
-        this.palavraTextEdit = document.getElementById('palavraText');
-        this.radioResposta = document.getElementsByName('alternativaPalavra');
+        this.lacunaFirstText = document.getElementById('lacunaFirstText');
+        this.lacunaSecondText = document.getElementById('lacunaSecondText');
+        this.newLacunaText = document.getElementsByName('newLacunaText');
         this.significadoTextEdit = document.getElementById('textoSignificado');
         this.dicaTextEdit = document.getElementById('textoDica');
-        this.palavrasContainer = document.getElementById('palavrasAdicionadas');
-
+fd
         this.botaoAdd = document.getElementById('botaoAdd');
         this.botaoEdit = document.getElementById('botaoEdit');
         this.botaoSave = document.getElementById('botaoSave');

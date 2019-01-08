@@ -32,5 +32,9 @@ namespace TaCertoForms.Models
 
             return listaDeFase;
         }
+
+        public void SalvarFaseNormal(Fase fase){
+            
+        }
     }
 }
