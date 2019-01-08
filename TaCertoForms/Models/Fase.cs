@@ -12,6 +12,12 @@ namespace TaCertoForms.Models
         public string Descricao { get; set; }
 
         public List<DesafioDeFaseNormal> desafiosNormal { get; set; }
+
+        public List<DesafioDeFaseLacuna> desafiosLacuna { get; set; }
+
+        public List<DesafioDeFaseAurelio> desafiosAurelio { get; set; }
+
+        public List<DesafioDeFaseExploradorEscolha> desafiosExplorador
         
     }
     
