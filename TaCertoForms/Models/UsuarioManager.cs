@@ -10,8 +10,9 @@ namespace TaCertoForms.Models{
             Usuario usuario = usuarioFactory.GetByEmailAndPassword(email, senha);
             bool isAutenticado = false;
             if(usuario != null){
-                Session["usuario"] = usuario;
                 Session["isLoged"] = true;
+                Session["userName"] = usuario.Nome;
+                Session["userEmail"] = usuario.Email;
                 isAutenticado = true;
             }
 

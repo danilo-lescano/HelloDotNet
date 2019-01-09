@@ -9,11 +9,8 @@ using TaCertoForms.Models;
 using tacertoforms_dotnet.Models;
 using Util;
 
-namespace tacertoforms_dotnet.Controllers
-{
-    public class TaCertoFormsController : Controller
-    {
-        private MultitonSession Session { get; set; }
+namespace tacertoforms_dotnet.Controllers{
+    public class TaCertoFormsController : BaseController{
         private UsuarioManager usuarioManager = new UsuarioManager();
         private FaseManager faseManager = new FaseManager();
         private DesafioDeFaseManager desafioDeFaseManager = new DesafioDeFaseManager();
@@ -23,8 +20,7 @@ namespace tacertoforms_dotnet.Controllers
         //OBSERVAÇÕES:
         //Estados logado = sim (redireciona para TelaPrincipal) || não (redireciona para Login)
         public IActionResult Index(){
-            GetSession();
-            usuarioManager.Session = Session;
+            Start();
 
             if(usuarioManager.isLoged())
                 return RedirectToAction("TelaPrincipal");
@@ -38,8 +34,7 @@ namespace tacertoforms_dotnet.Controllers
         //Estado logado = sim
         //op = 1 - MinhasFases; op = 2 - Configuracoes; op = 3 - Sobre; op = 4 - logout; op invalido redireciona para index
         public IActionResult Menu(int op){
-            GetSession();
-            usuarioManager.Session = Session;
+            Start();
 
             if(!usuarioManager.isLoged())
                 return RedirectToAction("Index");
@@ -61,8 +56,7 @@ namespace tacertoforms_dotnet.Controllers
         //OBSERVAÇÕES:
         //Estado logado = nao
         public IActionResult Login(){
-            GetSession();
-            usuarioManager.Session = Session;
+            Start();
 
             if(usuarioManager.isLoged())
                 return RedirectToAction("Index");
@@ -75,8 +69,7 @@ namespace tacertoforms_dotnet.Controllers
         //OBSERVAÇÕES:
         //Lógica de logout no objeto usuario manager!
         public IActionResult Logout(){
-            GetSession();
-            usuarioManager.Session = Session;
+            Start();
 
             usuarioManager.Logout();
             return RedirectToAction("Index");
@@ -88,8 +81,7 @@ namespace tacertoforms_dotnet.Controllers
         //Form - email OU login E senha
         //Melhoria - redirecionar para view login com mensagem de login e senha invalidos
         public ActionResult Autenticar(){
-            GetSession();
-            usuarioManager.Session = Session;
+            Start();
 
             string email = Request.Form["email"];
             string password = Request.Form["password"];
@@ -105,8 +97,7 @@ namespace tacertoforms_dotnet.Controllers
         //OBSERVAÇÕES:
         //Estado logado = sim
         public IActionResult TelaPrincipal(){
-           GetSession();
-            usuarioManager.Session = Session;
+            Start();
 
             if(!usuarioManager.isLoged())
                 return RedirectToAction("Index");
@@ -123,8 +114,7 @@ namespace tacertoforms_dotnet.Controllers
         //Fases normal, lacuna, aurelio, explorador
         //Esse metoro é um Render, mas pode ser transformado num redirecionar caso alguma lógica mais complexa precise ser acressentada
         public IActionResult CriarFase(string fase){
-            GetSession();
-            usuarioManager.Session = Session;
+            Start();
 
             if(!usuarioManager.isLoged())
                 return RedirectToAction("Index");
@@ -160,6 +150,7 @@ namespace tacertoforms_dotnet.Controllers
         //Renderiza tela NormalIframe, LacunaIframe, AurelioIframe, ExploradorIframe
         //Esse método deveria ser invocado apenas ao ser carregado a fase normal. Cabe alguma validação mais interessante ou um metodo diferente do iframe usado
         public IActionResult ChamarIframe(int id){
+            Start();
             string view;
             if(id == 1)
                 view = "~/TaCertoForms/Views/Iframe/NormalIframe.cshtml";
@@ -180,11 +171,7 @@ namespace tacertoforms_dotnet.Controllers
         //OBSERVAÇÕES:
         //Estado logado = sim
         public IActionResult MinhasFases(){
-            GetSession();
-            usuarioManager.Session = Session;
-            faseManager.Session = Session;
-            desafioDeFaseManager.Session = Session;
-
+            Start();
             if(!usuarioManager.isLoged())
                 return RedirectToAction("Index");
 
@@ -211,6 +198,7 @@ namespace tacertoforms_dotnet.Controllers
         //Estado logado = sim
         //Precisa carregar as opções do usuario se é que essa página vai existir
         public IActionResult Configuracoes(){
+            Start();
             ViewBag.HeaderTexto = "Configurações";
             return View("~/TaCertoForms/Views/Configuracoes.cshtml");
         }
@@ -218,6 +206,7 @@ namespace tacertoforms_dotnet.Controllers
         //Sobre - mostra página descrevendo o tacertoforms
         //Tipo: Render
         public IActionResult Sobre(){
+            Start();
             ViewBag.HeaderTexto = "Sobre";
             return View("~/TaCertoForms/Views/Sobre.cshtml");
         }
@@ -227,33 +216,14 @@ namespace tacertoforms_dotnet.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        //GetSession - verifica se client possui sessão e cria uma caso não tenha
-        //Tipo: Util
-        //OBSERVAÇÕES:
-        //Utilidade geral que os outros metodos podem utilizar
-        private void GetSession(){
-            string sessionKey = Request.Cookies["tacertosessionkey"];
-            if(sessionKey == null || sessionKey == "")
-                sessionKey = SetSession();
-            Session = MultitonSession.GetSession(sessionKey);
-        }
-        //SetSession - cria uma chave unica de sessão no computador do cliente
-        //Tipo: Util
-        //OBSERVAÇÕES:
-        //Criado para extender o metodo GetSession
-        private string SetSession(){
-            //deletar cookies com js
-            //document.cookie.split(";").forEach(function(c) { document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); });
-            string key = "tacertosessionkey";
-            Random random = new Random();
-            string value = new string(Enumerable.Repeat("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789", 16).Select(s => s[random.Next(s.Length)]).ToArray());
+        public void Start(){
+            GetSession();
+            usuarioManager.Session = Session;
+            faseManager.Session = Session;
+            desafioDeFaseManager.Session = Session;
 
-            CookieOptions option = new CookieOptions();
-            option.Expires = DateTime.Now.AddDays(14);
-
-            Response.Cookies.Append(key, value, option);
-
-            return value;
+            ViewBag.userName = Session["userName"];
+            ViewBag.userEmail = Session["userEmail"];
         }
     }
 }
