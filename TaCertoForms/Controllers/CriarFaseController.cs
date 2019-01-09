@@ -14,12 +14,15 @@ namespace tacertoforms_dotnet.Controllers
 {
     public class CriarFaseController : Controller
     {
-
         private Dictionary<string, Object> Session { get; set; }
 
         private Fase _fase = new Fase();
         private FaseManager _faseManager = new FaseManager();
 
+        /*
+            Recebe "fase" que é um Json e o adiciona na FaseManager
+            para a fase ser salva
+         */
         [HttpPost]
         public JsonResult SalvarFaseNormal([FromBody] Fase fase){
             
@@ -27,9 +30,9 @@ namespace tacertoforms_dotnet.Controllers
                 _fase = fase;
             }
 
-            CriarFlag("FaseCriadaFlag",1);
+            CriarFlag("FaseCriadaFlag",1); // Cria flag para mostrar toast na próxima tela
 
-            _faseManager.SalvarFaseNormal(_fase); 
+            _faseManager.SalvarFaseNormal(_fase); // Adiciona a fase na _faseManager
 
             return Json(new {
                 state = 0,
@@ -37,6 +40,13 @@ namespace tacertoforms_dotnet.Controllers
             });     
         }  
 
+        /*
+         flag / Significado
+            1 = Fase Normal Criada
+            2 = Fase Lacuna Criada
+            3 = Fase Aurelio Criada
+            4 = Fase Explorador Criada
+         */
         protected void CriarFlag(string nome, int flag){
             GetSession();
             try{
