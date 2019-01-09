@@ -313,10 +313,14 @@ var ScriptsCriarFaseNormal = {
             } else {
                 console.error(xhr.responseText);
             }
+            
+            if(xhr.flag)
+                window.location.href = '/TaCertoForms/MinhasFases'; // Redireciona
+            else
+                console.log("Deu ruim no server side");
         }
         xhr.send(json);
 
-        window.location.href = '/TaCertoForms/MinhasFases'; // Redireciona
     }
 }
 

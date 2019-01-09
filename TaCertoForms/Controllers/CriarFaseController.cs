@@ -32,11 +32,12 @@ namespace tacertoforms_dotnet.Controllers
 
             CriarFlag("FaseCriadaFlag",1); // Cria flag para mostrar toast na próxima tela
 
-            _faseManager.SalvarFaseNormal(_fase); // Adiciona a fase na _faseManager
+            bool _flag = _faseManager.SalvarFaseNormal(_fase); // Adiciona a fase na _faseManager
 
             return Json(new {
                 state = 0,
-                msg = string.Empty
+                msg = string.Empty,
+                flag = _flag
             });     
         }  
 
