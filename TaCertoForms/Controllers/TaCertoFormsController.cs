@@ -13,7 +13,7 @@ namespace tacertoforms_dotnet.Controllers
 {
     public class TaCertoFormsController : Controller
     {
-        private Dictionary<string, Object> Session { get; set; }
+        private MultitonSession Session { get; set; }
         private UsuarioManager usuarioManager = new UsuarioManager();
         private FaseManager faseManager = new FaseManager();
         private DesafioDeFaseManager desafioDeFaseManager = new DesafioDeFaseManager();
@@ -188,10 +188,9 @@ namespace tacertoforms_dotnet.Controllers
             if(!usuarioManager.isLoged())
                 return RedirectToAction("Index");
 
-            if(Session.ContainsKey("FaseCriadaFlag")){
-                if((int)Session["FaseCriadaFlag"] == 1){
-                    ViewBag.Toast = "23523523523";
-                }
+            if(Session["FaseCriadaFlag"] != null && (int) Session["FaseCriadaFlag"] == 1){
+                ViewBag.Toast = "23523523523";
+                Session.Remove("FaseCriadaFlag");
             }
         
             List<Fase> listaFases = faseManager.CarregaFases();

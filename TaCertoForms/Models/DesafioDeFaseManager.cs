@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
 using TaCertoForms.Models;
-namespace TaCertoForms.Models
-{
+using Util;
+
+namespace TaCertoForms.Models{
     public class DesafioDeFaseManager{
-        public Dictionary<string, Object> Session { get; set; }
+        public MultitonSession Session { get; set; }
         private DesafioDeFaseFactory desafioFactory = new DesafioDeFaseFactory();
 
         public List<IDesafioDeFase> CarregaDesafios(int idFase){

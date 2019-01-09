@@ -1,10 +1,8 @@
 using System;
 using System.Collections.Generic;
 
-namespace Util
-{
-    public class MultitonSession
-    {
+namespace Util{
+    public class MultitonSession{
         private static List<MultitonSession> sessionList = new List<MultitonSession>();
 
         private string SessionKey { get; set; }
@@ -16,23 +14,23 @@ namespace Util
             this.SessionKey = sessionKey;
         }
 
-        public static Dictionary<string, Object> GetSession(string sessionKey){
+        public static MultitonSession GetSession(string sessionKey){
             for (int i = 0; i < sessionList.Count; i++)
                 if (sessionList[i].SessionKey == sessionKey){
                     sessionList[i].LastUpdate = DateTime.Now;
-                    return sessionList[i].SessionVariables;
+                    return sessionList[i];
                 }
 
             MultitonSession newSession = new MultitonSession(sessionKey);
             sessionList.Add(newSession);
 
-            return newSession.SessionVariables;
+            return newSession;
         }
 
-        public static void DeleteSession(Dictionary<string, Object> sessionToDelete){
+        public static void RemoveSession(MultitonSession sessionToDelete){
             MultitonSession aux = null;
             foreach (MultitonSession session in sessionList){
-                if(Object.ReferenceEquals(session.SessionVariables, sessionToDelete)){
+                if(Object.ReferenceEquals(session, sessionToDelete)){
                     aux = session;
                     break;
                 }
@@ -48,9 +46,21 @@ namespace Util
         /***************************************************************/
         /***********************MÉTODOS DO OBJETO***********************/
         /***************************************************************/
-        public void add(){
-
+        public Object this[string key] {
+            get{
+                if(SessionVariables.ContainsKey(key))
+                    return SessionVariables[key];
+                return null;
+            }
+            set{
+                if(SessionVariables.ContainsKey(key))
+                    SessionVariables[key] = value;
+                else
+                    SessionVariables.Add(key, value);
+            }
         }
-        public 
+        public void Remove(string key){
+            SessionVariables.Remove(key);
+        }
     }
 }

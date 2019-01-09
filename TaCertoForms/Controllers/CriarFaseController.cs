@@ -15,7 +15,7 @@ namespace tacertoforms_dotnet.Controllers
     public class CriarFaseController : Controller
     {
 
-        private Dictionary<string, Object> Session { get; set; }
+        private MultitonSession Session { get; set; }
 
         private Fase _fase = new Fase();
         private FaseManager _faseManager = new FaseManager();
@@ -40,7 +40,7 @@ namespace tacertoforms_dotnet.Controllers
         protected void CriarFlag(string nome, int flag){
             GetSession();
             try{
-                Session.Add(nome, flag);
+                Session[nome] = flag;
 
             }catch{
 
