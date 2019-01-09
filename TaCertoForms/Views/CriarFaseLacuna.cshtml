@@ -13,14 +13,14 @@
             </div>
             <div class="row">
                     <div class="input-field col s12">
-                    <textarea id="lacunaFirstText" class="materialize-textfield"></textarea>
+                    <textarea id="lacunaFirstText" class="materialize-textarea" onkeyup="ScriptsCriarFaseLacuna.trocaFraseLacuna(this.value, 1);" onfocus="ScriptsCriarFaseLacuna.trocaFraseLacuna(this.value, 1);"></textarea>
                     <label for="lacunaFirstText">Primeira parte da frase</label>
                     </div>
             </div>
 
             <div class="row">
                     <div class="input-field col s3">
-                    <textarea id="newLacunaText" class="materialize-textfield" data-length="26"></textarea>
+                    <textarea id="newLacunaText" class="materialize-textarea" data-length="26"></textarea>
                     <label for="newLacunaText">Lacuna</label>
                     </div>
                         <div class="input-field col s1">
@@ -31,7 +31,7 @@
 
             <div class="row">
                     <div class="input-field col s12">
-                    <textarea id="lacunaSecondText" class="materialize-textfield"></textarea>
+                    <textarea id="lacunaSecondText" class="materialize-textarea" onkeyup="ScriptsCriarFaseLacuna.trocaFraseLacuna(this.value, 2);" onfocus="ScriptsCriarFaseLacuna.trocaFraseLacuna(this.value, 2);"></textarea>
                     <label for="lacunaSecondText">Segunda parte da frase</label>
                     </div>
             </div>

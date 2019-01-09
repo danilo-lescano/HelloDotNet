@@ -23,6 +23,8 @@ var ScriptsCriarFaseLacuna = {
     botaoEdit: null, // Elemento do botão de Editar palavra
     botaoSave: null, // Elemento do botão de Salvar fase
     botaoDeletar: null, // Elemento do botão de Deletar palavra
+    frase1: "",
+    frase2: "",
     loadData: function(){
         console.log("sdfsdfsdfs");
         this.lacunaFirstText = document.getElementById('lacunaFirstText');
@@ -30,41 +32,41 @@ var ScriptsCriarFaseLacuna = {
         this.newLacunaText = document.getElementsByName('newLacunaText');
         this.significadoTextEdit = document.getElementById('textoSignificado');
         this.dicaTextEdit = document.getElementById('textoDica');
-fd
+
         this.botaoAdd = document.getElementById('botaoAdd');
         this.botaoEdit = document.getElementById('botaoEdit');
         this.botaoSave = document.getElementById('botaoSave');
         this.botaoDeletar = document.getElementById('botaoApagar');
         
-        this.iframe = document.getElementById('normalIframe');
-        this.palavraTextEdit.focus();  
+        this.iframe = document.getElementById('lacunaIframe');
+        this.lacunaFirstText.focus();  
         
     },
-    addPalavra: function(){
+    addResp: function(){
 
-        let palavra = this.checaPalavra();
+        let resp = this.checaLacuna();
 
-        if(palavra != 0){
+        if(lacuna != 0){
 
-            if(this.palavraNaoExiste(palavra) || this.editando >= 0){
+            if(this.palavraNaoExiste(lacuna) || this.editando >= 0){
                 let cor = this.pegaCor(); // Pega a cor caso a palavra esteja certa ou errada
                 let significado = this.significadoTextEdit.value;
                 let dica = this.dicaTextEdit.value;
-
+                lacunaResp
                 if(this.editando == -1){ // Não está editando
                     let palavrasContainer = this.palavrasContainer;
-                    palavrasContainer.innerHTML += '<div id = "' + this.quantidade+'" class="palavraBox '+cor+'" onclick="ScriptsCriarFaseNormal.carregaParaEditar(this.id)"><h6>'+palavra+'</h6></div>';
+                    palavrasContainer.innerHTML += '<div id = "' + this.quantidade+'" class="palavraBox '+cor+'" onclick="ScriptsCriarFaseNormal.carregaParaEditar(this.id)"><h6>'+lacuna+'</h6></div>';
                     
-                    this.listaDeDesafios[this.quantidade++] = new this.desafio(this.quantidade -1, this.quantidade-1, palavra, this.correto, -1, significado, dica);
+                    this.listaDeDesafios[this.quantidade++] = new this.desafio(this.quantidade -1, this.quantidade-1, lacuna, this.correto, -1, significado, dica);
 
                     document.getElementById('numeroDePalavras').innerHTML = this.quantidade;
 
                     this.mostraToast(2); // Palavra adicionada
                 }else{ // Está editando
                     // var elemento = document.getElementById(this.editando); // Elemento que estou editando
-                    if(this.listaDeDesafios[this.editando].palavra != palavra){
-                        this.elemento.childNodes[0].innerHTML = palavra;
-                        this.listaDeDesafios[this.editando].palavra = palavra; 
+                    if(this.listaDeDesafios[this.editando].palavra != lacuna){
+                        this.elemento.childNodes[0].innerHTML = lacuna;
+                        this.listaDeDesafios[this.editando].palavra = lacuna; 
                     }
                     if(this.listaDeDesafios[this.editando].eCorreto == true){
                         if(this.correto == false){
@@ -99,11 +101,11 @@ fd
         this.palavraTextEdit.focus();
         this.mostraBotaoSalvar();
     },
-    checaPalavra: function(){
-        let palavra = this.palavraTextEdit.value;
+    checaLacuna: function(){
+        let lacuna = this.newLacunaText.value;
         
-        if(palavra != false)
-            return palavra;
+        if(lacuna != false)
+            return lacuna;
         return 0;
     },
     mostraToast: function(op){
@@ -164,9 +166,15 @@ fd
 
         this.estaEditando(1); 
     },
-    trocaTextoPalavra: function(palavra){
+    trocaFraseLacuna: function(frase, id){
         let innerDoc = (this.iframe.contentDocument) ? this.iframe.contentDocument : this.iframe.contentWindow.document;
-        innerDoc.getElementById('palavra').innerHTML = palavra;
+        if(id === 1){
+            this.frase1 = frase;
+        }else if(id == 2){
+            this.frase2 = frase;
+        }
+        let fraseLacuna = this.frase1+"<div class='padThis'><div id='lacuna1' class='emptyLacuna droppableLacuna ui-draggable'></div></div>"+this.frase2;
+        innerDoc.getElementById('lacConteudoWrapper').innerHTML = fraseLacuna;
     },
     palavraNaoExiste: function(palavra){
         let naoexiste = true;
@@ -295,6 +303,6 @@ fd
 }
 
 window.onload = ()=>{
-    ScriptsCriarFaseNormal.loadData();
+    ScriptsCriarFaseLacuna.loadData();
 };
 
