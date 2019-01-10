@@ -31,8 +31,6 @@ namespace Util
     }
     //Necessário para DesafioDeFaseLacuna
     public class FraseXlacunaStruct{
-        [Key]
-        int idFraseXLacunaSeiLa;
         bool eFrase;
         string conteudo;
     }
