@@ -9,10 +9,10 @@ namespace TaCertoForms.Models{
         private FaseFactory faseFactory = new FaseFactory();
         public List<Fase> CarregaFases(){
             List<Fase> listaDeFases = null;
-            Usuario usuario = null;
-            if(Session["usuario"] != null){
-                usuario = (Usuario)Session["usuario"];
-                listaDeFases = faseFactory.GetFaseByUserId(usuario.Id);
+            int userId;
+            if(Session["userId"] != null){
+                userId = (int)Session["userId"];
+                listaDeFases = faseFactory.GetFaseByUserId(userId);
             }
             return listaDeFases;
         }

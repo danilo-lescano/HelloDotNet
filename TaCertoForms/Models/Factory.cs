@@ -5,6 +5,7 @@ using TaCertoForms.Models;
 
 namespace TaCertoForms.Models{
     public class Factory{
+        string ConnectionString { get; set; } = "aaaaa";
         private string query;
         protected string Query{
             set{
@@ -18,12 +19,10 @@ namespace TaCertoForms.Models{
         }
 
         private void teste(){
-            string connectionString = "x";
             //
             // In a using statement, acquire the SqlConnection as a resource.
             //
-            using (SqlConnection con = new SqlConnection(connectionString))
-            {
+            using (SqlConnection con = new SqlConnection(ConnectionString)){
                 //
                 // Open the SqlConnection.
                 //
@@ -32,10 +31,8 @@ namespace TaCertoForms.Models{
                 // The following code uses an SqlCommand based on the SqlConnection.
                 //
                 using (SqlCommand command = new SqlCommand("SELECT TOP 2 * FROM Dogs1", con))
-                using (SqlDataReader reader = command.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
+                using (SqlDataReader reader = command.ExecuteReader()){
+                    while (reader.Read()){
                         Console.WriteLine("{0} {1} {2}",
                             reader.GetInt32(0), reader.GetString(1), reader.GetString(2));
                     }

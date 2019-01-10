@@ -22,6 +22,7 @@ namespace Util{
                 }
 
             MultitonSession newSession = new MultitonSession(sessionKey);
+            newSession.LastUpdate = DateTime.Now;
             sessionList.Add(newSession);
 
             return newSession;

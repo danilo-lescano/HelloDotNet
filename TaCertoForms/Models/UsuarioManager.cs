@@ -11,6 +11,7 @@ namespace TaCertoForms.Models{
             bool isAutenticado = false;
             if(usuario != null){
                 Session["isLoged"] = true;
+                Session["userId"] = usuario.Id;
                 Session["userName"] = usuario.Nome;
                 Session["userEmail"] = usuario.Email;
                 isAutenticado = true;
