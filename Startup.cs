@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using tacertoforms_dotnet.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using tacertoforms_dotnet.TaCertoForms.Models;
 
 namespace tacertoforms_dotnet
 {
@@ -37,6 +38,13 @@ namespace tacertoforms_dotnet
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlite(
                     Configuration.GetConnectionString("DefaultConnection")));
+
+            // Macoratti - Registro do contexto como um serviço
+            // Pq dessa forma ele vai ser injetado no meu controlador
+            // usando o recurso da injeção de dependência da aspnet core
+            services.AddDbContext<FaseContexto>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            
             services.AddDefaultIdentity<IdentityUser>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
@@ -45,7 +53,7 @@ namespace tacertoforms_dotnet
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, FaseContexto contexto)
         {
             if (env.IsDevelopment())
             {
@@ -70,6 +78,8 @@ namespace tacertoforms_dotnet
                     name: "default",
                     template: "{controller=TaCertoForms}/{action=Index}/{id?}");
             });
+
+            //InicializaDB.Initialize(contexto);
         }
     }
 }

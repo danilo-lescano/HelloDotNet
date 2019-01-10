@@ -8,12 +8,15 @@ using Microsoft.AspNetCore.Http;
 using TaCertoForms.Models;
 using tacertoforms_dotnet.Models;
 using Util;
+using tacertoforms_dotnet.TaCertoForms.Models;
 
 namespace tacertoforms_dotnet.Controllers{
     public class TaCertoFormsController : BaseController{
         private UsuarioManager usuarioManager = new UsuarioManager();
         private FaseManager faseManager = new FaseManager();
+
         private DesafioDeFaseManager desafioDeFaseManager = new DesafioDeFaseManager();
+        //private FaseContexto _contexto;
 
         //Index: redireciona para a TelaPrincipal ou para a tela de login
         //Tipo: Redirecionador
@@ -103,7 +106,8 @@ namespace tacertoforms_dotnet.Controllers{
                 return RedirectToAction("Index");
 
             ViewBag.HeaderTexto = "Tá Certo Forms";
-
+            //for(int i = 0; i < 400; i++)
+            //    Console.WriteLine(_contexto.Fases.ToList());
             return View("~/TaCertoForms/Views/TelaPrincipal.cshtml");
         }
 
@@ -176,7 +180,7 @@ namespace tacertoforms_dotnet.Controllers{
                 return RedirectToAction("Index");
 
             if(Session["FaseCriadaFlag"] != null && (int) Session["FaseCriadaFlag"] == 1){
-                ViewBag.Toast = "23523523523";
+                ViewBag.Toast = "Fase Normal criada com sucesso!";
                 Session.Remove("FaseCriadaFlag");
             }
         

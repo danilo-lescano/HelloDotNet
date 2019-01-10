@@ -1,7 +1,9 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace Util
 {
     //Necessário para DesafioDeFaseAurelio
-    public struct ConteudoRespostaStruct{
+    public class ConteudoRespostaStruct{
         int index;
         string palavra;
         bool eApendice;
@@ -9,26 +11,26 @@ namespace Util
     }
 
     //Necessário para DesafioDeFaseExploradorColuna
-    public struct ColunaStruct{
+    public class ColunaStruct{
         int equivalente;
         bool emoji;
         string conteudo;
     }
 
     //Necessário para DesafioDeFaseExploradorEscolha
-    public struct PalavraExWrapperStruct{
+    public class PalavraExWrapperStruct{
         int equivalente;
         bool emoji;
         string conteudo;
     }
 
     //Necessário para DesafioDeFaseLacuna
-    public struct RespostaStruct{
+    public class RespostaStruct{
         string conteudo;
         int posicao;
     }
     //Necessário para DesafioDeFaseLacuna
-    public struct FraseXlacunaStruct{
+    public class FraseXlacunaStruct{
         bool eFrase;
         string conteudo;
     }

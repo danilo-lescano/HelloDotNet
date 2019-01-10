@@ -13,27 +13,28 @@
             </div>
             <div class="row">
                     <div class="input-field col s12">
-                    <textarea id="lacunaFirstText" class="materialize-textfield"></textarea>
-                    <label for="lacunaFirstText">Primeira parte da frase</label>
+                    <div contenteditable="true" id="lacunaText" class="cloneTextArea" ondblclick="ScriptsCriarFaseLacuna.textoLacunaClicado()" onkeyup="ScriptsCriarFaseLacuna.trocaFraseLacuna(this.innerHTML);" onfocus="ScriptsCriarFaseLacuna.trocaFraseLacuna(this.innerHTML);ScriptsCriarFaseLacuna.focusOnMe(this,true);" onfocusout="ScriptsCriarFaseLacuna.focusOnMe(this,false);">
+                    </div>
                     </div>
             </div>
 
             <div class="row">
-                    <div class="input-field col s3">
-                    <textarea id="newLacunaText" class="materialize-textfield" data-length="26"></textarea>
-                    <label for="newLacunaText">Lacuna</label>
-                    </div>
-                        <div class="input-field col s1">
-                            <a class="waves-effect waves-light btn btn-large" onclick="TaCertoForms.Salvar(this, true);">+</a>
-                        </div>
+                <div class="input-field col s3">
+                    <textarea id="newLacunaText" class="materialize-textarea" data-length="26" ondblclick="ScriptsCriarFaseLacuna.addLacunaErrada()"></textarea>
+                    <label for="newLacunaText">Lacunas erradas</label>
+                </div>
+                
+                <div class="input-field col s1">
+                    <a class="waves-effect waves-light btn btn-large" onclick="TaCertoForms.Salvar(this, true);">+</a>
+                </div>
             </div>
 
-
             <div class="row">
-                    <div class="input-field col s12">
-                    <textarea id="lacunaSecondText" class="materialize-textfield"></textarea>
-                    <label for="lacunaSecondText">Segunda parte da frase</label>
+                <div class="input-field col s12">
+                    <div id="lacunasAdicionadas" class="left-align">
+                        <h6>Palavras adicionadas:</h6>
                     </div>
+                </div>
             </div>
             <div class="row">
                     <div class="input-field col s12">
@@ -50,7 +51,7 @@
             
             <div class="row">
                 <div class="input-field col s12">
-                    <a class="waves-effect waves-light btn btn-large" onclick="TaCertoForms.Salvar(this, true);">Adicionar</a>
+                    <a class="waves-effect waves-light btn btn-large" onclick="TaCertoForms.addDesafio(this, true);">Adicionar</a>
                 </div>
             </div>
             <div class="divider"></div>

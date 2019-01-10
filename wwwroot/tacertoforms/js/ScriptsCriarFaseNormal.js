@@ -24,6 +24,8 @@ var ScriptsCriarFaseNormal = {
     botaoEdit: null, // Elemento do botão de Editar palavra
     botaoSave: null, // Elemento do botão de Salvar fase
     botaoDeletar: null, // Elemento do botão de Deletar palavra
+    
+    // Pega as referências necessárias para o funcionamento das demais funcões
     loadData: function(){
         console.log("sdfsdfsdfs");
         this.palavraTextEdit = document.getElementById('palavraText');
@@ -41,6 +43,8 @@ var ScriptsCriarFaseNormal = {
         this.palavraTextEdit.focus();  
         
     },
+
+    // Adiciona uma palavra na fase atual
     addPalavra: function(){
 
         let palavra = this.checaPalavra();
@@ -100,6 +104,8 @@ var ScriptsCriarFaseNormal = {
         this.palavraTextEdit.focus();
         this.mostraBotaoSalvar();
     },
+
+    // Checa se uma palavra foi escrita
     checaPalavra: function(){
         let palavra = this.palavraTextEdit.value;
         
@@ -107,6 +113,8 @@ var ScriptsCriarFaseNormal = {
             return palavra;
         return 0;
     },
+
+    // Mostra toast
     mostraToast: function(op){
         
         if(op == 1){ // Pessoa não digitou uma palavra
@@ -122,6 +130,7 @@ var ScriptsCriarFaseNormal = {
             M.toast({html: 'Palavra foi removida!', classes: 'rounded red lighten-1'});
         }
     },
+    // Retorna a cor do div da palavra para mostrar se ela é certa ou errada
     pegaCor: function(){
         let cor = "green";
         if(this.radioResposta[0].checked){
@@ -134,20 +143,22 @@ var ScriptsCriarFaseNormal = {
 
         return cor;
     },
+    // Carrega os dados para serem editados
     carregaParaEditar: function(id_clicado){
         if(this.editando >= 0){ // Já tem alguém editando logo devo mudar
             this.elemento.classList.remove("editandoPalavraModoNormal");         
         }
 
-        this.editando = parseInt(id_clicado);
+        this.editando = parseInt(id_clicado); // Pega o id da div que foi clicada para saber quem será editado
             
-        elementos = this.listaDeDesafios[this.editando];
+        elementos = this.listaDeDesafios[this.editando]; // Pega os elementos que serão editados
 
         this.elemento = document.getElementById(this.editando); // Elemento que estou editando
 
-        this.elemento.classList.add("editandoPalavraModoNormal");
+        this.elemento.classList.add("editandoPalavraModoNormal"); // Adiciona classe na div clicada para mostra que está sendo editada
 
         document.getElementById('palavraText').value = elementos.palavra;
+
         if(elementos.eCorreto == true)
             this.radioResposta[0].checked = true;
         else
@@ -169,6 +180,8 @@ var ScriptsCriarFaseNormal = {
         let innerDoc = (this.iframe.contentDocument) ? this.iframe.contentDocument : this.iframe.contentWindow.document;
         innerDoc.getElementById('palavra').innerHTML = palavra;
     },
+
+    // Checa de a palavra ainda não existe
     palavraNaoExiste: function(palavra){
         let naoexiste = true;
 
@@ -179,6 +192,8 @@ var ScriptsCriarFaseNormal = {
 
         return naoexiste;
     },
+
+    // Mostra ou não o botão para Salvar a fase
     mostraBotaoSalvar: function(){
 
         if(this.quantidade == 0){
@@ -187,6 +202,8 @@ var ScriptsCriarFaseNormal = {
             this.botaoSave.classList.remove("ghostElement");
         }
     },
+
+    // Remove uma palavra da fase
     apagarPalavra: function(){
         let indexParaApagar = this.editando;
         console.log(this.listaDeDesafios);
@@ -215,6 +232,8 @@ var ScriptsCriarFaseNormal = {
         this.estaEditando(0);
         this.mostraToast(5);
     },
+
+    // Mostra ou esconde os botões de acordo com o que está sendo feito agora
     estaEditando: function(op){ 
         if(op > 0){ // Está 
             // Dá display num botão e tira o display do outro
@@ -235,6 +254,8 @@ var ScriptsCriarFaseNormal = {
         this.palavraTextEdit.focus(); 
 
     },
+
+    // Limpa os elementos do formulário
     limpaElementos: function(){
         this.palavraTextEdit.value = "";
         this.radioResposta[0].checked = true;
@@ -254,44 +275,54 @@ var ScriptsCriarFaseNormal = {
         }
         return str.join("&");
     },
+
+    // Salva os dados de quem está editando e da fase criada, adicionada tudo em um Json
+    // e envia tudo para o server side, para ser salvo no BD
     salvarFase: function(){
         console.log("Devo chamar o controller apropriada para salvar a fase da pessoa");
                     
-          // Post a user
-          var url = "/CriarFase/SalvarFaseNormal";
+        var url = "/CriarFase/SalvarFaseNormal"; // Url que será enviado
         
-          fase = {
-              id: 123,
-              usuarioId: 13,
-              chave: "key13",
-              idTipoFase: 0,
-              descricao: "Uma fase",
-              desafiosNormal: []
-          };
-          var listaDeDesafiosParaEnviar = [];
-          for(var i = 0; i < this.listaDeDesafios.length;i++){
-                listaDeDesafiosParaEnviar[i] = new this.desafio(null, this.listaDeDesafios[i].id, this.listaDeDesafios[i].palavra, this.listaDeDesafios[i].eCorreto, this.listaDeDesafios[i].faseId, this.listaDeDesafios[i].significado, this.listaDeDesafios[i].dica);
-            }
-          
-            fase.desafiosNormal = listaDeDesafiosParaEnviar;
-            var json = JSON.stringify(fase);
-          //var json = this.listaDeDesafios;
-          console.log(json);
-          
-          var xhr = new XMLHttpRequest();
-          xhr.open("POST", url, true);
-          //xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
-          xhr.setRequestHeader('Content-type','application/json');
-          xhr.onload = function () {
-              if (xhr.readyState == 4 && xhr.status == "201") {
-                  console.log(xhr.responseText);
-              } else {
-                  console.error(xhr.responseText);
-              }
-          }
-          xhr.send(json);
+        fase = { // Dados da fase
+            id: 123,
+            usuarioId: 13,
+            chave: "key13",
+            idTipoFase: 0,
+            descricao: "Uma fase",
+            desafiosNormal: []
+        };
 
-          window.location.href = '/TaCertoForms/MinhasFases';
+        var listaDeDesafiosParaEnviar = []; // Lista para desafios da fase
+
+        // Add os desafios na lista
+        for(var i = 0; i < this.listaDeDesafios.length;i++){
+            listaDeDesafiosParaEnviar[i] = new this.desafio(null, this.listaDeDesafios[i].id, this.listaDeDesafios[i].palavra, this.listaDeDesafios[i].eCorreto, this.listaDeDesafios[i].faseId, this.listaDeDesafios[i].significado, this.listaDeDesafios[i].dica);
+        }
+          
+        fase.desafiosNormal = listaDeDesafiosParaEnviar; // add a lista no objeto que será enviado
+        
+        var json = JSON.stringify(fase);
+          
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", url, true);
+        //xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+        xhr.setRequestHeader('Content-type','application/json');
+        xhr.onload = function () {
+            if (xhr.readyState == 4 && xhr.status == "201") {
+                console.log(xhr.responseText);
+            } else {
+                console.error(xhr.responseText);
+            }
+
+            var jsonReceived = JSON.parse(xhr.responseText);
+            
+            if(jsonReceived.flag)
+                window.location.href = '/TaCertoForms/MinhasFases'; // Redireciona
+            else
+                console.log("Deu ruim no server side");
+        }
+        xhr.send(json);
+
     }
 }
 
