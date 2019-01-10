@@ -18,7 +18,6 @@ namespace TaCertoForms.Models{
         }
 
         public bool SalvarFaseNormal(Fase fase){
-
             for(int i = 0; i < 100; i++)
                 Console.WriteLine(fase.Chave + "   " + fase.desafiosNormal[0].Palavra);
             Console.WriteLine("chamar o factory para salvar a fase");

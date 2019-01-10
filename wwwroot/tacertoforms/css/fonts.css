@@ -2,15 +2,15 @@
     font-family: 'Pacifico';
     font-style: normal;
     font-weight: 400;
-    src: local('Pacifico Regular'), local('Pacifico-Regular'), url('../media/font/pacifico/Pacifico.ttf') format('tff');
-  }
-  @font-face {
+    src: local('Pacifico Regular'), local('Pacifico-Regular'), url('../font/pacifico/Pacifico.ttf') format('tff');
+}
+@font-face {
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 400;
-    src: local('Roboto'), local('Roboto-Regular'), url('../media/font/roboto/Roboto-Regular.ttf') format('ttf');
-  }
-  @font-face {
+    src: local('Roboto'), local('Roboto-Regular'), url('../font/roboto/Roboto-Regular.ttf') format('ttf');
+}
+@font-face {
     font-family: 'panton';
-    src: url("../media/font/panton3/Panton-BlackCaps.otf");
-  }
+    src: url("../font/panton3/Panton-BlackCaps.otf");
+}
