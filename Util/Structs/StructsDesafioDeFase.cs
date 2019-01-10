@@ -1,6 +1,7 @@
 using System.ComponentModel.DataAnnotations;
+using Util;
 
-namespace Util
+namespace TaCertoForms.Models
 {
     //Necessário para DesafioDeFaseAurelio
     public class ConteudoRespostaStruct{
@@ -26,12 +27,12 @@ namespace Util
 
     //Necessário para DesafioDeFaseLacuna
     public class RespostaStruct{
-        string conteudo;
-        int posicao;
+        public string conteudo { get; set; }
+        public int posicao { get; set; }
     }
     //Necessário para DesafioDeFaseLacuna
     public class FraseXlacunaStruct{
-        bool eFrase;
-        string conteudo;
+        public bool eFrase { get; set; }
+        public string conteudo { get; set; }
     }
 }

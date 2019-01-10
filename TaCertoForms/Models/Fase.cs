@@ -13,7 +13,7 @@ namespace TaCertoForms.Models
 
         public List<DesafioDeFaseNormal> desafiosNormal { get; set; }
 
-        //public List<DesafioDeFaseLacuna> desafiosLacuna { get; set; }
+        public List<DesafioDeFaseLacuna> desafiosLacuna { get; set; }
 
         //public List<DesafioDeFaseAurelio> desafiosAurelio { get; set; }
 

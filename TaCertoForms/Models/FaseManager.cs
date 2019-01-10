@@ -24,5 +24,12 @@ namespace TaCertoForms.Models{
         
             return true;
         }
+        public bool SalvarFaseLacuna(Fase fase){
+            for(int i = 0; i < 100; i++)
+                Console.WriteLine(fase.Chave + " x ");// + fase.desafiosLacuna[0].FraseXlacuna[0].conteudo);
+            Console.WriteLine("chamar o factory para salvar a fase");
+        
+            return true;
+        }
     }
 }

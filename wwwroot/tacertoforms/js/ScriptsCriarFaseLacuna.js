@@ -310,41 +310,64 @@ var ScriptsCriarFaseLacuna = {
     salvarFase: function(){
         console.log("Devo chamar o controller apropriada para salvar a fase da pessoa");
                     
-          // Post a user
-          var url = "/CriarFase/SalvarFaseNormal";
-        
-          fase = {
-              id: 123,
-              usuarioId: 13,
-              chave: "key13",
-              idTipoFase: 0,
-              descricao: "Uma fase",
-              desafiosNormal: []
-          };
-          var listaDeDesafiosParaEnviar = [];
-          for(var i = 0; i < this.listaDeDesafios.length;i++){
-                listaDeDesafiosParaEnviar[i] = new this.desafio(null, this.listaDeDesafios[i].id, this.listaDeDesafios[i].palavra, this.listaDeDesafios[i].eCorreto, this.listaDeDesafios[i].faseId, this.listaDeDesafios[i].significado, this.listaDeDesafios[i].dica);
-            }
-          
-            fase.desafiosNormal = listaDeDesafiosParaEnviar;
-            var json = JSON.stringify(fase);
-          //var json = this.listaDeDesafios;
-          console.log(json);
-          
-          var xhr = new XMLHttpRequest();
-          xhr.open("POST", url, true);
-          //xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
-          xhr.setRequestHeader('Content-type','application/json');
-          xhr.onload = function () {
-              if (xhr.readyState == 4 && xhr.status == "201") {
-                  console.log(xhr.responseText);
-              } else {
-                  console.error(xhr.responseText);
-              }
-          }
-          xhr.send(json);
+        // Post a user
+        var url = "/CriarFase/SalvarFaseLacuna";
+    
+        fase = {
+            id: 123,
+            usuarioId: 13,
+            chave: "key13",
+            idTipoFase: 0,
+            descricao: "Uma fase",
+            desafiosLacuna: []
+        };
+        var listaDeDesafiosParaEnviar = [];
+        for(var i = 0; i < this.listaDeDesafios.length;i++){
+            listaDeDesafiosParaEnviar[i] = new this.desafio(null, this.listaDeDesafios[i].id, this.listaDeDesafios[i].palavra, this.listaDeDesafios[i].eCorreto, this.listaDeDesafios[i].faseId, this.listaDeDesafios[i].significado, this.listaDeDesafios[i].dica);
+        }
 
-          window.location.href = '/TaCertoForms/MinhasFases';
+        /*\/\/ deletar isso é pra teste \/\/*/
+        listaDeDesafiosParaEnviar = [];
+        listaDeDesafiosParaEnviar[0] =
+        {
+            resposta: [
+                {conteudo: "4", position: 1},
+                {conteudo: "10", position: 3},
+                {conteudo: "100", position: 5},
+                {conteudo: "17", position: -1},
+                {conteudo: "54", position: -1},
+            ],
+            fraseXlacuna: [
+                /*0*/{frase: true, conteudo: "2+2 = "},
+                /*1*/{frase: false},
+                /*2*/{frase: true, conteudo: "2*5 = "},
+                /*3*/{frase: false},
+                /*4*/{frase: true, conteudo: "10*10 = "},
+                /*5*/{frase: false},
+            ],
+            significado: "souumsignificado", dica: "souumadica"
+        };
+        /*/\/\ deletar isso é pra teste /\/\*/
+            
+        fase.desafiosLacuna = listaDeDesafiosParaEnviar;
+        var json = JSON.stringify(fase);
+        //var json = this.listaDeDesafios;
+        console.log(json);
+        
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", url, true);
+        //xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+        xhr.setRequestHeader('Content-type','application/json');
+        xhr.onload = function () {
+            if (xhr.readyState == 4 && xhr.status == "201") {
+                console.log(xhr.responseText);
+            } else {
+                console.error(xhr.responseText);
+            }
+        }
+        xhr.send(json);
+
+        //window.location.href = '/TaCertoForms/MinhasFases';
     },
     focusOnMe: function(el, flag){
         console.log(el.innerHTML + "  " +flag)
