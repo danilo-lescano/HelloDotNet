@@ -313,8 +313,10 @@ var ScriptsCriarFaseNormal = {
             } else {
                 console.error(xhr.responseText);
             }
+
+            var jsonReceived = JSON.parse(xhr.responseText);
             
-            if(xhr.flag)
+            if(jsonReceived.flag)
                 window.location.href = '/TaCertoForms/MinhasFases'; // Redireciona
             else
                 console.log("Deu ruim no server side");

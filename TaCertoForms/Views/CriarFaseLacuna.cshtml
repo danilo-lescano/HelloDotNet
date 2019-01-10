@@ -21,8 +21,15 @@
             <div class="row">
                     <div class="input-field col s3">
                     <textarea id="newLacunaText" class="materialize-textarea" data-length="26"></textarea>
-                    <label for="newLacunaText">Lacuna</labe
-                    colocar para saber se a lacuna é certa ou errada
+                    <label for="newLacunaText">Lacuna</label>
+                    <label>
+                        <input id="certo" name="alternativaPalavra" type="radio" checked />
+                        <span>Certo</span>
+                    </label>
+                    <label>
+                        <input id="errado" name="alternativaPalavra" type="radio" />
+                        <span>Errado</span>
+                    </label>
                     </div>
                         <div class="input-field col s1">
                             <a class="waves-effect waves-light btn btn-large" onclick="TaCertoForms.Salvar(this, true);">+</a>

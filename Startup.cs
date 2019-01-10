@@ -79,7 +79,7 @@ namespace tacertoforms_dotnet
                     template: "{controller=TaCertoForms}/{action=Index}/{id?}");
             });
 
-            InicializaDB.Initialize(contexto);
+            //InicializaDB.Initialize(contexto);
         }
     }
 }
