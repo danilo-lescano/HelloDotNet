@@ -1,6 +1,7 @@
 var ScriptsCriarFaseLacuna = {
     listaDeDesafios: [],
-    quantidade: 0,
+    quantidadeQuestoes: 0,
+    idQuestaoAtual: 0,
     editando: -1,
     desafio: function(index, id, faseId, significado, dica){
         if(index !== null)
@@ -18,6 +19,7 @@ var ScriptsCriarFaseLacuna = {
             conteudo: ""
         }]  
     },
+    lastPalavra: "",
     lacunasMaximas: 0,
     lacunasAtuais: 0,
     idAtual: 0,
@@ -29,6 +31,7 @@ var ScriptsCriarFaseLacuna = {
     lacunasContainer: "",
     iframe: null,
     iframeFraseContainer: null,
+    iframeFraseText: "",
     iframeLacunasContainer: null,
     elemento: null, // Elemento que está sendo editado
     botaoAdd: null, // Elemento do botão de Adicionar palavra
@@ -225,10 +228,26 @@ var ScriptsCriarFaseLacuna = {
     },
     trocaFraseLacuna: function(frase){
         
-        this.lacunaText = frase;
+        let lastChar = frase[frase.length-1];
+        let novaFrase = "";
+        console.log(lastChar);
+        if(lastChar == " "){ // Foi digitado um espaço
+            if(this.lastPalavra.length == 0){ //Próximos char tem que entrar na palavra
+                novaFrase = " ";
+                this.lastPalavra = " ";
+            }else{ //Palavra nova, colocar span nela
+                novaFrase = "<span>"+this.lastPalavra+"</span> ";
+                this.lastPalavra = "";
+            }
+        }else{
+            this.lastPalavra += lastChar;
+            novaFrase += this.lastPalavra;
+        }
+
+        this.iframeFraseText = novaFrase;
 
         //"<div class='padThis'><div id='lacuna1' class='emptyLacuna droppableLacuna ui-draggable'></div></div>"
-        this.iframeFraseContainer.innerHTML = this.lacunaText;
+        this.iframeFraseContainer.innerHTML = this.iframeFraseText;
     },
     // Checa se a palavra escrita na lacuna já não está em outra lacuna
     palavraNaoExiste: function(palavra){
