@@ -4,7 +4,7 @@ using Util;
 namespace TaCertoForms.Models
 {
     //Necessário para DesafioDeFaseAurelio
-    public class ConteudoRespostaStruct{
+    public struct ConteudoRespostaStruct{
         int index;
         string palavra;
         bool eApendice;
@@ -12,14 +12,14 @@ namespace TaCertoForms.Models
     }
 
     //Necessário para DesafioDeFaseExploradorColuna
-    public class ColunaStruct{
+    public struct ColunaStruct{
         int equivalente;
         bool emoji;
         string conteudo;
     }
 
     //Necessário para DesafioDeFaseExploradorEscolha
-    public class PalavraExWrapperStruct{
+    public struct PalavraExWrapperStruct{
         int equivalente;
         bool emoji;
         string conteudo;
