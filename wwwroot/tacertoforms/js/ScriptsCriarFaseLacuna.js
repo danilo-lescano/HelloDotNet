@@ -309,49 +309,12 @@ var ScriptsCriarFaseLacuna = {
     },
     salvarFase: function(){
         console.log("Devo chamar o controller apropriada para salvar a fase da pessoa");
-                    
-        // Post a user
-        var url = "/CriarFase/SalvarFaseLacuna";
-    
-        fase = {
-            id: 123,
-            usuarioId: 13,
-            chave: "key13",
-            idTipoFase: 0,
-            descricao: "Uma fase",
-            desafiosLacuna: []
-        };
-        var listaDeDesafiosParaEnviar = [];
-        for(var i = 0; i < this.listaDeDesafios.length;i++){
-            listaDeDesafiosParaEnviar[i] = new this.desafio(null, this.listaDeDesafios[i].id, this.listaDeDesafios[i].palavra, this.listaDeDesafios[i].eCorreto, this.listaDeDesafios[i].faseId, this.listaDeDesafios[i].significado, this.listaDeDesafios[i].dica);
-        }
 
-        /*\/\/ deletar isso é pra teste \/\/*/
-        listaDeDesafiosParaEnviar = [];
-        listaDeDesafiosParaEnviar[0] =
-        {
-            resposta: [
-                {conteudo: "4", position: 1},
-                {conteudo: "10", position: 3},
-                {conteudo: "100", position: 5},
-                {conteudo: "17", position: -1},
-                {conteudo: "54", position: -1},
-            ],
-            fraseXlacuna: [
-                /*0*/{frase: true, conteudo: "2+2 = "},
-                /*1*/{frase: false},
-                /*2*/{frase: true, conteudo: "2*5 = "},
-                /*3*/{frase: false},
-                /*4*/{frase: true, conteudo: "10*10 = "},
-                /*5*/{frase: false},
-            ],
-            significado: "souumsignificado", dica: "souumadica"
-        };
-        /*/\/\ deletar isso é pra teste /\/\*/
+        var url = "/CriarFase/SalvarFaseLacuna";
             
-        fase.desafiosLacuna = listaDeDesafiosParaEnviar;
+        var fase = this.generateFase();
+            
         var json = JSON.stringify(fase);
-        //var json = this.listaDeDesafios;
         console.log(json);
         
         var xhr = new XMLHttpRequest();
@@ -368,6 +331,56 @@ var ScriptsCriarFaseLacuna = {
         xhr.send(json);
 
         //window.location.href = '/TaCertoForms/MinhasFases';
+    },
+    generateFase: function(){
+        var fase = {
+            id: null,
+            usuarioId: null,
+            chave: null,
+            idTipoFase: null,
+            descricao: null,
+            desafiosLacuna: [],
+            respostaNum: [],
+            resposta: [],
+            fraseXlacunaNum: [],
+            fraseXlacuna: []
+        };
+        if(FASE !== null){
+            fase.id = FASE.id;
+            fase.usuarioId = FASE.usuarioId;
+            fase.chave = FASE.chave;
+            fase.idTipoFase = FASE.idTipoFase;
+            fase.descricao = FASE.descricao;
+        }
+        else{
+            fase.usuarioId = USER.id;
+        }
+
+        var listaDeDesafiosParaEnviar = [];
+        for(var i = 0; i < this.listaDeDesafios.length;i++){
+            fase.desafiosLacuna[fase.desafiosLacuna.length] = {
+                significado: this.listaDeDesafios[i].significado,
+                dica: this.listaDeDesafios[i].dica
+            }
+        }
+
+        /*\/\/ deletar isso é pra teste \/\/*/
+        fase.resposta = [
+            {conteudo: "4", position: 1},
+            {conteudo: "10", position: 3},
+            {conteudo: "100", position: 5},
+            {conteudo: "17", position: -1},
+            {conteudo: "54", position: -1},
+        ];
+        fase.fraseXlacuna = [
+            /*0*/{frase: true, conteudo: "2+2 = "},
+            /*1*/{frase: false},
+            /*2*/{frase: true, conteudo: "2*5 = "},
+            /*3*/{frase: false},
+            /*4*/{frase: true, conteudo: "10*10 = "},
+            /*5*/{frase: false},
+        ];
+        /*/\/\ deletar isso é pra teste /\/\*/
     },
     focusOnMe: function(el, flag){
         console.log(el.innerHTML + "  " +flag)

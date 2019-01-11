@@ -40,18 +40,26 @@ namespace tacertoforms_dotnet.Controllers{
         //Tipo: Ação
         //OBSERVAÇÕES:
         //Lógica de logout no objeto usuario manager!
+        [HttpPost]
         public JsonResult SalvarFaseLacuna([FromBody] Fase fase){
-            if(fase != null)
-                _fase = fase;
+            /*fase.ResolveComplexLacuna();
 
-            CriarFlag("FaseCriadaFlag",2); // Cria flag para mostrar toast na próxima tela
-
-            bool _flag = _faseManager.SalvarFaseLacuna(_fase); // Adiciona a fase na _faseManager
+            for (int i = 0; i < 100; i++)
+            if(fase == null)
+                Console.WriteLine("null");
+            else{
+                Console.WriteLine("!" + fase.desafiosLacuna.Count);
+                Console.WriteLine(fase.RespostaNum.Count);
+                Console.WriteLine(fase.Resposta.Count);
+                Console.WriteLine(fase.FraseXlacunaNum.Count);
+                Console.WriteLine(fase.FraseXlacuna.Count);
+                Console.WriteLine(fase.desafiosLacuna[0].FraseXlacuna[0].conteudo);
+            }*/
 
             return Json(new {
                 state = 0,
                 msg = string.Empty,
-                flag = _flag
+                flag = true
             });
         }
 

@@ -13,7 +13,27 @@ namespace TaCertoForms.Models
 
         public List<DesafioDeFaseNormal> desafiosNormal { get; set; }
 
-        public List<DesafioDeFaseLacuna> desafiosLacuna { get; set; }
+        public List<DesafioDeFaseLacuna> desafiosLacuna { get; set; } = new List<DesafioDeFaseLacuna>();
+        public List<int> RespostaNum { get; set; } = new List<int>();
+        public List<RespostaStruct> Resposta { get; set; } = new List<RespostaStruct>();
+        public List<int> FraseXlacunaNum { get; set; } = new List<int>();
+        public List<FraseXlacunaStruct> FraseXlacuna { get; set; } = new List<FraseXlacunaStruct>();
+        public void ResolveComplexLacuna(){
+            for (int i = 0; i < desafiosLacuna.Count; i++){
+                List<RespostaStruct> resposta = new List<RespostaStruct>();
+                for (int j = 0; j < RespostaNum[i]; j++){
+                    resposta.Add(Resposta[0]);
+                }
+                desafiosLacuna[i].Resposta = resposta;
+
+                List<FraseXlacunaStruct> fraseXlacuna = new List<FraseXlacunaStruct>();
+                for (int j = 0; j < FraseXlacunaNum[i]; j++){
+                    fraseXlacuna.Add(FraseXlacuna[0]);
+                    FraseXlacuna.Remove(FraseXlacuna[0]);
+                }
+                desafiosLacuna[i].FraseXlacuna = fraseXlacuna;
+            }
+        }
 
         //public List<DesafioDeFaseAurelio> desafiosAurelio { get; set; }
 

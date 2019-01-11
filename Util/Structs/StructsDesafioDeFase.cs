@@ -26,12 +26,12 @@ namespace TaCertoForms.Models
     }
 
     //Necessário para DesafioDeFaseLacuna
-    public class RespostaStruct{
+    public struct RespostaStruct{
         public string conteudo { get; set; }
         public int posicao { get; set; }
     }
     //Necessário para DesafioDeFaseLacuna
-    public class FraseXlacunaStruct{
+    public struct FraseXlacunaStruct{
         public bool eFrase { get; set; }
         public string conteudo { get; set; }
     }
