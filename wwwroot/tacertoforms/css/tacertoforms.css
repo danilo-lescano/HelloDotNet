@@ -645,7 +645,7 @@ nav .brand-logo{
 .cloneActive::before{
 	font-size: .8rem !important;
 	color: #26a69a !important;
-	transform: translateY(-100%) !important;
+	transform: translateY(-150%) !important;
     transition: all .1s linear;
 }
 
