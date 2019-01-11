@@ -1,8 +1,9 @@
 var ScriptsCriarFaseLacuna = {
     listaDeDesafios: [],
-    quantidade: 0,
+    quantidadeQuestoes: 0,
+    idQuestaoAtual: 0,
     editando: -1,
-    desafio: function(index, id, f1, f2, p, eCorreto, faseId, significado, dica){
+    desafio: function(index, id, faseId, significado, dica){
         if(index !== null)
             this.index = index;
         this.id = id;
@@ -18,16 +19,19 @@ var ScriptsCriarFaseLacuna = {
             conteudo: ""
         }]  
     },
+    lastPalavra: "",
+    lacunasMaximas: 0,
+    lacunasAtuais: 0,
     idAtual: 0,
     lacunaText: "",
-    newLacunaText: "", 
+    newLacuna: "", 
     numeroDeLacunasAtual: 0,
     significadoTextEdit: "",
     dicaTextEdit: "",
     lacunasContainer: "",
     iframe: null,
-    innerDoc: null,
     iframeFraseContainer: null,
+    iframeFraseText: "",
     iframeLacunasContainer: null,
     elemento: null, // Elemento que está sendo editado
     botaoAdd: null, // Elemento do botão de Adicionar palavra
@@ -39,7 +43,7 @@ var ScriptsCriarFaseLacuna = {
         this.lacunaText = document.getElementById('lacunaText');
         this.lacunaText.innerHTML = "";
         this.lacunaSecondText = document.getElementById('lacunaSecondText');
-        this.newLacunaText = document.getElementsByName('newLacunaText');
+        this.newLacuna = document.getElementById('newLacunaText');
         this.significadoTextEdit = document.getElementById('textoSignificado');
         this.dicaTextEdit = document.getElementById('textoDica');
         this.lacunasContainer = document.getElementById('lacunasAdicionadas');
@@ -58,20 +62,19 @@ var ScriptsCriarFaseLacuna = {
     },
     addLacunaErrada: function(){
 
-        let resp = this.checaLacuna();
+        let lacuna = this.checaLacuna();
 
         if(lacuna != 0){
 
-            if(this.palavraNaoExiste(lacuna) || this.editando >= 0){
-                let cor = this.pegaCor(); // Pega a cor caso a palavra esteja certa ou errada
-                sdasdfsadfdsfa
-                if(this.editando == -1){ // Não está editando
-                    let lacunasContainer = this.lacunasContainer;
-                    lacunasContainer.innerHTML += '<div id = "' + this.quantidade+'" class="palavraBox '+cor+'" onclick="ScriptsCriarFaseNormal.carregaParaEditar(this.id)"><h6>'+lacuna+'</h6></div>';
-                    
-                    this.listaDeDesafios[this.quantidade++] = new this.desafio(this.quantidade -1, this.quantidade-1, lacuna, this.correto, -1, significado, dica);
+            //if(this.palavraNaoExiste(lacuna) || this.editando >= 0){
 
-                    document.getElementById('numeroDePalavras').innerHTML = this.quantidade;
+                if(this.editando == -1){ // Não está editando
+                    //let lacunasContainer = this.lacunasContainer;
+                    this.addNovaLacuna(1, lacuna);
+                    
+                    //this.listaDeDesafios[this.quantidade++] = new this.desafio(this.quantidade -1, this.quantidade-1, lacuna, this.correto, -1, significado, dica);
+
+                    //document.getElementById('numeroDePalavras').innerHTML = this.quantidade;
 
                     this.mostraToast(2); // Palavra adicionada
                 }else{ // Está editando
@@ -101,17 +104,17 @@ var ScriptsCriarFaseLacuna = {
                     this.mostraToast(3); // Palavra editada   
                 }
 
-                this.limpaElementos();
+                this.limpaElementos(0);
             }else{
                 this.mostraToast(4);    
             }
-        }else{
-            console.log("Chama o toast para o usuario lembrar que tem que escrever uma palavra");
-            this.mostraToast(1); // Usuário não escreveu uma palavra
-        }
+        //}else{
+          //  console.log("Chama o toast para o usuario lembrar que tem que escrever uma palavra");
+         ////   this.mostraToast(1); // Usuário não escreveu uma palavra
+        //}
 
-        this.palavraTextEdit.focus();
-        this.mostraBotaoSalvar();
+        this.newLacuna.focus();
+        //this.mostraBotaoSalvar();
     },
     textoLacunaClicado(){
         // <div class="padThis"><div class="draggableLacuna lacunaAlternativa ui-draggable" style="position: relative;">mais</div></div>
@@ -121,10 +124,8 @@ var ScriptsCriarFaseLacuna = {
         console.log(selectedText);
         if(selectedText != " " && selectedText != ""){
             if(this.numeroDeLacunasAtual < 6){
-                this.iframeLacunasContainer.innerHTML += "<div class='padThis'><div class='draggableLacuna lacunaAlternativa ui-draggable' style='position: relative;'>"+selectedText+"</div></div>";
+                this.addNovaLacuna(0, selectedText);
                 
-                this.lacunasContainer.innerHTML += '<div id = "' + this.numeroDeLacunasAtual+'" class="palavraBox green" onclick="ScriptsCriarFaseLacuna.carregaParaEditar(this.id)"><h6>'+selectedText+'</h6></div>';
-                    
                 //this.listaDeDesafios[this.quantidade++] = new this.desafio(this.quantidade -1, this.quantidade-1, palavra, this.correto, -1, significado, dica);
 
                 //document.getElementById('numeroDePalavras').innerHTML = this.quantidade;
@@ -137,9 +138,20 @@ var ScriptsCriarFaseLacuna = {
 
         // tenho que checar a posição que a lacuna foi criada
         // Tenho que adicionar a lacuna embaixo
-
     
-       
+    },
+    addNovaLacuna(op, text){
+        if(op === 0){
+            this.iframeLacunasContainer.innerHTML += "<div class='padThis'><div class='draggableLacuna lacunaAlternativa ui-draggable' style='position: relative;'>"+text+"</div></div>";
+                
+            this.lacunasContainer.innerHTML += '<div id = "' + this.numeroDeLacunasAtual+'" class="palavraBox green" onclick="ScriptsCriarFaseLacuna.carregaParaEditar(this.id)"><h6>'+text+'</h6></div>';
+                    
+        }else if(op == 1){
+
+            this.iframeLacunasContainer.innerHTML += "<div class='padThis'><div class='draggableLacuna lacunaAlternativa ui-draggable' style='position: relative;'>"+text+"</div></div>";
+
+            this.lacunasContainer.innerHTML += '<div id = "' + this.quantidade+'" class="palavraBox red" onclick="ScriptsCriarLacuna.showApagar(this.id)"><h6>'+text+'</h6></div>';
+        }
     },
     addDesafio(){
         if(this.desafio[this.idAtual].lacuna.length > 1){
@@ -149,7 +161,7 @@ var ScriptsCriarFaseLacuna = {
         }
     },
     checaLacuna: function(){
-        let lacuna = this.newLacunaText.value;
+        let lacuna = this.newLacuna.value;
         
         if(lacuna != false)
             return lacuna;
@@ -216,10 +228,26 @@ var ScriptsCriarFaseLacuna = {
     },
     trocaFraseLacuna: function(frase){
         
-        this.lacunaText = frase;
+        let lastChar = frase[frase.length-1];
+        let novaFrase = "";
+        console.log(lastChar);
+        if(lastChar == " "){ // Foi digitado um espaço
+            if(this.lastPalavra.length == 0){ //Próximos char tem que entrar na palavra
+                novaFrase = " ";
+                this.lastPalavra = " ";
+            }else{ //Palavra nova, colocar span nela
+                novaFrase = "<span>"+this.lastPalavra+"</span> ";
+                this.lastPalavra = "";
+            }
+        }else{
+            this.lastPalavra += lastChar;
+            novaFrase += this.lastPalavra;
+        }
+
+        this.iframeFraseText = novaFrase;
 
         //"<div class='padThis'><div id='lacuna1' class='emptyLacuna droppableLacuna ui-draggable'></div></div>"
-        this.iframeFraseContainer.innerHTML = this.lacunaText;
+        this.iframeFraseContainer.innerHTML = this.iframeFraseText;
     },
     // Checa se a palavra escrita na lacuna já não está em outra lacuna
     palavraNaoExiste: function(palavra){
@@ -288,11 +316,15 @@ var ScriptsCriarFaseLacuna = {
         this.palavraTextEdit.focus(); 
 
     },
-    limpaElementos: function(){
-        this.palavraTextEdit.value = "";
-        this.radioResposta[0].checked = true;
-        this.significadoTextEdit.value = "";
-        this.dicaTextEdit.value = "";
+    limpaElementos: function(op){
+        if(op === 0){ // Limpa só o campo "Lacunas erradas"
+            this.newLacuna.value = "";
+        }else if(op === 1){ // Limpa todos os campos e até a lista de Lacunas adicionadas
+            this.lacunaText.value = "";
+            this.lacunasContainer.innerHTML = null;
+            this.significadoTextEdit.value = "";
+            this.dicaTextEdit.value = "";
+        }        
     },
     serialize: function(obj, prefix){
         var str = [],p;
