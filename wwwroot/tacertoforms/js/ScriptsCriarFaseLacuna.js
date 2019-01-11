@@ -365,6 +365,7 @@ var ScriptsCriarFaseLacuna = {
         //window.location.href = '/TaCertoForms/MinhasFases';
     },
     generateFase: function(){
+        /*var FASE = FASE || null;
         var fase = {
             id: null,
             usuarioId: null,
@@ -395,9 +396,10 @@ var ScriptsCriarFaseLacuna = {
                 dica: this.listaDeDesafios[i].dica
             }
         }
+        */
 
         /*\/\/ deletar isso é pra teste \/\/*/
-        fase.resposta = [
+        /*fase.resposta = [
             {conteudo: "4", position: 1},
             {conteudo: "10", position: 3},
             {conteudo: "100", position: 5},
@@ -405,13 +407,13 @@ var ScriptsCriarFaseLacuna = {
             {conteudo: "54", position: -1},
         ];
         fase.fraseXlacuna = [
-            /*0*/{frase: true, conteudo: "2+2 = "},
-            /*1*/{frase: false},
-            /*2*/{frase: true, conteudo: "2*5 = "},
-            /*3*/{frase: false},
-            /*4*/{frase: true, conteudo: "10*10 = "},
-            /*5*/{frase: false},
-        ];
+            {frase: true, conteudo: "2+2 = "},
+            {frase: false},
+            {frase: true, conteudo: "2*5 = "},
+            {frase: false},
+            {frase: true, conteudo: "10*10 = "},
+            {frase: false},
+        ];*/
         /*/\/\ deletar isso é pra teste /\/\*/
     },
     focusOnMe: function(el, flag){

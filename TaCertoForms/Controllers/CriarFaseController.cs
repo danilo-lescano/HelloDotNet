@@ -42,19 +42,7 @@ namespace tacertoforms_dotnet.Controllers{
         //Lógica de logout no objeto usuario manager!
         [HttpPost]
         public JsonResult SalvarFaseLacuna([FromBody] Fase fase){
-            /*fase.ResolveComplexLacuna();
-
-            for (int i = 0; i < 100; i++)
-            if(fase == null)
-                Console.WriteLine("null");
-            else{
-                Console.WriteLine("!" + fase.desafiosLacuna.Count);
-                Console.WriteLine(fase.RespostaNum.Count);
-                Console.WriteLine(fase.Resposta.Count);
-                Console.WriteLine(fase.FraseXlacunaNum.Count);
-                Console.WriteLine(fase.FraseXlacuna.Count);
-                Console.WriteLine(fase.desafiosLacuna[0].FraseXlacuna[0].conteudo);
-            }*/
+            fase.ResolveComplexLacuna();
 
             return Json(new {
                 state = 0,

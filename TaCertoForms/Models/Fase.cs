@@ -13,6 +13,8 @@ namespace TaCertoForms.Models
 
         public List<DesafioDeFaseNormal> desafiosNormal { get; set; }
 
+
+        //LACUNA
         public List<DesafioDeFaseLacuna> desafiosLacuna { get; set; } = new List<DesafioDeFaseLacuna>();
         public List<int> RespostaNum { get; set; } = new List<int>();
         public List<RespostaStruct> Resposta { get; set; } = new List<RespostaStruct>();

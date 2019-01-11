@@ -185,13 +185,7 @@ namespace tacertoforms_dotnet.Controllers{
             }
         
             List<Fase> listaFases = faseManager.CarregaFases();
-            foreach (Fase fase in listaFases){
-                List<IDesafioDeFase> listaDeDesafios = desafioDeFaseManager.CarregaDesafios(fase.Id);
-                foreach (IDesafioDeFase desafio in listaDeDesafios){
-                    // TO DO
-                    ViewBag.HeaderTexto = "Minhas Fases";
-                }
-            }
+            ViewBag.listaFases = listaFases;
             ViewBag.HeaderTexto = "Minhas Fases";
             return View("~/TaCertoForms/Views/MinhasFases.cshtml");
         }
@@ -226,6 +220,7 @@ namespace tacertoforms_dotnet.Controllers{
             faseManager.Session = Session;
             desafioDeFaseManager.Session = Session;
 
+            ViewBag.userId = Session["userId"];
             ViewBag.userName = Session["userName"];
             ViewBag.userEmail = Session["userEmail"];
         }

@@ -8,71 +8,24 @@
     <br>
     <div class="row s12 m12 l12 ">
         <ul class="collection">
-            <li class="collection-item">
-                <div>"id da fase"
-                    <a href="#!" class="secondary-content">
-                        <i class="material-icons">clear</i>
-                    </a>
-                    <a href="#!" class="secondary-content rightSpace">
-                        <i class="material-icons">edit</i>
-                    </a>
-                    <a href="#info-fase-modal" class="secondary-content modal-trigger rightSpace">
-                        <i class="material-icons">visibility</i>
-                    </a>
-                </div>
-            </li>
-            <li class="collection-item">
-                <div>"id da fase"
-                    <a href="#!" class="secondary-content">
-                        <i class="material-icons">clear</i>
-                    </a>
-                    <a href="#!" class="secondary-content rightSpace">
-                        <i class="material-icons">edit</i>
-                    </a>
-                    <a href="#info-fase-modal" class="secondary-content modal-trigger rightSpace">
-                        <i class="material-icons">visibility</i>
-                    </a>
-                </div>
-            </li>
-            <li class="collection-item">
-                <div>"id da fase"
-                    <a href="#!" class="secondary-content">
-                        <i class="material-icons">clear</i>
-                    </a>
-                    <a href="#!" class="secondary-content rightSpace">
-                        <i class="material-icons">edit</i>
-                    </a>
-                    <a href="#info-fase-modal" class="secondary-content modal-trigger rightSpace">
-                        <i class="material-icons">visibility</i>
-                    </a>
-                </div>
-            </li>
-            <li class="collection-item">
-                <div>"id da fase"
-                    <a href="#!" class="secondary-content">
-                        <i class="material-icons">clear</i>
-                    </a>
-                    <a href="#!" class="secondary-content rightSpace">
-                        <i class="material-icons">edit</i>
-                    </a>
-                    <a href="#info-fase-modal" class="secondary-content modal-trigger rightSpace">
-                        <i class="material-icons">visibility</i>
-                    </a>
-                </div>
-            </li>
-            <li class="collection-item">
-                <div>"id da fase"
-                    <a href="#!" class="secondary-content">
-                        <i class="material-icons">clear</i>
-                    </a>
-                    <a href="#!" class="secondary-content rightSpace">
-                        <i class="material-icons">edit</i>
-                    </a>
-                    <a href="#info-fase-modal" class="secondary-content modal-trigger rightSpace">
-                        <i class="material-icons">visibility</i>
-                    </a>
-                </div>
-            </li> 
+            @{
+                foreach (var @fase in @ViewBag.listaFases){
+                    <li class="collection-item">
+                        <div>
+                            @fase.Chave @fase.Descricao
+                            <a href="#!" class="secondary-content">
+                                <i class="material-icons">clear</i>
+                            </a>
+                            <a href="#!" class="secondary-content rightSpace">
+                                <i class="material-icons">edit</i>
+                            </a>
+                            <a href="#info-fase-modal" class="secondary-content modal-trigger rightSpace">
+                                <i class="material-icons">visibility</i>
+                            </a>
+                        </div>
+                    </li>
+                }
+            }
         </ul>
     </div>
     <br>
