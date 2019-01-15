@@ -98,8 +98,6 @@ $(document).ready(function(){
 });
 
 
-// Funções para o Modo Normal *********************************************************
-
 
 
 // Funções para o Modo Aurélio *********************************************************
@@ -109,6 +107,12 @@ function trocaTextoFrase(texto){
     innerDoc.getElementById('aurPhraseWrap').innerHTML = texto;
 }
 
+
+// Funções para a tela Minhas Fases *********************************************************
+function trocaIndexFase(Index){
+    let indexText = document.getElementById('indexFase');
+    indexText.innerHTML = Index;
+}
 
 
 //operacao / dados
