@@ -175,11 +175,28 @@ nav .brand-logo{
 	color: #e0f2f1;
 }
 
-.user-info{
+.user-stuff{
 	position: relative;
 	width: 100%;
-	padding-top: 22px;
+	padding-top: 10px;
 	padding-left: 22px;
+}
+
+.user-stuff>img{
+	width: 22%;
+	height: 100%;
+	position: absolute;
+}
+
+.user-info{
+	position: absolute;
+	top: 5%;
+	left: 58%;
+	transform: translateX(-50%);
+}
+
+.user-info>h5{
+	margin-top: 0;
 }
 
 .card{

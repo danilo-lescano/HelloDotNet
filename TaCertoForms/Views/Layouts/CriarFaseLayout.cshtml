@@ -24,10 +24,14 @@
 <ul class="sidenav" id="mobileMenu">
     <li class="sidenav-header">
         <a href="/TaCertoForms/TelaPrincipal" class="brand-logo">Tá Certo Forms</a>
-        <div class="user-info">
-            <h6 class="title">@ViewBag.userName</h6>
-            <p>@ViewBag.EmailLogado</p>
-        </div>
+        <a class="user-stuff">
+            <img src="~/tacertoforms/images/EricCartman.jpg" alt="" class="circle">
+            <div class="user-info">
+                <h5 class="title">@ViewBag.userName</h5>
+                <h6>@ViewBag.userEmail</h6>
+            </div>
+            
+        </a>
     </li>
     <div class="divider"></div>
     <li><a href="/TaCertoForms/Menu/?op=1">Minhas Fases</a></li>

@@ -13,7 +13,7 @@
                     <li class="collection-item">
                         <div>
                             @fase.Chave @fase.Descricao
-                            <a href="#!" class="secondary-content">
+                            <a href="#!" class="secondary-content" onclick="tacertoforms/trocaIndexFase("@fase.Chave");">
                                 <i class="material-icons">clear</i>
                             </a>
                             <a href="#!" class="secondary-content rightSpace">
@@ -36,7 +36,7 @@
 <div id="info-fase-modal" class="modal modal-fixed-footer modal-fixed-header">
     <div class="modal-header">
         <h5 class="leftSpace">
-            Fase: #0432
+            Fase: <span id="indexFase">#0432</span>
         </h5>
     </div>
     <div class="modal-content">
