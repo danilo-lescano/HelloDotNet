@@ -109,11 +109,53 @@ function trocaTextoFrase(texto){
 
 
 // Funções para a tela Minhas Fases *********************************************************
-function trocaIndexFase(Index){
+function trocaIndexFase(index, desafios){
+    console.log(index);
+    AchaDesafioCorreto(index, desafios);
     let indexText = document.getElementById('indexFase');
-    indexText.innerHTML = Index;
+    indexText.innerHTML = index;
 }
 
+// Função para carregar questões da fase atual
+function AchaDesafioCorreto(index, desafios){
+
+    let obj = JSON.parse(desafios);
+    for(i = 0; i < obj.length; i++){
+        if(obj[i].Chave === index){
+            console.log("ACHEI!");
+            chamaMetodoEspecifico(obj[i]);
+            return;
+        }else{
+            console.log("NÃO ACHEI!");
+        }
+    }
+
+}
+
+function chamaMetodoEspecifico(desafios){
+    document.getElementById('myQuestions').innerHTML = "";
+    console.log(desafios)
+    console.log(desafios.IdTipoFase);
+    if(desafios.IdTipoFase === 1){ // Aurélio
+
+    }else if(desafios.IdTipoFase === 2){ // Explorador
+
+    }else if(desafios.IdTipoFase === 3){ // Lacuna
+
+    }if(desafios.IdTipoFase === 4){ // Normal
+       
+        for(i = 0; i < desafios.desafiosNormal.length; i++){
+            console.log("óia");
+            carregaQuestoes(0+i, desafios.desafiosNormal[i].Palavra);
+        }
+    }
+}
+
+function carregaQuestoes(index, texto){
+    let myQuestionsModal = document.getElementById('myQuestions');
+    myQuestionsModal.innerHTML += "<li class='collection-item'><div>"+index+" - "+texto+"<div class='secondary-content rightSpace'>Erros: 423</div><div class='secondary-content rightSpace'>Acertos: 3000</div></div></li>";
+}
+         
 
 //operacao / dados
 function fetchTCF(){

@@ -13,13 +13,13 @@
                     <li class="collection-item">
                         <div>
                             @fase.Chave @fase.Descricao
-                            <a href="#!" class="secondary-content" onclick="tacertoforms/trocaIndexFase("@fase.Chave");">
+                            <a href="#!" class="secondary-content">
                                 <i class="material-icons">clear</i>
                             </a>
                             <a href="#!" class="secondary-content rightSpace">
                                 <i class="material-icons">edit</i>
                             </a>
-                            <a href="#info-fase-modal" class="secondary-content modal-trigger rightSpace">
+                            <a href="#info-fase-modal" class="secondary-content modal-trigger rightSpace" onclick="trocaIndexFase('@fase.Chave', '@ViewBag.listaFasesJson');">
                                 <i class="material-icons">visibility</i>
                             </a>
                         </div>
@@ -40,7 +40,7 @@
         </h5>
     </div>
     <div class="modal-content">
-        <ul class="collection">
+        <ul class="collection" id="myQuestions">
             <li class="collection-item">
                 <div>1 - Cadarço
                     <div class="secondary-content rightSpace">Erros: 423</div>
