@@ -8,11 +8,32 @@ namespace TaCertoForms.Models
         public List<Fase> GetFaseByUserId(int idUsuario){
             Fase fase1 = new Fase(), fase2 = new Fase(), fase3 = new Fase();
             List<Fase> listaDeFase = new List<Fase>();
+            DesafioDeFaseNormal desafio = new DesafioDeFaseNormal();
+
             fase1.Id = 1;
             fase1.UsuarioId = 1;
             fase1.Chave = "XN4TG";
-            fase1.IdTipoFase = 1;
+            fase1.IdTipoFase = 4;
             fase1.Descricao = "uma fase normal aqui";
+
+            desafio.Id = 123;
+            desafio.FaseId  = 3;
+            desafio.Significado = "significado da palavra";
+            desafio.Dica = "dica da palavra";
+            desafio.Palavra = "Cambito";
+            desafio.eCorreto = true;
+
+            fase1.desafiosNormal = new List<DesafioDeFaseNormal>();
+            fase1.desafiosNormal.Add(desafio);
+            fase1.desafiosNormal.Add(desafio);
+            fase1.desafiosNormal.Add(desafio);
+            fase1.desafiosNormal.Add(desafio);
+            fase1.desafiosNormal.Add(desafio);
+            fase1.desafiosNormal.Add(desafio);
+            fase1.desafiosNormal.Add(desafio);
+            fase1.desafiosNormal.Add(desafio);
+            fase1.desafiosNormal.Add(desafio);
+            fase1.desafiosNormal.Add(desafio);
 
             fase2.Id = 2;
             fase2.UsuarioId = 1;

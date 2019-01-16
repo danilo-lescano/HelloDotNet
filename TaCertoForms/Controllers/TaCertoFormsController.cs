@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using TaCertoForms.Models;
 using tacertoforms_dotnet.Models;
 using Util;
+using Newtonsoft.Json;
 using tacertoforms_dotnet.TaCertoForms.Models;
 
 namespace tacertoforms_dotnet.Controllers{
@@ -185,7 +186,11 @@ namespace tacertoforms_dotnet.Controllers{
             }
         
             List<Fase> listaFases = faseManager.CarregaFases();
+
+            string json = JsonConvert.SerializeObject(listaFases, Formatting.None);
+
             ViewBag.listaFases = listaFases;
+            ViewBag.listaFasesJson = json;
             ViewBag.HeaderTexto = "Minhas Fases";
             return View("~/TaCertoForms/Views/MinhasFases.cshtml");
         }
