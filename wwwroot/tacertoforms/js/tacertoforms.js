@@ -134,8 +134,9 @@ function AchaDesafioCorreto(index, desafios){
 
 function chamaMetodoEspecifico(desafios){
     document.getElementById('myQuestions').innerHTML = "";
-    console.log(desafios)
-    console.log(desafios.IdTipoFase);
+    let footerButtons = document.getElementById('footerButtons');
+    footerButtons.innerHTML = "";
+
     if(desafios.IdTipoFase === 1){ // Aurélio
 
     }else if(desafios.IdTipoFase === 2){ // Explorador
@@ -143,7 +144,22 @@ function chamaMetodoEspecifico(desafios){
     }else if(desafios.IdTipoFase === 3){ // Lacuna
 
     }if(desafios.IdTipoFase === 4){ // Normal
-       
+      
+        let element = document.createElement('a');
+        element.onclick = function (){
+            console.log("sdfsdf")
+            chamaTelaEditar(4,desafios.Chave,desafios.desafiosNormal);
+        };
+        element.classList.add("waves-effect", "red", "btn-flat");
+
+        let iElement = document.createElement("i");
+        iElement.classList.add("material-icons");
+        iElement.innerHTML = 'edit';
+        element.appendChild(iElement);
+        footerButtons.appendChild(element);
+
+        footerButtons.innerHTML += "<a href='#!' class='modal-close waves-effect waves-red btn-flat'><i class='material-icons'>clear</i></a>";
+
         for(i = 0; i < desafios.desafiosNormal.length; i++){
             console.log("óia");
             carregaQuestoes(0+i, desafios.desafiosNormal[i].Palavra);
@@ -155,7 +171,12 @@ function carregaQuestoes(index, texto){
     let myQuestionsModal = document.getElementById('myQuestions');
     myQuestionsModal.innerHTML += "<li class='collection-item'><div>"+index+" - "+texto+"<div class='secondary-content rightSpace'>Erros: 423</div><div class='secondary-content rightSpace'>Acertos: 3000</div></div></li>";
 }
-         
+       
+function chamaTelaEditar(tipoFase, chaveFase, desafiosDaFase){
+    console.log(tipoFase);
+    console.log(chaveFase);
+    console.log(desafiosDaFase);
+}
 
 //operacao / dados
 function fetchTCF(){
