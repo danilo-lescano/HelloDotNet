@@ -1,0 +1,22 @@
+
+@if(@ViewBag.tipoFase == 1){
+    <script type="text/javascript">
+        console.log("Carregar dados para editar 1");
+    </script>
+}else if(@ViewBag.tipoFase == 2){
+    <script type="text/javascript">
+        console.log("Carregar dados para editar 2");
+    </script>
+}else if(@ViewBag.tipoFase == 3){
+    <script type="text/javascript">
+        console.log("Carregar dados para editar 2");
+    </script>
+}else if(@ViewBag.tipoFase == 4){
+    <script type="text/javascript">
+        console.log("ODAMA RASENGAN!");
+        ScriptsCriarFaseNormal.carregarDadosParaEditar('@ViewBag.dadosParaEditar');
+    </script>
+}else{
+    <script type="text/javascript">
+    </script>
+}   

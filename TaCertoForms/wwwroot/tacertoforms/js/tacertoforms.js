@@ -98,8 +98,6 @@ $(document).ready(function(){
 });
 
 
-
-
 // Funções para o Modo Aurélio *********************************************************
 function trocaTextoFrase(texto){
     let iframe = document.getElementById('aureliolIframe');
@@ -110,7 +108,6 @@ function trocaTextoFrase(texto){
 
 // Funções para a tela Minhas Fases *********************************************************
 function trocaIndexFase(index, desafios){
-    console.log(index);
     AchaDesafioCorreto(index, desafios);
     let indexText = document.getElementById('indexFase');
     indexText.innerHTML = index;
@@ -144,26 +141,35 @@ function chamaMetodoEspecifico(desafios){
     }else if(desafios.IdTipoFase === 3){ // Lacuna
 
     }if(desafios.IdTipoFase === 4){ // Normal
-      
-        let element = document.createElement('a');
-        element.onclick = function (){
-            console.log("sdfsdf")
-            chamaTelaEditar(4,desafios.Chave,desafios.desafiosNormal);
+        console.log(desafios);
+        var element = document.createElement('a');
+        element.classList.add("waves-effect", "waves-green", "btn-flat");
+        element.onclick = function(){
+            chamaTelaEditar(desafios.Id);
         };
-        element.classList.add("waves-effect", "red", "btn-flat");
-
-        let iElement = document.createElement("i");
+        
+        var iElement = document.createElement("i");
         iElement.classList.add("material-icons");
         iElement.innerHTML = 'edit';
+        
         element.appendChild(iElement);
         footerButtons.appendChild(element);
 
-        footerButtons.innerHTML += "<a href='#!' class='modal-close waves-effect waves-red btn-flat'><i class='material-icons'>clear</i></a>";
-
-        for(i = 0; i < desafios.desafiosNormal.length; i++){
-            console.log("óia");
-            carregaQuestoes(0+i, desafios.desafiosNormal[i].Palavra);
-        }
+        element = document.createElement('a');
+        element.classList.add("modal-close","waves-effect", "waves-green", "btn-flat");
+        
+        iElement = document.createElement("i");
+        iElement.classList.add("material-icons");
+        iElement.innerHTML = 'clear';
+        
+        element.appendChild(iElement);
+        footerButtons.appendChild(element);
+        console.log(desafios.desafiosNormal.length)
+        let numPalavras = desafios.desafiosNormal.length
+        for(i = 0; i < numPalavras; i++){
+            console.log("óia   " + desafios.desafiosNormal[i].Palavra);
+            carregaQuestoes(i, desafios.desafiosNormal[i].Palavra);
+        }     
     }
 }
 
@@ -171,11 +177,36 @@ function carregaQuestoes(index, texto){
     let myQuestionsModal = document.getElementById('myQuestions');
     myQuestionsModal.innerHTML += "<li class='collection-item'><div>"+index+" - "+texto+"<div class='secondary-content rightSpace'>Erros: 423</div><div class='secondary-content rightSpace'>Acertos: 3000</div></div></li>";
 }
+
+// Quando o usuário clica no botão para apagar uma fase
+function taQuerendoApagarFase(idFase){
+    document.getElementById('idFaseParaApagar').innerHTML = idFase
+}
        
-function chamaTelaEditar(tipoFase, chaveFase, desafiosDaFase){
-    console.log(tipoFase);
-    console.log(chaveFase);
-    console.log(desafiosDaFase);
+function chamaTelaEditar(idFase){
+    console.log(idFase);
+                 
+    var url = "/CriarFase/CarregarParaEditar"; // Url que será enviado
+                
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", url, true);
+    //xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+    xhr.setRequestHeader('Content-type','application/json');
+    xhr.onload = function () {
+        if (xhr.readyState == 4 && xhr.status == "201") {
+            console.log(xhr.responseText);
+        } else {
+            console.error(xhr.responseText);
+        }
+
+        var jsonReceived = JSON.parse(xhr.responseText);
+        
+        if(jsonReceived.state == 1)
+            window.location.href = '/TaCertoForms/CriarFase?fase=normal'; // Redireciona
+        else
+            console.log("Deu ruim no server side");
+    }
+    xhr.send(idFase);
 }
 
 //operacao / dados
@@ -186,6 +217,7 @@ function fetchTCF(){
 //Toast!
 var Toast = Toast || null;
 document.addEventListener("DOMContentLoaded", ()=>{
+    console.log("eita  " + Toast)
     if(Toast !== null)
-        M.toast({html: Toast});
+        M.toast({html: Toast, classes: 'rounded green lighten-1'});
 });

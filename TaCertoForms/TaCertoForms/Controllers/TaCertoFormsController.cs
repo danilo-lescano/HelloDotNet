@@ -121,6 +121,13 @@ namespace tacertoforms_dotnet.Controllers{
         public IActionResult CriarFase(string fase){
             Start();
 
+            if(Session["tipoFase"] != null && Session["dadosParaEditar"] != null){
+                @ViewBag.tipoFase = Session["tipoFase"];
+                @ViewBag.dadosParaEditar = Session["dadosParaEditar"];
+                Session.Remove("tipoFase");
+                Session.Remove("dadosParaEditar");
+            }
+
             if(!usuarioManager.isLoged())
                 return RedirectToAction("Index");
 
@@ -187,8 +194,9 @@ namespace tacertoforms_dotnet.Controllers{
         
             List<Fase> listaFases = faseManager.CarregaFases();
 
-            string json = JsonConvert.SerializeObject(listaFases, Formatting.None);
-
+            //string json = JsonConvert.SerializeObject(listaFases, Formatting.None);
+            string json = JsonHelper.JsonSerializer<List<Fase>>(listaFases);
+            
             ViewBag.listaFases = listaFases;
             ViewBag.listaFasesJson = json;
             ViewBag.HeaderTexto = "Minhas Fases";

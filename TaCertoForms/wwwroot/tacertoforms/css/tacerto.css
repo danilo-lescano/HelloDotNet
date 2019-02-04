@@ -1172,6 +1172,10 @@ span {
 	opacity:1;
 }
 
+span.transparentWord{
+	color: rgba(132, 87, 168, 0.3) !important;
+}
+
 .bounceInDown1{
 	animation: mymove 1s;
 }

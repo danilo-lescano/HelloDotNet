@@ -13,7 +13,7 @@
             </div>
             <div class="row">
                     <div class="input-field col s12">
-                    <div contenteditable="true" id="lacunaText" class="cloneTextArea" ondblclick="ScriptsCriarFaseLacuna.textoLacunaClicado()" onkeyup="ScriptsCriarFaseLacuna.trocaFraseLacuna(this.innerHTML);" onfocus="ScriptsCriarFaseLacuna.focusOnMe(this,true);" onfocusout="ScriptsCriarFaseLacuna.focusOnMe(this,false);">
+                    <div contenteditable="true" id="lacunaText" class="cloneTextArea" onkeyup="ScriptsCriarFaseLacuna.trocaFraseLacuna(this.innerHTML);" onfocus="ScriptsCriarFaseLacuna.focusOnMe(this,true);" onfocusout="ScriptsCriarFaseLacuna.focusOnMe(this,false);">
                     </div>
                     </div>
             </div>
@@ -32,7 +32,7 @@
             <div class="row">
                 <div class="input-field col s12">
                     <div id="lacunasAdicionadas" class="left-align">
-                        <h6>Lacunas adicionadas:</h6>
+                        <h6 id="-1">Lacunas adicionadas:</h6>
                     </div>
                 </div>
             </div>
@@ -51,19 +51,22 @@
             
             <div class="row">
                 <div class="input-field col s12">
-                    <a class="waves-effect waves-light btn btn-large" onclick="TaCertoForms.addDesafio(this, true);">Adicionar</a>
+                    <a class="waves-effect waves-light btn btn-large" onclick="ScriptsCriarFaseLacuna.addDesafio(this, true);">Adicionar</a>
                 </div>
             </div>
             <div class="divider"></div>
             <div class="left-align">
-                Número de questões atual: 0
+                Número de questões atual:<span id="numeroDeQuestoes">0</span></h6>
+            </div>
+            <div id="questoesAdicionadas" class="left-align">
+            
             </div>
         </form>
     </div>
 
     <div id="telaNormalAndHardcore" class="col s12 m4 l4 hide-on-small-only">
         <iframe id="lacunaIframe" src="~/TaCertoForms/ChamarIframe?id=2" frameborder="0"></iframe>
-         <div onclick="M.toast({html: 'Esse é apenas um exemplo de como ficará no jogo.', classes: 'rounded red lighten-1'})"  class="ghostDivJustForClick">
-        </div>
+        <!--<div onclick="M.toast({html: 'Esse é apenas um exemplo de como ficará no jogo.', classes: 'rounded red lighten-1'})"  class="ghostDivJustForClick">
+        </div>--> 
    </div>
 </div>

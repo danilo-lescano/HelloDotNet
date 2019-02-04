@@ -13,10 +13,10 @@
                     <li class="collection-item">
                         <div>
                             @fase.Chave @fase.Descricao
-                            <a href="#!" class="secondary-content">
+                            <a href="#modal1" class="secondary-content modal-trigger" onclick="taQuerendoApagarFase('@fase.Id')">
                                 <i class="material-icons">clear</i>
                             </a>
-                            <a href="#!" class="secondary-content rightSpace">
+                            <a href="#!" class="secondary-content rightSpace" onclick="chamaTelaEditar('@fase.Id')">
                                 <i class="material-icons">edit</i>
                             </a>
                             <a href="#info-fase-modal" class="secondary-content modal-trigger rightSpace" onclick="trocaIndexFase('@fase.Chave', '@ViewBag.listaFasesJson');">
@@ -32,7 +32,7 @@
     <br>
 </div>
 
-<!-- Modal Structure -->
+<!-- Modal de Informações de fase -->
 <div id="info-fase-modal" class="modal modal-fixed-footer modal-fixed-header">
     <div class="modal-header">
         <h5 class="leftSpace">
@@ -55,3 +55,15 @@
     </div>
 </div>
 
+<!-- Modal Pergunta se quer apagar mesmo -->
+<div id="modal1" class="modal">
+    <div class="modal-content">
+        <h4>Apagar Fase</h4>
+        <h6>Você deseja mesmo apagar a fase <span id="idFaseParaApagar"></span>?</h6>
+    </div>
+
+    <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Sim</a>
+        <a href="#!" class="modal-close waves-effect waves-red btn-flat">Não</a>
+    </div>
+</div>
