@@ -18,26 +18,24 @@
 	<!-- conteudo do modal-->
 	<div class="modalWrapper">
 		<div class="centerPanel">
-				<h4>Explicação</h4>
-				<h6>Aqui vai a explicação da questão que você errou</h6>
-				<img class="modalBtn" onclick="TaCerto.Controladora.Jogo.Geral.showMeMeuErro(this, false);" src="~/tacertoforms/images/voltar_ao_jogo.png" alt="Botão voltar ao jogo">
+			<h4>Explicação</h4>
+			<h6>Aqui vai a explicação da questão que você errou</h6>
+			<img class="modalBtn" onclick="TaCerto.Controladora.Jogo.Geral.showMeMeuErro(this, false);" src="~/tacertoforms/images/voltar_ao_jogo.png" alt="Botão voltar ao jogo">
 		</div>
-		
 	</div>
 </div>
 
 <!-- SIGNIFICADO MODAL -->
 <div id="significadoModal" class="animated fadeIn" onclick="TaCerto.Controladora.Jogo.Geral.showMeOSignificado(this, false);">
-		<!-- conteudo do modal-->
-		<div class="modalWrapper">
-			<div class="centerPanel">
-					<h4>Significado</h4>
-					<h6>Aqui vai o significado da palavra que você está</h6>
-					<img class="modalBtn" onclick="TaCerto.Controladora.Jogo.Geral.showMeOSignificado(this, false);" src="~/tacertoforms/images/voltar_ao_jogo.png" alt="Botão voltar ao jogo">
-			</div>
-			
+	<!-- conteudo do modal-->
+	<div class="modalWrapper">
+		<div class="centerPanel">
+			<h4>Significado</h4>
+			<h6>Aqui vai o significado da palavra que você está</h6>
+			<img class="modalBtn" onclick="TaCerto.Controladora.Jogo.Geral.showMeOSignificado(this, false);" src="~/tacertoforms/images/voltar_ao_jogo.png" alt="Botão voltar ao jogo">
 		</div>
 	</div>
+</div>
 
 <!-- MODAL start -->
 <div id="despauseModal" class="modalBlur">
@@ -78,10 +76,9 @@
 		</div>
 	</div>
 	<div class="h10">
-		<div id="achievementPanel" onclick="TaCerto.Controladora.MenuConquistas.SaiDaqui(this);" class="achievementWrapper">
-		</div>
+		<div id="achievementPanel" onclick="TaCerto.Controladora.MenuConquistas.SaiDaqui(this);" class="achievementWrapper"></div>
 		<div id="botaoInformacao">
-				<img onclick="TaCerto.Controladora.Jogo.Geral.showMeMeuErro(this, true);" src="~/tacertoforms/images/botaoInformacao2.png" alt="botão mostra a questão que errou">
+			<img onclick="TaCerto.Controladora.Jogo.Geral.showMeMeuErro(this, true);" src="~/tacertoforms/images/botaoInformacao2.png" alt="botão mostra a questão que errou">
 		</div>
 		<div id="botaoSignificado">
 			<img onclick="TaCerto.Controladora.Jogo.Geral.showMeOSignificado(this, true);" src="~/tacertoforms/images/botaoSignificado.png" alt="botão mostra o significado da palavra">
@@ -101,40 +98,41 @@
 	</div>
 
 	<!--conteudo do tipo de jogo abaixo-->
-	<div id="JogoTipo"><div class="mesaExpl">
-	<!--caixa de linhas que ligam as colunas-->
-	<div id="lineWrapper" class="lineWrapper"></div>
+	<div id="JogoTipo">
+		<div class="mesaExpl">
+			<!--caixa de linhas que ligam as colunas-->
+			<div id="lineWrapper" class="lineWrapper"></div>
 
-	<!--onde fica a palavra do jogo explorador tipo palavra-->
-	<!--OU onde fica um texto avisando que o jogo é do tipo ligar colunas-->
-	<div id="explCabecalho" class="explCabecalho"></div>
+			<!--onde fica a palavra do jogo explorador tipo palavra-->
+			<!--OU onde fica um texto avisando que o jogo é do tipo ligar colunas-->
+			<div id="explCabecalho" class="explCabecalho"></div>
 
-	<!--explPWrapper-->
-	<div id="explPWrapper" class="explPWrapper" style="display: none">
-		<!--explPCountWordWrapper-->
-		<div class="explPCountWordWrapper">
-			<div class="explPCountContent">
-				<div id="explPCountContentDinamico" class="explPCountContentShadow"></div>
-				/
-				<div id="explPCountContentDinamicoBase" class="explPCountContentShadow"></div>
+			<!--explPWrapper-->
+			<div id="explPWrapper" class="explPWrapper" style="display: none">
+				<!--explPCountWordWrapper-->
+				<div class="explPCountWordWrapper">
+					<div class="explPCountContent">
+						<div id="explPCountContentDinamico" class="explPCountContentShadow"></div>
+						/
+						<div id="explPCountContentDinamicoBase" class="explPCountContentShadow"></div>
+					</div>
+				</div>
+				<!--explPWordWrapper-->
+				<div id="explPWordWrapper" class="explPWordWrapper"></div>
+			</div>
+
+			<!--explCWrapper-->
+			<div id="explCWrapper" class="explCWrapper" style="display: block;">
+				<!--explCWordWrapper-->
+				<div class="explCWordWrapper">
+					<!--explCCol1-->
+					<div id="explCCol1" class="explCCol1"><div class="explCCol1ItemWrapper animated zoomInRight fadeIn"><div class="explCCol1Item explPalavraItem" data-equivalente="0" data-match="n" id="0itemColPrincipal">Naco</div></div><div class="explCCol1ItemWrapper animated zoomInDown fadeIn"><div class="explCCol1Item explPalavraItem" data-equivalente="1" data-match="n" id="1itemColPrincipal" style="font-size: calc(12px + 1.4vw); padding-bottom: 6px; padding-top: 6px;">Pandorga</div></div><div class="explCCol1ItemWrapper animated zoomInLeft fadeIn"><div class="explCCol1Item explPalavraItem" data-equivalente="2" data-match="n" id="2itemColPrincipal">Califom</div></div></div>
+					<!--explCCol2-->
+					<div id="explCCol2" class="explCCol2"><div class="explCCol2ItemWrapper animated zoomInRight fadeIn"><div class="explCCol2Item explPalavraItem" data-equivalente="1" data-match="n" id="0itemColSecundaria">Pipa</div></div><div class="explCCol2ItemWrapper animated zoomInUp fadeIn"><div class="explCCol2Item explPalavraItem" data-equivalente="2" data-match="n" id="1itemColSecundaria">Sutiã</div></div><div class="explCCol2ItemWrapper animated zoomInLeft fadeIn"><div class="explCCol2Item explPalavraItem" data-equivalente="0" data-match="n" id="2itemColSecundaria">Pedaço</div></div></div>
+				</div>
 			</div>
 		</div>
-		<!--explPWordWrapper-->
-		<div id="explPWordWrapper" class="explPWordWrapper"></div>
 	</div>
-
-	<!--explCWrapper-->
-	<div id="explCWrapper" class="explCWrapper" style="display: block;">
-		<!--explCWordWrapper-->
-		<div class="explCWordWrapper">
-			<!--explCCol1-->
-			<div id="explCCol1" class="explCCol1"><div class="explCCol1ItemWrapper animated zoomInRight fadeIn"><div class="explCCol1Item explPalavraItem" data-equivalente="0" data-match="n" id="0itemColPrincipal">Naco</div></div><div class="explCCol1ItemWrapper animated zoomInDown fadeIn"><div class="explCCol1Item explPalavraItem" data-equivalente="1" data-match="n" id="1itemColPrincipal" style="font-size: calc(12px + 1.4vw); padding-bottom: 6px; padding-top: 6px;">Pandorga</div></div><div class="explCCol1ItemWrapper animated zoomInLeft fadeIn"><div class="explCCol1Item explPalavraItem" data-equivalente="2" data-match="n" id="2itemColPrincipal">Califom</div></div></div>
-			<!--explCCol2-->
-			<div id="explCCol2" class="explCCol2"><div class="explCCol2ItemWrapper animated zoomInRight fadeIn"><div class="explCCol2Item explPalavraItem" data-equivalente="1" data-match="n" id="0itemColSecundaria">Pipa</div></div><div class="explCCol2ItemWrapper animated zoomInUp fadeIn"><div class="explCCol2Item explPalavraItem" data-equivalente="2" data-match="n" id="1itemColSecundaria">Sutiã</div></div><div class="explCCol2ItemWrapper animated zoomInLeft fadeIn"><div class="explCCol2Item explPalavraItem" data-equivalente="0" data-match="n" id="2itemColSecundaria">Pedaço</div></div></div>
-		</div>
-	</div>
-</div>
-</div>
 	<div id="block" data-timing="1000" data-tada="false" data-animacoestotal="21" data-framesx="4" data-framesy="6"></div>
 	<div id="vassoura" data-timing="1000" data-tada="false" data-animacoestotal="32" data-framesx="5" data-framesy="7"></div>
 </div>

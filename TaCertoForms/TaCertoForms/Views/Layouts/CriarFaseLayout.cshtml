@@ -9,60 +9,57 @@
     <link rel="stylesheet" href="~/tacertoforms/css/fonts.css" />
     <link rel="stylesheet" href="~/tacertoforms/css/tacertoforms.css" />
     <link rel="stylesheet" href="~/lib/animate/animate.min.css" />
-
 </head>
 <body>
     @await Html.PartialAsync("~/TaCertoForms/Views/Partial/_CookieConsentPartial.cshtml")
     <div id="logged-navbar">
-    <nav>
-        <div class="nav-wrapper">
-            <a id="header-text" class="brand-logo">@ViewBag.HeaderTexto</a>
-            <a href="#" data-target="mobileMenu" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-        </div>
-    </nav>
-</div>
-<ul class="sidenav" id="mobileMenu">
-    <li class="sidenav-header">
-        <a href="/TaCertoForms/TelaPrincipal" class="brand-logo">Tá Certo Forms</a>
-        <a class="user-stuff">
-            <img src="~/tacertoforms/images/EricCartman.jpg" alt="" class="circle">
-            <div class="user-info">
-                <h5 class="title">@ViewBag.userName</h5>
-                <h6>@ViewBag.userEmail</h6>
+        <nav>
+            <div class="nav-wrapper">
+                <a id="header-text" class="brand-logo">@ViewBag.HeaderTexto</a>
+                <a href="#" data-target="mobileMenu" class="sidenav-trigger"><i class="material-icons">menu</i></a>
             </div>
-            
-        </a>
-    </li>
-    <div class="divider"></div>
-    <li><a href="/TaCertoForms/Menu/?op=1">Minhas Fases</a></li>
-    <div class="divider"></div>
-    <li><a href="/TaCertoForms/Menu/?op=2">Configurações</a></li>
-    <div class="divider"></div>
-    <li><a href="/TaCertoForms/Menu/?op=3">Sobre</a></li>
-    <div class="divider"></div>
-    <li><a href="/TaCertoForms/Menu/?op=4">Sair</a></li>
-</ul>
+        </nav>
+    </div>
+    <ul class="sidenav" id="mobileMenu">
+        <li class="sidenav-header">
+            <a href="/TaCertoForms/TelaPrincipal" class="brand-logo">Tá Certo Forms</a>
+            <a class="user-stuff">
+                <img src="~/tacertoforms/images/EricCartman.jpg" alt="" class="circle">
+                <div class="user-info">
+                    <h5 class="title">@ViewBag.userName</h5>
+                    <h6>@ViewBag.userEmail</h6>
+                </div>
+            </a>
+        </li>
+        <div class="divider"></div>
+        <li><a href="/TaCertoForms/Menu/?op=1">Minhas Fases</a></li>
+        <div class="divider"></div>
+        <li><a href="/TaCertoForms/Menu/?op=2">Configurações</a></li>
+        <div class="divider"></div>
+        <li><a href="/TaCertoForms/Menu/?op=3">Sobre</a></li>
+        <div class="divider"></div>
+        <li><a href="/TaCertoForms/Menu/?op=4">Sair</a></li>
+    </ul>
 
-<!--<div id="tipoForm" class="container center-align">-->
-    
-    	<div class="body-content">
-            @RenderBody()
+    <!--<div id="tipoForm" class="container center-align">-->
+    <div class="body-content">
+        @RenderBody()
+    </div>
+    <div class="footer-copyright">
+        <hr />
+        <div class="container center-align"> 
+            <p>&copy; 2018 - tacertoforms</p>
         </div>
-       <div class="footer-copyright">
-            <hr />
-            <div class="container center-align"> 
-                <p>&copy; 2018 - tacertoforms</p>
-            </div>
-       </div>
+    </div>
         
-        @await Html.PartialAsync("~/TaCertoForms/Views/Partial/_Toast.js.cshtml")
+    @await Html.PartialAsync("~/TaCertoForms/Views/Partial/_Toast.js.cshtml")
 
-        <script src="~/lib/jquery/dist/jquery.js"></script>
-        <script src="~/lib/materialize/js/materialize.min.js"></script>
-        <script src="~/tacertoforms/js/tacertoforms.js"></script>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/materialize/js/materialize.min.js"></script>
+    <script src="~/tacertoforms/js/tacertoforms.js"></script>
         
-        @await Html.PartialAsync("~/TaCertoForms/Views/Partial/_ScriptCriarFase.cshtml")
-        @await Html.PartialAsync("~/TaCertoForms/Views/Partial/_ChecaEditandoFase.js.cshtml")
+    @await Html.PartialAsync("~/TaCertoForms/Views/Partial/_ScriptCriarFase.cshtml")
+    @await Html.PartialAsync("~/TaCertoForms/Views/Partial/_ChecaEditandoFase.js.cshtml")
 
     @RenderSection("Scripts", required: false)
 </body>

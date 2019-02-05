@@ -11,51 +11,48 @@
             <div class="row card-panel teal lighten-2">
                 <h5 class="titulo-questao">Questão 1</h5>
             </div>
-                        <div class="row">
-                                <div class="input-field col s6">
-                                        <i class="material-icons prefix">add_circle</i>
-                                        <input placeholder="ex: Cambito" id="palavraText" type="text" class="validate" onkeyup
-                                        ="trocaTextoPalavra(this.value);">
-                                        <label for="palavraText">Palavra</label>
-                                </div>
-                                <label>
-                                    <input name="group1" type="radio" checked />
-                                    <span>Certo</span>
-                                </label>
-                                <label>
-                                    <input name="group1" type="radio" />
-                                    <span>Errado</span>
-                                </label>
-                        </div>
-                        <div class="row">
-                                <div class="input-field col s12">
-                                <textarea id="textarea1" class="materialize-textarea"></textarea>
-                                <label for="textarea1">Significado (Opcional)</label>
-                                </div>
-                        </div>
-                        <div class="row">
-                                <div class="input-field col s12">
-                                <textarea id="textarea1" class="materialize-textarea"></textarea>
-                                <label for="textarea1">Dica (Opcional)</label>
-                                </div>
-                        </div>
-                        
-                        <div class="row">
-                            <div class="input-field col s12">
-                                <a class="waves-effect waves-light btn btn-large" onclick="TaCertoForms.Salvar(this, true);">Adicionar</a>
-                            </div>
-                        </div>
-                        <div class="divider"></div>
-                        <div class="left-align">
-                            Número de questões atual: 0
-                        </div>
-                </form>
+            <div class="row">
+                <div class="input-field col s6">
+                    <i class="material-icons prefix">add_circle</i>
+                    <input placeholder="ex: Cambito" id="palavraText" type="text" class="validate" onkeyup="trocaTextoPalavra(this.value);">
+                    <label for="palavraText">Palavra</label>
+                </div>
+                <label>
+                    <input name="group1" type="radio" checked />
+                    <span>Certo</span>
+                </label>
+                <label>
+                    <input name="group1" type="radio" />
+                    <span>Errado</span>
+                </label>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <textarea id="textarea1" class="materialize-textarea"></textarea>
+                    <label for="textarea1">Significado (Opcional)</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <textarea id="textarea1" class="materialize-textarea"></textarea>
+                    <label for="textarea1">Dica (Opcional)</label>
+                </div>
+            </div>
 
+            <div class="row">
+                <div class="input-field col s12">
+                    <a class="waves-effect waves-light btn btn-large" onclick="TaCertoForms.Salvar(this, true);">Adicionar</a>
+                </div>
+            </div>
+            <div class="divider"></div>
+            <div class="left-align">
+                Número de questões atual: 0
+            </div>
+        </form>
     </div>
 
     <div id="telaNormalAndHardcore" class="col s12 m4 l4 hide-on-small-only">
         <iframe id="exploradorlIframe" src="~/TaCertoForms/ChamarIframe?id=4" frameborder="0"></iframe>
-         <div onclick="M.toast({html: 'Esse é apenas um exemplo de como ficará no jogo.', classes: 'rounded red lighten-1'})"  class="ghostDivJustForClick">
-        </div>
+        <div onclick="M.toast({html: 'Esse é apenas um exemplo de como ficará no jogo.', classes: 'rounded red lighten-1'})"  class="ghostDivJustForClick"></div>
     </div>
 </div>

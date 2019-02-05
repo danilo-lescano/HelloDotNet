@@ -10,56 +10,59 @@
             <div class="row card-panel teal lighten-2">
                 <h5 class="titulo-questao">Questão 1</h5>
             </div>
-                        <div class="row">
-                                <div class="input-field col s6">
-                                        <i class="material-icons prefix">add_circle</i>
-                                        <input placeholder="ex: Cambito" id="palavraText" name="palavraText" type="text" class="validate" onkeyup="ScriptsCriarFaseNormal.trocaTextoPalavra(this.value);" onfocus="ScriptsCriarFaseNormal.trocaTextoPalavra(this.value);">
-                                        <label for="palavraText">Palavra</label>
-                                </div>
-                                <label>
-                                    <input id="certo" name="alternativaPalavra" type="radio" checked />
-                                    <span>Certo</span>
-                                </label>
-                                <label>
-                                    <input id="errado" name="alternativaPalavra" type="radio" />
-                                    <span>Errado</span>
-                                </label>
-                        </div>
-                        <div class="row">
-                                <div class="input-field col s12">
-                                <textarea id="textoSignificado" class="materialize-textarea"></textarea>
-                                <label for="textoSignificado">Significado (Opcional)</label>
-                                </div>
-                        </div>
-                        <div class="row">
-                                <div class="input-field col s12">
-                                <textarea id="textoDica" class="materialize-textarea"></textarea>
-                                <label for="textoDica">Dica (Opcional)</label>
-                                </div>
-                        </div>
+            <div class="row">
+                <div class="input-field col s6">
+                    <i class="material-icons prefix">add_circle</i>
+                    <input placeholder="ex: Cambito" id="palavraText" name="palavraText" type="text" class="validate" onkeyup="ScriptsCriarFaseNormal.trocaTextoPalavra(this.value);" onfocus="ScriptsCriarFaseNormal.trocaTextoPalavra(this.value);">
+                    <label for="palavraText">Palavra</label>
+                </div>
+                <label>
+                    <input id="certo" name="alternativaPalavra" type="radio" checked />
+                    <span>Certo</span>
+                </label>
+                <label>
+                    <input id="errado" name="alternativaPalavra" type="radio" />
+                    <span>Errado</span>
+                </label>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <textarea id="textoSignificado" class="materialize-textarea"></textarea>
+                    <label for="textoSignificado">Significado (Opcional)</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <textarea id="textoDica" class="materialize-textarea"></textarea>
+                    <label for="textoDica">Dica (Opcional)</label>
+                </div>
+            </div>
                         
-                        <div class="row">
-                            <!--<div class="input-field col s12">
-                               <a class="waves-effect waves-light btn" onclick="ScriptsCriarFaseNormal.addPalavra()">Adicionar</a>
-                            </div>-->
-                            <button id="botaoAdd" class="btn waves-effect waves-light tooltipped" data-position="bottom" data-tooltip="Clique aqui para adicionar uma nova palavra na fase" type="submit" name="action" onclick="ScriptsCriarFaseNormal.addPalavra()">Adicionar palavra
-                                <i id="iconeAdd" class="material-icons right">add</i>
-                            </button>
-                            <button id="botaoEdit" class="btn waves-effect waves-light ghostElement tooltipped" data-position="bottom" data-tooltip="Clique aqui para editar a palavra selecionada" type="submit" name="action" onclick="ScriptsCriarFaseNormal.addPalavra()">Editar palavra<i id="iconeAdd" class="material-icons right">edit</i>
-                            </button>
-                            <button id="botaoApagar" class="btn waves-effect waves-light red ghostElement tooltipped" data-position="bottom" data-tooltip="Clique aqui para remover a palavra selecionada" type="submit" name="action" onclick="ScriptsCriarFaseNormal.apagarPalavra()">Remover palavra<i id="iconeAdd" class="material-icons right">clear</i>
-                            </button>
-                            <button id="botaoSave" class="btn waves-effect waves-light ghostElement right blue tooltipped" data-position="bottom" data-tooltip="Clique aqui para salvar a fase atual" type="submit" name="action" onclick="ScriptsCriarFaseNormal.salvarFase()">Salvar fase<i id="iconeAdd" class="material-icons right">save</i>
-                            </button>
-                        </div>
-                        <div class="divider"></div>
-                        <div class="left-align">
-                            <h6>Número de questões atual: <span id="numeroDePalavras">0</span></h6>
-                        </div>
-                        <div id="palavrasAdicionadas" class="left-align">
-                            <h6>Palavras adicionadas:</h6>
-                        </div>
-                </div>   
+            <div class="row">
+                <!--<div class="input-field col s12">
+                    <a class="waves-effect waves-light btn" onclick="ScriptsCriarFaseNormal.addPalavra()">Adicionar</a>
+                </div>-->
+                <button id="botaoAdd" class="btn waves-effect waves-light tooltipped" data-position="bottom" data-tooltip="Clique aqui para adicionar uma nova palavra na fase" type="submit" name="action" onclick="ScriptsCriarFaseNormal.addPalavra()">
+                    Adicionar palavra<i id="iconeAdd" class="material-icons right">add</i>
+                </button>
+                <button id="botaoEdit" class="btn waves-effect waves-light ghostElement tooltipped" data-position="bottom" data-tooltip="Clique aqui para editar a palavra selecionada" type="submit" name="action" onclick="ScriptsCriarFaseNormal.addPalavra()">
+                    Editar palavra<i id="iconeAdd" class="material-icons right">edit</i>
+                </button>
+                <button id="botaoApagar" class="btn waves-effect waves-light red ghostElement tooltipped" data-position="bottom" data-tooltip="Clique aqui para remover a palavra selecionada" type="submit" name="action" onclick="ScriptsCriarFaseNormal.apagarPalavra()">
+                    Remover palavra<i id="iconeAdd" class="material-icons right">clear</i>
+                </button>
+                <button id="botaoSave" class="btn waves-effect waves-light ghostElement right blue tooltipped" data-position="bottom" data-tooltip="Clique aqui para salvar a fase atual" type="submit" name="action" onclick="ScriptsCriarFaseNormal.salvarFase()">
+                    Salvar fase<i id="iconeAdd" class="material-icons right">save</i>
+                </button>
+            </div>
+            <div class="divider"></div>
+            <div class="left-align">
+                <h6>Número de questões atual: <span id="numeroDePalavras">0</span></h6>
+            </div>
+            <div id="palavrasAdicionadas" class="left-align">
+                <h6>Palavras adicionadas:</h6>
+            </div>
+        </div>   
     </div>
     
         

@@ -3,12 +3,9 @@
 }
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
-<div class="row noMargin rowParaFixarAltura"> 
-
-</div>
-        <div class="row noMargin">
-    <div class=" col xl3 l3 m2">
-    </div>
+<div class="row noMargin rowParaFixarAltura"></div>
+<div class="row noMargin">
+    <div class=" col xl3 l3 m2"></div>
     <div class="rowPrincipalDoLogin col xl6 l6 m8 s12">
         <div class="imagensDoLogin">
             <img id="loginImg" src="~/tacertoforms/images/panel.png" alt="">
@@ -36,19 +33,19 @@
         <div id="loginForm" class="container">
             <form class="col s12" action="@Url.Action("autenticar", "TaCertoForms")" method="post">
                 <div class="row emailRow">
-                <div class="input-field col s12">
-                    <i class="material-icons prefix">account_circle</i>
-                    <input id="email" type="email" name="email" class="validate">
-                    <label for="email">E-mail</label>
-                    <span class="helper-text" data-error="errado" data-success="correto">ex: seunome@gmail.com</span>
-                </div>
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">account_circle</i>
+                        <input id="email" type="email" name="email" class="validate">
+                        <label for="email">E-mail</label>
+                        <span class="helper-text" data-error="errado" data-success="correto">ex: seunome@gmail.com</span>
+                    </div>
                 </div>
                 <div class="row senhaRow">
-                <div class="input-field col s12">
-                    <i class="material-icons prefix">lock</i>
-                    <input id="password" type="password" name="password" class="validate">
-                    <label for="password">Senha</label>
-                </div>
+                    <div class="input-field col s12">
+                        <i class="material-icons prefix">lock</i>
+                        <input id="password" type="password" name="password" class="validate">
+                        <label for="password">Senha</label>
+                    </div>
                 </div>
                 <div class="row lembraRow">
                     <p>
@@ -64,10 +61,11 @@
                     </p>	
                 </div>
                 <div class="row right-align buttonRow">
-                <div class="input-field col s12">
-                    <button class="btn waves-effect waves-light" type="submit" name="action">
-                        Autenticar
-                    </button>
+                    <div class="input-field col s12">
+                        <button class="btn waves-effect waves-light" type="submit" name="action">
+                            Autenticar
+                        </button>
+                    </div>
                 </div>
             </form>
         </div>

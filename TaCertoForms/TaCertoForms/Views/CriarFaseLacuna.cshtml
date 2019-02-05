@@ -12,10 +12,9 @@
                 <h5 class="titulo-questao">Questão 1</h5>
             </div>
             <div class="row">
-                    <div class="input-field col s12">
-                    <div contenteditable="true" id="lacunaText" class="cloneTextArea" onkeyup="ScriptsCriarFaseLacuna.trocaFraseLacuna(this.innerHTML);" onfocus="ScriptsCriarFaseLacuna.focusOnMe(this,true);" onfocusout="ScriptsCriarFaseLacuna.focusOnMe(this,false);">
-                    </div>
-                    </div>
+                <div class="input-field col s12">
+                    <div contenteditable="true" id="lacunaText" class="cloneTextArea" onkeyup="ScriptsCriarFaseLacuna.trocaFraseLacuna(this.innerHTML);" onfocus="ScriptsCriarFaseLacuna.focusOnMe(this,true);" onfocusout="ScriptsCriarFaseLacuna.focusOnMe(this,false);"></div>
+                </div>
             </div>
 
             <div class="row">
@@ -23,7 +22,7 @@
                     <textarea id="newLacunaText" class="materialize-textarea" data-length="26"></textarea>
                     <label for="newLacunaText">Lacunas erradas</label>
                 </div>
-                
+
                 <div class="input-field col s1">
                     <a class="waves-effect waves-light btn btn-large" onclick="ScriptsCriarFaseLacuna.addLacunaErrada();">+</a>
                 </div>
@@ -37,18 +36,18 @@
                 </div>
             </div>
             <div class="row">
-                    <div class="input-field col s12">
+                <div class="input-field col s12">
                     <textarea id="textoSignificado" class="materialize-textarea"></textarea>
                     <label for="textoSignificado">Significado (Opcional)</label>
-                    </div>
+                </div>
             </div>
             <div class="row">
-                    <div class="input-field col s12">
+                <div class="input-field col s12">
                     <textarea id="textoDica" class="materialize-textarea"></textarea>
                     <label for="textoDica">Dica (Opcional)</label>
-                    </div>
+                </div>
             </div>
-            
+
             <div class="row">
                 <div class="input-field col s12">
                     <a class="waves-effect waves-light btn btn-large" onclick="ScriptsCriarFaseLacuna.addDesafio(this, true);">Adicionar</a>
@@ -56,17 +55,14 @@
             </div>
             <div class="divider"></div>
             <div class="left-align">
-                Número de questões atual:<span id="numeroDeQuestoes">0</span></h6>
+                Número de questões atual:<span id="numeroDeQuestoes">0</span>
             </div>
-            <div id="questoesAdicionadas" class="left-align">
-            
-            </div>
+            <div id="questoesAdicionadas" class="left-align"></div>
         </form>
     </div>
 
     <div id="telaNormalAndHardcore" class="col s12 m4 l4 hide-on-small-only">
         <iframe id="lacunaIframe" src="~/TaCertoForms/ChamarIframe?id=2" frameborder="0"></iframe>
-        <!--<div onclick="M.toast({html: 'Esse é apenas um exemplo de como ficará no jogo.', classes: 'rounded red lighten-1'})"  class="ghostDivJustForClick">
-        </div>--> 
-   </div>
+        <!--<div onclick="M.toast({html: 'Esse é apenas um exemplo de como ficará no jogo.', classes: 'rounded red lighten-1'})"  class="ghostDivJustForClick"></div>--> 
+    </div>
 </div>

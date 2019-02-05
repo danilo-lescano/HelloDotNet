@@ -18,26 +18,24 @@
 	<!-- conteudo do modal-->
 	<div class="modalWrapper">
 		<div class="centerPanel">
-				<h4>Explicação</h4>
-				<h6>Aqui vai a explicação da questão que você errou</h6>
-				<img class="modalBtn" onclick="TaCerto.Controladora.Jogo.Geral.showMeMeuErro(this, false);" src="~/tacertoforms/images/voltar_ao_jogo.png" alt="Botão voltar ao jogo">
+			<h4>Explicação</h4>
+			<h6>Aqui vai a explicação da questão que você errou</h6>
+			<img class="modalBtn" onclick="TaCerto.Controladora.Jogo.Geral.showMeMeuErro(this, false);" src="~/tacertoforms/images/voltar_ao_jogo.png" alt="Botão voltar ao jogo">
 		</div>
-		
 	</div>
 </div>
 
 <!-- SIGNIFICADO MODAL -->
 <div id="significadoModal" class="animated fadeIn" onclick="TaCerto.Controladora.Jogo.Geral.showMeOSignificado(this, false);">
-		<!-- conteudo do modal-->
-		<div class="modalWrapper">
-			<div class="centerPanel">
-					<h4>Significado</h4>
-					<h6>Aqui vai o significado da palavra que você está</h6>
-					<img class="modalBtn" onclick="TaCerto.Controladora.Jogo.Geral.showMeOSignificado(this, false);" src="~/tacertoforms/images/voltar_ao_jogo.png" alt="Botão voltar ao jogo">
-			</div>
-			
+	<!-- conteudo do modal-->
+	<div class="modalWrapper">
+		<div class="centerPanel">
+			<h4>Significado</h4>
+			<h6>Aqui vai o significado da palavra que você está</h6>
+			<img class="modalBtn" onclick="TaCerto.Controladora.Jogo.Geral.showMeOSignificado(this, false);" src="~/tacertoforms/images/voltar_ao_jogo.png" alt="Botão voltar ao jogo">
 		</div>
 	</div>
+</div>
 
 <!-- MODAL start -->
 <div id="despauseModal" class="modalBlur">
@@ -78,10 +76,9 @@
 		</div>
 	</div>
 	<div class="h10">
-		<div id="achievementPanel" onclick="TaCerto.Controladora.MenuConquistas.SaiDaqui(this);" class="achievementWrapper">
-		</div>
+		<div id="achievementPanel" onclick="TaCerto.Controladora.MenuConquistas.SaiDaqui(this);" class="achievementWrapper"></div>
 		<div id="botaoInformacao">
-				<img onclick="TaCerto.Controladora.Jogo.Geral.showMeMeuErro(this, true);" src="~/tacertoforms/images/botaoInformacao2.png" alt="botão mostra a questão que errou">
+			<img onclick="TaCerto.Controladora.Jogo.Geral.showMeMeuErro(this, true);" src="~/tacertoforms/images/botaoInformacao2.png" alt="botão mostra a questão que errou">
 		</div>
 		<div id="botaoSignificado">
 			<img onclick="TaCerto.Controladora.Jogo.Geral.showMeOSignificado(this, true);" src="~/tacertoforms/images/botaoSignificado.png" alt="botão mostra o significado da palavra">
@@ -101,31 +98,33 @@
 	</div>
 
 	<!--conteudo do tipo de jogo abaixo-->
-	<div id="JogoTipo"><div class="mesaAur">
-	<div class="aurTopWrap">
-		<div class="aurTopBGWrap">
-			<img src="~/tacertoforms/images/card_normal.svg" class="aurTopBGImg">
-		</div>
-		<div class="aurPhraseWrap" id="aurPhraseWrap">vc pode vir aqui pfv</div>
-
-		<div class="aurTopContentWrap" id="aurTopContentWrap"></div>
-		<div class="aurCoinBtnWrap">
-
-			<div class="aurBtnWrapper">
-				<div class="aurBtnImgWrapper">
-					<img src="~/tacertoforms/images/aurSendBtn.svg" class="aurSendBtnImg" onclick="TaCerto.Controladora.Jogo.Aurelio.aurSendClick(this)">
+	<div id="JogoTipo">
+		<div class="mesaAur">
+			<div class="aurTopWrap">
+				<div class="aurTopBGWrap">
+					<img src="~/tacertoforms/images/card_normal.svg" class="aurTopBGImg">
 				</div>
-				<div class="aurBtnImgWrapper">
-					<img src="~/tacertoforms/images/aurEraseBtn.svg" class="aurEraseBtnImg" onclick="TaCerto.Controladora.Jogo.Aurelio.aurEraseClick(this)">
+				<div class="aurPhraseWrap" id="aurPhraseWrap">vc pode vir aqui pfv</div>
+
+				<div class="aurTopContentWrap" id="aurTopContentWrap"></div>
+				<div class="aurCoinBtnWrap">
+
+					<div class="aurBtnWrapper">
+						<div class="aurBtnImgWrapper">
+							<img src="~/tacertoforms/images/aurSendBtn.svg" class="aurSendBtnImg" onclick="TaCerto.Controladora.Jogo.Aurelio.aurSendClick(this)">
+						</div>
+						<div class="aurBtnImgWrapper">
+							<img src="~/tacertoforms/images/aurEraseBtn.svg" class="aurEraseBtnImg" onclick="TaCerto.Controladora.Jogo.Aurelio.aurEraseClick(this)">
+						</div>
+					</div>
 				</div>
+			</div>
+
+			<div class="aurBotWrap">
+				<div class="aurBotWordWrap" id="aurBotWordWrap"><div class="aurWord" style="width: 47.5px; margin-right: 1.97917px; margin-left: 1.97917px;">?</div><div class="aurWord" style="width: 23.75px; margin-right: 1.97917px; margin-left: 1.97917px;">.</div><div class="aurWord" style="width: 23.75px; margin-right: 1.97917px; margin-left: 1.97917px;">,</div><div data-index="-1" class="aurWord" id="6aurWordBot" style="width: 118.75px; margin-right: 1.97917px; margin-left: 1.97917px;">palavra</div><div data-index="2" class="aurWord" id="2aurWordBot" style="width: 47.5px; margin-right: 1.97917px; margin-left: 1.97917px;">vir</div><div data-index="1" class="aurWord" id="1aurWordBot" style="width: 71.25px; margin-right: 1.97917px; margin-left: 1.97917px;">pode</div><div data-index="-1" class="aurWord" id="8aurWordBot" style="width: 118.75px;">palavra</div><div data-index="3" class="aurWord" id="3aurWordBot" style="width: 71.25px;">aqui</div><div data-index="0" class="aurWord" id="0aurWordBot" style="width: 71.25px;">Você</div><div data-index="4" class="aurWord" id="4aurWordBot" style="width: 71.25px;">por</div><div data-index="-1" class="aurWord" id="7aurWordBot" style="width: 118.75px;">palavra</div><div data-index="5" data-apendice="?" class="aurWord" id="5aurWordBot" style="width: 95px;">favor</div></div>
 			</div>
 		</div>
 	</div>
-
-	<div class="aurBotWrap">
-		<div class="aurBotWordWrap" id="aurBotWordWrap"><div class="aurWord" style="width: 47.5px; margin-right: 1.97917px; margin-left: 1.97917px;">?</div><div class="aurWord" style="width: 23.75px; margin-right: 1.97917px; margin-left: 1.97917px;">.</div><div class="aurWord" style="width: 23.75px; margin-right: 1.97917px; margin-left: 1.97917px;">,</div><div data-index="-1" class="aurWord" id="6aurWordBot" style="width: 118.75px; margin-right: 1.97917px; margin-left: 1.97917px;">palavra</div><div data-index="2" class="aurWord" id="2aurWordBot" style="width: 47.5px; margin-right: 1.97917px; margin-left: 1.97917px;">vir</div><div data-index="1" class="aurWord" id="1aurWordBot" style="width: 71.25px; margin-right: 1.97917px; margin-left: 1.97917px;">pode</div><div data-index="-1" class="aurWord" id="8aurWordBot" style="width: 118.75px;">palavra</div><div data-index="3" class="aurWord" id="3aurWordBot" style="width: 71.25px;">aqui</div><div data-index="0" class="aurWord" id="0aurWordBot" style="width: 71.25px;">Você</div><div data-index="4" class="aurWord" id="4aurWordBot" style="width: 71.25px;">por</div><div data-index="-1" class="aurWord" id="7aurWordBot" style="width: 118.75px;">palavra</div><div data-index="5" data-apendice="?" class="aurWord" id="5aurWordBot" style="width: 95px;">favor</div></div>
-	</div>
-</div></div>
 	<div id="block" data-timing="1000" data-tada="false" data-animacoestotal="21" data-framesx="4" data-framesy="6"></div>
 	<div id="vassoura" data-timing="1000" data-tada="false" data-animacoestotal="32" data-framesx="5" data-framesy="7"></div>
 </div>
