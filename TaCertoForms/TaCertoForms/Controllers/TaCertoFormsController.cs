@@ -31,29 +31,6 @@ namespace tacertoforms_dotnet.Controllers{
             else
                 return RedirectToAction("Login");
         }
-
-        //Menu: recebe uma operação(op) e redireciona para sua respectiva página
-        //Tipo: Redirecionador
-        //OBSERVAÇÕES:
-        //Estado logado = sim
-        //op = 1 - MinhasFases; op = 2 - Configuracoes; op = 3 - Sobre; op = 4 - logout; op invalido redireciona para index
-        public IActionResult Menu(int op){
-            Start();
-
-            if(!usuarioManager.isLoged())
-                return RedirectToAction("Index");
-
-            if(op == 1)
-                return RedirectToAction("MinhasFases");
-            else if(op == 2)
-                return RedirectToAction("Configuracoes");
-            else if(op == 3)
-                return RedirectToAction("Sobre");
-            else if(op == 4)
-                return RedirectToAction("Logout");
-            else
-                return RedirectToAction("Index");
-        }
        
         //Login: renderiza a view do login
         //Tipo: Reder
@@ -107,8 +84,6 @@ namespace tacertoforms_dotnet.Controllers{
                 return RedirectToAction("Index");
 
             ViewBag.HeaderTexto = "Tá Certo Forms";
-            //for(int i = 0; i < 400; i++)
-            //    Console.WriteLine(_contexto.Fases.ToList());
             return View("~/TaCertoForms/Views/TelaPrincipal.cshtml");
         }
 
@@ -210,6 +185,9 @@ namespace tacertoforms_dotnet.Controllers{
         //Precisa carregar as opções do usuario se é que essa página vai existir
         public IActionResult Configuracoes(){
             Start();
+            if(!usuarioManager.isLoged())
+                return RedirectToAction("Index");
+
             ViewBag.HeaderTexto = "Configurações";
             return View("~/TaCertoForms/Views/Configuracoes.cshtml");
         }

@@ -217,7 +217,7 @@ function fetchTCF(){
 //Toast!
 var Toast = Toast || null;
 document.addEventListener("DOMContentLoaded", ()=>{
-    console.log("eita  " + Toast)
+    console.log("toast message  " + Toast)
     if(Toast !== null)
         M.toast({html: Toast, classes: 'rounded green lighten-1'});
 });

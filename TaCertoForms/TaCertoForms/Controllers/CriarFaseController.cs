@@ -31,12 +31,42 @@ namespace tacertoforms_dotnet.Controllers{
      
             bool _flag = _faseManager.SalvarFaseNormal(_fase); // Adiciona a fase na _faseManager
 
+
             return Json(new {
-                state = 0,
-                msg = string.Empty,
-                flag = _flag
+                id = fase != null ? fase.Id.ToString() : "null",
+                usuarioId = fase != null ? fase.UsuarioId.ToString() : "null",
+                chave = fase != null ? fase.Chave.ToString() : "null",
+                idTipoFase = fase != null ? fase.IdTipoFase.ToString() : "null",
+                descricao = fase != null ? fase.Descricao.ToString() : "null",
+                serialization = fase != null ? JsonConvert.SerializeObject(fase) : "null"
             });
         }
+
+        [HttpPost]
+        public string teste([FromBody] string rawString){
+            return rawString + "\n end";
+/*
+var json = JSON.stringify(
+fase = { // Dados da fase
+    id: 123,
+    usuarioId: 13,
+    chave: "key13",
+    idTipoFase: 0,
+    descricao: "duas fase",
+    desafiosNormal: []
+});
+
+var xhr = new XMLHttpRequest();
+xhr.open("POST", "/CriarFase/teste", true);
+//xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+xhr.setRequestHeader('Content-type','application/json');
+xhr.onload = ()=>{
+    console.log(xhr.response);
+}
+xhr.send(json);
+*/
+        }
+        
 
         //Logout: realiza o logout do usuario
         //Tipo: Ação
