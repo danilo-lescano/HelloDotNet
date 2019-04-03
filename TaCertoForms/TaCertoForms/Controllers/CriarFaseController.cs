@@ -38,7 +38,8 @@ namespace tacertoforms_dotnet.Controllers{
                 chave = fase != null ? fase.Chave.ToString() : "null",
                 idTipoFase = fase != null ? fase.IdTipoFase.ToString() : "null",
                 descricao = fase != null ? fase.Descricao.ToString() : "null",
-                serialization = fase != null ? JsonConvert.SerializeObject(fase) : "null"
+                serialization = fase != null ? JsonConvert.SerializeObject(fase) : "null",
+                flag = fase != null ? true : false,
             });
         }
 
