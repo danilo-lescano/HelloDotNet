@@ -8,12 +8,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
-namespace TaCertoForms
-{
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
+namespace TaCertoForms{
+    public class Program{
+        public static void Main(string[] args){
             CreateWebHostBuilder(args).Build().Run();
         }
 
