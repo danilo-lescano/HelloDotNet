@@ -5,8 +5,10 @@ using System.Collections.Generic;
 namespace Util{
     public class MultitonSession{
         private static List<Session> sessionList = new List<Session>();
+        private static bool isStarted = false;
         public static Session GetSession(string sessionKey){
-            if(sessionList.Count == 0){
+            if(!isStarted){
+                isStarted = true;
                 SessionThread obj = new SessionThread(sessionList); 
                 Thread thr = new Thread(new ThreadStart(obj.LimparSessoesVencidas)); 
                 thr.Start();

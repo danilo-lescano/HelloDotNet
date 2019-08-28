@@ -8,7 +8,7 @@ using TaCertoForms.Models;
 using TaCertoForms.Util.Session;
 
 namespace TaCertoForms.Controllers{
-    public class LoginController : Controller{
+    public class LoginController : SessionController{
         public IActionResult Index(){
             return View();
         }
