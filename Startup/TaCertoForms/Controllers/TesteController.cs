@@ -7,14 +7,17 @@ using Microsoft.AspNetCore.Mvc;
 using TaCertoForms.Models;
 
 namespace TaCertoForms.Controllers{
-    public class HomeController : Controller{
-        public IActionResult Index(){
+    public class TesteController : Controller{
+        public IActionResult Login(){
             return View();
         }
-
-        public IActionResult Privacy(){
+        public IActionResult Sobre(){
             return View();
         }
+        public IActionResult Teste(){
+            return View(new List<string> { "thais", "danilo"});
+        }
+        
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error(){

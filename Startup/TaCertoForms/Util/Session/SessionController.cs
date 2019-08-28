@@ -5,12 +5,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Runtime.Serialization.Json;
 using Microsoft.AspNetCore.Mvc;
-using tacertoforms_dotnet.Models;
 using TaCertoForms.Models;
 using Microsoft.AspNetCore.Http;
 
-namespace Util{
-    public class BaseController : Controller{
+namespace TaCertoForms.Util.Session{
+    public class SessionController : Controller{
         protected Session Session { get; set; }
 
         //GetSession - verifica se client possui sessão e cria uma caso não tenha

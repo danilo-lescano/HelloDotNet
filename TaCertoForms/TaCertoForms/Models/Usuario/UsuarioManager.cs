@@ -4,7 +4,7 @@ using TaCertoForms.Models;
 using Util;
 namespace TaCertoForms.Models{
     public class UsuarioManager{
-        public MultitonSession Session { get; set; }
+        public Session Session { get; set; }
         private UsuarioFactory usuarioFactory = new UsuarioFactory();
         public bool AutenticarLogin(string email, string senha){
             Usuario usuario = usuarioFactory.GetByEmailAndPassword(email, senha);

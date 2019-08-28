@@ -1,20 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
+using System.Diagnostics;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using TaCertoForms.Models;
+using TaCertoForms.Util.Session;
 
 namespace TaCertoForms.Controllers{
-    public class DemoAdminController : Controller{
-        public IActionResult Login(){
+    public class LoginController : Controller{
+        public IActionResult Index(){
             return View();
         }
-        public IActionResult Sobre(){
+
+        public IActionResult Privacy(){
             return View();
         }
-        
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error(){

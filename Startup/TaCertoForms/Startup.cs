@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -14,6 +14,8 @@ namespace TaCertoForms{
     public class Startup{
         public Startup(IConfiguration configuration){
             Configuration = configuration;
+            for(int i = 0; i < 100; i++)
+                Console.WriteLine(configuration.GetConnectionString("DefaultConnection"));
         }
 
         public IConfiguration Configuration { get; }
@@ -47,7 +49,7 @@ namespace TaCertoForms{
             app.UseMvc(routes =>{
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Login}/{action=Index}/{id?}");
             });
         }
     }

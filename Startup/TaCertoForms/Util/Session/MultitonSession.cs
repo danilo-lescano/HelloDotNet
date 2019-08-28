@@ -2,7 +2,7 @@ using System;
 using System.Threading;
 using System.Collections.Generic;
 
-namespace Util{
+namespace TaCertoForms.Util.Session{
     public class MultitonSession{
         private static List<Session> sessionList = new List<Session>();
         public static Session GetSession(string sessionKey){
@@ -45,8 +45,9 @@ namespace Util{
                 while(true){
                     Thread.Sleep(1000);
                     for (int i = sessionList.Count - 1; i >= 0; i--)
-                        if(sessionList[i].LastUpdate.AddMinutes(30) <= DateTime.Now)
+                        if(sessionList[i].LastUpdate.AddMinutes(30) <= DateTime.Now){
                             MultitonSession.RemoveSession(sessionList[i]);
+                        }
                 }
             }
         }

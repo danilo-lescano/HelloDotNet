@@ -5,7 +5,7 @@ using Util;
 
 namespace TaCertoForms.Models{
     public class DesafioDeFaseManager{
-        public MultitonSession Session { get; set; }
+        public Session Session { get; set; }
         private DesafioDeFaseFactory desafioFactory = new DesafioDeFaseFactory();
 
         public List<IDesafioDeFase> CarregaDesafios(int idFase){

@@ -5,7 +5,7 @@ using Util;
 
 namespace TaCertoForms.Models{
     public class FaseManager{
-        public MultitonSession Session { get; set; }
+        public Session Session { get; set; }
         private FaseFactory faseFactory = new FaseFactory();
         public List<Fase> CarregaFases(){
             List<Fase> listaDeFases = null;
