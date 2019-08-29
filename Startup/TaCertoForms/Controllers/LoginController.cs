@@ -6,14 +6,26 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using TaCertoForms.Models;
 using TaCertoForms.Util.Session;
+using TaCertoForms.Util.Coercion;
 
 namespace TaCertoForms.Controllers{
     public class LoginController : SessionController{
         public IActionResult Index(){
-            return View();
+            GetSession();
+
+            Console.WriteLine(Session["IsLogged"]);
+
+            if(Coercion.ToBool(Session["IsLogged"]) == true){
+                Session["IsLogged"] = false;
+                return RedirectToAction("Privacy", "Login");
+            }
+            else{
+                Session["IsLogged"] = true;
+                return View();
+            }
         }
 
-        public IActionResult Privacy(){
+        public IActionResult About(){
             return View();
         }
 

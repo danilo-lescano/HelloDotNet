@@ -47,9 +47,8 @@ namespace TaCertoForms.Util.Session{
                 while(true){
                     Thread.Sleep(1000);
                     for (int i = sessionList.Count - 1; i >= 0; i--)
-                        if(sessionList[i].LastUpdate.AddMinutes(30) <= DateTime.Now){
-                            MultitonSession.RemoveSession(sessionList[i]);
-                        }
+                        if(sessionList[i].LastUpdate.AddMinutes(30) <= DateTime.Now)
+                            sessionList.RemoveAt(i);
                 }
             }
         }

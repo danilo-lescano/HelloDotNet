@@ -14,8 +14,7 @@ namespace TaCertoForms{
     public class Startup{
         public Startup(IConfiguration configuration){
             Configuration = configuration;
-            for(int i = 0; i < 100; i++)
-                Console.WriteLine(configuration.GetConnectionString("DefaultConnection"));
+            //Console.WriteLine(configuration.GetConnectionString("DefaultConnection"));
         }
 
         public IConfiguration Configuration { get; }
