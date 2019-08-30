@@ -12,21 +12,22 @@ namespace TaCertoForms.Controllers{
     public class LoginController : SessionController{
         public IActionResult Index(){
             GetSession();
-
-            Console.WriteLine(Session["IsLogged"]);
-
-            if(Coercion.ToBool(Session["IsLogged"]) == true){
-                Session["IsLogged"] = false;
-                return RedirectToAction("Privacy", "Login");
-            }
-            else{
-                Session["IsLogged"] = true;
-                return View();
-            }
+            return View();
         }
 
         public IActionResult About(){
+            GetSession();
             return View();
+        }
+
+        public IActionResult Logar(){
+            GetSession();
+
+            Session["IsLogged"] = true;
+            Session["Email"] = Request.Form["email"];
+            Console.WriteLine(Session["Email"]);
+            
+            return RedirectToAction("Privacy", "Login");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

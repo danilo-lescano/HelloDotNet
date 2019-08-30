@@ -77,5 +77,9 @@ namespace TaCertoForms.Util.Session{
         public void Remove(string key){
             SessionVariables.Remove(key);
         }
+
+        public void Delete(){
+            MultitonSession.RemoveSession(this);
+        }
     }
 }

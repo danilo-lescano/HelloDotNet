@@ -5,8 +5,10 @@
 
 <div class="text-center">
     <h1 class="display-4">Login</h1>
-    <input type="email" placeholder="E-mail"><br>
-    <input type="password" placeholder="Senha"><br>
-    <a href="#">Esqueci minha senha</a><br>
-    <input type="button" value="Logar">
+    <form action="/Login/Logar" method="post">
+        <input type="email" name="email" placeholder="E-mail"><br>
+        <input type="password" name="password" placeholder="Senha"><br>
+        <a href="#">Esqueci minha senha</a><br>
+        <input type="submit" value="Logar">
+    </form>
 </div>
