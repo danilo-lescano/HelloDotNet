@@ -11,28 +11,51 @@ using TaCertoForms.Util.Coercion;
 namespace TaCertoForms.Controllers{
     public class LoginController : SessionController{
         public IActionResult Index(){
-            GetSession();
-            return View();
+            Start();
+            if(isUsuarioLogado()){
+                //redirecionar para admin, aluno, professor dependendo do perfil
+                return RedirectToAction("Index", Session["Perfil"]);
+            }
+            else{
+                //n tem login
+                return View();
+            }
         }
 
-        public IActionResult About(){
-            GetSession();
+        public IActionResult Sobre(){
+            Start();
             return View();
         }
 
         public IActionResult Logar(){
-            GetSession();
-
-            Session["IsLogged"] = true;
-            Session["Email"] = Request.Form["email"];
-            Console.WriteLine(Session["Email"]);
-            
-            return RedirectToAction("Privacy", "Login");
+            Start();
+            if(isUsuarioLogado()){
+                //redirecionar para admin, aluno, professor dependendo do perfil
+                return RedirectToAction("Index", Session["Perfil"]);
+            }
+            else{
+                Session["IsLogged"] = true;
+                Session["Email"] = Request.Form["email"];
+                Console.WriteLine(Session["Email"]);
+                
+                return RedirectToAction("Sobre", "Login");
+            }
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error(){
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+
+
+        private void Start(){
+            GetSession();
+        }
+        private bool isUsuarioLogado(){
+            if(Session["IsLogged"] != null && Coercion.ToBool(Session["IsLogged"]))
+                return true;
+            return false;
         }
     }
 }
