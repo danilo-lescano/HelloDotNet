@@ -10,5 +10,9 @@ namespace TaCertoFormsModel{
         string Serie { get; set; }
         string Periodo { get; set; }
         string Ano { get; set; }
+
+        Instituicao Instituicao { get; set; }
+        List<TurmaAluno> TurmaAlunoList { get; set; }
+        List<TurmaDisciplinaProfessor> TurmaDisciplinaProfessorList { get; set; }
     }
 }

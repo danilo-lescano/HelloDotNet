@@ -9,5 +9,7 @@ namespace TaCertoFormsModel{
         int IdInstituicao { get; set; }
         int NumeroDeLinceca { get; set; }
         string ValidadeLicenca { get; set; }
+
+        Instituicao Instituicao { get; set; }
     }
 }

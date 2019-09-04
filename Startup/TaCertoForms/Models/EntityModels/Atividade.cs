@@ -12,5 +12,9 @@ namespace TaCertoForms.Models{
         int NumeroTentativas { get; set; }
         bool IsAleatorio { get; set; }
         bool IsProva { get; set; }
+
+        TurmaDisciplinaProfessor TurmaDisciplinaProfessor { get; set; }
+        List<Questao> QuestoeList { get; set; }
+        List<AtividadeRespostaAluno> AtividadeRespostaAlunoList { get; set; }
     }
 }

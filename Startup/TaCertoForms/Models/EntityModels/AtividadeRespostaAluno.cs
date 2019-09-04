@@ -11,5 +11,9 @@ namespace TaCertoFormsModel{
         string DataEnvio { get; set; }
         float Nota { get; set; }
         string TempoTotal { get; set; }
+
+        Pessoa Aluno { get; set; }
+        Atividade Atividade { get; set; }
+        List<QuestaoRespostaALuno> QuestaoRespostaALunoList { get; set; }
     }
 }

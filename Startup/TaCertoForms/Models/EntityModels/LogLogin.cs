@@ -10,5 +10,7 @@ namespace TaCertoFormsModel{
         string HoraAcesso { get; set; }
         string Plataforma { get; set; }
         string DeviceId { get; set; }
+
+        Pessoa Pessoa { get; set; }
     }
 }

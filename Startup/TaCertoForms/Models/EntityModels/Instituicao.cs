@@ -11,5 +11,11 @@ namespace TaCertoFormsModel{
         string RazaoSocial { get; set; }
         string NomeFantasia { get; set; }
         string CNPJ { get; set; }
+
+        Endereco EnderecoCobranca { get; set; }
+        Endereco EnderecoPrincipal { get; set; }
+        List<Turma> TurmaList { get; set; }
+        List<Pessoa> PessoaList { get; set; }
+        List<Licenca> LicencaList { get; set; }
     }
 }

@@ -9,5 +9,7 @@ namespace TaCertoForms.Models{
         int IdTipoQuestao { get; set; }
         string Nome { get; set; }
         string Descricao { get; set; }
+
+        List<Questao> QuestaoList { get; set; }
     }
 }

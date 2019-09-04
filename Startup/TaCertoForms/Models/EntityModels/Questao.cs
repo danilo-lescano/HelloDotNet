@@ -12,5 +12,9 @@ namespace TaCertoForms.Models{
         string Enunciado { get; set; }
         string JsonQuestao { get; set; }
         int PesoNota { get; set; }
+
+        Atividade Atividade { get; set; }
+        TipoQuestao TipoQuestao { get; set; }
+        List<QuestaoRespostaAluno> QuestaoRespostaAlunoList { get; set; }
     }
 }

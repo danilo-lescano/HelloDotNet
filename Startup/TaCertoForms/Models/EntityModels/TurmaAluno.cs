@@ -8,5 +8,8 @@ namespace TaCertoForms.Models{
         int IdTurmaAluno { get; set; }
         int IdTurma { get; set; }
         int IdPessoa { get; set; }
+
+        Turma Turma { get; set; }
+        Pessoa Aluno { get; set; }
     }
 }

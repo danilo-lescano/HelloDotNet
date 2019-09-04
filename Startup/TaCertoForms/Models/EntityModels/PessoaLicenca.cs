@@ -3,10 +3,14 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore;
 namespace TaCertoForms.Models{
-    public class LicencaPessoa{
+    public class PessoaLicenca{
         [Key]
-        int IdLicencaPessoa { get; set; }
+        int IdPessoaLicenca { get; set; }
         int IdPessoa { get; set; }
+        int IdLicenca { get; set; }
         bool IsAtivo { get; set; }
+
+        Pessoa Pessoa { get; set; }
+        Licenca Licenca { get; set; }
     }
 }

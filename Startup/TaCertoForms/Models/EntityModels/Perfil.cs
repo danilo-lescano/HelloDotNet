@@ -8,5 +8,7 @@ namespace TaCertoForms.Models{
         int IdPerfil { get; set; }
         string Nome { get; set; }
         string Descricao { get; set; }
+
+        List<PerfilPessoa> PerfilPessoaList { get; set; }
     }
 }
