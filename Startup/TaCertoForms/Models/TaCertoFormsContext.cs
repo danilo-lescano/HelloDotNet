@@ -3,21 +3,28 @@ using Microsoft.EntityFrameworkCore;
 
 namespace TaCertoForms.Models{
     public class TaCertoFormsContext : DbContext { 
-        public DbSet<Acesso> Acessos { get; set; }
-        public DbSet<AcessoPessoa> AcessoPessoas { get; set; }
-        //public DbSet<Atividade> Atividades { get; set; }
-        //public DbSet<AtividadeResposta> AtividadeRespostas { get; set; }
+        public DbSet<Atividade> Atividades { get; set; }
+        public DbSet<AtividadeRespostaAluno> AtividadeRespostaAlunos { get; set; }
+        public DbSet<Disciplina> Disciplinas { get; set; }
+        public DbSet<DisciplinaProfessor> DisciplinaProfessors { get; set; }
+        public DbSet<Endereco> Enderecos { get; set; }
         public DbSet<Instituicao> Instituicaos { get; set; }
-        public DbSet<Materia> Materias { get; set; }
-        public DbSet<MateriaProfessor> MateriaProfessors { get; set; }
+        public DbSet<Licenca> Licencas { get; set; }
+        public DbSet<LogLogin> LogLogins { get; set; }
+        public DbSet<Midia> Midias { get; set; }
+        public DbSet<Perfil> Perfils { get; set; }
+        public DbSet<PerfilPessoa> PerfilPessoas { get; set; }
         public DbSet<Pessoa> Pessoas { get; set; }
-        //public DbSet<Questao> Questaos { get; set; }
-        //public DbSet<QuestaoResposta> QuestaoRespostas { get; set; }
-        //public DbSet<TipoQuestao> TipoQuestaos { get; set; }
+        public DbSet<PessoaLicenca> PessoaLicencas { get; set; }
+        public DbSet<Questao> Questaos { get; set; }
+        public DbSet<QuestaoRespostaAluno> QuestaoRespostaAlunos { get; set; }
+        public DbSet<TipoQuestao> TipoQuestaos { get; set; }
         public DbSet<Turma> Turmas { get; set; }
+        public DbSet<TurmaAluno> TurmaAlunos { get; set; }
+        public DbSet<TurmaDisciplinaProfessor> TurmaDisciplinaProfessors { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionBuilder){
-            optionBuilder.UseSqlServer(@"Server=localhost;Database=EFCore.Demo;Trusted_Connection=True;");
+            optionBuilder.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder){
             //---------------------------------ACESSO--------------------------------//
