@@ -36,8 +36,7 @@ namespace TaCertoForms.Controllers{
             else{
                 Session["IsLogged"] = true;
                 Session["Email"] = Request.Form["email"];
-                Console.WriteLine(Session["Email"]);
-                
+                Session["Password"] = Request.Form["password"];
                 return RedirectToAction("Sobre", "Login");
             }
         }

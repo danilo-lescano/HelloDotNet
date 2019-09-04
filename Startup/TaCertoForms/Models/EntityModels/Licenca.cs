@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore;
 namespace TaCertoFormsModel{
-    public class Turma{
+    public class Licenca{
         [Key]
-        int IdTurma { get; set; }
+        int IdLicenca { get; set; }
         int IdInstituicao { get; set; }
-        string Serie { get; set; }
-        string Periodo { get; set; }
-        string Ano { get; set; }
+        int NumeroDeLinceca { get; set; }
+        string ValidadeLicenca { get; set; }
     }
 }
