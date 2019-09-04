@@ -2,7 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore;
-namespace TaCertoFormsModel{
+
+namespace TaCertoForms.Models{
     public class AtividadeRespostaAluno{
         [Key]
         int IdAtividadeRespostaAluno { get; set; }
@@ -14,6 +15,6 @@ namespace TaCertoFormsModel{
 
         Pessoa Aluno { get; set; }
         Atividade Atividade { get; set; }
-        List<QuestaoRespostaALuno> QuestaoRespostaALunoList { get; set; }
+        List<QuestaoRespostaAluno> QuestaoRespostaAlunoList { get; set; }
     }
 }
