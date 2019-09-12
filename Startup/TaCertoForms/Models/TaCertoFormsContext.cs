@@ -1,8 +1,11 @@
 using System;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace TaCertoForms.Models{
-    public class TaCertoFormsContext : DbContext { 
+    public class TaCertoFormsContext : DbContext {
+        public IConfiguration Configuration { get; }
+
         public DbSet<Atividade> Atividades { get; set; }
         public DbSet<AtividadeRespostaAluno> AtividadeRespostaAlunos { get; set; }
         public DbSet<Disciplina> Disciplinas { get; set; }
@@ -24,123 +27,82 @@ namespace TaCertoForms.Models{
         public DbSet<TurmaDisciplinaProfessor> TurmaDisciplinaProfessors { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionBuilder){
-            optionBuilder.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
+            optionBuilder.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder){
-            //-------------------------------ATIVIDADE-------------------------------//
-            modelBuilder.Entity<Atividade>().ToTable("Atividade", schemaName: "TaCertoForms");
+            modelBuilder.HasDefaultSchema("TaCertoForms");
+            //-------------------------------ATIVIDADE-------------------------------
+            modelBuilder.Entity<Atividade>().ToTable("Atividade");
+            //modelBuilder.Entity<Atividade>()
+            //    .HasOne(a => a.TurmaDisciplinaProfessor)
+            //    .WithMany(tdp => tdp.AtividadeList)
+            //    .HasForeignKey(a => a.IdTurmaDisciplinaProfessor);
             //-------------------------------ATIVIDADE-------------------------------//
             //------------------------ATIVIDADE RESPOSTA ALUNO-----------------------//
-            modelBuilder.Entity<AtividadeRespostaAluno>().ToTable("AtividadeRespostaAluno", schemaName: "TaCertoForms");
+            modelBuilder.Entity<AtividadeRespostaAluno>().ToTable("AtividadeRespostaAluno");
+            //modelBuilder.Entity<AtividadeRespostaAluno>()
+            //    .HasOne(ara => ara.Aluno)
+            //    .WithMany(a => a.AtividadeRespostaAluno)
+            //    .HasForeignKey(ara => ara.IdAluno);
+            //modelBuilder.Entity<AtividadeRespostaAluno>()
+            //    .HasOne(ara => ara.Atividade)
+            //    .WithMany(ara => ara.AtividadeRespostaAluno)
+            //   .HasForeignKey(ara => ara.IdAtividade);
             //------------------------ATIVIDADE RESPOSTA ALUNO-----------------------//
             //-------------------------------DISCIPLINA------------------------------//
-            modelBuilder.Entity<Disciplina>().ToTable("Disciplina", schemaName: "TaCertoForms");
+            modelBuilder.Entity<Disciplina>().ToTable("Disciplina");
             //-------------------------------DISCIPLINA------------------------------//
             //--------------------------DISCIPLINA PROFESSOR-------------------------//
-            modelBuilder.Entity<DisciplinaProfessor>().ToTable("DisciplinaProfessor", schemaName: "TaCertoForms");
+            modelBuilder.Entity<DisciplinaProfessor>().ToTable("DisciplinaProfessor");
             //--------------------------DISCIPLINA PROFESSOR-------------------------//
             //--------------------------------ENDERECO-------------------------------//
-            modelBuilder.Entity<Endereco>().ToTable("Endereco", schemaName: "TaCertoForms");
+            modelBuilder.Entity<Endereco>().ToTable("Endereco");
             //--------------------------------ENDERECO-------------------------------//
             //------------------------------INSTITUICAO------------------------------//
-            modelBuilder.Entity<Instituicao>().ToTable("Instituicao", schemaName: "TaCertoForms");
+            modelBuilder.Entity<Instituicao>().ToTable("Instituicao");
             //------------------------------INSTITUICAO------------------------------//
             //--------------------------------LICENCA--------------------------------//
-            modelBuilder.Entity<Licenca>().ToTable("Licenca", schemaName: "TaCertoForms");
+            modelBuilder.Entity<Licenca>().ToTable("Licenca");
             //--------------------------------LICENCA--------------------------------//
             //-------------------------------LOG LOGIN-------------------------------//
-            modelBuilder.Entity<LogLogin>().ToTable("LogLogin", schemaName: "TaCertoForms");
+            modelBuilder.Entity<LogLogin>().ToTable("LogLogin");
             //-------------------------------LOG LOGIN-------------------------------//
             //---------------------------------MIDIA---------------------------------//
-            modelBuilder.Entity<Midia>().ToTable("Midia", schemaName: "TaCertoForms");
+            modelBuilder.Entity<Midia>().ToTable("Midia");
             //---------------------------------MIDIA---------------------------------//
             //---------------------------------PERFIL--------------------------------//
-            modelBuilder.Entity<Perfil>().ToTable("Perfil", schemaName: "TaCertoForms");
+            modelBuilder.Entity<Perfil>().ToTable("Perfil");
             //---------------------------------PERFIL--------------------------------//
             //------------------------------PERFIL PESSOA----------------------------//
-            modelBuilder.Entity<PerfilPessoa>().ToTable("PerfilPessoa", schemaName: "TaCertoForms");
+            modelBuilder.Entity<PerfilPessoa>().ToTable("PerfilPessoa");
             //------------------------------PERFIL PESSOA----------------------------//
-            //---------------------------------PESSOA--------------------------------//
-            modelBuilder.Entity<Pessoa>().ToTable("Pessoa", schemaName: "TaCertoForms");
-            //---------------------------------PESSOA--------------------------------//
-            //-----------------------------PESSOA LICENCA----------------------------//
-            modelBuilder.Entity<PessoaLicenca>().ToTable("PessoaLicenca", schemaName: "TaCertoForms");
-            //-----------------------------PESSOA LICENCA----------------------------//
-            //---------------------------------QUESTAO-------------------------------//
-            modelBuilder.Entity<Questao>().ToTable("Questao", schemaName: "TaCertoForms");
-            //---------------------------------QUESTAO-------------------------------//
-            //--------------------------QUESTAO RESPOSTA ALUNO-----------------------//
-            modelBuilder.Entity<QuestaoRespostaAluno>().ToTable("QuestaoRespostaAluno", schemaName: "TaCertoForms");
-            //--------------------------QUESTAO RESPOSTA ALUNO-----------------------//
-            //-------------------------------TIPO QUESTAO----------------------------//
-            modelBuilder.Entity<TipoQuestao>().ToTable("TipoQuestao", schemaName: "TaCertoForms");
-            //-------------------------------TIPO QUESTAO----------------------------//
-            //----------------------------------TURMA--------------------------------//
-            modelBuilder.Entity<Turma>().ToTable("Turma", schemaName: "TaCertoForms");
-            //----------------------------------TURMA--------------------------------//
-
-            //-------------------------------TURMA ALUNO-----------------------------//
-            modelBuilder.Entity<TurmaAluno>().ToTable("TurmaAluno", schemaName: "TaCertoForms");
-            //-------------------------------TURMA ALUNO-----------------------------//
-
-            //-----------------------TURMA DISCIPLINA PROFESSOR----------------------//
-            modelBuilder.Entity<TurmaDisciplinaProfessor>().ToTable("TurmaDisciplinaProfessor", schemaName: "TaCertoForms");
-            //-----------------------TURMA DISCIPLINA PROFESSOR----------------------//
-
-
-
-            //-----------------------------ACESSO PESSOA-----------------------------//
-            modelBuilder.Entity<AcessoPessoa>().ToTable("AcessoPessoa");
-            modelBuilder.Entity<AcessoPessoa>()
-                .HasOne(ap => ap.Acesso)
-                .WithMany(ap => ap.AcessoPessoas)
-                .HasForeignKey(ap => ap.IdAcesso);
-            modelBuilder.Entity<AcessoPessoa>()
-                .HasOne(ap => ap.Pessoa)
-                .WithMany(ap => ap.AcessoPessoas)
-                .HasForeignKey(ap => ap.IdPessoa);
-            //-----------------------------ACESSO PESSOA-----------------------------//
             //---------------------------------PESSOA--------------------------------//
             modelBuilder.Entity<Pessoa>().ToTable("Pessoa");
-            modelBuilder.Entity<Pessoa>()
-                .HasOne(p => p.Instituicao)
-                .WithMany(p => p.Pessoas)
-                .HasForeignKey(p => p.IdInstituicao);
             //---------------------------------PESSOA--------------------------------//
-            //------------------------------INSTITUIÇÃO------------------------------//
-            modelBuilder.Entity<Instituicao>().ToTable("Instituicao");
-            //------------------------------INSTITUIÇÃO------------------------------//
-            //--------------------------------MATERIA--------------------------------//
-            modelBuilder.Entity<Materia>().ToTable("Materia");
-            //--------------------------------MATERIA--------------------------------//
-            //---------------------------MATERIA PROFESSOR---------------------------//
-            modelBuilder.Entity<MateriaProfessor>().ToTable("MateriaProfessor");
-            modelBuilder.Entity<MateriaProfessor>()
-                .HasOne(mp => mp.Materia)
-                .WithMany(mp => mp.MateriaProfessor)
-                .HasForeignKey(mp => mp.IdMateria);
-            modelBuilder.Entity<MateriaProfessor>()
-                .HasOne(mp => mp.Pessoa)
-                .WithMany(mp => mp.MateriaProfessor)
-                .HasForeignKey(mp => mp.IdPessoa);
-            //---------------------------MATERIA PROFESSOR---------------------------//
-            //---------------------------------TURMA---------------------------------//
+            //-----------------------------PESSOA LICENCA----------------------------//
+            modelBuilder.Entity<PessoaLicenca>().ToTable("PessoaLicenca");
+            //-----------------------------PESSOA LICENCA----------------------------//
+            //---------------------------------QUESTAO-------------------------------//
+            modelBuilder.Entity<Questao>().ToTable("Questao");
+            //---------------------------------QUESTAO-------------------------------//
+            //--------------------------QUESTAO RESPOSTA ALUNO-----------------------//
+            modelBuilder.Entity<QuestaoRespostaAluno>().ToTable("QuestaoRespostaAluno");
+            //--------------------------QUESTAO RESPOSTA ALUNO-----------------------//
+            //-------------------------------TIPO QUESTAO----------------------------//
+            modelBuilder.Entity<TipoQuestao>().ToTable("TipoQuestao");
+            //-------------------------------TIPO QUESTAO----------------------------//
+            //----------------------------------TURMA--------------------------------//
             modelBuilder.Entity<Turma>().ToTable("Turma");
-            //---------------------------------TURMA---------------------------------//
-            //---------------------------------TURMA---------------------------------//
-            modelBuilder.Entity<TurmaMateriaProfessor>().ToTable("TurmaMateriaProfessor");
-            modelBuilder.Entity<TurmaMateriaProfessor>()
-                .HasOne(tmp => tmp.Turma)
-                .WithMany(tmp => tmp.TurmaMateriaProfessors)
-                .HasForeignKey(tmp => tmp.IdTurma);
-            modelBuilder.Entity<TurmaMateriaProfessor>()
-                .HasOne(tmp => tmp.MateriaProfessor)
-                .WithMany(tmp => tmp.TurmaMateriaProfessors)
-                .HasForeignKey(tmp => tmp.IdMateriaProfessor);
-            //---------------------------------TURMA---------------------------------//
+            //----------------------------------TURMA--------------------------------//
+            //-------------------------------TURMA ALUNO-----------------------------//
+            modelBuilder.Entity<TurmaAluno>().ToTable("TurmaAluno");
+            //-------------------------------TURMA ALUNO-----------------------------//
+            //-----------------------TURMA DISCIPLINA PROFESSOR----------------------//
+            modelBuilder.Entity<TurmaDisciplinaProfessor>().ToTable("TurmaDisciplinaProfessor");
+            //-----------------------TURMA DISCIPLINA PROFESSOR----------------------//
+            /*
+                modelBuilder.Entity<Livro>().Property(p => p.Titulo).HasColumnType("varchar(50)");
+            */
         }
-        /*
-            modelBuilder.Entity<Livro>().Property(p => p.Titulo).HasColumnType("varchar(50)");
-        */
     }
 }

@@ -6,21 +6,21 @@ using Microsoft.EntityFrameworkCore;
 namespace TaCertoForms.Models{
     public class Pessoa{
         [Key]
-        int IdPessoa { get; set; }
-        int IdInstituicao { get; set; }
-        int IdPessoaLicenca { get; set; }
-        string Nome { get; set; }
-        string CPF { get; set; }
-        string Email { get; set; }
-        string Senha { get; set; }
+        public int IdPessoa { get; set; }
+        public int IdInstituicao { get; set; }
+        public int IdPessoaLicenca { get; set; }
+        public string Nome { get; set; }
+        public string CPF { get; set; }
+        public string Email { get; set; }
+        public string Senha { get; set; }
 
-        Instituicao Instituicao { get; set; }
-        PessoaLicenca PessoaLicenca { get; set; }
-        List<PerfilPessoa> PerfilPessoaList { get; set; }
+        public Instituicao Instituicao { get; set; }
+        public PessoaLicenca PessoaLicenca { get; set; }
+        public List<PerfilPessoa> PerfilPessoaList { get; set; }
         //se aluno
-        List<TurmaAluno> TurmaAlunoList { get; set; }
-        List<AtividadeRespostaAluno> AtividadeRespostaAlunoList { get; set; }
+        public List<TurmaAluno> TurmaAlunoList { get; set; }
+        public List<AtividadeRespostaAluno> AtividadeRespostaAlunoList { get; set; }
         //se professor
-        List<DisciplinaProfessor> DisciplinaProfessorList { get; set; }
+        public List<DisciplinaProfessor> DisciplinaProfessorList { get; set; }
     }
 }

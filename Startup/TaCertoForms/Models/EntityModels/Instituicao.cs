@@ -6,17 +6,17 @@ using Microsoft.EntityFrameworkCore;
 namespace TaCertoForms.Models{
     public class Instituicao{
         [Key]
-        int IdInstituicao { get; set; }
-        int IdEnderecoPrincipal { get; set; }
-        int IdEnderecoCobranca { get; set; }
-        string RazaoSocial { get; set; }
-        string NomeFantasia { get; set; }
-        string CNPJ { get; set; }
+        public int IdInstituicao { get; set; }
+        public int IdEnderecoPrincipal { get; set; }
+        public int IdEnderecoCobranca { get; set; }
+        public string RazaoSocial { get; set; }
+        public string NomeFantasia { get; set; }
+        public string CNPJ { get; set; }
 
-        Endereco EnderecoCobranca { get; set; }
-        Endereco EnderecoPrincipal { get; set; }
-        List<Turma> TurmaList { get; set; }
-        List<Pessoa> PessoaList { get; set; }
-        List<Licenca> LicencaList { get; set; }
+        public Endereco EnderecoCobranca { get; set; }
+        public Endereco EnderecoPrincipal { get; set; }
+        public List<Turma> TurmaList { get; set; }
+        public List<Pessoa> PessoaList { get; set; }
+        public List<Licenca> LicencaList { get; set; }
     }
 }

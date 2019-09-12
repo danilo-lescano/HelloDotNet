@@ -6,10 +6,10 @@ using Microsoft.EntityFrameworkCore;
 namespace TaCertoForms.Models{
     public class Perfil{
         [Key]
-        int IdPerfil { get; set; }
-        string Nome { get; set; }
-        string Descricao { get; set; }
+        public int IdPerfil { get; set; }
+        public string Nome { get; set; }
+        public string Descricao { get; set; }
 
-        List<PerfilPessoa> PerfilPessoaList { get; set; }
+        public List<PerfilPessoa> PerfilPessoaList { get; set; }
     }
 }

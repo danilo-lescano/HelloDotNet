@@ -6,15 +6,15 @@ using Microsoft.EntityFrameworkCore;
 namespace TaCertoForms.Models{
     public class AtividadeRespostaAluno{
         [Key]
-        int IdAtividadeRespostaAluno { get; set; }
-        int IdAtividade { get; set; }
-        int IdPessoa { get; set; }
-        string DataEnvio { get; set; }
-        float Nota { get; set; }
-        string TempoTotal { get; set; }
+        public int IdAtividadeRespostaAluno { get; set; }
+        public int IdAtividade { get; set; }
+        public int IdAluno { get; set; }
+        public string DataEnvio { get; set; }
+        public float Nota { get; set; }
+        public string TempoTotal { get; set; }
 
-        Pessoa Aluno { get; set; }
-        Atividade Atividade { get; set; }
-        List<QuestaoRespostaAluno> QuestaoRespostaAlunoList { get; set; }
+        public Pessoa Aluno { get; set; }
+        public Atividade Atividade { get; set; }
+        public List<QuestaoRespostaAluno> QuestaoRespostaAlunoList { get; set; }
     }
 }

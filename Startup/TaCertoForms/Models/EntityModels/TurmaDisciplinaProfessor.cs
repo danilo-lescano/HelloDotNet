@@ -6,11 +6,11 @@ using Microsoft.EntityFrameworkCore;
 namespace TaCertoForms.Models{
     public class TurmaDisciplinaProfessor{
         [Key]
-        int IdTurmaDisciplinaProfessor { get; set; }
-        int IdTurma { get; set; }
-        int IdDisciplinaProfessor { get; set; }
+        public int IdTurmaDisciplinaProfessor { get; set; }
+        public int IdTurma { get; set; }
+        public int IdDisciplinaProfessor { get; set; }
 
-        List<Atividade> AtividadeList { get; set; }
-        List<DisciplinaProfessor> DisciplinaProfessorList { get; set; }
+        public List<Atividade> AtividadeList { get; set; }
+        public List<DisciplinaProfessor> DisciplinaProfessorList { get; set; }
     }
 }

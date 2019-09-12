@@ -6,13 +6,13 @@ using Microsoft.EntityFrameworkCore;
 namespace TaCertoForms.Models{
     public class Endereco{
         [Key]
-        int IdEndereco { get; set; }
-        string Pais { get; set; }
-        string UF { get; set; }
-        string Cidade { get; set; }
-        string Rua { get; set; }
-        string Numero { get; set; }
-        string Complemento { get; set; }
-        string CEP { get; set; }
+        public int IdEndereco { get; set; }
+        public string Pais { get; set; }
+        public string UF { get; set; }
+        public string Cidade { get; set; }
+        public string Rua { get; set; }
+        public string Numero { get; set; }
+        public string Complemento { get; set; }
+        public string CEP { get; set; }
     }
 }

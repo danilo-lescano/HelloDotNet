@@ -6,10 +6,10 @@ using Microsoft.EntityFrameworkCore;
 namespace TaCertoForms.Models{
     public class TipoQuestao{
         [Key]
-        int IdTipoQuestao { get; set; }
-        string Nome { get; set; }
-        string Descricao { get; set; }
+        public int IdTipoQuestao { get; set; }
+        public string Nome { get; set; }
+        public string Descricao { get; set; }
 
-        List<Questao> QuestaoList { get; set; }
+        public List<Questao> QuestaoList { get; set; }
     }
 }
