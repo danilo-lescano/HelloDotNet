@@ -1,0 +1,5 @@
+1) cria snapshop. n sei bem pra que serve
+dotnet ef migrations add Inicial
+
+2) cria o banco de dados efetivamente
+dotnet ef database update

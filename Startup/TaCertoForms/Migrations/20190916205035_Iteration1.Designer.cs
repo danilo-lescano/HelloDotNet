@@ -9,8 +9,8 @@ using TaCertoForms.Models;
 namespace TaCertoForms.Migrations
 {
     [DbContext(typeof(TaCertoFormsContext))]
-    [Migration("20190916183606_Inicial")]
-    partial class Inicial
+    [Migration("20190916205035_Iteration1")]
+    partial class Iteration1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -225,6 +225,10 @@ namespace TaCertoForms.Migrations
 
                     b.HasKey("IdPerfilPessoa");
 
+                    b.HasIndex("IdPerfil");
+
+                    b.HasIndex("IdPessoa");
+
                     b.ToTable("PerfilPessoa");
                 });
 
@@ -378,6 +382,19 @@ namespace TaCertoForms.Migrations
                     b.HasKey("IdTurmaDisciplinaProfessor");
 
                     b.ToTable("TurmaDisciplinaProfessor");
+                });
+
+            modelBuilder.Entity("TaCertoForms.Models.PerfilPessoa", b =>
+                {
+                    b.HasOne("TaCertoForms.Models.Perfil", "Perfil")
+                        .WithMany("PerfilPessoas")
+                        .HasForeignKey("IdPerfil")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("TaCertoForms.Models.Pessoa", "Pessoa")
+                        .WithMany("PerfilPessoas")
+                        .HasForeignKey("IdPessoa")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

@@ -16,7 +16,7 @@ namespace TaCertoForms.Models{
 
         //public Instituicao Instituicao { get; set; }
         //public PessoaLicenca PessoaLicenca { get; set; }
-        //public List<PerfilPessoa> PerfilPessoaList { get; set; }
+        public List<PerfilPessoa> PerfilPessoas { get; set; }
         ////se aluno
         //public List<TurmaAluno> TurmaAlunoList { get; set; }
         //public List<AtividadeRespostaAluno> AtividadeRespostaAlunoList { get; set; }

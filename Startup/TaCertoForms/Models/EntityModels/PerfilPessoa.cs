@@ -8,9 +8,8 @@ namespace TaCertoForms.Models{
         [Key]
         public int IdPerfilPessoa { get; set; }
         public int IdPerfil { get; set; }
+        public Perfil Perfil { get; set; }
         public int IdPessoa { get; set; }
-
-        //public Perfil Perfil { get; set; }
-        //public Pessoa Pessoa { get; set; }
+        public Pessoa Pessoa { get; set; }
     }
 }

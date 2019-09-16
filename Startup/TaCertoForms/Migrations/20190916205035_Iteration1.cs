@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TaCertoForms.Migrations
 {
-    public partial class Inicial : Migration
+    public partial class Iteration1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -182,21 +182,6 @@ namespace TaCertoForms.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "PerfilPessoa",
-                schema: "TaCertoForms",
-                columns: table => new
-                {
-                    IdPerfilPessoa = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    IdPerfil = table.Column<int>(nullable: false),
-                    IdPessoa = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_PerfilPessoa", x => x.IdPerfilPessoa);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Pessoa",
                 schema: "TaCertoForms",
                 columns: table => new
@@ -331,6 +316,47 @@ namespace TaCertoForms.Migrations
                 {
                     table.PrimaryKey("PK_TurmaDisciplinaProfessor", x => x.IdTurmaDisciplinaProfessor);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "PerfilPessoa",
+                schema: "TaCertoForms",
+                columns: table => new
+                {
+                    IdPerfilPessoa = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    IdPerfil = table.Column<int>(nullable: false),
+                    IdPessoa = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PerfilPessoa", x => x.IdPerfilPessoa);
+                    table.ForeignKey(
+                        name: "FK_PerfilPessoa_Perfil_IdPerfil",
+                        column: x => x.IdPerfil,
+                        principalSchema: "TaCertoForms",
+                        principalTable: "Perfil",
+                        principalColumn: "IdPerfil",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_PerfilPessoa_Pessoa_IdPessoa",
+                        column: x => x.IdPessoa,
+                        principalSchema: "TaCertoForms",
+                        principalTable: "Pessoa",
+                        principalColumn: "IdPessoa",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PerfilPessoa_IdPerfil",
+                schema: "TaCertoForms",
+                table: "PerfilPessoa",
+                column: "IdPerfil");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PerfilPessoa_IdPessoa",
+                schema: "TaCertoForms",
+                table: "PerfilPessoa",
+                column: "IdPessoa");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -372,15 +398,7 @@ namespace TaCertoForms.Migrations
                 schema: "TaCertoForms");
 
             migrationBuilder.DropTable(
-                name: "Perfil",
-                schema: "TaCertoForms");
-
-            migrationBuilder.DropTable(
                 name: "PerfilPessoa",
-                schema: "TaCertoForms");
-
-            migrationBuilder.DropTable(
-                name: "Pessoa",
                 schema: "TaCertoForms");
 
             migrationBuilder.DropTable(
@@ -409,6 +427,14 @@ namespace TaCertoForms.Migrations
 
             migrationBuilder.DropTable(
                 name: "TurmaDisciplinaProfessor",
+                schema: "TaCertoForms");
+
+            migrationBuilder.DropTable(
+                name: "Perfil",
+                schema: "TaCertoForms");
+
+            migrationBuilder.DropTable(
+                name: "Pessoa",
                 schema: "TaCertoForms");
         }
     }

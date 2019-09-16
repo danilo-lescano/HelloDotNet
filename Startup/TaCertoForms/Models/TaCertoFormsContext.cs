@@ -75,6 +75,14 @@ namespace TaCertoForms.Models{
             //---------------------------------PERFIL--------------------------------//
             //------------------------------PERFIL PESSOA----------------------------//
             modelBuilder.Entity<PerfilPessoa>().ToTable("PerfilPessoa");
+            modelBuilder.Entity<PerfilPessoa>()
+                .HasOne(pp => pp.Perfil)
+                .WithMany(p => p.PerfilPessoas)
+                .HasForeignKey(pp => pp.IdPerfil);
+            modelBuilder.Entity<PerfilPessoa>()
+                .HasOne(pp => pp.Pessoa)
+                .WithMany(p => p.PerfilPessoas)
+                .HasForeignKey(pp => pp.IdPessoa);
             //------------------------------PERFIL PESSOA----------------------------//
             //---------------------------------PESSOA--------------------------------//
             modelBuilder.Entity<Pessoa>().ToTable("Pessoa");
