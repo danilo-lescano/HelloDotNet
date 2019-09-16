@@ -12,8 +12,8 @@ namespace TaCertoForms.Models{
         public string Periodo { get; set; }
         public string Ano { get; set; }
 
-        public Instituicao Instituicao { get; set; }
-        public List<TurmaAluno> TurmaAlunoList { get; set; }
-        public List<TurmaDisciplinaProfessor> TurmaDisciplinaProfessorList { get; set; }
+        //public Instituicao Instituicao { get; set; }
+        //public List<TurmaAluno> TurmaAlunoList { get; set; }
+        //public List<TurmaDisciplinaProfessor> TurmaDisciplinaProfessorList { get; set; }
     }
 }

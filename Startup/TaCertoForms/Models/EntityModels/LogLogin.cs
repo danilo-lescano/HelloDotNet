@@ -12,6 +12,6 @@ namespace TaCertoForms.Models{
         public string Plataforma { get; set; }
         public string DeviceId { get; set; }
 
-        public Pessoa Pessoa { get; set; }
+        //public Pessoa Pessoa { get; set; }
     }
 }

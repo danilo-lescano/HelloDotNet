@@ -14,13 +14,13 @@ namespace TaCertoForms.Models{
         public string Email { get; set; }
         public string Senha { get; set; }
 
-        public Instituicao Instituicao { get; set; }
-        public PessoaLicenca PessoaLicenca { get; set; }
-        public List<PerfilPessoa> PerfilPessoaList { get; set; }
-        //se aluno
-        public List<TurmaAluno> TurmaAlunoList { get; set; }
-        public List<AtividadeRespostaAluno> AtividadeRespostaAlunoList { get; set; }
-        //se professor
-        public List<DisciplinaProfessor> DisciplinaProfessorList { get; set; }
+        //public Instituicao Instituicao { get; set; }
+        //public PessoaLicenca PessoaLicenca { get; set; }
+        //public List<PerfilPessoa> PerfilPessoaList { get; set; }
+        ////se aluno
+        //public List<TurmaAluno> TurmaAlunoList { get; set; }
+        //public List<AtividadeRespostaAluno> AtividadeRespostaAlunoList { get; set; }
+        ////se professor
+        //public List<DisciplinaProfessor> DisciplinaProfessorList { get; set; }
     }
 }

@@ -2,18 +2,25 @@
 using System.Linq;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+
+using TaCertoForms.Models;
 
 namespace TaCertoForms{
     public class Startup{
         public Startup(IConfiguration configuration){
             Configuration = configuration;
+            
+            using(var db = new TaCertoFormsContext()){
+                db.Configuration = Configuration;
+                db.Database.EnsureCreated();
+            }
             //Console.WriteLine(configuration.GetConnectionString("DefaultConnection"));
         }
 

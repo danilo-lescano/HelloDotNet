@@ -10,7 +10,7 @@ namespace TaCertoForms.Models{
         public int IdTurma { get; set; }
         public int IdDisciplinaProfessor { get; set; }
 
-        public List<Atividade> AtividadeList { get; set; }
-        public List<DisciplinaProfessor> DisciplinaProfessorList { get; set; }
+        //public List<Atividade> AtividadeList { get; set; }
+        //public List<DisciplinaProfessor> DisciplinaProfessorList { get; set; }
     }
 }

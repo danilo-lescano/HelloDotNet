@@ -13,10 +13,10 @@ namespace TaCertoForms.Models{
         public string NomeFantasia { get; set; }
         public string CNPJ { get; set; }
 
-        public Endereco EnderecoCobranca { get; set; }
-        public Endereco EnderecoPrincipal { get; set; }
-        public List<Turma> TurmaList { get; set; }
-        public List<Pessoa> PessoaList { get; set; }
-        public List<Licenca> LicencaList { get; set; }
+        //public Endereco EnderecoCobranca { get; set; }
+        //public Endereco EnderecoPrincipal { get; set; }
+        //public List<Turma> TurmaList { get; set; }
+        //public List<Pessoa> PessoaList { get; set; }
+        //public List<Licenca> LicencaList { get; set; }
     }
 }

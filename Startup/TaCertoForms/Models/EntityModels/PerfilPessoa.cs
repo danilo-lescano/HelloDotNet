@@ -10,7 +10,7 @@ namespace TaCertoForms.Models{
         public int IdPerfil { get; set; }
         public int IdPessoa { get; set; }
 
-        public Perfil Perfil { get; set; }
-        public Pessoa Pessoa { get; set; }
+        //public Perfil Perfil { get; set; }
+        //public Pessoa Pessoa { get; set; }
     }
 }

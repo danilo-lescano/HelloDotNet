@@ -10,6 +10,6 @@ namespace TaCertoForms.Models{
         public string Nome { get; set; }
         public string Descricao { get; set; }
 
-        public List<Questao> QuestaoList { get; set; }
+        //public List<Questao> QuestaoList { get; set; }
     }
 }

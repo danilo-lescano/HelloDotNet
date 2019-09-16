@@ -11,6 +11,6 @@ namespace TaCertoForms.Models{
         public int NumeroDeLinceca { get; set; }
         public string ValidadeLicenca { get; set; }
 
-        public Instituicao Instituicao { get; set; }
+        //public Instituicao Instituicao { get; set; }
     }
 }

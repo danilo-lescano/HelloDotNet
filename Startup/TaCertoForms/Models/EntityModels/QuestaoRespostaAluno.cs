@@ -15,7 +15,7 @@ namespace TaCertoForms.Models{
         public string Tempo { get; set; }
         public string JsonResposta { get; set; }
 
-        public Questao Questao { get; set; }
-        public AtividadeRespostaAluno AtividadeRespostaAluno { get; set; }
+        //public Questao Questao { get; set; }
+        //public AtividadeRespostaAluno AtividadeRespostaAluno { get; set; }
     }
 }

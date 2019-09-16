@@ -4,7 +4,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace TaCertoForms.Models{
     public class TaCertoFormsContext : DbContext {
-        public IConfiguration Configuration { get; }
+        public IConfiguration Configuration { get; set; }
 
         public DbSet<Atividade> Atividades { get; set; }
         public DbSet<AtividadeRespostaAluno> AtividadeRespostaAlunos { get; set; }
@@ -27,7 +27,7 @@ namespace TaCertoForms.Models{
         public DbSet<TurmaDisciplinaProfessor> TurmaDisciplinaProfessors { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionBuilder){
-            optionBuilder.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+            optionBuilder.UseSqlServer(@"Server=localhost;Database=TaCerto;Trusted_Connection=True;");
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder){
             modelBuilder.HasDefaultSchema("TaCertoForms");

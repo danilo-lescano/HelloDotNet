@@ -13,8 +13,8 @@ namespace TaCertoForms.Models{
         public float Nota { get; set; }
         public string TempoTotal { get; set; }
 
-        public Pessoa Aluno { get; set; }
-        public Atividade Atividade { get; set; }
-        public List<QuestaoRespostaAluno> QuestaoRespostaAlunoList { get; set; }
+        //public Pessoa Aluno { get; set; }
+        //public Atividade Atividade { get; set; }
+        //public List<QuestaoRespostaAluno> QuestaoRespostaAlunoList { get; set; }
     }
 }

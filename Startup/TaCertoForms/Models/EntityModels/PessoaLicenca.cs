@@ -11,7 +11,7 @@ namespace TaCertoForms.Models{
         public int IdLicenca { get; set; }
         public bool IsAtivo { get; set; }
 
-        public Pessoa Pessoa { get; set; }
-        public Licenca Licenca { get; set; }
+        //public Pessoa Pessoa { get; set; }
+        //public Licenca Licenca { get; set; }
     }
 }
