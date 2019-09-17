@@ -29,16 +29,18 @@ namespace TaCertoForms.Controllers{
 
         public IActionResult Logar(){
             Start();
-            if(isUsuarioLogado()){
-                //redirecionar para admin, aluno, professor dependendo do perfil
-                return RedirectToAction("Index", Session["Perfil"]);
+            using(var db = new TaCertoFormsContext()){
+                var email = Request.Form["email"];
+                var password = Request.Form["password"];
+                var pessoa = db.Pessoas
+                    .Where(p => p.Email == email && p.Senha == password)
+                    .ToList();
+                if(pessoa != null && pessoa.Count > 0){
+                    GuardarSesssao(db, pessoa[0]);
+                    return RedirectToAction("Sobre", "Login");
+                }
             }
-            else{
-                Session["IsLogged"] = true;
-                Session["Email"] = Request.Form["email"];
-                Session["Password"] = Request.Form["password"];
-                return RedirectToAction("Sobre", "Login");
-            }
+            return RedirectToAction("Index", "Login");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
@@ -47,7 +49,20 @@ namespace TaCertoForms.Controllers{
         }
 
 
-
+        private void GuardarSesssao(TaCertoFormsContext db, Pessoa p){
+            Session["IsLogged"] = true;
+            Session["Pessoa"] = p;
+            var perfilPessoa = db.PerfilPessoas
+                .Where(pp => pp.IdPessoa == p.IdPessoa)
+                .ToList();
+            List<int> auxList = new List<int>();
+            foreach(var item in perfilPessoa)
+                auxList.Add(item.IdPerfil);
+            var perfil = db.Perfils
+                .Where(per => auxList.Contains(per.IdPerfil))
+                .ToList();
+            Session["Perfil"] = perfil[0];
+        }
         private void Start(){
             GetSession();
         }
