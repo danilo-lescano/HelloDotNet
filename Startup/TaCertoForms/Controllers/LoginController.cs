@@ -14,7 +14,7 @@ namespace TaCertoForms.Controllers{
             Start();
             if(isUsuarioLogado()){
                 //redirecionar para admin, aluno, professor dependendo do perfil
-                return RedirectToAction("Index", Session["Perfil"]);
+                return RedirectToAction("Index", ((Perfil)Session["Perfil"]).Nome);
             }
             else{
                 //n tem login
@@ -29,6 +29,10 @@ namespace TaCertoForms.Controllers{
 
         public IActionResult Logar(){
             Start();
+            if(isUsuarioLogado()){
+                //redirecionar para admin, aluno, professor dependendo do perfil
+                return RedirectToAction("Index", ((Perfil)Session["Perfil"]).Nome);
+            }
             using(var db = new TaCertoFormsContext()){
                 var email = Request.Form["email"];
                 var password = Request.Form["password"];
@@ -37,7 +41,7 @@ namespace TaCertoForms.Controllers{
                     .ToList();
                 if(pessoa != null && pessoa.Count > 0){
                     GuardarSesssao(db, pessoa[0]);
-                    return RedirectToAction("Sobre", "Login");
+                    return RedirectToAction("Index", ((Perfil)Session["Perfil"]).Nome);
                 }
             }
             return RedirectToAction("Index", "Login");
@@ -50,7 +54,7 @@ namespace TaCertoForms.Controllers{
 
 
         private void GuardarSesssao(TaCertoFormsContext db, Pessoa p){
-            Session["IsLogged"] = true;
+            Session["IsLogged"] = false; //CHANGE true
             Session["Pessoa"] = p;
             var perfilPessoa = db.PerfilPessoas
                 .Where(pp => pp.IdPessoa == p.IdPessoa)
