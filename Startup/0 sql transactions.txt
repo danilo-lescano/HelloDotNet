@@ -11,3 +11,20 @@ using(var db = new TaCertoFormsContext()){
 
     db.SaveChanges();
 }
+
+
+
+INSERT INTO Perfil
+VALUES ('Admin', 'acesso admin'),
+VALUES ('Professor', 'acesso professor'),
+VALUES ('Aluno', 'acesso aluno');
+
+INSERT INTO Pessoa
+VALUES (0, 0, 'danilo', '03654571166', 'nq3i4fsx@hotmail.com', '123');
+INSERT INTO PerfilPessoa
+VALUES (1, 1);
+
+INSERT INTO Pessoa
+VALUES (0, 0, 'lucas', '999999999999', 'lucas@hotmail.com', '123');
+INSERT INTO PerfilPessoa
+VALUES (2, 2);
