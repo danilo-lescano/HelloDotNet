@@ -12,7 +12,7 @@ namespace TaCertoForms.Controllers{
     public class AdminController : SessionController{
         public IActionResult Index(){
             Start();
-            if(isUsuarioLogado() && ((Perfil)Session["Perfil"]).Nome.ToUpper() == "ADMIN"){
+            if(isUsuarioLogado() && isControleCorreto()){
                 return View();
             }
             else{
@@ -32,6 +32,9 @@ namespace TaCertoForms.Controllers{
             if(Session["IsLogged"] != null && Coercion.ToBool(Session["IsLogged"]))
                 return true;
             return false;
+        }
+        private bool isControleCorreto(){
+            return ((Perfil)Session["Perfil"]).Nome.ToUpper() == "ADMIN";
         }
     }
 }

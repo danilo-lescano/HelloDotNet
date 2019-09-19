@@ -70,7 +70,7 @@ namespace TaCertoForms.Controllers{
         private void Start(){
             GetSession();
         }
-        private bool isUsuarioLogado(){
+        private bool isUsuarioLogadoE(){
             if(Session["IsLogged"] != null && Coercion.ToBool(Session["IsLogged"]))
                 return true;
             return false;
