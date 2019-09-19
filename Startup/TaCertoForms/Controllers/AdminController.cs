@@ -12,13 +12,11 @@ namespace TaCertoForms.Controllers{
     public class AdminController : SessionController{
         public IActionResult Index(){
             Start();
-            if(isUsuarioLogado()){
-                //redirecionar para admin, aluno, professor dependendo do perfil
+            if(isUsuarioLogado() && ((Perfil)Session["Perfil"]).Nome.ToUpper() == "ADMIN"){
                 return RedirectToAction("Index", ((Perfil)Session["Perfil"]).Nome);
             }
             else{
-                //n tem login
-                return View();
+                return RedirectToAction("Index", "Login");
             }
         }
 
@@ -26,7 +24,7 @@ namespace TaCertoForms.Controllers{
         public IActionResult Error(){
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-        
+
         private void Start(){
             GetSession();
         }

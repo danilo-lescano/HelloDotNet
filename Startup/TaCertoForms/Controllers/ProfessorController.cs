@@ -12,13 +12,11 @@ namespace TaCertoForms.Controllers{
     public class ProfessorController : SessionController{
         public IActionResult Index(){
             Start();
-            if(isUsuarioLogado()){
-                //redirecionar para admin, aluno, professor dependendo do perfil
+            if(isUsuarioLogado() && ((Perfil)Session["Perfil"]).Nome.ToUpper() == "PROFESSOR"){
                 return RedirectToAction("Index", ((Perfil)Session["Perfil"]).Nome);
             }
             else{
-                //n tem login
-                return View();
+                return RedirectToAction("Index", "Login");
             }
         }
 

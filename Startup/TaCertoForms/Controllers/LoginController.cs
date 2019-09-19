@@ -54,7 +54,7 @@ namespace TaCertoForms.Controllers{
 
 
         private void GuardarSesssao(TaCertoFormsContext db, Pessoa p){
-            Session["IsLogged"] = false; //CHANGE true
+            Session["IsLogged"] = true; //CHANGE true
             Session["Pessoa"] = p;
             var perfilPessoa = db.PerfilPessoas
                 .Where(pp => pp.IdPessoa == p.IdPessoa)
