@@ -13,7 +13,7 @@ namespace TaCertoForms.Controllers{
         public IActionResult Index(){
             Start();
             if(isUsuarioLogado() && ((Perfil)Session["Perfil"]).Nome.ToUpper() == "PROFESSOR"){
-                return RedirectToAction("Index", ((Perfil)Session["Perfil"]).Nome);
+                return View();
             }
             else{
                 return RedirectToAction("Index", "Login");
