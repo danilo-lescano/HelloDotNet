@@ -14,17 +14,19 @@ using(var db = new TaCertoFormsContext()){
 
 
 
-INSERT INTO Perfil
-VALUES ('Admin', 'acesso admin'),
-VALUES ('Professor', 'acesso professor'),
-VALUES ('Aluno', 'acesso aluno');
+INSERT INTO [TaCerto].[TaCertoForms].[Perfil]
+VALUES
+('Admin', 'acesso admin'),
+('Professor', 'acesso professor'),
+('Aluno', 'acesso aluno');
 
-INSERT INTO Pessoa
+
+INSERT INTO [TaCerto].[TaCertoForms].[Pessoa]
 VALUES (0, 0, 'danilo', '03654571166', 'nq3i4fsx@hotmail.com', '123');
-INSERT INTO PerfilPessoa
+INSERT INTO [TaCerto].[TaCertoForms].[PerfilPessoa]
 VALUES (1, 1);
 
-INSERT INTO Pessoa
+INSERT INTO [TaCerto].[TaCertoForms].[Pessoa]
 VALUES (0, 0, 'lucas', '999999999999', 'lucas@hotmail.com', '123');
-INSERT INTO PerfilPessoa
+INSERT INTO [TaCerto].[TaCertoForms].[PerfilPessoa]
 VALUES (2, 2);
