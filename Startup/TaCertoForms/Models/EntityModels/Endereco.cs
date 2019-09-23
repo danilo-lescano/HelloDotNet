@@ -14,5 +14,8 @@ namespace TaCertoForms.Models{
         public string Numero { get; set; }
         public string Complemento { get; set; }
         public string CEP { get; set; }
+
+        public List<Instituicao> EnderecoPrincipalList { get; set; }
+        public List<Instituicao> EnderecoCobrancaList { get; set; }
     }
 }

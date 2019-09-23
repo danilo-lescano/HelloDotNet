@@ -27,10 +27,10 @@ namespace TaCertoForms.Models{
         public DbSet<TurmaDisciplinaProfessor> TurmaDisciplinaProfessors { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionBuilder){
-            optionBuilder.UseSqlServer(@"Server=localhost;Database=TaCerto;Trusted_Connection=True;");
+            optionBuilder.UseSqlServer(@"Server=SRV-SGBD02\SQL2016PRD;Database=StartupJogos_SESI;User Id=StartupJogos_SESI;Password=StartupJogos_SESI7654$;");
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder){
-            modelBuilder.HasDefaultSchema("TaCertoForms");
+            modelBuilder.HasDefaultSchema("Teste1");
             //-------------------------------ATIVIDADE-------------------------------
             modelBuilder.Entity<Atividade>().ToTable("Atividade");
             //modelBuilder.Entity<Atividade>()
@@ -60,6 +60,16 @@ namespace TaCertoForms.Models{
             //--------------------------------ENDERECO-------------------------------//
             //------------------------------INSTITUICAO------------------------------//
             modelBuilder.Entity<Instituicao>().ToTable("Instituicao");
+            modelBuilder.Entity<Instituicao>()
+                .HasOne(i => i.EnderecoPrincipal)
+                .WithMany(e => e.EnderecoPrincipalList)
+                .HasForeignKey(i => i.IdEnderecoPrincipal)
+                .OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<Instituicao>()
+                .HasOne(i => i.EnderecoCobranca)
+                .WithMany(e => e.EnderecoCobrancaList)
+                .HasForeignKey(i => i.IdEnderecoCobranca)
+                .OnDelete(DeleteBehavior.Restrict);
             //------------------------------INSTITUICAO------------------------------//
             //--------------------------------LICENCA--------------------------------//
             modelBuilder.Entity<Licenca>().ToTable("Licenca");

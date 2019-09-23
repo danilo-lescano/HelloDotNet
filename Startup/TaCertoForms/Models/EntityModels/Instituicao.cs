@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
 namespace TaCertoForms.Models{
@@ -12,9 +13,8 @@ namespace TaCertoForms.Models{
         public string RazaoSocial { get; set; }
         public string NomeFantasia { get; set; }
         public string CNPJ { get; set; }
-
-        //public Endereco EnderecoCobranca { get; set; }
-        //public Endereco EnderecoPrincipal { get; set; }
+        public Endereco EnderecoPrincipal { get; set; }
+        public Endereco EnderecoCobranca { get; set; }
         //public List<Turma> TurmaList { get; set; }
         //public List<Pessoa> PessoaList { get; set; }
         //public List<Licenca> LicencaList { get; set; }
