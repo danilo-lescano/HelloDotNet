@@ -8,10 +8,9 @@ namespace TaCertoForms.Models{
         [Key]
         public int IdLogLoggin { get; set; }
         public int IdPessoa { get; set; }
-        public string HoraAcesso { get; set; }
+        public Pessoa Pessoa { get; set; }
+        public DateTime HoraAcesso { get; set; }
         public string Plataforma { get; set; }
         public string DeviceId { get; set; }
-
-        //public Pessoa Pessoa { get; set; }
     }
 }

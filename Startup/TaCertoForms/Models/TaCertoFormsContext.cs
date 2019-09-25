@@ -30,36 +30,37 @@ namespace TaCertoForms.Models{
             optionBuilder.UseSqlServer(@"Server=SRV-SGBD02\SQL2016PRD;Database=StartupJogos_SESI;User Id=StartupJogos_SESI;Password=StartupJogos_SESI7654$;");
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder){
-            modelBuilder.HasDefaultSchema("Teste1");
+            modelBuilder.HasDefaultSchema("TaCerto");
             //-------------------------------ATIVIDADE-------------------------------
-            modelBuilder.Entity<Atividade>().ToTable("Atividade");
+            //modelBuilder.Entity<Atividade>().ToTable("Atividade");
             //modelBuilder.Entity<Atividade>()
             //    .HasOne(a => a.TurmaDisciplinaProfessor)
             //    .WithMany(tdp => tdp.AtividadeList)
             //    .HasForeignKey(a => a.IdTurmaDisciplinaProfessor);
             //-------------------------------ATIVIDADE-------------------------------//
             //------------------------ATIVIDADE RESPOSTA ALUNO-----------------------//
-            modelBuilder.Entity<AtividadeRespostaAluno>().ToTable("AtividadeRespostaAluno");
+            //modelBuilder.Entity<AtividadeRespostaAluno>().ToTable("AtividadeRespostaAluno");
             //modelBuilder.Entity<AtividadeRespostaAluno>()
             //    .HasOne(ara => ara.Aluno)
             //    .WithMany(a => a.AtividadeRespostaAluno)
             //    .HasForeignKey(ara => ara.IdAluno);
-            //modelBuilder.Entity<AtividadeRespostaAluno>()
-            //    .HasOne(ara => ara.Atividade)
-            //    .WithMany(ara => ara.AtividadeRespostaAluno)
-            //   .HasForeignKey(ara => ara.IdAtividade);
+            modelBuilder.Entity<AtividadeRespostaAluno>()
+                .HasOne(ara => ara.Atividade)
+                .WithMany(a => a.AtividadeRespostaAlunoList)
+                .HasForeignKey(ara => ara.IdAtividade)
+                .OnDelete(DeleteBehavior.Restrict);
             //------------------------ATIVIDADE RESPOSTA ALUNO-----------------------//
             //-------------------------------DISCIPLINA------------------------------//
-            modelBuilder.Entity<Disciplina>().ToTable("Disciplina");
+            //modelBuilder.Entity<Disciplina>().ToTable("Disciplina");
             //-------------------------------DISCIPLINA------------------------------//
             //--------------------------DISCIPLINA PROFESSOR-------------------------//
-            modelBuilder.Entity<DisciplinaProfessor>().ToTable("DisciplinaProfessor");
+            //modelBuilder.Entity<DisciplinaProfessor>().ToTable("DisciplinaProfessor");
             //--------------------------DISCIPLINA PROFESSOR-------------------------//
             //--------------------------------ENDERECO-------------------------------//
-            modelBuilder.Entity<Endereco>().ToTable("Endereco");
+            //modelBuilder.Entity<Endereco>().ToTable("Endereco");
             //--------------------------------ENDERECO-------------------------------//
             //------------------------------INSTITUICAO------------------------------//
-            modelBuilder.Entity<Instituicao>().ToTable("Instituicao");
+            //modelBuilder.Entity<Instituicao>().ToTable("Instituicao");
             modelBuilder.Entity<Instituicao>()
                 .HasOne(i => i.EnderecoPrincipal)
                 .WithMany(e => e.EnderecoPrincipalList)
@@ -72,51 +73,76 @@ namespace TaCertoForms.Models{
                 .OnDelete(DeleteBehavior.Restrict);
             //------------------------------INSTITUICAO------------------------------//
             //--------------------------------LICENCA--------------------------------//
-            modelBuilder.Entity<Licenca>().ToTable("Licenca");
+            //modelBuilder.Entity<Licenca>().ToTable("Licenca");
             //--------------------------------LICENCA--------------------------------//
             //-------------------------------LOG LOGIN-------------------------------//
-            modelBuilder.Entity<LogLogin>().ToTable("LogLogin");
+            //modelBuilder.Entity<LogLogin>().ToTable("LogLogin");
             //-------------------------------LOG LOGIN-------------------------------//
             //---------------------------------MIDIA---------------------------------//
-            modelBuilder.Entity<Midia>().ToTable("Midia");
+            //modelBuilder.Entity<Midia>().ToTable("Midia");
             //---------------------------------MIDIA---------------------------------//
             //---------------------------------PERFIL--------------------------------//
-            modelBuilder.Entity<Perfil>().ToTable("Perfil");
+            //modelBuilder.Entity<Perfil>().ToTable("Perfil");
             //---------------------------------PERFIL--------------------------------//
             //------------------------------PERFIL PESSOA----------------------------//
-            modelBuilder.Entity<PerfilPessoa>().ToTable("PerfilPessoa");
-            modelBuilder.Entity<PerfilPessoa>()
-                .HasOne(pp => pp.Perfil)
-                .WithMany(p => p.PerfilPessoas)
-                .HasForeignKey(pp => pp.IdPerfil);
-            modelBuilder.Entity<PerfilPessoa>()
-                .HasOne(pp => pp.Pessoa)
-                .WithMany(p => p.PerfilPessoas)
-                .HasForeignKey(pp => pp.IdPessoa);
+            //modelBuilder.Entity<PerfilPessoa>().ToTable("PerfilPessoa");
+            //modelBuilder.Entity<PerfilPessoa>()
+            //    .HasOne(pp => pp.Perfil)
+            //    .WithMany(p => p.PerfilPessoas)
+            //    .HasForeignKey(pp => pp.IdPerfil);
+            //modelBuilder.Entity<PerfilPessoa>()
+            //    .HasOne(pp => pp.Pessoa)
+            //    .WithMany(p => p.PerfilPessoas)
+            //    .HasForeignKey(pp => pp.IdPessoa);
             //------------------------------PERFIL PESSOA----------------------------//
             //---------------------------------PESSOA--------------------------------//
-            modelBuilder.Entity<Pessoa>().ToTable("Pessoa");
+            //modelBuilder.Entity<Pessoa>().ToTable("Pessoa");
+            modelBuilder.Entity<Pessoa>()
+                .HasOne(p => p.PessoaLicenca)
+                .WithOne(pl => pl.Pessoa)
+                .HasForeignKey<PessoaLicenca>(pl => pl.IdPessoa)
+                .OnDelete(DeleteBehavior.Restrict);
             //---------------------------------PESSOA--------------------------------//
             //-----------------------------PESSOA LICENCA----------------------------//
-            modelBuilder.Entity<PessoaLicenca>().ToTable("PessoaLicenca");
+            //modelBuilder.Entity<PessoaLicenca>().ToTable("PessoaLicenca");
+            modelBuilder.Entity<PessoaLicenca>()
+                .HasOne(pl => pl.Licenca)
+                .WithMany(l => l.PessoaLicencaList)
+                .HasForeignKey(pl => pl.IdLicenca)
+                .OnDelete(DeleteBehavior.Restrict);
             //-----------------------------PESSOA LICENCA----------------------------//
             //---------------------------------QUESTAO-------------------------------//
-            modelBuilder.Entity<Questao>().ToTable("Questao");
+            //modelBuilder.Entity<Questao>().ToTable("Questao");
             //---------------------------------QUESTAO-------------------------------//
             //--------------------------QUESTAO RESPOSTA ALUNO-----------------------//
-            modelBuilder.Entity<QuestaoRespostaAluno>().ToTable("QuestaoRespostaAluno");
+            //modelBuilder.Entity<QuestaoRespostaAluno>().ToTable("QuestaoRespostaAluno");
+            modelBuilder.Entity<QuestaoRespostaAluno>()
+                .HasOne(qra => qra.Questao)
+                .WithMany(q => q.QuestaoRespostaAlunoList)
+                .HasForeignKey(qra => qra.IdQuestao)
+                .OnDelete(DeleteBehavior.Restrict);
             //--------------------------QUESTAO RESPOSTA ALUNO-----------------------//
             //-------------------------------TIPO QUESTAO----------------------------//
-            modelBuilder.Entity<TipoQuestao>().ToTable("TipoQuestao");
+            //modelBuilder.Entity<TipoQuestao>().ToTable("TipoQuestao");
             //-------------------------------TIPO QUESTAO----------------------------//
             //----------------------------------TURMA--------------------------------//
-            modelBuilder.Entity<Turma>().ToTable("Turma");
+            //modelBuilder.Entity<Turma>().ToTable("Turma");
             //----------------------------------TURMA--------------------------------//
             //-------------------------------TURMA ALUNO-----------------------------//
-            modelBuilder.Entity<TurmaAluno>().ToTable("TurmaAluno");
+            //modelBuilder.Entity<TurmaAluno>().ToTable("TurmaAluno");
+            modelBuilder.Entity<TurmaAluno>()
+                .HasOne(ta => ta.Turma)
+                .WithMany(t => t.TurmaAlunoList)
+                .HasForeignKey(ta => ta.IdTurma)
+                .OnDelete(DeleteBehavior.Restrict);
             //-------------------------------TURMA ALUNO-----------------------------//
             //-----------------------TURMA DISCIPLINA PROFESSOR----------------------//
-            modelBuilder.Entity<TurmaDisciplinaProfessor>().ToTable("TurmaDisciplinaProfessor");
+            //modelBuilder.Entity<TurmaDisciplinaProfessor>().ToTable("TurmaDisciplinaProfessor");
+            modelBuilder.Entity<TurmaDisciplinaProfessor>()
+                .HasOne(tdp => tdp.Turma)
+                .WithMany(t => t.TurmaDisciplinaProfessorList)
+                .HasForeignKey(i => i.IdTurma)
+                .OnDelete(DeleteBehavior.Restrict);
             //-----------------------TURMA DISCIPLINA PROFESSOR----------------------//
             /*
                 modelBuilder.Entity<Livro>().Property(p => p.Titulo).HasColumnType("varchar(50)");

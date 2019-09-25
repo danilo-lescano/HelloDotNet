@@ -8,14 +8,13 @@ namespace TaCertoForms.Models{
         [Key]
         public int IdQuestaoRespostaAluno { get; set; }
         public int IdAtividadeRespostaAluno { get; set; }
+        public AtividadeRespostaAluno AtividadeRespostaAluno { get; set; }
         public int IdQuestao { get; set; }
+        public Questao Questao { get; set; }
         public int NumAcerto { get; set; }
         public int NumErro { get; set; }
         public float Nota { get; set; }
-        public string Tempo { get; set; }
+        public int TempoEmMilisegundos { get; set; }
         public string JsonResposta { get; set; }
-
-        //public Questao Questao { get; set; }
-        //public AtividadeRespostaAluno AtividadeRespostaAluno { get; set; }
     }
 }

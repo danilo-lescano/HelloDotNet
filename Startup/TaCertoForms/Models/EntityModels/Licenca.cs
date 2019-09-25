@@ -8,9 +8,11 @@ namespace TaCertoForms.Models{
         [Key]
         public int IdLicenca { get; set; }
         public int IdInstituicao { get; set; }
+        public Instituicao Instituicao { get; set; }
         public int NumeroDeLinceca { get; set; }
-        public string ValidadeLicenca { get; set; }
+        public DateTime InicioLicenca { get; set; }
+        public DateTime ValidadeLicenca { get; set; }
 
-        //public Instituicao Instituicao { get; set; }
+        public List<PessoaLicenca> PessoaLicencaList { get; set; }
     }
 }

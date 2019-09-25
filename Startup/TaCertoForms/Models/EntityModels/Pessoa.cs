@@ -8,19 +8,19 @@ namespace TaCertoForms.Models{
         [Key]
         public int IdPessoa { get; set; }
         public int IdInstituicao { get; set; }
-        public int IdPessoaLicenca { get; set; }
+        public Instituicao Instituicao { get; set; }
         public string Nome { get; set; }
         public string CPF { get; set; }
         public string Email { get; set; }
         public string Senha { get; set; }
 
-        //public Instituicao Instituicao { get; set; }
-        //public PessoaLicenca PessoaLicenca { get; set; }
+        public PessoaLicenca PessoaLicenca { get; set; }
         public List<PerfilPessoa> PerfilPessoas { get; set; }
+        public List<LogLogin> LogLoginList { get; set; }
         ////se aluno
-        //public List<TurmaAluno> TurmaAlunoList { get; set; }
-        //public List<AtividadeRespostaAluno> AtividadeRespostaAlunoList { get; set; }
+        public List<TurmaAluno> TurmaAlunoList { get; set; }
+        public List<AtividadeRespostaAluno> AtividadeRespostaAlunoList { get; set; }
         ////se professor
-        //public List<DisciplinaProfessor> DisciplinaProfessorList { get; set; }
+        public List<DisciplinaProfessor> DisciplinaProfessorList { get; set; }
     }
 }

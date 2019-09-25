@@ -8,14 +8,13 @@ namespace TaCertoForms.Models{
         [Key]
         public int IdAtividade { get; set; }
         public int IdTurmaDisciplinaProfessor { get; set; }
-        public string DataInicio { get; set; }
-        public string DataFim { get; set; }
+        public TurmaDisciplinaProfessor TurmaDisciplinaProfessor { get; set; }
+        public DateTime DataInicio { get; set; }
+        public DateTime DataFim { get; set; }
         public int NumeroTentativas { get; set; }
         public bool IsAleatorio { get; set; }
         public bool IsProva { get; set; }
-
-        //public TurmaDisciplinaProfessor TurmaDisciplinaProfessor { get; set; }
-        //public List<Questao> QuestoeList { get; set; }
-        //public List<AtividadeRespostaAluno> AtividadeRespostaAlunoList { get; set; }
+        public List<Questao> QuestoeList { get; set; }
+        public List<AtividadeRespostaAluno> AtividadeRespostaAlunoList { get; set; }
     }
 }
