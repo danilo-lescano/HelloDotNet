@@ -16,7 +16,6 @@ namespace TaCertoForms.Models{
         public DateTime DataEnvio { get; set; }
         public float Nota { get; set; }
         public int TempoTotalMilisegundos { get; set; }
-
         public List<QuestaoRespostaAluno> QuestaoRespostaAlunoList { get; set; }
     }
 }
