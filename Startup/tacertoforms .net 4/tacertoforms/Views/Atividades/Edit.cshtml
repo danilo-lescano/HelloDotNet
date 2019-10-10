@@ -1,0 +1,409 @@
+﻿@model tacertoforms.Models.ViewModelAtividade
+
+@{
+    ViewBag.Title = "Edit";
+}
+<div class="content-wrapper">
+    <section class="content-header">
+        <h1>Criação de Instituição</h1>
+        <ol class="breadcrumb">
+            <li>
+                <a href="@Url.Action("Index", "Home")"><i class="fa fa-home"></i>Início</a>
+            </li>
+            <li class="active">
+                <a href="@Url.Action("Index", "Atividades")">Atividades</a>
+            </li>
+        </ol>
+    </section>
+    <section class="content">
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title">Novo Registro</h3>
+                <a href="@Url.Action("Index", "Atividades")" class="btn btn-sm btn-default btn-flat pull-right">Voltar</a>
+            </div>
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                <div class="box-body">
+                    <div class="col-xs-12">
+                        <div class="row">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            @Html.HiddenFor(model => model.IdAtividade, new { htmlAttributes = new { @class = "form-control" } })
+                            <div class="form-group col-xs-12 col-md-6">
+                                @Html.Label("Turma + matéria")
+                                @Html.EditorFor(model => model.IdTurmaDisciplinaProfessor, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.IdTurmaDisciplinaProfessor, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group col-xs-12 col-md-6">
+                                @Html.Label("Período")
+                                @Html.TextBox("Periodo", null, new { @class = "form-control", @type = "text", @id = "periodo" })
+                                @Html.ValidationMessageFor(model => model.DataInicio, "", new { @class = "text-danger" })
+                            </div>                            
+                            <div class="form-group col-xs-12 col-md-6">
+                                @Html.Label("Número de tentativas")
+                                @Html.EditorFor(model => model.NumeroTentativas, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.NumeroTentativas, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group col-xs-12 col-md-6">
+                                @Html.Label("É aleatório")
+                                @Html.EditorFor(model => model.IsAleatorio)
+                                @Html.ValidationMessageFor(model => model.IsAleatorio, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group col-xs-12 col-md-6">
+                                @Html.Label("É prova")
+                                @Html.EditorFor(model => model.IsProva)
+                                @Html.ValidationMessageFor(model => model.IsProva, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12" style="margin-top: 20px;">
+                        <div class="row">
+                            <div class="col-xs-12 form-group">
+                                <!-- Custom Tabs (Pulled to the right) -->
+                                <div class="nav-tabs-custom">
+                                    <ul class="nav nav-tabs pull-right">
+                                        <li class="active">
+                                            <a href="#tab-listagem" data-toggle="tab" aria-expanded="true" IdTipoQuestao="0">
+                                                Listagem de Questões&nbsp;<span id="label_Listagem_num" class="label label-primary pull-right">0</span>
+                                            </a>
+                                        </li>
+                                        <li class="tab-button">
+                                            <a href="#tab-certo-errado" data-toggle="tab" aria-expanded="false" IdTipoQuestao="1">
+                                                Modo Certo e Errado&nbsp;<span id="label_CertoErrado_num" class="label label-primary pull-right">0</span>
+                                            </a>
+                                        </li>
+                                        <li class="tab-button">
+                                            <a href="#tab-lacuna" data-toggle="tab" aria-expanded="false" IdTipoQuestao="2">
+                                                Modo Lacuna&nbsp;<span id="label_Lacuna_num" class="label label-primary pull-right">0</span>
+                                            </a>
+                                        </li>
+                                        <li class="tab-button">
+                                            <a href="#tab-coluna" data-toggle="tab" aria-expanded="false" IdTipoQuestao="3">
+                                                Modo Coluna&nbsp;<span id="label_Coluna_num" class="label label-primary pull-right">0</span>
+                                            </a>
+                                        </li>
+                                        <li class="tab-button">
+                                            <a href="#tab-associacao" data-toggle="tab" aria-expanded="false" IdTipoQuestao="4">
+                                                Modo Associação &nbsp;<span id="label_Associacao_num" class="label label-primary pull-right">0</span>
+                                            </a>
+                                        </li>
+                                        <li class="pull-left header"><i class="fa fa-th"></i> Cadastro de Questões</li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <!-- tab Listagem de Questões -->
+                                        <div class="tab-pane active" id="tab-listagem" IdTipoQuestao="0">
+                                            @Html.Partial("QuestoesListagem", @Model)
+                                        </div>
+                                        <!-- tab Certo e Errado -->
+                                        <div class="tab-pane" id="tab-certo-errado" IdTipoQuestao="1">
+                                            @Html.Partial("QuestoesCertoErrado", @Model)
+                                        </div>
+                                        <!-- tab Lacuna -->
+                                        <div class="tab-pane" id="tab-lacuna" IdTipoQuestao="2">
+                                            @Html.Partial("QuestoesLacuna", @Model)
+                                        </div>
+                                        <!-- tab Coluna -->
+                                        <div class="tab-pane" id="tab-coluna" IdTipoQuestao="3">
+                                            @Html.Partial("QuestoesColuna", @Model)
+                                        </div>
+                                        <!-- tab Associação -->
+                                        <div class="tab-pane" id="tab-associacao" IdTipoQuestao="4">
+                                            @Html.Partial("QuestoesAssociacao", @Model)
+                                        </div>
+                                        <!-- /.tab-content -->
+                                    </div>
+                                </div>
+                                <!-- nav-tabs-custom -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="box-footer">
+                    <input type="submit" value="Salvar" class="btn btn-primary pull-right" />
+                </div>
+            }
+        </div>
+    </section>
+</div>
+
+<script>
+    $('#listagem').DataTable({ "language": dados_translate });
+    $('#certo-errado-listagem').DataTable({ "language": dados_translate });
+    $('#lacuna-listagem').DataTable({ "language": dados_translate });
+    $('#coluna-listagem').DataTable({ "language": dados_translate });        
+    var select2 = $('.select2').select2({
+        tags: true,
+        tokenSeparators: [',', ' '],
+        width: '100%'       
+    });            
+    $('#periodo').daterangepicker({"locale": locale_drp});    
+    
+    /*
+    $('#numero-linhas').on('change', function () {               
+        $('.linhas-input').html('');
+        for (var i = 1; i <= $(this).val(); i++) {
+            $('.linhas-input').append(
+                '<div class="form-group col-xs-12 col-md-6">'+
+                    '<input type="text" name="name" class="form-control" value="" />'+
+                '</div>'+
+                '<div class="form-group col-xs-12 col-md-6">' +
+                    '<input type="text" name="name" class="form-control" value="" />'+
+                '</div>'
+            );
+        }
+    });
+    /****************************** AJAX ******************************/
+    //Chamando Ajax para visualização de listagem(datatable) ao clicar em uma aba do tab-pane
+    $('.tab-button').on('click', function(){                
+        atualizar_questao_index($($(this).find('a').attr('href')), $(this).find('a').attr('IdTipoQuestao'));
+    });
+    function montar_dataTable(context, dados) {        
+        if(true) { //TODO Validar para executar esse código só na orimeira vez que ta entrando no data table, ta criando!
+            var dados_add = Array();
+            dados.map(function(element, index) {
+            dados_add[index] = [
+                element.Titulo,
+                element.Enunciado,
+                element.PesoNota,
+                '<a id_questao="'+element.IdQuestao+'" class="btn-editar-questao btn btn-primary btn-xs" title="Editar"><i class="fa fa-pencil"></i></a>'+
+                '&nbsp;'+
+                '<a id_questao="'+element.IdQuestao+'" class="btn-remover-questao btn btn-danger btn-xs" title="Excluir"><i class="fa fa-remove"></i></a>'
+            ]
+            });                        
+            context.find('.datatable-table').DataTable({ "language": dados_translate }).rows.add(dados_add).draw();
+        } else { //Já ta criado, é uma edição
+            
+        }
+    }
+    function atualizar_select2(data, IdTipoQuestao) {      
+        if(IdTipoQuestao == 4){
+            var certas = JSON.parse(dados.JsonQuestao).certas;
+            var erradas = JSON.parse(dados.JsonQuestao).erradas;
+            console.log(certas, erradas);  
+            var dados = [
+                {
+                    "id": 1,
+                    "text": "Option 1",
+                    "selected": true             
+                }
+            ];
+        }
+    }
+    
+    function popula_edit(data, IdTipoQuestao) {
+        var dados = JSON.parse(data);                
+        $('#input-idquestao-associacao').val(dados.IdQuestao);        
+        $('#input-titulo-associacao').val(dados.Titulo);        
+        $('#input-enunciado-associacao').val(dados.Enunciado);        
+        $('#input-pesonota-associacao').val(dados.PesoNota);        
+        console.log(IdTipoQuestao);
+        atualizar_select2(data, IdTipoQuestao);
+        //TODO Danilo, adicionar e deixar selecionada as opções no select2
+        
+        //var newOption = new Option(data.text, data.id, false, false);    
+        //$('#input-certas-associacao').append(newOption).trigger('change');
+
+        //$('#input-certas-associacao').val(JSON.parse(dados.JsonQuestao).certas);        
+        //$('#input-erradas-associacao').val(JSON.parse(dados.JsonQuestao).erradas);        
+    }
+    function zerar_edit() {
+        $('#input-idquestao-associacao').val('');        
+        $('#input-titulo-associacao').val('');        
+        $('#input-enunciado-associacao').val('');        
+        $('#input-pesonota-associacao').val('');        
+        $('#input-certas-associacao').val('');        
+        $('#input-erradas-associacao').val('');        
+    }
+    function atualizar_questao_index(context, idTipoQuestao) {        
+        $.ajax({
+            url: '@Url.Action("Index", "Questao")' + '?idAtividade=@Html.Raw(Model.IdAtividade)&IdTipoQuestao=' + idTipoQuestao,            
+            cache: false,
+            dataType: 'html',  
+            success: function (data) {                
+                montar_dataTable(context, JSON.parse(data));
+            },
+            error: function () {
+                alert('Ocorreu algum erro de conexão. Por favor, tente novamente mais tarde');
+            }
+        });   
+    }
+
+    $('#tab-associacao').on('click', '#btn-adicionar-associacao', function (e) {
+        e.preventDefault();
+
+        var alt_certas = $(this).parents('#tab-associacao').find('#input-certas-associacao').val();
+        var alt_erradas = $(this).parents('#tab-associacao').find('#input-erradas-associacao').val();
+        var IdQuestao = null;
+        if ($(this).parents('#tab-associacao').find('#input-idquestao-associacao').val() != '') {
+            IdQuestao = $(this).parents('#tab-associacao').find('#input-idquestao-associacao').val();
+        }        
+        $.ajax({
+            url: '@Url.Action("Create", "Questao")',
+            data: {
+                IdQuestao: IdQuestao,
+                IdAtividade: "@Html.Raw(Model.IdAtividade)",
+                IdTipoQuestao: 4, //Código de modo associação no banco
+                Titulo: $(this).parents('#tab-associacao').find('#input-titulo-associacao').val(),
+                Enunciado: $(this).parents('#tab-associacao').find('#input-enunciado-associacao').val(),
+                PesoNota: $(this).parents('#tab-associacao').find('#input-pesonota-associacao').val(),
+                JsonQuestao: JSON.stringify({ certas: alt_certas, erradas: alt_erradas })                
+            },
+            cache: false,
+            dataType: 'html',
+            type: 'post',
+            success: function (data) {                
+                if (data == 'True') {                    
+                    atualizar_questao_index($(this).parents('#tab-associcao'), 4);
+                }                
+            },
+            error: function () {
+                alert('Ocorreu algum erro de conexão. Por favor, tente novamente mais tarde');
+            }
+        });        
+    });
+
+    $('#tab-associacao').on('click', '.btn-editar-questao', function (e) {
+        e.preventDefault();
+        
+        $.ajax({
+            url: '@Url.Action("Edit", "Questao")'+'?id='+$(this).attr('id_questao'),            
+            cache: false,
+            dataType: 'html',            
+            success: function (data) {                                
+                popula_edit(data, $(this).parents('#tab-associacao').attr('IdTipoQuestao'));
+            },
+            error: function () {
+                alert('Ocorreu algum erro de conexão. Por favor, tente novamente mais tarde');
+            }
+        });        
+    });
+
+     $('#tab-associacao').on('click', '.btn-remover-questao', function (e) {
+        e.preventDefault();
+        $.ajax({
+            url: '@Url.Action("Delete", "Questao")',
+            data: {
+                id: $(this).attr('id_questao')                
+            },
+            cache: false,
+            dataType: 'html',
+            type: 'post',
+            success: function (data) {                
+                if (data == 'True') {                    
+                    atualizar_questao_index($(this).parents('#tab-associcao'), 4);
+                }                
+            },
+            error: function () {
+                alert('Ocorreu algum erro de conexão. Por favor, tente novamente mais tarde');
+            }
+        });        
+    });
+</script>
+
+<style>
+    .select2-container--default .select2-selection--multiple .select2-selection__choice{color: #000 !important}
+</style>
+
+<script>
+var LabelNum = {
+    _CertoErrado: 0,
+    _Lacuna: 0,
+    _Coluna: 0,
+    _Associacao: 0,
+    set CertoErrado(value){
+        this._CertoErrado += value;
+        document.getElementById("label_CertoErrado_num").innerHTML = this._CertoErrado;
+        document.getElementById("label_Listagem_num").innerHTML = this._CertoErrado + this._Lacuna + this._Coluna + this._Associacao;
+    },
+    set Lacuna(value){
+        this._Lacuna += value;
+        document.getElementById("label_Lacuna_num").innerHTML = this._Lacuna;
+        document.getElementById("label_Listagem_num").innerHTML = this._CertoErrado + this._Lacuna + this._Coluna + this._Associacao;
+    },
+    set Coluna(value){
+        this._Coluna += value;
+        document.getElementById("label_Coluna_num").innerHTML = this._Coluna;
+        document.getElementById("label_Listagem_num").innerHTML = this._CertoErrado + this._Lacuna + this._Coluna + this._Associacao;
+    },
+    set Associacao(value){
+        this._Associacao += value;
+        document.getElementById("label_Associacao_num").innerHTML = this._Associacao;
+        document.getElementById("label_Listagem_num").innerHTML = this._CertoErrado + this._Lacuna + this._Coluna + this._Associacao;
+    }
+};
+
+function SendData(){
+	var xhttp = new XMLHttpRequest();
+    xhttp.open('POST', '/Atividades/Edit');
+    xhttp.setRequestHeader('Content-type', 'application/json;charset=UTF-8');
+    xhttp.onload = function () {
+        console.log("ok");
+    };
+    xhttp.send(MontarDados());
+}
+var ListaDeQuestoes = [];
+function MontarDados(){
+    var aux = [];
+    for(var i = 0; i < ListaDeQuestoes.length; i++)
+        if(ListaDeQuestoes[i] !== 'deleted')
+            aux[aux.length] = ListaDeQuestoes[i];
+    var atividade = {
+        IdAtividade: document.getElementById("IdAtividade").value,
+        IdTurmaDisciplinaProfessor: parseInt(document.getElementById("IdTurmaDisciplinaProfessor").value),
+        DataInicio: document.getElementById("DataInicio").value,
+        DataFim: document.getElementById("DataFim").value,
+        NumeroTentativas: parseInt(document.getElementById("NumeroTentativas").value),
+        IsAleatorio: document.getElementById("IsAleatorio").checked,
+        IsProva: document.getElementById("IsProva").checked,
+        Questoes : aux
+    };
+    return JSON.stringify(atividade);
+}
+function AddQuestao(tq, t, e, j, pn){
+    ListaDeQuestoes[ListaDeQuestoes.length] =
+    {
+        IdQuestao: 0,
+        IdAtividade: 0,
+        IdTipoQuestao: tq,
+        Titulo: t,
+        Enunciado: e,
+        JsonQuestao: JSON.stringify(j),
+        PesoNota: pn
+    };
+}
+@{ string code = ""; }
+@{
+    foreach(var q in Model.Questoes)
+    {
+        if(q.IdTipoQuestao == 1)
+        {
+            code += "LabelNum.CertoErrado = 1; "+
+            "AddQuestao(" + q.IdTipoQuestao + ",\'" + q.Titulo + "\',\'" + q.Enunciado + "\',\'" + q.JsonQuestao + "\'," + q.PesoNota + ");"+
+            "ListaDeQuestoes[ListaDeQuestoes.length - 1].IdQuestao = " + q.IdQuestao + "; " +
+            "ListaDeQuestoes[ListaDeQuestoes.length - 1].IdAtividade = " + q.IdAtividade + ";";
+        }
+        else if(q.IdTipoQuestao == 2)
+        {
+            code += "LabelNum.Lacuna = 1; "+
+            "AddQuestao(" + q.IdTipoQuestao + ",\'" + q.Titulo + "\',\'" + q.Enunciado + "\',\'" + q.JsonQuestao + "\'," + q.PesoNota + ");"+
+            "ListaDeQuestoes[ListaDeQuestoes.length - 1].IdQuestao = " + q.IdQuestao + "; " +
+            "ListaDeQuestoes[ListaDeQuestoes.length - 1].IdAtividade = " + q.IdAtividade + ";";
+        }
+        else if(q.IdTipoQuestao == 3)
+        {
+            code += "LabelNum.Coluna = 1; "+
+            "AddQuestao(" + q.IdTipoQuestao + ",\'" + q.Titulo + "\',\'" + q.Enunciado + "\',\'" + q.JsonQuestao + "\'," + q.PesoNota + ");"+
+            "ListaDeQuestoes[ListaDeQuestoes.length - 1].IdQuestao = " + q.IdQuestao + "; " +
+            "ListaDeQuestoes[ListaDeQuestoes.length - 1].IdAtividade = " + q.IdAtividade + ";";
+        }
+        else if(q.IdTipoQuestao == 4)
+        {
+            code += "LabelNum.Associacao = 1; "+
+            "AddQuestao(" + q.IdTipoQuestao + ",\'" + q.Titulo + "\',\'" + q.Enunciado + "\',\'" + q.JsonQuestao + "\'," + q.PesoNota + ");"+
+            "ListaDeQuestoes[ListaDeQuestoes.length - 1].IdQuestao = " + q.IdQuestao + "; " +
+            "ListaDeQuestoes[ListaDeQuestoes.length - 1].IdAtividade = " + q.IdAtividade + ";";
+        }
+    }
+}
+@Html.Raw(@code)
+</script>

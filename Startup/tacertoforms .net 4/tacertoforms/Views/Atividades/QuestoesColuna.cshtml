@@ -1,0 +1,148 @@
+@model tacertoforms.Models.ViewModelAtividade
+<div class="row">
+    <div class="col-xs-12 col-md-6">
+        <div class="row">
+            @using (Html.BeginForm())
+            {
+                <div class="form-group col-xs-12">
+                    @Html.TextBox("IdQuestao", null, new { @id = "input-idquestao-coluna", @type = "hidden" })
+                    @Html.Label("Título")
+                    @Html.TextBox("Titulo", null, new { @class = "form-control", @id = "input-titulo-coluna" })
+                </div>
+                <div class="form-group col-xs-12">
+                    @Html.Label("Enunciado")
+                    @Html.TextArea("Enunciado", null, new { @class = "form-control", @id = "input-enunciado-coluna" })
+                </div>
+                <div class="form-group col-xs-12">
+                    @Html.Label("Peso Nota")
+                    @Html.TextBox("PesoNota", null, new { @class = "form-control", @type = "number", @step = ".01", @min = "0", @max = "1", @id = "input-pesonota-coluna" })
+                </div>
+                <div class="form-group col-xs-12">
+                    <label for="exampleInputFile">Adicionar Imagem</label>
+                    <input type="file" id="exampleInputFile">
+                </div>
+                <div class="form-group col-xs-12">
+                    @Html.Label("Número de linhas")
+                    @Html.TextBox("Frase", "0", new { @class = "form-control", @type = "number", @id = "numero-linhas" })
+                </div>
+                <div class="linhas-input" id="ID_COLUNAS">
+                                                                                
+                </div>
+
+                <div class="form-group col-xs-12">
+                    <input type="submit" value="Adicionar" class="btn btn-success" />
+                </div>
+            }
+        </div>
+            </div>
+    <div class="col-xs-12 col-md-6">
+        <table id="coluna-listagem" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Título</th>
+                    <th>Número de Linhas</th>                                                            
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>O cravo brigou cum a rosa...</td>
+                    <td>4</td>                                                            
+                    <td>
+                        <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
+                        <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-remove"></i></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Não trabalhe hoje, se está...</td>                                                            
+                    <td>5</td>
+                    <td>
+                        <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
+                        <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-remove"></i></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>vlw pelo presente...</td>
+                    <td>2</td>
+                    <td>
+                        <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
+                        <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-remove"></i></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>ql o num do seu cel?...</td>
+                    <td>2</td>                                                           
+                    <td>
+                        <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
+                        <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-remove"></i></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>O cravo brigou cum a rosa...</td>
+                    <td>4</td>                                                           
+                    <td>
+                        <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
+                        <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-remove"></i></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>Não trabalhe hoje, se está...</td>
+                    <td>5</td>                                                           
+                    <td>
+                        <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
+                        <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-remove"></i></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td>vlw pelo presente...</td>
+                    <td>2</td>                                                           
+                    <td>
+                        <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
+                        <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-remove"></i></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td>ql o num do seu cel?...</td>
+                    <td>2</td>                                                           
+                    <td>
+                        <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
+                        <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-remove"></i></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    function GetJsonColuna(){
+        console.log(1)
+        var colunas = document.getElementById("ID_COLUNAS").childNodes;
+        console.log(2)
+        var json = {
+            coluna1: [],
+            coluna2: [],
+        }
+        console.log(3)
+        if(colunas.length > 1){
+        console.log(4)
+            for(var i = 0; i < colunas.length; i++){
+                if(i%2 === 0)
+                    json.coluna1[json.coluna1.length] = colunas[i].childNodes[0].value;
+                else
+                    json.coluna2[json.coluna2.length] = colunas[i].childNodes[0].value;
+            }
+        }
+        console.log(5)
+        return json;
+    }
+</script>

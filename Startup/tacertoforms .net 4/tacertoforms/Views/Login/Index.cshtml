@@ -1,0 +1,70 @@
+﻿@{
+    Layout = "~/Views/Login/_Layout.cshtml";
+    ViewBag.Title = "Login";
+}
+
+<div style="position: relative; height: 100vh;">
+    <img id="loginImg" src="~/Content/images/panel.png" alt="">
+    <img id="logoImg" src="~/Content/images/LOGO-ABERTURA.png" alt="">
+    <img id="cardImg" src="~/Content/images/cartaVermelhaBack.png" alt="">
+    <img id="relogioImg" src="~/Content/images/relogio_solo.png" alt="">
+    <img id="trofeuImg" src="~/Content/images/botaoTrofeu.png" alt="">
+    <img id="lacunasImg" src="~/Content/images/botaoLacunas.png" alt="">
+    <img id="certoImg" src="~/Content/images/botaoCerto.png" alt="">
+    <img id="erradoImg" src="~/Content/images/botaoErrado.png" alt="">
+    <img id="exploradorImg" src="~/Content/images/botaoExplorador.png" alt="">
+    <img id="hardcoreImg" src="~/Content/images/botaoHardcore.png" alt="">
+    <img id="jogarImg" src="~/Content/images/botaoJogar.png" alt="">
+    <img id="geloImg" src="~/Content/images/cartaAzulBack.png" alt="">
+    <img id="yellowImg" src="~/Content/images/cartaAmarelaBack.png" alt="">
+    <img id="greenImg" src="~/Content/images/cartaVerdeBack.png" alt="">
+    <img id="aurelioImg" src="~/Content/images/botaoAurelio.png" alt="">
+    <img id="randomImg" src="~/Content/images/botaoRandom.png" alt="">
+    <img id="casualImg" src="~/Content/images/menucasual.png" alt="">
+</div>
+<div id="loginForm" class="container">
+    <div class="col s12">
+        <div class="row emailRow">
+            <div class="input-field col s12">
+                <i class="material-icons prefix">account_circle</i>
+                <input id="email" type="email" name="email" class="validate">
+                <label for="email">E-mail</label>
+                <span class="helper-text" data-error="errado" data-success="correto">ex: seunome@gmail.com</span>
+            </div>
+        </div>
+        <div class="row senhaRow">
+            <div class="input-field col s12">
+                <i class="material-icons prefix">lock</i>
+                <input id="password" type="password" name="password" class="validate">
+                <label for="password">Senha</label>
+            </div>
+        </div>
+        <div class="row lembraRow">
+            <p>
+                <div class="col s6">
+                    <label for="remember">
+                        <input type="checkbox" id="remember" name="remember" checked="checked"/>
+                        <span>Lembrar-me</span>
+                    </label>
+                </div>
+                <div class="col s6">
+                    <a href="#esqueciasenha">Esqueci a senha</a>
+                </div>
+            </p>	
+        </div>
+        <div class="row right-align buttonRow">
+            <div class="input-field col s12">
+                <button class="btn waves-effect waves-light"
+                        onclick="(()=>{
+                        var email = document.getElementById('email');
+                        var password = document.getElementById('password');
+                        if(email.value = 'lucas.barque@sesims.com.br' && password.value == '123456abcde')
+                            window.location.pathname = '/Home/Index';
+                    })()"
+                           >
+                    Autenticar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

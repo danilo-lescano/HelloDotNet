@@ -1,0 +1,14 @@
+.user-panel { height: 44px; }
+.user-panel>.info { padding: 5px 0px 0 5px !important; }
+.navbar-nav>.user-menu>.dropdown-menu>li.user-header { height: 65px; }
+.dados-tabela {color: #222;}
+.gallery-btn { width: 100px; display: inline-block; height: 100px;}
+.image-item{display: inline-block; position: relative; margin-right: 10px;}
+.arquivo-item { display: inline-block; position: relative; margin-right: 10px; width: 200px; }
+.btn-remove{position: absolute; top: 0; right: 0}
+.btn-app{margin: 0 !important; width: 200px;}
+.clear{display: block; width: 100%}
+.checkbox-ativo{margin-left: 20px;}
+
+
+.mt10{margin-top: 10px;}.mt20{margin-top: 20px;}.mt30{margin-top: 30px;}.mt40{margin-top: 40px;}.mt50{margin-top: 50px;}.mt60{margin-top: 60px;}.mt70{margin-top: 70px;}.mt80{margin-top: 80px;}.mt90{margin-top: 90px;}.mt100{margin-top: 100px;}.mt110{margin-top: 110px;}.mt120{margin-top: 120px;}.mt130{margin-top: 130px;}.mt140{margin-top: 140px;}.mt150{margin-top: 150px;}.mt160{margin-top: 160px;}.mt170{margin-top: 170px;}.mt180{margin-top: 180px;}.mt190{margin-top: 190px;}.mt200{margin-top: 200px;}

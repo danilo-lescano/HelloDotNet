@@ -1,0 +1,126 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>@ViewBag.Title</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
+    @Styles.Render("~/Content/bootstrap.min.css")
+    @Styles.Render("~/Content/font-awesome.min.css")
+    @Styles.Render("~/Content/ionicons.min.css")
+    @Styles.Render("~/Content/jquery-jvectormap.css")
+    @Styles.Render("~/Content/AdminLTE.min.css")
+    @Styles.Render("~/Content/blue.css")
+    @Styles.Render("~/Content/skin-blue.min.css")
+    @Styles.Render("~/Content/admin.css")
+    @Styles.Render("~/Content/dataTables.bootstrap.min.css")
+    @Styles.Render("~/Content/jquery.fancybox.min.css")
+    @Styles.Render("~/Content/daterangepicker.css")
+    @Styles.Render("~/Content/iCheck/all.css")    
+    @Styles.Render("~/Content/select2.min.css")
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+    <!-- Site wrapper -->
+    <div class="wrapper">
+
+        <header class="main-header">
+            <!-- Logo -->
+            <a href="#" class="logo">
+                <!-- mini logo for sidebar mini 50x50 pixels -->
+                <span class="logo-mini"><img src="~/Content/images/LOGO-ABERTURA.png"></span>
+                <!-- logo for regular state and mobile devices -->
+                <span class="logo-lg"><img src="~/Content/images/LOGO-ABERTURA2.png"></span>
+            </a>
+            <!-- Header Navbar: style can be found in header.less -->
+            <nav class="navbar navbar-static-top">
+                <!-- Sidebar toggle button-->
+                <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+
+                <div class="navbar-custom-menu">
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown user user-menu">
+                            <a href="#">Lucas Barque da Silva</a>
+
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        <aside class="main-sidebar">
+            <section class="sidebar">
+                <div class="user-panel">
+                    <div class="pull-left info">
+                        <p>Área administrativa</p>
+                    </div>
+                </div>
+                <ul class="sidebar-menu" data-widget="tree">
+                    <li class="header">MENU DE NAVEGAÇÃO</li>
+                    @*<li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="../../index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
+                            <li><a href="../../index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
+                        </ul>
+                    </li>*@
+                    <li><a href="@Url.Action("Index", "Home")"><i class="fa fa-home"></i> <span>Início</span></a></li>
+                    <li><a href="@Url.Action("Index", "Instituicaos")"><i class="fa fa-institution"></i> <span>Instituições</span></a></li>
+                    <li><a href="@Url.Action("Index", "Pessoas")"><i class="fa fa-user"></i><span>Pessoas</span></a></li>
+                    <li><a href="@Url.Action("Index", "Turmas")"><i class="fa fa-users"></i> <span>Turmas</span></a></li>
+                    <li><a href="@Url.Action("Index", "Disciplinas")"><i class="fa fa-reorder"></i> <span>Disciplinas</span></a></li>
+                    <li><a href="@Url.Action("Index", "Atividades")"><i class="fa fa-th-list"></i> <span>Atividades</span></a></li>
+                </ul>
+            </section>
+        </aside>
+        @Scripts.Render("~/Scripts/functions.js")
+        @Scripts.Render("~/Scripts/jquery.min.js")
+        @Scripts.Render("~/Scripts/bootstrap.min.js")
+        @Scripts.Render("~/Scripts/fastclick.js")
+        @Scripts.Render("~/Scripts/adminlte.min.js")
+        @Scripts.Render("~/Scripts/jquery.sparkline.min.js")
+        @Scripts.Render("~/Scripts/jquery-jvectormap-1.2.2.min.js")
+        @Scripts.Render("~/Scripts/jquery-jvectormap-world-mill-en.js")
+        @Scripts.Render("~/Scripts/jquery.slimscroll.min.js")
+        @Scripts.Render("~/Scripts/Chart.js")
+        @Scripts.Render("~/Scripts/demo.js")
+        @Scripts.Render("~/Scripts/jquery.dataTables.min.js")
+        @Scripts.Render("~/Scripts/dataTables.bootstrap.min.js")
+        @Scripts.Render("~/Scripts/jquery.fancybox.min.js")
+        @Scripts.Render("~/Scripts/moment.min.js")
+        @Scripts.Render("~/Scripts/daterangepicker.js")
+        @Scripts.Render("~/Scripts/moment-with-locales.min.js")
+        @Scripts.Render("~/Scripts/jquery.inputmask.js")
+        @Scripts.Render("~/Scripts/jquery.inputmask.date.extensions.js")
+        @Scripts.Render("~/Scripts/jquery.inputmask.extensions.js")
+        @Scripts.Render("~/Scripts/cidades-estados.js")
+        @Scripts.Render("~/Scripts/busca-cep.js")
+        @Scripts.Render("~/Scripts/icheck.min.js")        
+        @Scripts.Render("~/Scripts/select2.min.js")
+
+        @RenderSection("scripts", required: false)
+
+        @RenderBody()
+
+        <footer class="main-footer">
+            <div class="pull-right hidden-xs">
+                <b>Versão</b> 2.4.18
+            </div>
+            <strong>Copyright &copy; @DateTime.Now.Year - STARTUP/SESI</strong> Todos os direitos reservados.
+        </footer>
+        <div class="control-sidebar-bg"></div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,151 @@
+@model tacertoforms.Models.ViewModelAtividade
+<div class="row">
+    <div class="col-xs-12 col-md-6">
+        <div class="row">
+            <input class="form-control" id="questaocertoerrado_index" name="Titulo" type="hidden" value="">
+
+            <div class="form-group col-xs-12">
+                <label for="T_tulo">Título</label>
+                <input class="form-control" id="questaocertoerrado_titulo" name="Titulo" type="text" value="">
+            </div>
+            <div class="form-group col-xs-12">
+                <label for="Enunciado">Enunciado</label>
+                <textarea class="form-control" cols="20" id="questaocertoerrado_enunciado" name="Enunciado" rows="2"></textarea>
+            </div>
+            <div class="form-group col-xs-12">
+                <label for="exampleInputFile">Adicionar Imagem</label>
+                <input type="file" id="questaocertoerrado_exampleInputFile">
+            </div>
+            <div class="form-group col-xs-12 col-md-6">
+                <label for="Resposta">Resposta</label>
+                <select class="form-control" id="questaocertoerrado_verdadeiroFalso" name="VerdadeiroFalso">
+                    <option value="Verdadeiro">Verdadeiro</option>
+                    <option value="Falso">Falso</option>
+                </select>
+            </div>
+            <div class="form-group col-xs-12">
+                <label for="questaocertoerrado_pesonota">Peso Nota</label>
+                <input class="form-control" id="questaocertoerrado_pesonota" name="PenoNota" type="number" value="1">
+            </div>
+            <div class="form-group col-xs-12">
+                <input type="button" value="Adicionar" class="btn btn-success" onclick="AdicionarQuestaoCertoErrado()">
+            </div>
+
+        </div>
+    </div>
+    <div class="col-xs-12 col-md-6">
+        <table id="certo-errado-listagem" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>#</th> <th>Título</th> <th>Enunciado</th> <th>Peso Nota</th> <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody id="questaocertoerrado_tabela">
+                @for(int i=1; i <= Model.Questoes.Count; i++)
+                {
+                    var q = Model.Questoes[i-1];
+                    if(q.IdTipoQuestao == 1)
+                    {
+                        <tr>
+                            <td>@i</td>
+                            <td>@q.Titulo</td>
+                            <td>@q.Enunciado</td>
+                            <td>@q.PesoNota</td>
+                            <td>
+                                <a class="btn btn-primary btn-xs" onclick="EditarQuestaoCertoErrado(this, @i)"><i class="fa fa-pencil"></i></a>
+                                &nbsp;
+                                <a class="btn btn-danger btn-xs" onclick="DeletarQuestaoCertoErrado(this, @i)"><i class="fa fa-remove"></i></a>
+                            </td>
+                        </tr>
+                    }
+                }
+                <!-- EXEMPLO
+                <tr id="mini_questaocertoerrado_NUM">
+                    <td>1</td>
+                    <td>Quem descobriu o Brasil</td>
+                    <td>Verdadeiro</td>
+                    <td>Verdadeiro</td>
+                    <td>
+                        
+                    </td>
+                </tr>
+                -->
+            </tbody>
+        </table>
+    </div>
+</div>
+<script>
+var EdditingThis;
+function AdicionarQuestaoCertoErrado(){
+    var index = document.getElementById('questaocertoerrado_index').value;
+    LabelNum.CertoErrado = 1;
+    if(index === ''){
+        AddQuestao(
+            1,//id tipo questao
+            document.getElementById("questaocertoerrado_titulo").value,
+            document.getElementById("questaocertoerrado_enunciado").value,
+            {
+                isVerdeiro: document.getElementById("questaocertoerrado_verdadeiroFalso").value.toUpperCase() == "Verdadeiro".toUpperCase() ? true : false
+            },
+            document.getElementById("questaocertoerrado_pesonota").value
+        );
+        index = ListaDeQuestoes.length;
+        $('#certo-errado-listagem').DataTable().row.add([
+            index,
+            document.getElementById("questaocertoerrado_titulo").value,
+            document.getElementById("questaocertoerrado_enunciado").value,
+            document.getElementById("questaocertoerrado_pesonota").value,
+            '<a class="btn btn-primary btn-xs" onclick="EditarQuestaoCertoErrado(this, ' + index + ')"><i class="fa fa-pencil"></i></a>'+
+            '&nbsp;'+
+            '<a class="btn btn-danger btn-xs" onclick="DeletarQuestaoCertoErrado(this, ' + index + ')"><i class="fa fa-remove"></i></a>'
+        ]).draw(false);
+    }
+    else{
+        index = parseInt(index);
+        ListaDeQuestoes[index-1].Titulo = document.getElementById("questaocertoerrado_titulo").value;
+        ListaDeQuestoes[index-1].Enunciado = document.getElementById("questaocertoerrado_enunciado").value;
+        ListaDeQuestoes[index-1].JsonQuestao = JSON.stringify(
+            {
+                isVerdadeiro: document.getElementById("questaocertoerrado_verdadeiroFalso").value.toUpperCase() == "Verdadeiro".toUpperCase() ? true : false
+            }
+        );
+        ListaDeQuestoes[index-1].PesoNota = document.getElementById("questaocertoerrado_pesonota").value;
+        
+        var pageParamTable = $('#certo-errado-listagem').DataTable();
+        var tableRow = pageParamTable.row($(EdditingThis).parents('tr'));
+        var rData = [
+            index,
+            ListaDeQuestoes[index-1].Titulo,
+            ListaDeQuestoes[index-1].Enunciado,
+            ListaDeQuestoes[index-1].PesoNota,
+            '<a class="btn btn-primary btn-xs" onclick="EditarQuestaoCertoErrado(this, ' + index + ')"><i class="fa fa-pencil"></i></a>'+
+            '&nbsp;'+
+            '<a class="btn btn-danger btn-xs" onclick="DeletarQuestaoCertoErrado(this, ' + index + ')"><i class="fa fa-remove"></i></a>'
+        ];
+        pageParamTable
+            .row(tableRow)
+            .data(rData)
+            .draw();
+    }
+    
+    document.getElementById('questaocertoerrado_index').value =
+    document.getElementById("questaocertoerrado_titulo").value =
+    document.getElementById("questaocertoerrado_enunciado").value = '';
+    document.getElementById("questaocertoerrado_verdadeiroFalso").value = 'Verdadeiro';
+    document.getElementById("questaocertoerrado_pesonota").value = 1;
+}
+function EditarQuestaoCertoErrado(e, index){
+    EdditingThis = e;
+    var json = JSON.parse(ListaDeQuestoes[index-1].JsonQuestao);
+    document.getElementById('questaocertoerrado_index').value = index;
+    document.getElementById("questaocertoerrado_titulo").value = ListaDeQuestoes[index-1].Titulo;
+    document.getElementById("questaocertoerrado_enunciado").value = ListaDeQuestoes[index-1].Enunciado;
+    document.getElementById("questaocertoerrado_verdadeiroFalso").value = json.isVerdadeiro ? "Verdadeiro" : "Falso" ;
+    document.getElementById("questaocertoerrado_pesonota").value = ListaDeQuestoes[index-1].PesoNota;
+}
+function DeletarQuestaoCertoErrado(e, index){
+    ListaDeQuestoes[index - 1] = 'deleted';
+    LabelNum.CertoErrado = -1;
+    $('#certo-errado-listagem').DataTable().row($(e).parents('tr')).remove().draw(false);
+}
+</script>
