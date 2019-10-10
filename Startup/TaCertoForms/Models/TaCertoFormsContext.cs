@@ -27,7 +27,7 @@ namespace TaCertoForms.Models{
         public DbSet<TurmaDisciplinaProfessor> TurmaDisciplinaProfessors { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionBuilder){
-            optionBuilder.UseSqlServer(@"Server=SRV-SGBD02\SQL2016PRD;Database=StartupJogos_SESI;User Id=StartupJogos_SESI;Password=StartupJogos_SESI7654$;");
+            optionBuilder.UseSqlServer(@"Server=localhost;Database=Startup;Trusted_Connection=True;");
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder){
             modelBuilder.HasDefaultSchema("TaCerto");
