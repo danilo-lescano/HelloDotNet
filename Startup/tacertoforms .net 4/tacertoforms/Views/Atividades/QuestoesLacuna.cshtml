@@ -5,18 +5,18 @@
         <div class="row">
             @using (Html.BeginForm())
             {
+                @Html.TextBox("IdQuestao", null, new { @id = "tabela-de-lacunaIdQuestao", @type = "hidden" })
                 <div class="form-group col-xs-12">
-                    @Html.TextBox("IdQuestao", null, new { @id = "input-idquestao-lacuna", @type = "hidden" })
                     @Html.Label("Título")
-                    @Html.TextBox("Titulo", null, new { @class = "form-control", @id = "input-titulo-lacuna" })
+                    @Html.TextBox("Titulo", null, new { @class = "form-control", @id = "tabela-de-lacunaTitulo" })
                 </div>
                 <div class="form-group col-xs-12">
                     @Html.Label("Enunciado")
-                    @Html.TextArea("Enunciado", null, new { @class = "form-control", @id = "input-enunciado-lacuna" })
+                    @Html.TextArea("Enunciado", null, new { @class = "form-control", @id = "tabela-de-lacunaEnunciado" })
                 </div>
                 <div class="form-group col-xs-12">
                     @Html.Label("Peso Nota")
-                    @Html.TextBox("PesoNota", null, new { @class = "form-control", @type = "number", @step = ".01", @min = "0", @max = "1", @id = "input-pesonota-lacuna" })
+                    @Html.TextBox("PesoNota", null, new { @class = "form-control", @type = "number", @step = ".01", @min = "0", @max = "1", @id = "tabela-de-lacunaPesoNota" })
                 </div>
                 <div class="form-group col-xs-12">
                     <label for="exampleInputFile">Adicionar Imagem</label>
@@ -24,24 +24,26 @@
                 </div>
                 <div class="form-group col-xs-12">
                     @Html.Label("Frase")
-                    @Html.TextBox("Frase", "O cravo brigou cum a rosa de baixo de uma sacada, o cravo sail ferido e a rosa despedasada", new { @class = "form-control" })
+                    <div id="tabela-de-lacunaFrase" class="form-control" onfocusin="hideShadow()" onfocusout="showShadow()" onkeyup="ChangeInputTextLacuna(this, document.getElementById('tabela-de-lacunaFrase-shadow'))" contenteditable="true"></div>
+                    <div id="tabela-de-lacunaFrase-shadow" class="form-control" onclick="hideandfocus()"></div>
                 </div>
                 <div class="form-group col-xs-12">
                     @Html.Label("Palavras Certas")
-                    @Html.DropDownList("palavrascertas[]",
-                    new SelectList(new List<String>()),
-                    null,
-                    new { @class = "select2 form-control", @multiple = "multiple", @id = "input-certas-lacuna" })
+                    <div id="palavras-certas-lacuna" class="form-control" onclick="moveCursorToEnd(document.getElementById('palavras-certas-lacuna-span'))">
+                        <span id="palavras-certas-lacuna-lista">
+                            <span id="palavras-certas-lacuna-span" onfocusin="focusIn()" onfocusout="focusOut()" contenteditable="true" onkeyup="ChangeInputOpcoesLacuna(this, event)"></span>
+                        </span>
+                    </div>
                 </div>
                 <div class="form-group col-xs-12">
                     @Html.Label("Palavras Erradas")
                     @Html.DropDownList("palavraserradas[]",
                     new SelectList(new List<String>()),
                     null,
-                    new { @class = "select2 form-control", @multiple = "multiple", @id = "input-erradas-lacuna" })
+                    new { @class = "select2 form-control", @multiple = "multiple", @id = "tabela-de-lacunaErradas" })
                 </div>
                 <div class="form-group col-xs-12">
-                    <input type="submit" value="Adicionar" class="btn btn-success" />
+                    <input type="button" value="Adicionar" class="btn btn-success" onclick="AddQuestao('tabela-de-lacuna')" />
                 </div>
             }
         </div>
@@ -49,96 +51,82 @@
     <div class="col-xs-12 col-md-6">
         <table id="lacuna-listagem" class="table table-bordered table-striped">
             <thead>
-                <tr>               
+                <tr>
                     <th>#</th>
                     <th>Título</th>
-                    <th>Palavras Certas</th>
-                    <th>Palavras Erradas</th>
+                    <th>Enunciado</th>
+                    <th>Peso Nota</th>
                     <th>Ações</th>
                 </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>O cravo brigou cum a rosa...</td>
-                    <td>4</td>
-                    <td>2</td>
-                    <td>
-                        <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
-                        <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-remove"></i></a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Não trabalhe hoje, se está...</td>
-                    <td>5</td>
-                    <td>5</td>
-                    <td>
-                        <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
-                        <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-remove"></i></a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>vlw pelo presente...</td>
-                    <td>2</td>
-                    <td>3</td>
-                    <td>
-                        <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
-                        <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-remove"></i></a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td>ql o num do seu cel?...</td>
-                    <td>2</td>
-                    <td>1</td>
-                    <td>
-                        <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
-                        <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-remove"></i></a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td>O cravo brigou cum a rosa...</td>
-                    <td>4</td>
-                    <td>2</td>
-                    <td>
-                        <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
-                        <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-remove"></i></a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>6</td>
-                    <td>Não trabalhe hoje, se está...</td>
-                    <td>5</td>
-                    <td>5</td>
-                    <td>
-                        <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
-                        <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-remove"></i></a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>7</td>
-                    <td>vlw pelo presente...</td>
-                    <td>2</td>
-                    <td>3</td>
-                    <td>
-                        <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
-                        <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-remove"></i></a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>8</td>
-                    <td>ql o num do seu cel?...</td>
-                    <td>2</td>
-                    <td>1</td>
-                    <td>
-                        <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
-                        <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-remove"></i></a>
-                    </td>
-                </tr>
-            </tbody>
+            </thead>            
         </table>
     </div>
 </div>
+
+<script>    
+    $('#tabela-de-lacunaFrase').mouseup(function () {        
+        if (this.selectionStart != this.selectionEnd) {
+            console.log(this.selectionStart);
+            console.log(this.value.substring(this.selectionStart, this.selectionEnd));
+        }
+    });
+</script>
+
+<script>
+    function ChangeInputTextLacuna(el, shadow){
+        shadow.innerHTML = el.innerHTML;
+    }
+
+    function ChangeInputOpcoesLacuna(el, event){
+        var textOriginal = document.getElementById('tabela-de-lacunaFrase').innerHTML;
+        textOriginal = textOriginal.replace(new RegExp('<br>', 'g'), "");
+        textOriginal = textOriginal.replace(new RegExp('\n', 'g'), "");
+        var valorDigitado = el.innerHTML.replace(new RegExp('<br>', 'g'), "").replace(new RegExp('<div>', 'g'), "").replace(new RegExp('</div>', 'g'), "");
+        var shadow = document.getElementById('tabela-de-lacunaFrase-shadow');
+        var matchs = textOriginal.match(new RegExp(valorDigitado, 'g'));
+        matchs = matchs ? matchs.length : 0;
+
+        shadow.innerHTML = textOriginal.replace(new RegExp(el.innerHTML, 'g'),
+            '<span style="color: red; font-weight: bold;">'+
+                el.innerHTML+
+            '</span>'
+        );
+        if(matchs > 0){
+            if(event.keyCode === 13){
+                var s = document.createElement("span");
+                s.classList.add("palavra-certa-lacuna");
+                s.innerHTML = "<span class='close-btn-lacuna' onclick='deleteMyFather(this)'>×</span>" + valorDigitado;
+                el.insertAdjacentElement("beforebegin", s);
+                el.innerHTML = "";
+            };
+            el.classList.remove("alertText");
+        }
+        else
+            el.classList.add("alertText");
+    }
+
+    function focusIn(){
+        document.getElementById("palavras-certas-lacuna").classList.add("highlight-lacuna");
+    }
+    function focusOut(){
+        document.getElementById("palavras-certas-lacuna").classList.remove("highlight-lacuna");
+    }
+    function hideShadow(){
+        document.getElementById("tabela-de-lacunaFrase").style.display = "block";
+        document.getElementById("tabela-de-lacunaFrase-shadow").style.display = "none";
+    }
+    function showShadow(){
+        document.getElementById("tabela-de-lacunaFrase").style.display = "none";
+        document.getElementById("tabela-de-lacunaFrase-shadow").style.display = "block";
+    }
+    function hideandfocus(){
+        hideShadow();
+        moveCursorToEnd(document.getElementById('tabela-de-lacunaFrase'));
+    }
+    function deleteMyFather(el){
+        el.parentNode.parentNode.removeChild(el.parentNode);
+    }
+    function moveCursorToEnd(el) {
+        el.focus();
+    }
+</script>

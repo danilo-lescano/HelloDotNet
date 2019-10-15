@@ -12,3 +12,59 @@
 
 
 .mt10{margin-top: 10px;}.mt20{margin-top: 20px;}.mt30{margin-top: 30px;}.mt40{margin-top: 40px;}.mt50{margin-top: 50px;}.mt60{margin-top: 60px;}.mt70{margin-top: 70px;}.mt80{margin-top: 80px;}.mt90{margin-top: 90px;}.mt100{margin-top: 100px;}.mt110{margin-top: 110px;}.mt120{margin-top: 120px;}.mt130{margin-top: 130px;}.mt140{margin-top: 140px;}.mt150{margin-top: 150px;}.mt160{margin-top: 160px;}.mt170{margin-top: 170px;}.mt180{margin-top: 180px;}.mt190{margin-top: 190px;}.mt200{margin-top: 200px;}
+
+
+.highlight-lacuna{
+    border-color: #3c8dbc
+}
+#tabela-de-lacunaFrase{
+    height: 100px;
+    overflow: hidden;
+    display: none;
+}
+#tabela-de-lacunaFrase-shadow{
+    height: 100px;
+    overflow: hidden;
+}
+#palavras-certas-lacuna{
+    display: inline-table;
+}
+#palavras-certas-lacuna-span{
+    background: transparent;
+    border: none;
+    outline: 0;
+    box-shadow: none;
+    -webkit-appearance: textfield;
+    box-sizing: border-box;
+    font-size: 100%;
+    float: left;
+    margin-right: 5px;
+    margin-top: 5px;
+    overflow: hidden;
+    height: 20px;
+    min-width: 2px;
+}
+.palavra-certa-lacuna{
+    background-color: #e4e4e4;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    cursor: default;
+    float: left;
+    margin-right: 5px;
+    margin-top: 5px;
+    padding: 0 5px;
+    color: black;
+}
+.close-btn-lacuna{
+    color: #999;
+    cursor: pointer;
+    display: inline-block;
+    font-weight: bold;
+    margin-right: 2px;
+}
+.close-btn-lacuna:hover{
+    color: black;
+}
+.alertText{
+    color: rgb(165, 10, 10);
+}

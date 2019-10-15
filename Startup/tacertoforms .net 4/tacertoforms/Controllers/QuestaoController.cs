@@ -31,8 +31,7 @@ namespace tacertoforms.Controllers{
             return Json(questao, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
-        public bool Create(Questao questao)
-        {
+        public JsonResult Create(Questao questao){
             if(questao.IdQuestao == 0){
                 db.Questaos.Add(questao);
                 db.SaveChanges();
@@ -41,7 +40,7 @@ namespace tacertoforms.Controllers{
                 db.Entry(questao).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
             }
-            return true;
+            return Json(questao);
         }
         [HttpPost]
         public bool Delete(int? id){

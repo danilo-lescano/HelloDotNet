@@ -55,7 +55,7 @@ namespace tacertoforms.Controllers{
                 db.Questaos.Add(q);
                 db.SaveChanges();
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Edit", new { id = atividade.IdAtividade});
         }
 
         // GET: Atividades/Edit/5
@@ -136,45 +136,3 @@ namespace tacertoforms.Controllers{
         }
     }
 }
-/*
-var atividade = {
-    IdAtividade: 0,
-    IdTurmaDisciplinaProfessor: 0,
-    DataInicio: '10/10/2019',
-    DataFim: '20/10/2019',
-    NumeroTentativas: 10,
-    IsAleatorio: true,
-    IsProva: false,
-    Questoes : [
-        {
-			IdQuestao: 0,
-            IdAtividade: 0,
-            IdTipoQuestao: 1,
-            Titulo: 'questao numero 1',
-            Enunciado: 'abcdefgh',
-            JsonQuestao: 'abcdefgh',
-            PesoNota: 1
-		},
-        {
-			IdQuestao: 0,
-            IdAtividade: 0,
-            IdTipoQuestao: 2,
-            Titulo: 'questao numero 2',
-            Enunciado: 'abcdefgh',
-            JsonQuestao: 'abcdefgh',
-            PesoNota: 2
-		}
-    ]
-};
-function sendData(){
-	var xhttp = new XMLHttpRequest();
-    xhttp.open('POST', '/atividades/teste');
-    xhttp.setRequestHeader('Content-type', 'application/json;charset=UTF-8');
-    xhttp.onload = function () {
-        //console.log(xhttp.response);
-        console.log("ok");
-    };
-    xhttp.send(JSON.stringify(atividade));
-}
-sendData();
-*/
