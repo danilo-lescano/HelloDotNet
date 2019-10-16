@@ -73,36 +73,66 @@
 </script>
 
 <script>
-    function ChangeInputTextLacuna(el, shadow){
-        shadow.innerHTML = el.innerHTML;
+
+    var CL = { //controle lacuna
+        _shadow: document.getElementById('tabela-de-lacunaFrase-shadow'),
+        _Frase: '',
+        Fragmentos: [],
+        set Frase(value){
+            value = value.replace(new RegExp('<div>', 'g'), "<br>").replace(new RegExp('</div>', 'g'), "");
+            if(value > 2 && value.substring(value.length-3, value.length-1) === "<br>")
+                value = value.substring(0, value.length-4);
+            this.Fragmentos = [];
+            this._shadow.innerHTML = this._Frase = value;
+        },
+        setFragmento: function(o, f, event){
+            this.Fragmentos[this.Fragmentos.length] = { origem: o, fim: f };
+            this.Fragmentos.sort(function(a, b){return a.origem - b.origem});
+            var txt = this._Frase;
+            for(var i = this.Fragmentos.length - 1; i >= 0; i--){
+                var aux = txt.substring(0, this.Fragmentos[i].fim + 1) + "</span>" + txt.slice(this.Fragmentos[i].fim + 1);
+                aux = aux.substring(0, this.Fragmentos[i].origem) + "<span class='elemento-lacuna-escolhido'>" + aux.slice(this.Fragmentos[i].origem);
+                txt = aux;
+            }
+            this._shadow.innerHTML = txt;
+            event.stopPropagation();
+        },
+        setMarcacao: function(texto_digitado){
+            var copy = this.Fragmentos;
+            var txt = this._Frase;
+            var finalN = this._Frase.length;
+
+            for(var i = copy.length - 1; i >= 0; i--){
+                var aux = this.checkMarcacao(copy[i].fim+1, finalN, txt, texto_digitado);
+                finalN = copy[i].origem - 1;
+                aux = aux.substring(0, copy[i].fim + 1) + "</span>" + aux.slice(copy[i].fim + 1);
+                aux = aux.substring(0, copy[i].origem) +
+                    "<span class='elemento-lacuna-escolhido'>" +
+                    aux.slice(copy[i].origem);
+                txt = aux;
+            }
+            this._shadow.innerHTML = txt;
+        },
+        checkMarcacao: function(o, f, txt, texto_digitado){
+            var substr = txt.substring(o, f);
+            if(texto_digitado != "" && texto_digitado != " "){
+                substr.indexOf(texto_digitado)
+                substr = substr.replace(new RegExp(texto_digitado, 'g'),
+                    '<span class="elemento-lacuna-selecionado" onclick="CL.setFragmento(' + o + ', ' + f + ', event)">' +
+                        texto_digitado +
+                    '</span>'
+                );
+            }
+            return txt.substring(0, o) + substr +  txt.substring(f, txt.length);
+        },
+    }
+
+    function ChangeInputTextLacuna(el){
+        CL.Frase = el.innerHTML;
     }
 
     function ChangeInputOpcoesLacuna(el, event){
-        var textOriginal = document.getElementById('tabela-de-lacunaFrase').innerHTML;
-        textOriginal = textOriginal.replace(new RegExp('<br>', 'g'), "");
-        textOriginal = textOriginal.replace(new RegExp('\n', 'g'), "");
-        var valorDigitado = el.innerHTML.replace(new RegExp('<br>', 'g'), "").replace(new RegExp('<div>', 'g'), "").replace(new RegExp('</div>', 'g'), "");
-        var shadow = document.getElementById('tabela-de-lacunaFrase-shadow');
-        var matchs = textOriginal.match(new RegExp(valorDigitado, 'g'));
-        matchs = matchs ? matchs.length : 0;
-
-        shadow.innerHTML = textOriginal.replace(new RegExp(el.innerHTML, 'g'),
-            '<span style="color: red; font-weight: bold;">'+
-                el.innerHTML+
-            '</span>'
-        );
-        if(matchs > 0){
-            if(event.keyCode === 13){
-                var s = document.createElement("span");
-                s.classList.add("palavra-certa-lacuna");
-                s.innerHTML = "<span class='close-btn-lacuna' onclick='deleteMyFather(this)'>×</span>" + valorDigitado;
-                el.insertAdjacentElement("beforebegin", s);
-                el.innerHTML = "";
-            };
-            el.classList.remove("alertText");
-        }
-        else
-            el.classList.add("alertText");
+        CL.setMarcacao(el.innerHTML);
     }
 
     function focusIn(){

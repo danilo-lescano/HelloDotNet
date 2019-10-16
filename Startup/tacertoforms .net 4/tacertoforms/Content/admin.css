@@ -68,3 +68,26 @@
 .alertText{
     color: rgb(165, 10, 10);
 }
+.elemento-lacuna-escolhido{
+    color: #7b7a7a;
+    font-weight: bold;
+    background-color: #dfdbdb;
+    border-radius: 5px;
+    padding: 1px 5px;
+    margin: 0 1px;
+}
+.elemento-lacuna-selecionado{
+    font-weight: bold;
+}
+.elemento-lacuna-selecionado::before{
+    content: "Add+";
+    position: absolute;
+    transform: translate(0%, -100%);
+    border: 0.5px solid green;
+    border-radius: 5px;
+    color: green;
+    background-color: wheat;
+    padding: 0.5px;
+    font-size: 10px;
+    cursor: pointer;
+}
