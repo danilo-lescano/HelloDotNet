@@ -73,7 +73,6 @@
 </script>
 
 <script>
-
     var CL = { //controle lacuna
         _shadow: document.getElementById('tabela-de-lacunaFrase-shadow'),
         _Frase: '',
@@ -96,6 +95,13 @@
             }
             this._shadow.innerHTML = txt;
             event.stopPropagation();
+            
+            var el = document.getElementById("palavras-certas-lacuna-span");
+            var s = document.createElement("span");
+            s.classList.add("palavra-certa-lacuna");
+            s.innerHTML = "<span class='close-btn-lacuna' onclick='CL.deleteMyFragmento(" + o + ", " + f + ", this);'>×</span>" + el.innerText;
+            el.insertAdjacentElement("beforebegin", s);
+            el.innerHTML = "";
         },
         setMarcacao: function(texto_digitado){
             var copy = this.Fragmentos;
@@ -111,20 +117,49 @@
                     aux.slice(copy[i].origem);
                 txt = aux;
             }
+            if(copy.length == 0)
+                txt = this.checkMarcacao(0, finalN, txt, texto_digitado);
+            else if(copy[0].origem > 0)
+                txt = this.checkMarcacao(0, copy[0].origem - 1, txt, texto_digitado);
             this._shadow.innerHTML = txt;
         },
         checkMarcacao: function(o, f, txt, texto_digitado){
             var substr = txt.substring(o, f);
             if(texto_digitado != "" && texto_digitado != " "){
-                substr.indexOf(texto_digitado)
-                substr = substr.replace(new RegExp(texto_digitado, 'g'),
-                    '<span class="elemento-lacuna-selecionado" onclick="CL.setFragmento(' + o + ', ' + f + ', event)">' +
-                        texto_digitado +
-                    '</span>'
+                while(substr.match(texto_digitado) && substr.match(texto_digitado).length > 0){
+                    var lastIndex = substr.lastIndexOf(texto_digitado);
+                    var _o = lastIndex + o;
+                    var _f = _o + texto_digitado.length - 1;
+                    substr = substr.replaceLast(
+                        texto_digitado,
+                        '<span class="elemento-lacuna-selecionado" onclick="CL.setFragmento(' + _o + ', ' + _f + ', event)">' +
+                            "❂"+
+                        '</span>'
+                    );
+                    console.log(1);
+                }
+                substr = substr.replace(new RegExp("❂", 'g'),
+                    texto_digitado
                 );
+                
             }
             return txt.substring(0, o) + substr +  txt.substring(f, txt.length);
         },
+        deleteMyFragmento: function(o, f, el){
+            for(var i = this.Fragmentos.length - 1; i >= 0; i--)
+                if(this.Fragmentos[i].origem == o && this.Fragmentos[i].fim == f){
+                    this.Fragmentos.splice(i, 1);
+                    break;
+                }
+            var txt = this._Frase;
+            for(var i = this.Fragmentos.length - 1; i >= 0; i--){
+                var aux = txt.substring(0, this.Fragmentos[i].fim + 1) + "</span>" + txt.slice(this.Fragmentos[i].fim + 1);
+                aux = aux.substring(0, this.Fragmentos[i].origem) + "<span class='elemento-lacuna-escolhido'>" + aux.slice(this.Fragmentos[i].origem);
+                txt = aux;
+            }
+            this._shadow.innerHTML = txt;
+            deleteMyFather(el);
+        }
     }
 
     function ChangeInputTextLacuna(el){
@@ -159,4 +194,11 @@
     function moveCursorToEnd(el) {
         el.focus();
     }
+    String.prototype.reverse = function () {
+        return this.split('').reverse().join('');
+    };
+
+    String.prototype.replaceLast = function (what, replacement) {
+        return this.reverse().replace(new RegExp(what.reverse()), replacement.reverse()).reverse();
+    };
 </script>
