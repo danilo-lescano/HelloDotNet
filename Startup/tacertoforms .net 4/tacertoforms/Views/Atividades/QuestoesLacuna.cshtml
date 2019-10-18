@@ -31,7 +31,7 @@
                     @Html.Label("Palavras Certas")
                     <div id="palavras-certas-lacuna" class="form-control" onclick="moveCursorToEnd(document.getElementById('palavras-certas-lacuna-span'))">
                         <span id="palavras-certas-lacuna-lista">
-                            <span id="palavras-certas-lacuna-span" onfocusin="focusIn()" onfocusout="focusOut()" contenteditable="true" onkeyup="ChangeInputOpcoesLacuna(this, event)"></span>
+                            <span id="palavras-certas-lacuna-span" onfocusin="focusIn()" onfocusout="focusOut()" contenteditable="true" onkeydown="AddInputLacuna(this, event)" onkeyup="ChangeInputOpcoesLacuna(this, event)"></span>
                         </span>
                     </div>
                 </div>
@@ -94,7 +94,8 @@
                 txt = aux;
             }
             this._shadow.innerHTML = txt;
-            event.stopPropagation();
+            if(event && event !== null)
+                event.stopPropagation();
             
             var el = document.getElementById("palavras-certas-lacuna-span");
             var s = document.createElement("span");
@@ -126,22 +127,21 @@
         checkMarcacao: function(o, f, txt, texto_digitado){
             var substr = txt.substring(o, f);
             if(texto_digitado != "" && texto_digitado != " "){
+                var spans = [];
                 while(substr.match(texto_digitado) && substr.match(texto_digitado).length > 0){
                     var lastIndex = substr.lastIndexOf(texto_digitado);
                     var _o = lastIndex + o;
                     var _f = _o + texto_digitado.length - 1;
+                    spans[spans.length] = '<span class="elemento-lacuna-selecionado" onclick="CL.setFragmento(' + _o + ', ' + _f + ', event)">' + texto_digitado + '</span>';
                     substr = substr.replaceLast(
                         texto_digitado,
-                        '<span class="elemento-lacuna-selecionado" onclick="CL.setFragmento(' + _o + ', ' + _f + ', event)">' +
-                            "❂"+
-                        '</span>'
+                        "❂"
                     );
-                    console.log(1);
                 }
-                substr = substr.replace(new RegExp("❂", 'g'),
-                    texto_digitado
-                );
-                
+                while(spans.length > 0){
+                    substr = substr.replace("❂", spans[0]);
+                    spans.shift();
+                }
             }
             return txt.substring(0, o) + substr +  txt.substring(f, txt.length);
         },
@@ -159,6 +159,14 @@
             }
             this._shadow.innerHTML = txt;
             deleteMyFather(el);
+        },
+        tryAdd: function(){
+            var elementos = document.getElementsByClassName("elemento-lacuna-selecionado");
+            if(elementos && elementos.length === 1){
+                elementos[0].click();
+                return true;
+            }
+            return false;
         }
     }
 
@@ -167,7 +175,16 @@
     }
 
     function ChangeInputOpcoesLacuna(el, event){
-        CL.setMarcacao(el.innerHTML);
+        if(event.keyCode !== 13)
+            CL.setMarcacao(el.innerHTML);
+        else el.innerHTML = "";
+    }
+    function AddInputLacuna(el, event){
+        if(event.keyCode === 13){
+            console.log(111);
+            var flag = CL.tryAdd();
+            if(flag) el.innerHTML = "";
+        }
     }
 
     function focusIn(){
