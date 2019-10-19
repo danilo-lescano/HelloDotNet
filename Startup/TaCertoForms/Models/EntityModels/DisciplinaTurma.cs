@@ -1,13 +1,13 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore;
 
 namespace TaCertoForms.Models{
-    public class TurmaDisciplinaProfessor{
+    public class DisciplinaTurma {
         [Key]
-        public int IdTurmaDisciplinaProfessor { get; set; }
-        public int IdProfessor { get; set; }
         public int IdDisciplinaTurma { get; set; }
+        public int IdDisciplina { get; set; }
+        public int IdTurma { get; set; }
     }
 }

@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
-
-namespace tacertoforms.Models
-{    
+//ok
+namespace tacertoforms.Models{
     public class Pessoa {
         [Key]
         public int IdPessoa { get; set; }

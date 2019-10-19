@@ -9,13 +9,9 @@ namespace TaCertoForms.Models{
         [Key]
         public int IdAtividadeRespostaAluno { get; set; }
         public int IdAtividade { get; set; }
-        public Atividade Atividade { get; set; }
         public int IdAluno { get; set; }
-        [ForeignKey("IdAluno")]
-        public Pessoa Aluno { get; set; }
-        public DateTime DataEnvio { get; set; }
+        public string DataEnvio { get; set; }
         public float Nota { get; set; }
-        public int TempoTotalMilisegundos { get; set; }
-        public List<QuestaoRespostaAluno> QuestaoRespostaAlunoList { get; set; }
+        public string TempoTotal { get; set; }
     }
 }

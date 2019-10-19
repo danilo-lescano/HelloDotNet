@@ -8,12 +8,7 @@ namespace TaCertoForms.Models{
         [Key]
         public int IdTurma { get; set; }
         public int IdInstituicao { get; set; }
-        public Instituicao Instituicao { get; set; }
         public string Serie { get; set; }
-        public string Periodo { get; set; }
-        public string Ano { get; set; }
-
-        public List<TurmaAluno> TurmaAlunoList { get; set; }
-        public List<TurmaDisciplinaProfessor> TurmaDisciplinaProfessorList { get; set; }
+        public Periodo Periodo { get; set; }
     }
 }

@@ -10,6 +10,7 @@ using TaCertoForms.Util.Coercion;
 
 namespace TaCertoForms.Controllers{
     public class LoginController : SessionController{
+    /*public class LoginController : SessionController{
         public IActionResult Index(){
             Start();
             if(isUsuarioLogado()){
@@ -75,5 +76,5 @@ namespace TaCertoForms.Controllers{
                 return true;
             return false;
         }
-    }
+    */}
 }

@@ -9,9 +9,6 @@ namespace TaCertoForms.Models{
         [Key]
         public int IdTurmaAluno { get; set; }
         public int IdTurma { get; set; }
-        public Turma Turma { get; set; }
-        public int IdAluno { get; set; }
-        [ForeignKey("IdAluno")]
-        public Pessoa Aluno { get; set; }
+        public int IdPessoa { get; set; }
     }
 }
