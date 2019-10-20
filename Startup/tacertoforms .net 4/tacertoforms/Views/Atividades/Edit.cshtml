@@ -318,7 +318,7 @@
             return json;
         }
         else if(t === "tabela-de-lacuna"){
-            
+            return GetJsonLacuna();
         }
     }
     function GetIdTipoQuestao(t){
@@ -340,14 +340,14 @@
             $('#tabela-de-associacaoCertas').val(null).trigger('change');
             $('#tabela-de-associacaoErradas').val(null).trigger('change');
         }
-        if (t === "tabela-de-certo-errado") {
+        else if (t === "tabela-de-certo-errado") {
             $('#'+t+'Resposta').val("True");
         }
-        if (t === "tabela-de-coluna") {
+        else if (t === "tabela-de-coluna") {
             $('#'+t+'NumeroLinhas').val(0).change();
         }
-        if (t === "tabela-de-lacuna") {
-            
+        else if (t === "tabela-de-lacuna") {
+            CL.LacunaReset();
         }
     }
     function povoaform(t, q){
@@ -355,8 +355,8 @@
         document.getElementById(t+"Titulo").value = q.Titulo;
         document.getElementById(t+"Enunciado").value = q.Enunciado;
         document.getElementById(t+"PesoNota").value = q.PesoNota;
+        q.JsonQuestao = JSON.parse(q.JsonQuestao);
         if(t === "tabela-de-associacao"){
-            q.JsonQuestao = JSON.parse(q.JsonQuestao);
             for(var i = 0; i < q.JsonQuestao.certas.length; i++){
                 $('#' + t + 'Certas').append(
                     new Option(q.JsonQuestao.certas[i], q.JsonQuestao.certas[i], false, true)
@@ -368,24 +368,22 @@
                 ).trigger('change');
             }
         }
-        if (t === "tabela-de-certo-errado") {            
-            q.JsonQuestao = JSON.parse(q.JsonQuestao);                  
+        else if (t === "tabela-de-certo-errado") {            
             if (q.JsonQuestao.isVerdadeiro) {
                 $('#'+t + "Resposta").val("True");
             } else {
                 $('#'+t + "Resposta").val("False");
             }            
         }
-        if (t === "tabela-de-coluna") {            
-            q.JsonQuestao = JSON.parse(q.JsonQuestao);            
+        else if (t === "tabela-de-coluna") {            
             $('#' + t + 'NumeroLinhas').val(q.JsonQuestao.coluna1.length).change();
             for (var i = 0; i < q.JsonQuestao.coluna1.length; i++) {
                 $('#coluna1-linha-' + i).val(q.JsonQuestao.coluna1[i].texto);
                 $('#coluna2-linha-' + i).val(q.JsonQuestao.coluna2[i].texto);
             }
         }
-        if (t === "tabela-de-lacuna") {            
-            
+        else if (t === "tabela-de-lacuna") {            
+            CL.PovoaLacuna(q.JsonQuestao);            
         }
     }
 </script>

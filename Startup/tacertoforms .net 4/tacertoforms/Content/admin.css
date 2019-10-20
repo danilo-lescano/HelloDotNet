@@ -26,10 +26,12 @@
     height: 100px;
     overflow: hidden;
 }
-#palavras-certas-lacuna{
+#palavras-certas-lacuna,
+#palavras-erradas-lacuna{
     display: inline-table;
 }
-#palavras-certas-lacuna-span{
+#palavras-certas-lacuna-span,
+#palavras-erradas-lacuna-span{
     background: transparent;
     border: none;
     outline: 0;
@@ -44,14 +46,15 @@
     height: 20px;
     min-width: 2px;
 }
-.palavra-certa-lacuna{
+.palavra-certa-lacuna,
+.palavra-errada-lacuna{
     background-color: #e4e4e4;
     border: 1px solid #aaa;
     border-radius: 4px;
     cursor: default;
     float: left;
     margin-right: 5px;
-    margin-top: 5px;
+    margin-top: 1px;
     padding: 0 5px;
     color: black;
 }
