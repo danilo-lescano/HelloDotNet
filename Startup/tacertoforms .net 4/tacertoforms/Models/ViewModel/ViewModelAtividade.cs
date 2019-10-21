@@ -13,10 +13,7 @@ namespace tacertoforms.Models {
         public int NumeroTentativas { get; set; }
         public bool IsAleatorio { get; set; }
         public bool IsProva { get; set; }
-
-        public List<Questao> Questoes { get; set; } = new List<Questao>();
-
-
+        public List<Questao> Questoes { get; set; } = new List<Questao>();        
         public Atividade Atividade {
             get{
                 return new Atividade {

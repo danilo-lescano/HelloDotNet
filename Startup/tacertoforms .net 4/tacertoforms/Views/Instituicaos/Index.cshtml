@@ -14,7 +14,7 @@
                 <a href="@Url.Action("Index", "Home")"><i class="fa fa-home"></i> Início</a>
             </li>
             <li class="active">
-                <a href="@Url.Action("Index", "Instituicaos")">Instituições</a>
+                <a href="@Url.Action("Index", "Instituicaos")">Instituições</a>          
             </li>
         </ol>
     </section>
@@ -24,8 +24,7 @@
             <div class="box-header with-border">
                 <h3 class="box-title">Listagem de registros</h3>
                 <a href="@Url.Action("Create", "Instituicaos")" class="btn btn-sm btn-primary btn-flat pull-right">Novo registro</a>
-            </div>
-            <!-- /.box-header -->
+            </div>            
             <!-- /.box-header -->
             <div class="box-body">
                 <table id="example1" class="table table-bordered  table-striped">
@@ -78,6 +77,6 @@
 <script type="text/javascript">
 
     $('#example1').DataTable({
-         "language": dados_translate
+        "language": dados_translate
     });
 </script>

@@ -4,26 +4,19 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Runtime.CompilerServices;
 using System.Web;
 using System.Web.Mvc;
 using tacertoforms.Models;
+using TaCertoForms.Attributes;
+using TaCertoForms.Controllers;
 
 namespace tacertoforms.Controllers{
-    public class AtividadesController : Controller{
-        private Context db = new Context();
-
-        [HttpPost]
-        public ActionResult Teste(ViewModelAtividade vmAtividade){
-            if(vmAtividade != null && vmAtividade.Questoes != null){
-                foreach (var item in vmAtividade.Questoes){
-                    System.Diagnostics.Debug.WriteLine(item.Titulo);
-                }
-            }
-            return RedirectToAction("Index");
-        }
-
+    public class AtividadesController : ControladorBase{
         // GET: Atividades
+        [Role("admin", "professor")]
         public ActionResult Index(){
+            bool valido = Validation().flag;
             return View(db.Atividades.ToList());
         }
 

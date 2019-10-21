@@ -26,5 +26,10 @@ namespace tacertoforms.Controllers
 
             return View();
         }
+
+        public ActionResult Relatorios()
+        {
+            return View();
+        }
     }
 }

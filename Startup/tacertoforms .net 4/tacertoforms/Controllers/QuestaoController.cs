@@ -13,13 +13,13 @@ namespace tacertoforms.Controllers{
         private Context db = new Context();
         [HttpGet]
         public JsonResult Index(int? idAtividade, int? idTipoQuestao){
-            List<Questao> questao;
+            List<Questao> questao = new List<Questao>();            
             if(idAtividade == null)
                 return Json(null, JsonRequestBehavior.AllowGet);
-            if(idTipoQuestao != null)
+            if (idTipoQuestao != null)
                 questao = db.Questaos.Where(q => q.IdAtividade == idAtividade && q.IdTipoQuestao == idTipoQuestao).ToList();
             else
-                questao = db.Questaos.Where(q => q.IdAtividade == idAtividade).ToList();
+                questao = db.Questaos.Where(q => q.IdAtividade == idAtividade).ToList();                
             return Json(questao, JsonRequestBehavior.AllowGet);
         }
         [HttpGet]

@@ -15,7 +15,8 @@ namespace tacertoforms.Controllers{
         // GET: Pessoas
         public ActionResult Index(){
             List<ViewModelAluno> alunos = new List<ViewModelAluno>();
-            foreach (var aluno in db.Pessoas.ToList()){                
+            foreach (var aluno in db.Pessoas.ToList())
+            {                
                 ViewModelAluno vmAluno = new ViewModelAluno() {
                     IdPessoa = aluno.IdPessoa,
                     Perfil   = aluno.Perfil,

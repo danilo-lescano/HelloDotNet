@@ -4,8 +4,10 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace tacertoforms.Models{
-    public class Endereco{
+namespace tacertoforms.Models
+{
+    public class Endereco
+    {
         [Key]
         public int IdEndereco { get; set; }
         public string Pais { get; set; }

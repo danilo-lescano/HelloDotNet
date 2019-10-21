@@ -67,8 +67,11 @@
 <script>    
     $('#tabela-de-lacunaFrase').mouseup(function () {        
         if (this.selectionStart != this.selectionEnd) {
-            console.log(this.selectionStart);
-            console.log(this.value.substring(this.selectionStart, this.selectionEnd));
+            //console.log(this.selectionStart);
+            //console.log(this.value.substring(this.selectionStart, this.selectionEnd));
+            $('#tabela-de-lacunaCertas').append(
+                new Option(this.value.substring(this.selectionStart, this.selectionEnd), this.selectionStart + '-' + this.selectionEnd, false, true)
+                ).trigger('change');
         }
     });
 </script>

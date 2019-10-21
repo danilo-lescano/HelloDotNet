@@ -17,7 +17,7 @@
     </section>
     <section class="content">
         @using (Html.BeginForm())
-        {
+{
             @Html.AntiForgeryToken()
             <div class="box box-primary">
                 <div class="box-header with-border">
@@ -122,7 +122,7 @@
                     <input type="submit" value="Salvar" class="btn btn-primary pull-right" />
                 </div>
             </div>
-        }
+}
     </section>
 </div>
 
@@ -132,7 +132,6 @@
 <script>
     //Configurações de elementos
     var select2 = $('.select2').select2({ tags: true, tokenSeparators: [','], width: '100%' });
-
 
     $('#tabela-de-colunaNumeroLinhas').on('change', function () { 
         $('.linhas-input').html(''); //TODO permitir a inserção e exclusão de linhas sem perder o conteúdo
@@ -389,6 +388,19 @@
 </script>
 
 <script>
+    var tipoquestao = {
+           @{
+               var tq = Get.TipoQuestoes();
+
+               for (var i = 0; i < tq.Count; i++ )
+               {                   
+                   @Html.Raw(i+1 +": '" + tq[i].Nome + "',")                   
+               }
+           }
+    };    
+</script>
+
+<script>
     //atualizacao dos numeros de questao
     function LabelNumAdd(t){
         if (t === "tabela-de-associacao") LabelNum.Associacao++;
@@ -438,9 +450,10 @@
             $('#tabela-de-listagem').DataTable().row.add([
                 q[i].IdQuestao,
                 q[i].Titulo,
-                q[i].Titulo,
+                tipoquestao[q[i].IdTipoQuestao],
                 '<a class="btn btn-primary btn-xs" onclick="EditQuestao(this, ' + q[i].IdQuestao + ', \'tabela-de-certo-errado\')"><i class="fa fa-pencil"></i></a>'                
-            ]).draw(false);            
+            ]).draw(false);
+            
         }
     });
 

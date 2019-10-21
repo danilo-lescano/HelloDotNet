@@ -6,6 +6,7 @@ using System.Data.Entity;
 
 namespace tacertoforms.Models {
     public class Context : DbContext {
+        public DbSet<Midia> Midias { get; set; }
         public DbSet<Atividade> Atividades { get; set; }
         public DbSet<Disciplina> Disciplinas { get; set; }
         public DbSet<DisciplinaTurma> DisciplinaTurmas { get; set; }
@@ -15,7 +16,8 @@ namespace tacertoforms.Models {
         public DbSet<Instituicao> Instituicaos { get; set; }
         public DbSet<Pessoa> Pessoas { get; set; }
         public DbSet<Questao> Questaos { get; set; }
-        public DbSet<Turma> Turmas { get; set; }
+        public DbSet<TipoQuestao> TipoQuestaos { get; set; }
+        public DbSet<Turma> Turmas { get; set; }        
         protected override void OnModelCreating(DbModelBuilder modelBuilder) {
             Database.SetInitializer<Context>(null);
             base.OnModelCreating(modelBuilder);

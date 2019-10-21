@@ -25,7 +25,7 @@
                 <a href="@Url.Action("Index", "Instituicaos")" class="btn btn-sm btn-default btn-flat pull-right">Voltar</a>
             </div>
 
-            @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "form-instituicao" }))
+            @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "form-instituicao", enctype = "multipart/form-data"}))
             {
                 @Html.AntiForgeryToken()
         <div class="box-body">
@@ -64,6 +64,10 @@
                         @Html.ValidationMessageFor(model => model.Telefone, "", new { @class = "text-danger" })
                     </div>
 
+                    <div class="form-group col-xs-12 col-md-6">
+                        @Html.Label("Logo da Empresa")
+                        @Html.TextBox("LogoEmpresa", null, new { @type = "file"})
+                    </div>
 
                     <div class="form-group col-xs-12">
                         <h3 class="box-title">Endereço Principal</h3>

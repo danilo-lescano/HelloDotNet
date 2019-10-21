@@ -4,10 +4,12 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace tacertoforms.Models{
-    public class Instituicao{
+namespace tacertoforms.Models
+{
+    public class Instituicao
+    {
         [Key]
-        public int IdInstituicao { get; set; }
+        public int IdInstituicao { get; set; }        
         public string RazaoSocial { get; set; }
         public string NomeFantasia { get; set; }
         public string CNPJ { get; set; }

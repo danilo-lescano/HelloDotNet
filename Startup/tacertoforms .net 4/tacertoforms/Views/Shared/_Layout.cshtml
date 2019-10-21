@@ -8,7 +8,7 @@
 
     @Styles.Render("~/Content/bootstrap.min.css")
     @Styles.Render("~/Content/font-awesome.min.css")
-    @Styles.Render("~/Content/ionicons.min.css")
+    @Styles.Render("~/Content/Ionicons/css/ionicons.min.css")
     @Styles.Render("~/Content/jquery-jvectormap.css")
     @Styles.Render("~/Content/AdminLTE.min.css")
     @Styles.Render("~/Content/blue.css")
@@ -46,9 +46,11 @@
 
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav">
-                        <li class="dropdown user user-menu">
-                            <a href="#">Lucas Barque da Silva</a>
-
+                        <li class="dropdown user user-menu">                            
+                            <a href="#">
+                                <img src="~/Content/images/user2-160x160.jpg" class="user-image" alt="User Image">
+                                Lucas Barque da Silva
+                            </a>
                         </li>
                     </ul>
                 </div>
@@ -65,23 +67,25 @@
                 <ul class="sidebar-menu" data-widget="tree">
                     <li class="header">MENU DE NAVEGAÇÃO</li>
                     @*<li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-dashboard"></i> <span>Dashboard</span>
-                            <span class="pull-right-container">
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="../../index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
-                            <li><a href="../../index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
-                        </ul>
-                    </li>*@
+            <a href="#">
+                <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+                <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                </span>
+            </a>
+            <ul class="treeview-menu">
+                <li><a href="../../index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
+                <li><a href="../../index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
+            </ul>
+        </li>*@
                     <li><a href="@Url.Action("Index", "Home")"><i class="fa fa-home"></i> <span>Início</span></a></li>
+                    <li><a href="@Url.Action("Relatorios", "Home")"><i class="fa fa-tasks"></i> <span>Relatórios</span></a></li>
                     <li><a href="@Url.Action("Index", "Instituicaos")"><i class="fa fa-institution"></i> <span>Instituições</span></a></li>
                     <li><a href="@Url.Action("Index", "Pessoas")"><i class="fa fa-user"></i><span>Pessoas</span></a></li>
                     <li><a href="@Url.Action("Index", "Turmas")"><i class="fa fa-users"></i> <span>Turmas</span></a></li>
                     <li><a href="@Url.Action("Index", "Disciplinas")"><i class="fa fa-reorder"></i> <span>Disciplinas</span></a></li>
                     <li><a href="@Url.Action("Index", "Atividades")"><i class="fa fa-th-list"></i> <span>Atividades</span></a></li>
+                    <li><a href="@Url.Action("Index", "Login")"><i class="fa fa-external-link"></i> <span>Sair</span></a></li>
                 </ul>
             </section>
         </aside>
@@ -121,6 +125,8 @@
             <strong>Copyright &copy; @DateTime.Now.Year - STARTUP/SESI</strong> Todos os direitos reservados.
         </footer>
         <div class="control-sidebar-bg"></div>
-    </div>
+    </div>    
 </body>
 </html>
+
+

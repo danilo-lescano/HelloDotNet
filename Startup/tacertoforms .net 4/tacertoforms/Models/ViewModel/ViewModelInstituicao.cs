@@ -34,7 +34,8 @@ namespace tacertoforms.Models {
         public string ComplementoCobranca { get; set; }
         public string CEPCobranca { get; set; }
         public string LogradouroCobranca { get; set; }
-        public string BairroCobranca { get; set; }
+        public string BairroCobranca { get; set; }        
+        public Midia Midia { get; set; }
         public Endereco enderecoPrincipal
         {
             get
@@ -89,6 +90,17 @@ namespace tacertoforms.Models {
                     IdEnderecoPrincipal = this.IdEnderecoPrincipal,
                     IdEnderecoCobranca = this.IdEnderecoCobranca
                 };
+            }
+            set
+            {
+                this.IdInstituicao = value.IdInstituicao;
+                this.RazaoSocial = value.RazaoSocial;
+                this.NomeFantasia = value.NomeFantasia;
+                this.CNPJ = value.CNPJ;
+                this.Email = value.Email;
+                this.Telefone = value.Telefone;
+                this.IdEnderecoPrincipal = value.IdEnderecoPrincipal;
+                this.IdEnderecoCobranca = value.IdEnderecoCobranca;
             }
         }                    
     }
