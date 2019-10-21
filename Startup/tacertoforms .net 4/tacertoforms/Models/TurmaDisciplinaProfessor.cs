@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-//ok
+
 namespace tacertoforms.Models{
     public class TurmaDisciplinaProfessor{
         [Key]
