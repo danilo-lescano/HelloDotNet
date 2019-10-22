@@ -21,12 +21,12 @@ namespace TaCertoForms.Attributes{
         }
         
         protected override bool AuthorizeCore(HttpContextBase httpContext){
-            if(httpContext.Session["Logado"] != null && (bool)httpContext.Session["Logado"] == true)
+           if (httpContext.Session["Logado"] == null || (bool)httpContext.Session["Logado"] == false)
                 return false;
             int? id = int.Parse(Convert.ToString(httpContext.Session["IdPessoa"]));
             if (id != null)
                 using (var db = new Context()) {
-                    Pessoa p = db.Pessoas.Find();
+                    Pessoa p = db.Pessoas.Find(id);
                     foreach (var perfil in perfisPermitidos){
                         if(perfil == p.Perfil)
                             return true;
