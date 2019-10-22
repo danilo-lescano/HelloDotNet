@@ -5,7 +5,7 @@
 }
 <div class="content-wrapper">
     <section class="content-header">
-        <h1>Criação de Instituição</h1>
+        <h1>Cadastro de Atividade</h1>
         <ol class="breadcrumb">
             <li>
                 <a href="@Url.Action("Index", "Home")"><i class="fa fa-home"></i>Início</a>
@@ -29,29 +29,60 @@
                         <div class="row">
                             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                             <div class="form-group col-xs-12 col-md-6">
-                                @Html.Label("Turma + matéria")
-                                @Html.EditorFor(model => model.IdTurmaDisciplinaProfessor, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.IdTurmaDisciplinaProfessor, "", new { @class = "text-danger" })
+                                @Html.Label("Instituição")
+                                
+                                @Html.DropDownList("Instituição",
+                                ViewBag.InstituicaoList as SelectList,
+                                "Instituição",                                
+                                new { @class = "form-control", @id = "instituicao-select" })                                
                             </div>
-                            <div class="form-group col-xs-12 col-md-6">
+                            <div class="form-group col-xs-12 col-md-3">
+                                <div class="turmas">
+                                    @Html.Label("Turma")
+                                    @Html.DropDownList("Turma",
+                                    new SelectList(new List<String>()),
+                                    "Turma",
+                                    new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group col-xs-12 col-md-3">
+                                <div class="disciplinas">
+                                    @Html.Label("Disciplina")
+                                    @Html.DropDownList("Disciplina",
+                                    new SelectList(new List<String>()),
+                                    "Disciplina",
+                                    new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group col-xs-12 col-md-3">
                                 @Html.Label("Período")
                                 @Html.TextBox("Periodo", null, new { @class = "form-control", @type = "text", @id = "periodo" })
                                 @Html.ValidationMessageFor(model => model.DataInicio, "", new { @class = "text-danger" })
                             </div>
-                            <div class="form-group col-xs-12 col-md-6">
+                            <div class="form-group col-xs-12 col-md-3">
                                 @Html.Label("Número de tentativas")
                                 @Html.EditorFor(model => model.NumeroTentativas, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.NumeroTentativas, "", new { @class = "text-danger" })
                             </div>
-                            <div class="form-group col-xs-12 col-md-6">
-                                @Html.Label("É aleatório")
-                                @Html.EditorFor(model => model.IsAleatorio)
-                                @Html.ValidationMessageFor(model => model.IsAleatorio, "", new { @class = "text-danger" })
+                            <div class="form-group col-xs-12 col-md-3">
+                                @Html.Label("É aleatório?")
+                                @Html.DropDownList("IsAleatorio",
+                                new List<SelectListItem> {
+                                    new SelectListItem() { Text = "Sim", Value = true.ToString()},
+                                    new SelectListItem() { Text = "Não", Value = false.ToString()}
+                                },
+                                null,
+                                new { @class = "form-control", @id = "tabela-de-certo-erradoResposta" })
                             </div>
-                            <div class="form-group col-xs-12 col-md-6">
-                                @Html.Label("É prova")
-                                @Html.EditorFor(model => model.IsProva)
-                                @Html.ValidationMessageFor(model => model.IsProva, "", new { @class = "text-danger" })
+                            <div class="form-group col-xs-12 col-md-3">
+                                @Html.Label("É prova?")
+                                @Html.DropDownList("IsProva",
+                                new List<SelectListItem> {
+                                    new SelectListItem() { Text = "Sim", Value = true.ToString()},
+                                    new SelectListItem() { Text = "Não", Value = false.ToString()}
+                                },
+                                null,
+                                new { @class = "form-control", @id = "tabela-de-certo-erradoResposta" })
                             </div>
                         </div>
                     </div>                    
@@ -65,5 +96,55 @@
 </div>
 
 <script>
-    $('#periodo').daterangepicker({"locale": locale_drp});    
+    $('#periodo').daterangepicker({ "locale": locale_drp });    
+
+    $('#instituicao-select').on('change', function () {        
+        if ($(this).val() != '') {
+            atualizar_turmas($(this).val());
+        } else {
+            $('#turmas-select').find('option').remove().end().append('<option value="">Turma</option>').val('');
+        }
+    }).change();
+
+    $('.turmas').on('change', '#turmas-select', function () {
+        if ($(this).val() != '') {
+            atualizar_disciplinas($(this).val());
+        } else {
+            $('#disciplinas-select').find('option').remove().end().append('<option value="">Disciplina</option>').val('');
+        }
+    });
+
+    function atualizar_turmas(IdInstituicao) {
+            $.ajax({
+            url: '@Url.Action("AjaxTurmas", "Turmas")',
+                data: {
+                    IdInstituicao: IdInstituicao
+            },
+            cache: false,
+            dataType: 'html',
+            success: function (data) {
+                $('.turmas').html(data);
+            },
+            error: function () {
+                alert('Ocorreu algum erro de conexão. Por favor, tente novamente mais tarde');
+            }
+        });
+    }
+
+     function atualizar_disciplinas(IdTurma) {
+            $.ajax({
+            url: '@Url.Action("AjaxDisciplinas", "Disciplinas")',
+                data: {
+                    IdTurma: IdTurma
+            },
+            cache: false,
+            dataType: 'html',
+            success: function (data) {
+                $('.disciplinas').html(data);
+            },
+            error: function () {
+                alert('Ocorreu algum erro de conexão. Por favor, tente novamente mais tarde');
+            }
+        });
+    }
 </script>

@@ -6,30 +6,31 @@ namespace TaCertoForms.Models{
     public class TaCertoFormsContext : DbContext {
         public IConfiguration Configuration { get; set; }
 
-        public DbSet<Atividade> Atividades { get; set; }
-        public DbSet<AtividadeRespostaAluno> AtividadeRespostaAlunos { get; set; }
-        public DbSet<Disciplina> Disciplinas { get; set; }
-        public DbSet<DisciplinaTurma> DisciplinaTurmas { get; set; }
-        //public DbSet<DisciplinaProfessor> DisciplinaProfessors { get; set; }
-        public DbSet<Endereco> Enderecos { get; set; }
-        public DbSet<Instituicao> Instituicaos { get; set; }
-        public DbSet<Licenca> Licencas { get; set; }
+        //public DbSet<Atividade> Atividades { get; set; }
+        //public DbSet<AtividadeRespostaAluno> AtividadeRespostaAlunos { get; set; }
+        //public DbSet<Disciplina> Disciplinas { get; set; }
+        //public DbSet<DisciplinaTurma> DisciplinaTurmas { get; set; }
+        ////public DbSet<DisciplinaProfessor> DisciplinaProfessors { get; set; }
+        //public DbSet<Endereco> Enderecos { get; set; }
+        //public DbSet<Instituicao> Instituicaos { get; set; }
+        //public DbSet<Licenca> Licencas { get; set; }
         //public DbSet<LogLogin> LogLogins { get; set; }
         //public DbSet<Midia> Midias { get; set; }
-        //public DbSet<Perfil> Perfils { get; set; }
-        //public DbSet<PerfilPessoa> PerfilPessoas { get; set; }
-        public DbSet<Pessoa> Pessoas { get; set; }
+        public DbSet<Perfil> Perfils { get; set; }
+        public DbSet<PerfilPessoa> PerfilPessoas { get; set; }
+        //public DbSet<Pessoa> Pessoas { get; set; }
         //public DbSet<PessoaLicenca> PessoaLicencas { get; set; }
-        public DbSet<Questao> Questaos { get; set; }
+        //public DbSet<Questao> Questaos { get; set; }
         //public DbSet<QuestaoRespostaAluno> QuestaoRespostaAlunos { get; set; }
         //public DbSet<TipoQuestao> TipoQuestaos { get; set; }
-        public DbSet<Turma> Turmas { get; set; }
-        public DbSet<TurmaAluno> TurmaAlunos { get; set; }
-        public DbSet<TurmaDisciplinaProfessor> TurmaDisciplinaProfessors { get; set; }
+        //public DbSet<Turma> Turmas { get; set; }
+        //public DbSet<TurmaAluno> TurmaAlunos { get; set; }
+        //public DbSet<TurmaDisciplinaProfessor> TurmaDisciplinaProfessors { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionBuilder){
             //optionBuilder.UseSqlServer(@"Server=localhost;Database=Startup;Trusted_Connection=True;");
-            optionBuilder.UseSqlServer(@"Server=localhost\MSSQLSERVER01;Database=sesi;Trusted_Connection=True;");
+            //optionBuilder.UseSqlServer(@"Server=localhost\MSSQLSERVER01;Database=sesi;Trusted_Connection=True;");
+            optionBuilder.UseSqlServer(@"Server=SRV-SGBD02\SQL2016PRD;Database=StartupJogos_SESI;User Id=StartupJogos_SESI;Password=StartupJogos_SESI7654$;");
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder){
             //modelBuilder.HasDefaultSchema("TaCerto");

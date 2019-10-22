@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace tacertoforms.Models {
+namespace TaCertoForms.Models{
     public class DisciplinaTurma {
         [Key]
         public int IdDisciplinaTurma { get; set; }

@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace tacertoforms.Models {
+namespace TaCertoForms.Models {
     public class ViewModelAtividade {
         public int IdAtividade { get; set; }
         public int IdTurmaDisciplinaProfessor { get; set; }

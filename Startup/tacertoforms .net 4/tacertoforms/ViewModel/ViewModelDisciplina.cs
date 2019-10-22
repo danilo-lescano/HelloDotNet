@@ -4,11 +4,10 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace tacertoforms.Models {
+namespace TaCertoForms.Models {
     public class ViewModelDisciplina {
         public int IdDisciplina { get; set; }
         public int IdDisciplinaTurma { get; set; }
-
         public int IdTurmaDisciplinaProfessor { get; set; }
         public string Nome { get; set; }
         public string Descricao { get; set; }

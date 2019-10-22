@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Data.Entity;
+using TaCertoForms.Models;
 
-namespace tacertoforms.Models {
+namespace TaCertoForms.Contexts {
     public class Context : DbContext {
         public DbSet<Midia> Midias { get; set; }
         public DbSet<Atividade> Atividades { get; set; }

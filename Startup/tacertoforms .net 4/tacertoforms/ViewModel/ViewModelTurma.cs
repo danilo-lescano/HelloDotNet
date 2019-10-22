@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace tacertoforms.Models
-{
-    public class ViewModelTurma
-    {
+namespace TaCertoForms.Models{
+    public class ViewModelTurma{
         public int IdTurma { get; set; }
         public int IdInstituicao { get; set; }
         public string Serie { get; set; }

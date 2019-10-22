@@ -1,9 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace tacertoforms.Models
-{
-    public class TipoQuestao
-    {
+namespace TaCertoForms.Models{
+    public class TipoQuestao{
         [Key]
         public int IdTipoQuestao { get; set; }
         public string Nome { get; set; }

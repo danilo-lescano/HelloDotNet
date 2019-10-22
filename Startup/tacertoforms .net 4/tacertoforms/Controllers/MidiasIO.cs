@@ -7,9 +7,11 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using tacertoforms.Models;
+using TaCertoForms.Models;
+using TaCertoForms.Contexts;
+using TaCertoForms.Attributes;
 
-namespace tacertoforms.Controllers
+namespace TaCertoForms.Controllers
 {
     public static class MidiasIO
     {
@@ -47,7 +49,7 @@ namespace tacertoforms.Controllers
                             Tipo = getTipoArquivo(file.ContentType)                            
                         };
                         arquivos.Add(fileDetail);
-                        string caminho = HttpContext.Current.Server.MapPath("~/App_Data/Upload/" + tabela + '/');
+                        string caminho = HttpContext.Current.Server.MapPath("~/Content/images/upload/" + tabela + '/');
 
                         var path = Path.Combine(caminho, fileDetail.IdMidia + fileDetail.Extensao);
                         if (!Directory.Exists(caminho))
@@ -76,6 +78,17 @@ namespace tacertoforms.Controllers
                 db.SaveChanges();
             }
             return arquivos;
+        }
+
+        public static bool Delete(int id)
+        {
+            Midia midia = db.Midias.Find(id);
+            if(midia != null)
+            {
+                db.Midias.Remove(midia);
+                db.SaveChanges();
+            }  
+            return true;
         }
     }
 }

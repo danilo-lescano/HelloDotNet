@@ -6,7 +6,7 @@
 <div class="content-wrapper">
     <section class="content-header">
         <h1>
-            Criação de Instituição
+            Cadastro de Instituição
         </h1>
         <ol class="breadcrumb">
             <li>
@@ -63,11 +63,12 @@
                         @Html.EditorFor(model => model.Telefone, new { htmlAttributes = new { @class = "form-control telefone" } })
                         @Html.ValidationMessageFor(model => model.Telefone, "", new { @class = "text-danger" })
                     </div>
-
+                    @*
                     <div class="form-group col-xs-12 col-md-6">
                         @Html.Label("Logo da Empresa")
                         @Html.TextBox("LogoEmpresa", null, new { @type = "file"})
                     </div>
+                    *@
 
                     <div class="form-group col-xs-12">
                         <h3 class="box-title">Endereço Principal</h3>
@@ -177,7 +178,7 @@
     $('.cep').inputmask("99.999-999");
     $('.cnpj').inputmask("99.999.999/9999-99");
     $('.telefone').inputmask("(99) 9999-9999");       
-
+   
     $('#form-instituicao input').on('change', function() {
         var selection_radio = $('input[name=EqualEnderecoCobranca]:checked', '#form-instituicao').val();                
         if (selection_radio == "True") {

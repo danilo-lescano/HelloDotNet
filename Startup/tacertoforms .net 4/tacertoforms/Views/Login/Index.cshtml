@@ -22,12 +22,13 @@
     <img id="randomImg" src="~/Content/images/botaoRandom.png" alt="">
     <img id="casualImg" src="~/Content/images/menucasual.png" alt="">
 </div>
+<form action="/Login/Autenticar" method="post">
 <div id="loginForm" class="container">
     <div class="col s12">
         <div class="row emailRow">
             <div class="input-field col s12">
                 <i class="material-icons prefix">account_circle</i>
-                <input id="email" type="email" name="email" class="validate">
+                <input id="email" type="email" name="email">
                 <label for="email">E-mail</label>
                 <span class="helper-text" data-error="errado" data-success="correto">ex: seunome@gmail.com</span>
             </div>
@@ -35,36 +36,32 @@
         <div class="row senhaRow">
             <div class="input-field col s12">
                 <i class="material-icons prefix">lock</i>
-                <input id="password" type="password" name="password" class="validate">
-                <label for="password">Senha</label>
+                <input id="senha" type="password" name="senha" class="validate">
+                <label for="senha">Senha</label>
             </div>
         </div>
         <div class="row lembraRow">
             <p>
-                <div class="col s6">
-                    <label for="remember">
-                        <input type="checkbox" id="remember" name="remember" checked="checked"/>
-                        <span>Lembrar-me</span>
-                    </label>
-                </div>
-                <div class="col s6">
-                    <a href="#esqueciasenha">Esqueci a senha</a>
-                </div>
+                <!--
+    <div class="col s6">
+        <label for="remember">
+            <input type="checkbox" id="remember" name="remember" checked="checked"/>
+            <span>Lembrar-me</span>
+        </label>
+    </div>
+    <div class="col s6">
+        <a href="#esqueciasenha">Esqueci a senha</a>
+    </div>
+        -->
             </p>	
         </div>
         <div class="row right-align buttonRow">
             <div class="input-field col s12">
-                <button class="btn waves-effect waves-light"
-                        onclick="(()=>{
-                        var email = document.getElementById('email');
-                        var password = document.getElementById('password');
-                        if(email.value = 'lucas.barque@sesims.com.br' && password.value == '123456abcde')
-                            window.location.pathname = '/Home/Index';
-                    })()"
-                           >
+                <button class="btn waves-effect waves-light" type="submit">
                     Autenticar
                 </button>
             </div>
         </div>
     </div>
 </div>
+</form>

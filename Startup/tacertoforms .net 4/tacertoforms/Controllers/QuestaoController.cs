@@ -6,9 +6,12 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using tacertoforms.Models;
+using TaCertoForms.Models;
+using TaCertoForms.Contexts;
+using TaCertoForms.Attributes;
 
-namespace tacertoforms.Controllers{
+namespace TaCertoForms.Controllers{
+    [SomenteLogado]
     public class QuestaoController : Controller{
         private Context db = new Context();
         [HttpGet]

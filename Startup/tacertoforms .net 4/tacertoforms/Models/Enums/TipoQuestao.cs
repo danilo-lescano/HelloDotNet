@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using tacertoforms.Models;
+using TaCertoForms.Models;
+using TaCertoForms.Contexts;
 public static class Get {
     private static Context db = new Context();
     public static List<TipoQuestao> TipoQuestoes(){

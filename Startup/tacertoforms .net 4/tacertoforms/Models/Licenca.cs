@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace tacertoforms.Models{
+namespace TaCertoForms.Models{
     public class Licenca {
         [Key]
         public int IdLicenca { get; set; }

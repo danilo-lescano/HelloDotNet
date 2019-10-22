@@ -7,18 +7,18 @@ using System.Net;
 using System.Runtime.CompilerServices;
 using System.Web;
 using System.Web.Mvc;
-using tacertoforms.Models;
+using TaCertoForms.Models;
+using TaCertoForms.Contexts;
 using TaCertoForms.Attributes;
-using TaCertoForms.Controllers;
 
-namespace tacertoforms.Controllers{
+namespace TaCertoForms.Controllers{
+    [SomenteLogado]
     public class AtividadesController : Controller{
         private Context db = new Context();
 
         // GET: Atividades
-        [Role("admin", "professor")]
+        [Perfil(Perfil.Administrador, Perfil.Professor)]
         public ActionResult Index(){
-            bool valido = Validation().flag;
             return View(db.Atividades.ToList());
         }
 
@@ -34,6 +34,8 @@ namespace tacertoforms.Controllers{
 
         // GET: Atividades/Create
         public ActionResult Create(){
+            List<Instituicao> list = db.Instituicaos.ToList();
+            ViewBag.InstituicaoList = new SelectList(list, "IdInstituicao", "NomeFantasia");
             return View();
         }
 

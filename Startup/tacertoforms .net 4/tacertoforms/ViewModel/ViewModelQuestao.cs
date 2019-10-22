@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace tacertoforms.Models
-{
-    public class ViewModelQuestao
-    {
+namespace TaCertoForms.Models{
+    public class ViewModelQuestao{
         public int IdQuestao { get; set; }
         public int IdAtividade { get; set; }
         public int IdTipoQuestao { get; set; }
@@ -15,10 +13,8 @@ namespace tacertoforms.Models
         public string JsonQuestao { get; set; }
         public int PesoNota { get; set; }
         public TipoQuestao TipoQuestao { get; set; }
-        public Questao Questao
-        {
-            get
-            {
+        public Questao Questao{
+            get{
                 return new Questao()
                 {
                     IdQuestao = this.IdQuestao,
@@ -30,8 +26,7 @@ namespace tacertoforms.Models
                     PesoNota = this.PesoNota
                 };
             }
-            set
-            {
+            set{
                     this.IdQuestao = value.IdQuestao;
                     this.IdAtividade = value.IdAtividade;
                     this.IdTipoQuestao = value.IdTipoQuestao;

@@ -46,10 +46,10 @@
 
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav">
-                        <li class="dropdown user user-menu">                            
+                        <li class="dropdown user user-menu">
                             <a href="#">
                                 <img src="~/Content/images/user2-160x160.jpg" class="user-image" alt="User Image">
-                                Lucas Barque da Silva
+                                @Session["NomeUsuario"]
                             </a>
                         </li>
                     </ul>
@@ -67,17 +67,17 @@
                 <ul class="sidebar-menu" data-widget="tree">
                     <li class="header">MENU DE NAVEGAÇÃO</li>
                     @*<li class="treeview">
-            <a href="#">
-                <i class="fa fa-dashboard"></i> <span>Dashboard</span>
-                <span class="pull-right-container">
-                    <i class="fa fa-angle-left pull-right"></i>
-                </span>
-            </a>
-            <ul class="treeview-menu">
-                <li><a href="../../index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
-                <li><a href="../../index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
-            </ul>
-        </li>*@
+                        <a href="#">
+                            <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="../../index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
+                            <li><a href="../../index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
+                        </ul>
+                    </li>*@
                     <li><a href="@Url.Action("Index", "Home")"><i class="fa fa-home"></i> <span>Início</span></a></li>
                     <li><a href="@Url.Action("Relatorios", "Home")"><i class="fa fa-tasks"></i> <span>Relatórios</span></a></li>
                     <li><a href="@Url.Action("Index", "Instituicaos")"><i class="fa fa-institution"></i> <span>Instituições</span></a></li>
@@ -85,7 +85,7 @@
                     <li><a href="@Url.Action("Index", "Turmas")"><i class="fa fa-users"></i> <span>Turmas</span></a></li>
                     <li><a href="@Url.Action("Index", "Disciplinas")"><i class="fa fa-reorder"></i> <span>Disciplinas</span></a></li>
                     <li><a href="@Url.Action("Index", "Atividades")"><i class="fa fa-th-list"></i> <span>Atividades</span></a></li>
-                    <li><a href="@Url.Action("Index", "Login")"><i class="fa fa-external-link"></i> <span>Sair</span></a></li>
+                    <li><a href="@Url.Action("LogOff", "Login")"><i class="fa fa-external-link"></i> <span>Sair</span></a></li>
                 </ul>
             </section>
         </aside>
@@ -111,8 +111,9 @@
         @Scripts.Render("~/Scripts/jquery.inputmask.extensions.js")
         @Scripts.Render("~/Scripts/cidades-estados.js")
         @Scripts.Render("~/Scripts/busca-cep.js")
-        @Scripts.Render("~/Scripts/icheck.min.js")        
+        @Scripts.Render("~/Scripts/icheck.min.js")
         @Scripts.Render("~/Scripts/select2.min.js")
+        @Scripts.Render("~/Scripts/dashboard2.js")
 
         @RenderSection("scripts", required: false)
 

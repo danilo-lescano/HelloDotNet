@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -6,9 +6,12 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using tacertoforms.Models;
+using TaCertoForms.Models;
+using TaCertoForms.Contexts;
+using TaCertoForms.Attributes;
 
-namespace tacertoforms.Controllers{
+namespace TaCertoForms.Controllers{
+    [SomenteLogado]
     public class PessoasController : Controller{
         private Context db = new Context();
 
