@@ -12,7 +12,9 @@ using TaCertoForms.Attributes;
 using TaCertoForms.Controllers;
 
 namespace tacertoforms.Controllers{
-    public class AtividadesController : ControladorBase{
+    public class AtividadesController : Controller{
+        private Context db = new Context();
+
         // GET: Atividades
         [Role("admin", "professor")]
         public ActionResult Index(){
