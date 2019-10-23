@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Web;
-using System.Web.Mvc;
-using System.Web.Mvc.Html;
+﻿using System.Web.Mvc;
 using TaCertoForms.Models;
-using TaCertoForms.Contexts;
 
 namespace tacertoforms.Helpers{
     public class MidiasHelper{
@@ -23,7 +16,8 @@ namespace tacertoforms.Helpers{
 
         public static MvcHtmlString showRemoveImage(Midia midia, string icon = null, string classname = null){
             string img = "<a ";
-            img += "href='/MidiasIO/Delete/" + midia.IdMidia + "'";            
+            img += "href='javascript:void(0)' ";
+            img += "id='" + midia.IdMidia + "' ";
             img += classname != null ? "class='btn btn-danger btn-xs btn-single-remove" + classname + "'" : "class='btn btn-danger btn-xs btn-single-remove'";
             img += icon != null ? "><i class='" + icon + "'></i>" : ">";
             img += "</a>";

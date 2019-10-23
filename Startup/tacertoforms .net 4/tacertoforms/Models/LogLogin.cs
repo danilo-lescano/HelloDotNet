@@ -6,15 +6,17 @@ using System.Linq;
 using System.Web;
 
 namespace TaCertoForms.Models{
-    [Table("TurmaAluno")]
-    public class TurmaAluno{
+    [Table("LogLogin")]
+    public class LogLogin{
         [Key]
-        public int IdTurmaAluno { get; set; }
-        public int IdTurma { get; set; }
+        public int IdLogLoggin { get; set; }
         public int IdPessoa { get; set; }
+        public DateTime HoraAcesso { get; set; }
+        [MaxLength(150)]
+        public string Plataforma { get; set; }
+        [MaxLength(150)]
+        public string DeviceId { get; set; }
 
-        [ForeignKey("IdTurma")]
-        public Turma Turma { get; set; }
         [ForeignKey("IdPessoa")]
         public Pessoa Pessoa { get; set; }
     }

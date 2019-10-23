@@ -1,23 +1,19 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using TaCertoForms.Models;
-using TaCertoForms.Contexts;
-using TaCertoForms.Attributes;
+using TaCertoForms.Controllers.Base;
 
 namespace TaCertoForms.Controllers{
-    public class LoginController : Controller{
-        Context db = new Context();
+    public class LoginController : ControladoraBase
+    {        
         public ActionResult Index(){
             return View();
         }
 
         [HttpPost]
         public ActionResult Autenticar(string email, string senha){
-            Pessoa pessoa = db.Pessoas.Where(p => p.Email == email && p.Senha == senha).FirstOrDefault();
+            Pessoa pessoa = db.Pessoa.Where(p => p.Email == email && p.Senha == senha).FirstOrDefault();
 
             if(pessoa == null){
                 ViewBag.ToastMessage = "Senha ou login inválidos!";
@@ -27,7 +23,7 @@ namespace TaCertoForms.Controllers{
                });
             }
             else{
-                Instituicao instituicao = db.Instituicaos.Find(pessoa.IdInstituicao);
+                Instituicao instituicao = db.Instituicao.Find(pessoa.IdInstituicao);
                 Session["Logado"] = true;
                 Session["IdPessoa"] = pessoa.IdPessoa;
                 Session["NomeUsuario"] = pessoa.Nome;

@@ -25,156 +25,160 @@
                 <h3 class="box-title">Edição de Registro</h3>
                 <a href="@Url.Action("Index", "Instituicaos")" class="btn btn-sm btn-default btn-flat pull-right">Voltar</a>
             </div>
-            @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "form-instituicao" }))
+            @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "form-instituicao", enctype = "multipart/form-data" }))
             {
                 @Html.AntiForgeryToken()
 
-        <div class="box-body">
-            <div class="col-xs-12">
-                <div class="row">
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                    @Html.HiddenFor(model => model.IdInstituicao)
-                    @Html.HiddenFor(model => model.IdEnderecoPrincipal)
-                    @Html.HiddenFor(model => model.IdEnderecoCobranca)
+                <div class="box-body">
+                    <div class="col-xs-12">
+                        <div class="row">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            @Html.HiddenFor(model => model.IdInstituicao)
+                            @Html.HiddenFor(model => model.IdEnderecoPrincipal)
+                            @Html.HiddenFor(model => model.IdEnderecoCobranca)
 
-                    <div class="form-group col-xs-12 col-md-6">
-                        @Html.Label("Razão Social")
-                        @Html.EditorFor(model => model.RazaoSocial, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.RazaoSocial, "", new { @class = "text-danger" })
-                    </div>
+                            <div class="form-group col-xs-12 col-md-6">
+                                @Html.Label("Razão Social")
+                                @Html.EditorFor(model => model.RazaoSocial, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.RazaoSocial, "", new { @class = "text-danger" })
+                            </div>
 
-                    <div class="form-group col-xs-12 col-md-6">
-                        @Html.Label("Nome Fantasia")
-                        @Html.EditorFor(model => model.NomeFantasia, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.NomeFantasia, "", new { @class = "text-danger" })
+                            <div class="form-group col-xs-12 col-md-6">
+                                @Html.Label("Nome Fantasia")
+                                @Html.EditorFor(model => model.NomeFantasia, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.NomeFantasia, "", new { @class = "text-danger" })
 
-                    </div>
+                            </div>
 
-                    <div class="form-group col-xs-12 col-md-6">
-                        @Html.Label("CNPJ")
-                        @Html.EditorFor(model => model.CNPJ, new { htmlAttributes = new { @class = "form-control cnpj" } })
-                        @Html.ValidationMessageFor(model => model.CNPJ, "", new { @class = "text-danger" })
+                            <div class="form-group col-xs-12 col-md-6">
+                                @Html.Label("CNPJ")
+                                @Html.EditorFor(model => model.CNPJ, new { htmlAttributes = new { @class = "form-control cnpj" } })
+                                @Html.ValidationMessageFor(model => model.CNPJ, "", new { @class = "text-danger" })
 
-                    </div>
+                            </div>
 
-                    <div class="form-group col-xs-12 col-md-6">
-                        @Html.Label("Email")
-                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @type = "email" } })
-                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                            <div class="form-group col-xs-12 col-md-6">
+                                @Html.Label("Email")
+                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @type = "email" } })
+                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
 
-                    </div>
+                            </div>
 
-                    <div class="form-group col-xs-12 col-md-6">
-                        @Html.Label("Telefone")
-                        @Html.EditorFor(model => model.Telefone, new { htmlAttributes = new { @class = "form-control telefone" } })
-                        @Html.ValidationMessageFor(model => model.Telefone, "", new { @class = "text-danger" })
-                    </div>
-                @*
-                <div class="form-group col-xs-12 col-md-6">
-                    <div class="row">
-                        <div class="col-md-6">
-                            @Html.Label("Logo da Empresa")
-                            @Html.TextBox("LogoEmpresa", null, new { @type = "file" })
-                        </div>              
-                        <div class="col-md-6">
-                            @MidiasHelper.showImage(Model.Midia, null, null, "100%")
-                            @MidiasHelper.showRemoveImage(Model.Midia, "fa fa-remove")
-                        </div>              
-                    </div>
-                </div>
-                *@
+                            <div class="form-group col-xs-12 col-md-6">
+                                @Html.Label("Telefone")
+                                @Html.EditorFor(model => model.Telefone, new { htmlAttributes = new { @class = "form-control telefone" } })
+                                @Html.ValidationMessageFor(model => model.Telefone, "", new { @class = "text-danger" })
+                            </div>
 
+                            <div class="form-group col-xs-12 col-md-6">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        @Html.Label("Logo da Empresa")
+                                        @Html.TextBox("LogoEmpresa", null, new { @type = "file", @id = "input-file" })
+                                        <input type="button" value="Enviar imagem" id="btn-enviar-imagem" class="btn btn-primary btn-xs mt10" />
+                                    </div>
+                                    @if (Model.Midia != null)
+                                    {
+                                        <div class="col-md-6">
+                                            <div class="logo-empresa">
+                                                @MidiasHelper.showImage(Model.Midia, null, null, "100%")
+                                                @MidiasHelper.showRemoveImage(Model.Midia, "fa fa-remove")
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
 
-            <div class="form-group col-xs-12">
-                <h3 class="box-title">Endereço Principal</h3>
-                O "Endereço Principal" é o mesmo "Endereço de Cobrança"?
-                Sim:  @Html.RadioButton("EqualEnderecoCobranca", true, new { id = "endereco-sim" })
-                Não:  @Html.RadioButton("EqualEnderecoCobranca", false, new { id = "endereco-nao" })
-            </div>
-            <div class="form-group col-xs-12 col-md-3">
-                @Html.Label("CEP")
-                @Html.TextBox("CEPPrincipal", null, new { @class = "form-control cep", @id = "cep-principal", @required = "required" })
-            </div>
-            <div class="form-group col-xs-12 col-md-3">
-                @Html.Label("País")
-                @Html.TextBox("PaisPrincipal", null, new { @class = "form-control", @id = "pais-principal", @required = "required" })
-            </div>
-            <div class="form-group col-xs-12 col-md-3">
-                @Html.Label("Logradouro")
-                @Html.TextBox("LogradouroPrincipal", null, new { @class = "form-control", @id = "logradouro-principal", @required = "required" })
-            </div>
-            <div class="form-group col-xs-12 col-md-3">
-                @Html.Label("Complemento")
-                @Html.TextBox("ComplementoPrincipal", null, new { @class = "form-control", @id = "complemento-principal" })
-            </div>
-            <div class="form-group col-xs-12 col-md-3">
-                @Html.Label("Número")
-                @Html.TextBox("NumeroPrincipal", null, new { @class = "form-control", @type = "number", @id = "numero-principal", @required = "required" })
-            </div>
-            <div class="form-group col-xs-12 col-md-3">
-                @Html.Label("Bairro")
-                @Html.TextBox("BairroPrincipal", null, new { @class = "form-control", @id = "bairro-principal", @required = "required" })
-            </div>
-            <div class="form-group col-xs-12 col-md-3">
-                @Html.Label("Estado")
-                @Html.DropDownList("UFPrincipal",
-                 new SelectList(new List<String>()),
-                 "Estado",
-                 new { @class = "form-control", @id = "estado-principal", @required = "required" })
+                            <div class="form-group col-xs-12">
+                                <h3 class="box-title">Endereço Principal</h3>
+                                O "Endereço Principal" é o mesmo "Endereço de Cobrança"?
+                                Sim:  @Html.RadioButton("EqualEnderecoCobranca", true, new { id = "endereco-sim" })
+                                Não:  @Html.RadioButton("EqualEnderecoCobranca", false, new { id = "endereco-nao" })
+                            </div>
+                            <div class="form-group col-xs-12 col-md-3">
+                                @Html.Label("CEP")
+                                @Html.TextBox("CEPPrincipal", null, new { @class = "form-control cep", @id = "cep-principal", @required = "required" })
+                            </div>
+                            <div class="form-group col-xs-12 col-md-3">
+                                @Html.Label("País")
+                                @Html.TextBox("PaisPrincipal", null, new { @class = "form-control", @id = "pais-principal", @required = "required" })
+                            </div>
+                            <div class="form-group col-xs-12 col-md-3">
+                                @Html.Label("Logradouro")
+                                @Html.TextBox("LogradouroPrincipal", null, new { @class = "form-control", @id = "logradouro-principal", @required = "required" })
+                            </div>
+                            <div class="form-group col-xs-12 col-md-3">
+                                @Html.Label("Complemento")
+                                @Html.TextBox("ComplementoPrincipal", null, new { @class = "form-control", @id = "complemento-principal" })
+                            </div>
+                            <div class="form-group col-xs-12 col-md-3">
+                                @Html.Label("Número")
+                                @Html.TextBox("NumeroPrincipal", null, new { @class = "form-control", @type = "number", @id = "numero-principal", @required = "required" })
+                            </div>
+                            <div class="form-group col-xs-12 col-md-3">
+                                @Html.Label("Bairro")
+                                @Html.TextBox("BairroPrincipal", null, new { @class = "form-control", @id = "bairro-principal", @required = "required" })
+                            </div>
+                            <div class="form-group col-xs-12 col-md-3">
+                                @Html.Label("Estado")
+                                @Html.DropDownList("UFPrincipal",
+                                 new SelectList(new List<String>()),
+                                 "Estado",
+                                 new { @class = "form-control", @id = "estado-principal", @required = "required" })
 
-            </div>
-            <div class="form-group col-xs-12 col-md-3">
-                @Html.Label("Cidade")
-                @Html.DropDownList("CidadePrincipal",
-                 new SelectList(new List<String>()),
-                 "Cidade",
-                 new { @class = "form-control", @id = "cidade-principal", @required = "required" })
-            </div>
-            <div id="cobranca" style="display: none">
-                <div class="form-group col-xs-12">
-                    <h3 class="box-title">Endereço de Cobrança</h3>
-                </div>
-                <div class="form-group col-xs-12 col-md-3">
-                    @Html.Label("CEP")
-                    @Html.TextBox("CEPCobranca", null, new { @class = "form-control cep", @id = "cep-cobranca" })
-                </div>
-                <div class="form-group col-xs-12 col-md-3">
-                    @Html.Label("País")
-                    @Html.TextBox("PaisCobranca", null, new { @class = "form-control", @id = "pais-cobranca" })
-                </div>
-                <div class="form-group col-xs-12 col-md-3">
-                    @Html.Label("Logradouro")
-                    @Html.TextBox("LogradouroCobranca", null, new { @class = "form-control", @id = "logradouro-cobranca" })
-                </div>
-                <div class="form-group col-xs-12 col-md-3">
-                    @Html.Label("Complemento")
-                    @Html.TextBox("ComplementoCobranca", null, new { @class = "form-control", @id = "complemento-cobranca" })
-                </div>
-                <div class="form-group col-xs-12 col-md-3">
-                    @Html.Label("Número")
-                    @Html.TextBox("NumeroCobranca", null, new { @class = "form-control", @type = "number", @id = "numero-cobranca" })
-                </div>
-                <div class="form-group col-xs-12 col-md-3">
-                    @Html.Label("Bairro")
-                    @Html.TextBox("BairroCobranca", null, new { @class = "form-control", @id = "bairro-cobranca" })
-                </div>
-                <div class="form-group col-xs-12 col-md-3">
-                    @Html.Label("Estado")
-                    @Html.DropDownList("UFCobranca",
-                     new SelectList(new List<String>()),
-                     "Estado",
-                     new { @class = "form-control", @id = "estado-cobranca" })
+                            </div>
+                            <div class="form-group col-xs-12 col-md-3">
+                                @Html.Label("Cidade")
+                                @Html.DropDownList("CidadePrincipal",
+                                 new SelectList(new List<String>()),
+                                 "Cidade",
+                                 new { @class = "form-control", @id = "cidade-principal", @required = "required" })
+                            </div>
+                            <div id="cobranca" style="display: none">
+                                <div class="form-group col-xs-12">
+                                    <h3 class="box-title">Endereço de Cobrança</h3>
+                                </div>
+                                <div class="form-group col-xs-12 col-md-3">
+                                    @Html.Label("CEP")
+                                    @Html.TextBox("CEPCobranca", null, new { @class = "form-control cep", @id = "cep-cobranca" })
+                                </div>
+                                <div class="form-group col-xs-12 col-md-3">
+                                    @Html.Label("País")
+                                    @Html.TextBox("PaisCobranca", null, new { @class = "form-control", @id = "pais-cobranca" })
+                                </div>
+                                <div class="form-group col-xs-12 col-md-3">
+                                    @Html.Label("Logradouro")
+                                    @Html.TextBox("LogradouroCobranca", null, new { @class = "form-control", @id = "logradouro-cobranca" })
+                                </div>
+                                <div class="form-group col-xs-12 col-md-3">
+                                    @Html.Label("Complemento")
+                                    @Html.TextBox("ComplementoCobranca", null, new { @class = "form-control", @id = "complemento-cobranca" })
+                                </div>
+                                <div class="form-group col-xs-12 col-md-3">
+                                    @Html.Label("Número")
+                                    @Html.TextBox("NumeroCobranca", null, new { @class = "form-control", @type = "number", @id = "numero-cobranca" })
+                                </div>
+                                <div class="form-group col-xs-12 col-md-3">
+                                    @Html.Label("Bairro")
+                                    @Html.TextBox("BairroCobranca", null, new { @class = "form-control", @id = "bairro-cobranca" })
+                                </div>
+                                <div class="form-group col-xs-12 col-md-3">
+                                    @Html.Label("Estado")
+                                    @Html.DropDownList("UFCobranca",
+                                     new SelectList(new List<String>()),
+                                     "Estado",
+                                     new { @class = "form-control", @id = "estado-cobranca" })
 
-                </div>
-                <div class="form-group col-xs-12 col-md-3">
-                    @Html.Label("Cidade")
-                    @Html.DropDownList("CidadeCobranca",
-                     new SelectList(new List<String>()),
-                     "Cidade",
-                     new { @class = "form-control", @id = "cidade-cobranca" })
-                </div>
-            </div>
-        </div>
+                                </div>
+                                <div class="form-group col-xs-12 col-md-3">
+                                    @Html.Label("Cidade")
+                                    @Html.DropDownList("CidadeCobranca",
+                                     new SelectList(new List<String>()),
+                                     "Cidade",
+                                     new { @class = "form-control", @id = "cidade-cobranca" })
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="box-footer">
@@ -282,6 +286,85 @@
             $('#estado-cobranca')
         );
     });
+    //TODO validar endereço principal e endereço de cobrança iguais
 
-        //TODO validar endereço principal e endereço de cobrança iguais
+    //Deletando imagem logo empresa
+    $('.btn-single-remove').on('click', function () {
+        $.ajax({
+            url: '@Url.Action("DeleteMidia", "ControladoraBase")',
+            data: {
+                id: $(this).attr('id')                
+            },
+            cache: false,                        
+            success: function (data) {                
+                if (data == true) {
+                    $('.logo-empresa').remove();
+                } else {
+                    alert('Falha ao deletar imagem. Por favor, entre em contato com o administrador do sistema.');
+                }
+            },
+            error: function () {
+                alert('Ocorreu algum erro de conexão. Por favor, tente novamente mais tarde');
+            }
+        });    
+    });
+
+    @*
+    $('#input-file').on('change', function () {         
+        $.ajax({
+            url: '@Url.Action("Save", "Midias")',
+            data: {
+                files: $(this)[0].files,
+                IdOrigem: @Html.Raw(Model.IdInstituicao),
+                tabela: 'Instituicaos'
+            },
+            cache: false,  
+            type: 'post',
+            contentType: false,         
+            processData:false,
+            success: function (data) {                
+                if (data == true) {
+                    $('.logo-empresa').remove();
+                } else {
+                    alert('Falha ao deletar imagem. Por favor, entre em contato com o administrador do sistema.');
+                }
+            },
+            error: function () {
+                alert('Ocorreu algum erro de conexão. Por favor, tente novamente mais tarde');
+            }
+        });            
+    });
+    *@
+
+    $('#input-file').on('change', function (e) {
+        var files = e.target.files;        
+    
+        if (files.length > 0) {
+           if (window.FormData !== undefined) {
+               var data = new FormData();
+               for (var x = 0; x < files.length; x++){
+                   data.append("file" + x, files[x]);
+               }
+
+               $.ajax({
+                   type: 'POST',
+                   url: '@Url.Action("Save", "Midias")' + '?id=' + '@Html.Raw(Model.IdInstituicao)' + "&tabela=Instituicaos" ,
+                   contentType: false,
+                   processData: false,
+                   data: data,
+                   success: function(result) {
+                       console.log(result);
+                   },
+                   error: function (xhr, status, p3, p4){
+                       var err = "Error " + " " + status + " " + p3 + " " + p4;
+                       if (xhr.responseText && xhr.responseText[0] == "{")
+                           err = JSON.parse(xhr.responseText).Message;
+                           console.log(err);
+                        }
+                    });               
+            } else {
+                alert("This browser doesn't support HTML5 file uploads!");
+              }
+         }
+    });
 </script>

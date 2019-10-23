@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using TaCertoForms.Models;
 
 namespace TaCertoForms.Controllers{
-    public class TesteController : Controller{
+    public class TesteController : Controller{/*
         public IActionResult Login(){
             return View();
         }
@@ -23,5 +23,5 @@ namespace TaCertoForms.Controllers{
         public IActionResult Error(){
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-    }
+    */}
 }

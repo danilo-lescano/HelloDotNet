@@ -9,7 +9,7 @@ using TaCertoForms.Util.Session;
 using TaCertoForms.Util.Coercion;
 
 namespace TaCertoForms.Controllers{
-    public class AdminController : SessionController{
+    public class AdminController : SessionController{/*
         public IActionResult Index(){
             Start();
             if(isUsuarioLogado() && isControleCorreto()){
@@ -36,5 +36,5 @@ namespace TaCertoForms.Controllers{
         private bool isControleCorreto(){
             return ((Perfil)Session["Perfil"]).Nome.ToUpper() == "ADMIN";
         }
-    }
+    */}
 }

@@ -12,6 +12,6 @@ namespace TaCertoForms.Models{
         public int IdPessoa { get; set; }
         public Pessoa Professor { get; set; }
 
-        public List<TurmaDisciplinaProfessor> TurmaDisciplinaProfessorList { get; set; }
+        //public List<TurmaDisciplinaProfessor> TurmaDisciplinaProfessorList { get; set; }
     }
 }

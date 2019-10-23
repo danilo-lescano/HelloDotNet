@@ -1,28 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
-using System.Data.Entity;
 using System.Linq;
-using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using TaCertoForms.Models;
-using TaCertoForms.Contexts;
 using TaCertoForms.Attributes;
+using TaCertoForms.Controllers.Base;
 
 namespace TaCertoForms.Controllers{
     [SomenteLogado]
-    public class QuestaoController : Controller{
-        private Context db = new Context();
+    public class QuestaoController : ControladoraBase
+    {        
         [HttpGet]
         public JsonResult Index(int? idAtividade, int? idTipoQuestao){
             List<Questao> questao = new List<Questao>();            
             if(idAtividade == null)
                 return Json(null, JsonRequestBehavior.AllowGet);
             if (idTipoQuestao != null)
-                questao = db.Questaos.Where(q => q.IdAtividade == idAtividade && q.IdTipoQuestao == idTipoQuestao).ToList();
+                questao = db.Questao.Where(q => q.IdAtividade == idAtividade && q.IdTipoQuestao == idTipoQuestao).ToList();
             else
-                questao = db.Questaos.Where(q => q.IdAtividade == idAtividade).ToList();                
+                questao = db.Questao.Where(q => q.IdAtividade == idAtividade).ToList();                
             return Json(questao, JsonRequestBehavior.AllowGet);
         }
         [HttpGet]
@@ -30,13 +26,13 @@ namespace TaCertoForms.Controllers{
             Questao questao;
             if (id == null)
                 return Json(null, JsonRequestBehavior.AllowGet);
-            questao = db.Questaos.Find(id);
+            questao = db.Questao.Find(id);
             return Json(questao, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
         public JsonResult Create(Questao questao){
             if(questao.IdQuestao == 0){
-                db.Questaos.Add(questao);
+                db.Questao.Add(questao);
                 db.SaveChanges();
             }
             else{
@@ -49,8 +45,8 @@ namespace TaCertoForms.Controllers{
         public bool Delete(int? id){
             if(id == null)
                 return false;
-            Questao q = db.Questaos.Find(id);
-            db.Questaos.Remove(q);
+            Questao q = db.Questao.Find(id);
+            db.Questao.Remove(q);
             db.SaveChanges();
             return true;
         }

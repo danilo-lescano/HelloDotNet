@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using TaCertoForms.Models;
-using TaCertoForms.Contexts;
+﻿using System.Web.Mvc;
 using TaCertoForms.Attributes;
+using TaCertoForms.Controllers.Base;
 
 namespace TaCertoForms.Controllers{
     [SomenteLogado]
-    public class HomeController : Controller{
+    public class HomeController : ControladoraBase
+    {
         public ActionResult Index(){
             return View();
         }

@@ -193,11 +193,12 @@
     <Compile Include="Attributes\SomenteLogadoAttribute.cs" />
     <Compile Include="Attributes\PerfilAttribute.cs" />
     <Compile Include="Controllers\AtividadesController.cs" />
+    <Compile Include="Controllers\Base\ControladoraBase.cs" />
     <Compile Include="Controllers\DisciplinasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InstituicaosController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
-    <Compile Include="Controllers\MidiasIO.cs" />
+    <Compile Include="Controllers\MidiasController.cs" />
     <Compile Include="Controllers\PessoasController.cs" />
     <Compile Include="Controllers\QuestaoController.cs" />
     <Compile Include="Controllers\TurmasController.cs" />
@@ -233,7 +234,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\Upload\Instituicaos\e99b7d56-36b9-444b-8c92-7d730d6aea33.png" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -3220,7 +3220,9 @@
     <Content Include="Views\Atividades\QuestoesLacuna.cshtml" />
     <Content Include="Views\Home\Relatorios.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

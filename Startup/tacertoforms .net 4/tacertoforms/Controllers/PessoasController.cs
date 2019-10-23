@@ -1,24 +1,21 @@
-using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using TaCertoForms.Models;
-using TaCertoForms.Contexts;
 using TaCertoForms.Attributes;
+using TaCertoForms.Controllers.Base;
 
 namespace TaCertoForms.Controllers{
     [SomenteLogado]
-    public class PessoasController : Controller{
-        private Context db = new Context();
-
+    public class PessoasController : ControladoraBase
+    {
         // GET: Pessoas
         public ActionResult Index(){
             List<ViewModelAluno> alunos = new List<ViewModelAluno>();
-            foreach (var aluno in db.Pessoas.ToList())
+            foreach (var aluno in db.Pessoa.ToList())
             {                
                 ViewModelAluno vmAluno = new ViewModelAluno() {
                     IdPessoa = aluno.IdPessoa,
@@ -27,7 +24,7 @@ namespace TaCertoForms.Controllers{
                     CPF      = aluno.CPF,
                     Email    = aluno.Email                    
                 };
-                vmAluno.Instituicao.Add(db.Instituicaos.Find(aluno.IdInstituicao));
+                vmAluno.Instituicao.Add(db.Instituicao.Find(aluno.IdInstituicao));
                 alunos.Add(vmAluno);
             }
             return View(alunos);            
@@ -37,7 +34,7 @@ namespace TaCertoForms.Controllers{
         public ActionResult Details(int? id){
             if (id == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            Pessoa pessoa = db.Pessoas.Find(id);
+            Pessoa pessoa = db.Pessoa.Find(id);
             if (pessoa == null)
                 return HttpNotFound();
             return View(pessoa);
@@ -45,7 +42,7 @@ namespace TaCertoForms.Controllers{
 
         // GET: Pessoas/Create
         public ActionResult Create(){
-            List<Instituicao> list = db.Instituicaos.ToList();
+            List<Instituicao> list = db.Instituicao.ToList();
             ViewBag.InstituicaoList = new SelectList(list, "IdInstituicao", "NomeFantasia");
             return View();
         }
@@ -56,8 +53,13 @@ namespace TaCertoForms.Controllers{
         [HttpPost]        
         public ActionResult Create(Pessoa pessoa){            
             if (ModelState.IsValid){
-                db.Pessoas.Add(pessoa);
+                db.Pessoa.Add(pessoa);
                 db.SaveChanges();
+
+                //Salvando M�dia (Logo da Empresa)
+                //HttpFileCollectionBase files = Request.Files;
+                //MidiasController.Save(files, pessoa.IdPessoa, "Pessoas");
+
                 return RedirectToAction("Edit", "Pessoas", new { id = pessoa.IdPessoa });
             }
             return View(pessoa);
@@ -67,11 +69,13 @@ namespace TaCertoForms.Controllers{
         public ActionResult Edit(int? id){
             if (id == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            Pessoa pessoa = db.Pessoas.Find(id);
-            List<Instituicao> list = db.Instituicaos.ToList();
+            Pessoa pessoa = db.Pessoa.Find(id);
+            List<Instituicao> list = db.Instituicao.ToList();
             ViewBag.InstituicaoList = new SelectList(list, "IdInstituicao", "NomeFantasia");
             if (pessoa == null)
                 return HttpNotFound();
+            Midia midia = db.Midia.Where(x => x.IdOrigem == id && x.Tabela == "Pessoas").FirstOrDefault<Midia>();            
+            ViewBag.Midia = midia;            
             return View(pessoa);
         }
 
@@ -93,7 +97,7 @@ namespace TaCertoForms.Controllers{
         public ActionResult Delete(int? id){
             if (id == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            Pessoa pessoa = db.Pessoas.Find(id);
+            Pessoa pessoa = db.Pessoa.Find(id);
             if (pessoa == null)
                 return HttpNotFound();
             return View(pessoa);
@@ -103,8 +107,8 @@ namespace TaCertoForms.Controllers{
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id){
-            Pessoa pessoa = db.Pessoas.Find(id);
-            db.Pessoas.Remove(pessoa);
+            Pessoa pessoa = db.Pessoa.Find(id);
+            db.Pessoa.Remove(pessoa);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
