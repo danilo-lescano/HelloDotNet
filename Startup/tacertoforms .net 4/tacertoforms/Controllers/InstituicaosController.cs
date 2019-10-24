@@ -8,7 +8,7 @@ using TaCertoForms.Attributes;
 using TaCertoForms.Controllers.Base;
 
 namespace TaCertoForms.Controllers{
-    [SomenteLogado]
+   // [SomenteLogado]
     public class InstituicaosController : ControladoraBase {
         
         // GET: Instituicaos

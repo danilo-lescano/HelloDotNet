@@ -16,7 +16,14 @@ namespace TaCertoForms.Models{
         public bool IsAleatorio { get; set; }
         public bool IsProva { get; set; }
 
-        [ForeignKey("IdTurmaDisciplinaAutor")]
+        [ForeignKey("IdTurmaDisciplinaAutor ")]
         public TurmaDisciplinaAutor TurmaDisciplinaAutor { get; set; }
+
+        public static void ModelBuilding(ModelBuilder modelBuilder){
+            modelBuilder.Entity<Atividade>()
+                .HasOne(A => A.TurmaDisciplinaAutor)
+                .WithMany()
+                .HasForeignKey(A => A.IdTurmaDisciplinaAutor);
+        }
     }
 }

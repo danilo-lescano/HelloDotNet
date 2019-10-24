@@ -29,7 +29,7 @@ namespace TaCertoForms.Controllers
         //public List<Midia> Save(HttpFileCollectionBase files, int IdOrigem, string tabela, string link = null)
         //{
         [HttpPost]
-        public Task<JsonResult> Save(int id, string tabela) {
+        public async Task<JsonResult> Save(int id, string tabela) {
             try
             {
                 List<Midia> arquivos = new List<Midia>();

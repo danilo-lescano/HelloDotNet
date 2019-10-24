@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.Entity;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -23,9 +24,9 @@ namespace TaCertoForms.Models{
         public int IdEnderecoPrincipal { get; set; }
         public int IdEnderecoCobranca { get; set; }
 
-        [ForeignKey("IdEnderecoPrincipal")]
+
+        //NAVIGATION PROPERTY
         public Endereco EnderecoPrincipal { get; set; }
-        [ForeignKey("IdEnderecoCobranca")]
         public Endereco EnderecoCobranca { get; set; }
     }
 }

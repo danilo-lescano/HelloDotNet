@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.Entity;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -13,9 +14,8 @@ namespace TaCertoForms.Models{
         public int IdAutor { get; set; }
         public int IdDisciplinaTurma { get; set; }       
 
-        [ForeignKey("IdAutor")]
+        //NAVIGATION PROPERTY
         public Pessoa Autor { get; set; }
-        [ForeignKey("IdDisciplinaTurma ")]
         public DisciplinaTurma DisciplinaTurma { get; set; }
     }
 }

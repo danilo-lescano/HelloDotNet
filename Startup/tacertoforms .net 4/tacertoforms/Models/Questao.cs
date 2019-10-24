@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.Entity;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -17,9 +18,8 @@ namespace TaCertoForms.Models{
         public string JsonQuestao { get; set; }
         public int PesoNota { get; set; }
 
-        [ForeignKey("IdAtividade")]
+        //NAVIGATION PROPERTY
         public Atividade Atividade { get; set; }
-        [ForeignKey("IdTipoQuestao")]
         public TipoQuestao TipoQuestao { get; set; }
     }
 }

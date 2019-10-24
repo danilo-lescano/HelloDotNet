@@ -5,7 +5,7 @@ using TaCertoForms.Contexts;
 public static class Get {
     private static Context db = new Context();
     public static List<TipoQuestao> TipoQuestoes(){
-        List<TipoQuestao> tq = db.TipoQuestaos.ToList();
+        List<TipoQuestao> tq = db.TipoQuestao.ToList();
         return tq;
     }
 }

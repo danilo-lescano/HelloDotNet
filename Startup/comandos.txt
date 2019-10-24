@@ -3,3 +3,10 @@ dotnet ef migrations add Inicial
 
 2) cria o banco de dados efetivamente
 dotnet ef database update
+
+
+EF 6 (Tudo dentro do CONSOLE GERENCIADOR DE PACOTES)
+Install-Package EntityFramework -IncludePrerelease
+Enable-Migrations
+Add-Migration
+Update-Database

@@ -26,7 +26,7 @@ namespace TaCertoForms.Attributes{
             int? id = int.Parse(Convert.ToString(httpContext.Session["IdPessoa"]));
             if (id != null)
                 using (var db = new Context()) {
-                    Pessoa p = db.Pessoas.Find(id);
+                    Pessoa p = db.Pessoa.Find(id);
                     foreach (var perfil in perfisPermitidos){
                         if(perfil == p.Perfil)
                             return true;

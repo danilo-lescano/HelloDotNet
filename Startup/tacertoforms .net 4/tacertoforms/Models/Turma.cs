@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.Entity;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -14,7 +15,7 @@ namespace TaCertoForms.Models{
         public string Serie { get; set; }
         public Periodo Periodo { get; set; } //nullable + enum(matutino, vespertino, noturno, integral)
 
-        [ForeignKey("IdInstituicao")]
+        //NAVIGATION PROPERTY
         public Instituicao Instituicao { get; set; }
     }
 }

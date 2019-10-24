@@ -7,7 +7,7 @@ using System.Web;
 namespace TaCertoForms.Models {
     public class ViewModelAtividade {
         public int IdAtividade { get; set; }
-        public int IdTurmaDisciplinaProfessor { get; set; }
+        public int IdTurmaDisciplinaAutor { get; set; }
         public DateTime DataInicio { get; set; }
         public DateTime DataFim { get; set; }
         public int NumeroTentativas { get; set; }
@@ -18,7 +18,7 @@ namespace TaCertoForms.Models {
             get{
                 return new Atividade {
                     IdAtividade = this.IdAtividade,
-                    IdTurmaDisciplinaProfessor = this.IdTurmaDisciplinaProfessor,
+                    IdTurmaDisciplinaAutor = this.IdTurmaDisciplinaAutor,
                     DataInicio = this.DataInicio,
                     DataFim = this.DataFim,
                     NumeroTentativas = this.NumeroTentativas,
@@ -28,7 +28,7 @@ namespace TaCertoForms.Models {
             }
             set{
                 this.IdAtividade = value.IdAtividade;
-                this.IdTurmaDisciplinaProfessor = value.IdTurmaDisciplinaProfessor;
+                this.IdTurmaDisciplinaAutor = value.IdTurmaDisciplinaAutor;
                 this.DataInicio = value.DataInicio;
                 this.DataFim = value.DataFim;
                 this.NumeroTentativas = value.NumeroTentativas;

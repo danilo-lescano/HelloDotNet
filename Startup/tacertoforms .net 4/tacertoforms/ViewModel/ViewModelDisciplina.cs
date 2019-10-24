@@ -8,7 +8,7 @@ namespace TaCertoForms.Models {
     public class ViewModelDisciplina {
         public int IdDisciplina { get; set; }
         public int IdDisciplinaTurma { get; set; }
-        public int IdTurmaDisciplinaProfessor { get; set; }
+        public int IdTurmaDisciplinaAutor { get; set; }
         public string Nome { get; set; }
         public string Descricao { get; set; }
         public string idTurmas { get; set; }

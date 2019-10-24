@@ -26,5 +26,17 @@ namespace TaCertoForms.Models{
         public Endereco EnderecoPrincipal { get; set; }
         [ForeignKey("IdEnderecoCobranca")]
         public Endereco EnderecoCobranca { get; set; }
+
+        public static void ModelBuilding(ModelBuilder modelBuilder){
+            modelBuilder.Entity<Instituicao>()
+                .HasOne(I => I.EnderecoPrincipal)
+                .WithMany()
+                .HasForeignKey(I => I.IdEnderecoPrincipal);
+
+            modelBuilder.Entity<Instituicao>()
+                .HasOne(I => I.EnderecoCobranca)
+                .WithMany()
+                .HasForeignKey(I => I.IdEnderecoCobranca);
+        }
     }
 }

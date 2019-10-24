@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.Entity;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -17,7 +18,7 @@ namespace TaCertoForms.Models{
         [MaxLength(150)]
         public string DeviceId { get; set; }
 
-        [ForeignKey("IdPessoa")]
+        //NAVIGATION PROPERTY
         public Pessoa Pessoa { get; set; }
     }
 }

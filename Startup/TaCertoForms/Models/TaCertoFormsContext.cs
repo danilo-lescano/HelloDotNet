@@ -34,6 +34,8 @@ namespace TaCertoForms.Models{
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder){
             modelBuilder.HasDefaultSchema("TaCerto");
+            //TaCertoForms.Models.Atividade.ModelBuilding(modelBuilder);
+            TaCertoForms.Models.Instituicao.ModelBuilding(modelBuilder);
             //-------------------------------ATIVIDADE-------------------------------
             //modelBuilder.Entity<Atividade>().ToTable("Atividade");
             //modelBuilder.Entity<Atividade>()
@@ -64,16 +66,16 @@ namespace TaCertoForms.Models{
             //--------------------------------ENDERECO-------------------------------//
             //------------------------------INSTITUICAO------------------------------//
             //modelBuilder.Entity<Instituicao>().ToTable("Instituicao");
-            modelBuilder.Entity<Instituicao>()
-                .HasOne(i => i.EnderecoPrincipal)
-                .WithMany(e => e.EnderecoPrincipalList)
-                .HasForeignKey(i => i.IdEnderecoPrincipal)
-                .OnDelete(DeleteBehavior.Restrict);
-            modelBuilder.Entity<Instituicao>()
-                .HasOne(i => i.EnderecoCobranca)
-                .WithMany(e => e.EnderecoCobrancaList)
-                .HasForeignKey(i => i.IdEnderecoCobranca)
-                .OnDelete(DeleteBehavior.Restrict);
+            //modelBuilder.Entity<Instituicao>()
+            //    .HasOne(i => i.EnderecoPrincipal)
+            //    .WithMany(e => e.EnderecoPrincipalList)
+            //    .HasForeignKey(i => i.IdEnderecoPrincipal)
+            //    .OnDelete(DeleteBehavior.Restrict);
+            //modelBuilder.Entity<Instituicao>()
+            //    .HasOne(i => i.EnderecoCobranca)
+            //    .WithMany(e => e.EnderecoCobrancaList)
+            //    .HasForeignKey(i => i.IdEnderecoCobranca)
+            //    .OnDelete(DeleteBehavior.Restrict);
             //------------------------------INSTITUICAO------------------------------//
             //--------------------------------LICENCA--------------------------------//
             //modelBuilder.Entity<Licenca>().ToTable("Licenca");
