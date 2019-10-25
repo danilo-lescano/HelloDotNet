@@ -29,7 +29,10 @@
             <div class="box-body">
                 <table id="example1" class="table table-bordered table-striped">
                     <thead>
-                        <tr>
+                        <tr>                            
+                            <th>
+                                Turmas
+                            </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.Nome)
                             </th>
@@ -40,21 +43,32 @@
                         </tr>
                     </thead>
                     <tbody>
-
                         @foreach (var item in Model)
                         {
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Nome)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Descricao)
-                                </td>
-                                <td>
-                                    <a href="@Url.Action("Edit", "Disciplina", new { id = item.IdDisciplina })" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
-                                    <a href="@Url.Action("Delete", "Disciplina", new { id = item.IdDisciplina })" class="btn btn-danger btn-xs"><i class="fa fa-remove"></i></a>
-                                </td>
-                            </tr>
+                        <tr>                            
+                            <td>
+                                @for (var i = 0; i < item.Turmas.Count; i++)
+                                {
+
+                                    @Html.Raw(item.Turmas[i].Serie)
+                                    if (i != item.Turmas.Count - 1)
+                                    {
+                                        @Html.Raw("   |   ");
+                                    }
+                                }
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Nome)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Descricao)
+                            </td>
+                            <td>
+                                <a href="@Url.Action("Edit", "Disciplina", new { id = item.IdDisciplina })" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
+                                <a href="@Url.Action("Delete", "Disciplina", new { id = item.IdDisciplina })" class="btn btn-danger btn-xs"><i class="fa fa-remove"></i></a>
+                            </td>
+                        </tr>
+                            @*
                             <tr></tr>
                             <tr style="display: none;">
                                 <td colspan="3">
@@ -64,6 +78,7 @@
                                     }
                                 </td>
                             </tr>
+                            *@
                         }
 
                     </tbody>

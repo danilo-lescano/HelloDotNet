@@ -58,8 +58,8 @@ namespace TaCertoForms.Controllers{
         public ActionResult Create(ViewModelDisciplina vmDisciplina){
             Disciplina disciplina = vmDisciplina.Disciplina;
             db.Disciplina.Add(disciplina);
-            db.SaveChanges();
-            
+            db.SaveChanges();            
+        
             string[] idTurmas = vmDisciplina.idTurmas.Split(';');
             foreach (string t in idTurmas){
                 db.DisciplinaTurma.Add(new DisciplinaTurma(){ IdDisciplina = disciplina.IdDisciplina, IdTurma = int.Parse(t) });
@@ -154,14 +154,17 @@ namespace TaCertoForms.Controllers{
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id){
-            Disciplina disciplina = db.Disciplina.Find(id);
-            db.Disciplina.Remove(disciplina);
-            db.SaveChanges();
             List<DisciplinaTurma> disciplinaTurmas = db.DisciplinaTurma.Where(dt => dt.IdDisciplina == id).ToList();
-            foreach (var dt in disciplinaTurmas){
+            foreach (var dt in disciplinaTurmas)
+            {
                 db.DisciplinaTurma.Remove(dt);
                 db.SaveChanges();
             }
+
+            Disciplina disciplina = db.Disciplina.Find(id);
+            db.Disciplina.Remove(disciplina);
+            db.SaveChanges();
+            
             return RedirectToAction("Index");
         }
 

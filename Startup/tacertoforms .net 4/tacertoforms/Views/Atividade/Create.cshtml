@@ -28,14 +28,6 @@
                     <div class="col-xs-12">
                         <div class="row">
                             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                            <div class="form-group col-xs-12 col-md-6">
-                                @Html.Label("Instituição")
-                                
-                                @Html.DropDownList("Instituição",
-                                ViewBag.InstituicaoList as SelectList,
-                                "Instituição",                                
-                                new { @class = "form-control", @id = "instituicao-select" })                                
-                            </div>
                             <div class="form-group col-xs-12 col-md-3">
                                 <div class="turmas">
                                     @Html.Label("Turma")
@@ -54,12 +46,12 @@
                                     new { @class = "form-control" })
                                 </div>
                             </div>
-                            <div class="form-group col-xs-12 col-md-3">
+                            <div class="form-group col-xs-12 col-md-6">
                                 @Html.Label("Período")
                                 @Html.TextBox("Periodo", null, new { @class = "form-control", @type = "text", @id = "periodo" })
                                 @Html.ValidationMessageFor(model => model.DataInicio, "", new { @class = "text-danger" })
                             </div>
-                            <div class="form-group col-xs-12 col-md-3">
+                            <div class="form-group col-xs-12 col-md-6">
                                 @Html.Label("Número de tentativas")
                                 @Html.EditorFor(model => model.NumeroTentativas, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.NumeroTentativas, "", new { @class = "text-danger" })
@@ -95,17 +87,14 @@
     </section>
 </div>
 
-<script>
-    $('#periodo').daterangepicker({ "locale": locale_drp });    
+<script>    
+    $('#periodo').daterangepicker({
+        timePicker: true,
+        timePickerIncrement: 30,
+        locale: { format: 'DD/MM/YYYY hh:mm:ss' }    }
+    );
 
-    $('#instituicao-select').on('change', function () {        
-        if ($(this).val() != '') {
-            atualizar_turmas($(this).val());
-        } else {
-            $('#turmas-select').find('option').remove().end().append('<option value="">Turma</option>').val('');
-        }
-    }).change();
-
+    
     $('.turmas').on('change', '#turmas-select', function () {
         if ($(this).val() != '') {
             atualizar_disciplinas($(this).val());
@@ -114,11 +103,11 @@
         }
     });
 
-    function atualizar_turmas(IdInstituicao) {
+    function atualizar_turmas() {
             $.ajax({
             url: '@Url.Action("AjaxTurmas", "Turma")',
                 data: {
-                    IdInstituicao: IdInstituicao
+                    IdInstituicao: '@Html.Raw(Session["IdInstituicao"])'
             },
             cache: false,
             dataType: 'html',
@@ -130,7 +119,7 @@
             }
         });
     }
-
+    atualizar_turmas();
      function atualizar_disciplinas(IdTurma) {
             $.ajax({
             url: '@Url.Action("AjaxDisciplinas", "Disciplina")',

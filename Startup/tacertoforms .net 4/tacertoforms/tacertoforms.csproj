@@ -237,7 +237,7 @@
     <Compile Include="Models\Turma.cs" />
     <Compile Include="Models\TurmaAluno.cs" />
     <Compile Include="Models\TurmaDisciplinaAutor.cs" />
-    <Compile Include="ViewModel\ViewModelAluno.cs" />
+    <Compile Include="ViewModel\ViewModelPessoa.cs" />
     <Compile Include="ViewModel\ViewModelAtividade.cs" />
     <Compile Include="ViewModel\ViewModelDisciplina.cs" />
     <Compile Include="ViewModel\ViewModelInstituicao.cs" />

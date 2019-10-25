@@ -59,6 +59,8 @@
             <!-- /.col -->
         </div>
         <!-- Info boxes -->
+        @if (Session["Perfil"].Equals(Perfil.Administrador))
+        {
         <div class="row">
             <div class="col-md-3 col-sm-6 col-xs-12">
                 <div class="info-box">
@@ -116,7 +118,7 @@
             </div>
             <!-- /.col -->
         </div>       
-        
+        }
         <!-- /.row -->
     </section>
     <!-- /.content -->

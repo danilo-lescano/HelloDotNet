@@ -139,10 +139,10 @@ namespace TaCertoForms.Controllers{
         [HttpGet]
         public ActionResult AjaxTurmasAlunos(int IdPessoa){            
             List<TurmaAluno> turmaAluno = db.TurmaAluno.Where(x => x.IdPessoa == IdPessoa).ToList();
-            List<ViewModelAluno> aluno = new List<ViewModelAluno>().ToList();
+            List<ViewModelPessoa> aluno = new List<ViewModelPessoa>().ToList();
 
             foreach (var ta in turmaAluno){
-                ViewModelAluno vmAluno = new ViewModelAluno() { IdTurmaAluno = ta.IdTurmaAluno };
+                ViewModelPessoa vmAluno = new ViewModelPessoa() { IdTurmaAluno = ta.IdTurmaAluno };
                 vmAluno.Turma.Add(db.Turma.Find(ta.IdTurma));
                 aluno.Add(vmAluno);
             }

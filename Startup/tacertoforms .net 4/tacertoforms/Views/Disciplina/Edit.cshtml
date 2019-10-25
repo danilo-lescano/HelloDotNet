@@ -39,13 +39,13 @@
 
                             <div class="form-group col-xs-12">
                                 @Html.Label("Nome")
-                                @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
                                 @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
                             </div>
 
                             <div class="form-group col-xs-12">
                                 @Html.Label("Descrição")
-                                @Html.EditorFor(model => model.Descricao, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.EditorFor(model => model.Descricao, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
                                 @Html.ValidationMessageFor(model => model.Descricao, "", new { @class = "text-danger" })
                             </div>
                             
@@ -113,6 +113,16 @@
                             @foreach(var t in ViewBag.turmas){
                                 <tr class="turmas turma_@t.IdInstituicao">
                                     <th>
+                                        @{
+                                            string instituicao_nome = "";
+                                            foreach (var i in ViewBag.InstituicaoList)
+                                            {
+                                                if(i.IdInstituicao == t.IdInstituicao)
+                                                {
+                                                    instituicao_nome = i.NomeFantasia;
+                                                }
+                                            }
+                                        }
                                         @if(Model.hasIdTurma(t.IdTurma))
                                         {
                                             <input type="checkbox" id="@t.IdTurma" onclick="addRemoveTurma(this.id)" checked>
@@ -121,7 +131,7 @@
                                         {
                                             <input type="checkbox" id="@t.IdTurma" onclick="addRemoveTurma(this.id)">
                                         }
-                                        <label for="@t.IdTurma">@t.Serie</label>
+                                        <label for="@t.IdTurma">@t.Serie - @instituicao_nome</label>
                                     </th>
                                 </tr>
                             }

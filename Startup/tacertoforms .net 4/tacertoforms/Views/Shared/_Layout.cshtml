@@ -69,25 +69,21 @@
                 </div>
                 <ul class="sidebar-menu" data-widget="tree">
                     <li class="header">MENU DE NAVEGAÇÃO</li>
-                    @*<li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-dashboard"></i> <span>Dashboard</span>
-                            <span class="pull-right-container">
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="../../index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
-                            <li><a href="../../index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
-                        </ul>
-                    </li>*@
                     <li><a href="@Url.Action("Index", "Home")"><i class="fa fa-home"></i> <span>Início</span></a></li>
+
                     <li><a href="@Url.Action("Relatorios", "Home")"><i class="fa fa-tasks"></i> <span>Relatórios</span></a></li>
-                    <li><a href="@Url.Action("Index", "Instituicao")"><i class="fa fa-institution"></i> <span>Instituições</span></a></li>
-                    <li><a href="@Url.Action("Index", "Pessoa")"><i class="fa fa-user"></i><span>Pessoas</span></a></li>
-                    <li><a href="@Url.Action("Index", "Turma")"><i class="fa fa-users"></i> <span>Turmas</span></a></li>
-                    <li><a href="@Url.Action("Index", "Disciplina")"><i class="fa fa-reorder"></i> <span>Disciplinas</span></a></li>
-                    <li><a href="@Url.Action("Index", "Atividade")"><i class="fa fa-th-list"></i> <span>Atividades</span></a></li>
+                        @if (Session["Perfil"].Equals(Perfil.Administrador))
+                        {
+                            <li><a href="@Url.Action("Index", "Instituicao")"><i class="fa fa-institution"></i> <span>Instituições</span></a></li>
+
+                            <li><a href="@Url.Action("Index", "Pessoa")"><i class="fa fa-user"></i><span>Pessoas</span></a></li>
+                            <li><a href="@Url.Action("Index", "Turma")"><i class="fa fa-users"></i> <span>Turmas</span></a></li>
+                            <li><a href="@Url.Action("Index", "Disciplina")"><i class="fa fa-reorder"></i> <span>Disciplinas</span></a></li>
+                        }
+                        @if (Session["Perfil"].Equals(Perfil.Autor))
+                        {
+                            <li><a href="@Url.Action("Index", "Atividade")"><i class="fa fa-th-list"></i> <span>Atividades</span></a></li>
+                        }
                     <li><a href="@Url.Action("LogOff", "Login")"><i class="fa fa-external-link"></i> <span>Sair</span></a></li>
                 </ul>
             </section>

@@ -5,7 +5,7 @@
 }
 <div class="content-wrapper">
     <section class="content-header">
-        <h1>Criação de Instituição</h1>
+        <h1>Edição de Atividade</h1>
         <ol class="breadcrumb">
             <li>
                 <a href="@Url.Action("Index", "Home")"><i class="fa fa-home"></i>Início</a>
@@ -21,7 +21,7 @@
             @Html.AntiForgeryToken()
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Novo Registro</h3>
+                    <h3 class="box-title">Edição de Registro</h3>
                     <a href="@Url.Action("Index", "Atividade")" class="btn btn-sm btn-default btn-flat pull-right">Voltar</a>
                 </div>
                 <div class="box-body">
@@ -29,10 +29,28 @@
                         <div class="row">
                             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                             @Html.HiddenFor(model => model.IdAtividade, new { htmlAttributes = new { @class = "form-control" } })
-                            <div class="form-group col-xs-12 col-md-6">
-                                @Html.Label("Turma + matéria")
-                                @Html.EditorFor(model => model.IdTurmaDisciplinaAutor, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.IdTurmaDisciplinaAutor, "", new { @class = "text-danger" })
+
+                            @Html.HiddenFor(model => model.IdTurmaDisciplinaAutor, new { htmlAttributes = new { @class = "form-control" } })
+
+                            <div class="form-group col-xs-12 col-md-3">
+                                @Html.Label("Turma")
+                                @Html.DropDownList("Turma",
+                                new List<SelectListItem> {
+                                    new SelectListItem() {
+                                        Text = ViewBag.Turma.Serie, Value=ViewBag.Turma.IdTurma.ToString()
+                                    }},
+                                null,
+                                new { @class = "form-control", @disabled = "disabled" })
+                            </div>
+                            <div class="form-group col-xs-12 col-md-3">
+                                @Html.Label("Disciplina")
+                                @Html.DropDownList("Disciplina",
+                                new List<SelectListItem> {
+                                    new SelectListItem() {
+                                        Text = ViewBag.Disciplina.Nome, Value=ViewBag.Disciplina.IdDisciplina.ToString()
+                                    }},
+                                null,
+                                new { @class = "form-control", @disabled = "disabled" })
                             </div>
                             <div class="form-group col-xs-12 col-md-6">
                                 @Html.Label("Período")
@@ -44,15 +62,25 @@
                                 @Html.EditorFor(model => model.NumeroTentativas, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.NumeroTentativas, "", new { @class = "text-danger" })
                             </div>
-                            <div class="form-group col-xs-12 col-md-6">
-                                @Html.Label("É aleatório")
-                                @Html.EditorFor(model => model.IsAleatorio)
-                                @Html.ValidationMessageFor(model => model.IsAleatorio, "", new { @class = "text-danger" })
+                            <div class="form-group col-xs-12 col-md-3">
+                                @Html.Label("É aleatório?")
+                                @Html.DropDownList("IsAleatorio",
+                                new List<SelectListItem> {
+                                    new SelectListItem() { Text = "Sim", Value = true.ToString()},
+                                    new SelectListItem() { Text = "Não", Value = false.ToString()}
+                                },
+                                null,
+                                new { @class = "form-control", @id = "tabela-de-certo-erradoResposta" })
                             </div>
-                            <div class="form-group col-xs-12 col-md-6">
-                                @Html.Label("É prova")
-                                @Html.EditorFor(model => model.IsProva)
-                                @Html.ValidationMessageFor(model => model.IsProva, "", new { @class = "text-danger" })
+                            <div class="form-group col-xs-12 col-md-3">
+                                @Html.Label("É prova?")
+                                @Html.DropDownList("IsProva",
+                                new List<SelectListItem> {
+                                    new SelectListItem() { Text = "Sim", Value = true.ToString()},
+                                    new SelectListItem() { Text = "Não", Value = false.ToString()}
+                                },
+                                null,
+                                new { @class = "form-control", @id = "tabela-de-certo-erradoResposta" })
                             </div>
                         </div>
                     </div>
@@ -132,6 +160,11 @@
 <script>
     //Configurações de elementos
     var select2 = $('.select2').select2({ tags: true, tokenSeparators: [','], width: '100%' });
+    $('#periodo').daterangepicker({
+        timePicker: true,
+        timePickerIncrement: 30,
+        locale: { format: 'DD/MM/YYYY hh:mm:ss' }    }
+    );
 
     $('#tabela-de-colunaNumeroLinhas').on('change', function () { 
         $('.linhas-input').html(''); //TODO permitir a inserção e exclusão de linhas sem perder o conteúdo
@@ -265,6 +298,7 @@
                 '<a class="btn btn-danger btn-xs" onclick="DeletQuestao(this, ' + questao.IdQuestao + ', \'' + tabela + '\')"><i class="fa fa-remove"></i></a>'
             ]).draw(false);
             LabelNumAdd(tabela);
+            $('#' + tabela + 'ImagemField').html("");
         }
         else{
             AjaxCreate(questao.IdAtividade, questao.IdQuestao, questao.IdTipoQuestao, questao.Titulo, questao.Enunciado, questao.PesoNota,  questao.JsonQuestao);

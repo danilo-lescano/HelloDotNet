@@ -13,7 +13,7 @@ namespace TaCertoForms.Controllers{
     public class InstituicaoController : ControladoraBase {
         
         public ActionResult Index() {            
-            return View(db.Instituicao.ToList());
+            return View(GetMinhasInstituicoes());
         }
         public ActionResult Create() {
             return View();
@@ -51,10 +51,10 @@ namespace TaCertoForms.Controllers{
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
             ViewModelInstituicao vmInstituicao = new ViewModelInstituicao();
-            Instituicao instituicao = db.Instituicao.Find(id);
+            Instituicao instituicao = FindMinhaInstituicao(id);
             if (instituicao == null)
                 return HttpNotFound();
-            vmInstituicao.instituicao = db.Instituicao.Find(id);
+            vmInstituicao.instituicao = instituicao;
 
             Endereco enderecoPrincipal = db.Endereco.Find(instituicao.IdEnderecoPrincipal);
             Endereco enderecoCobranca = null;
@@ -95,7 +95,6 @@ namespace TaCertoForms.Controllers{
 
             //Atualizando instituição
             (instituicao.IsMatriz, instituicao.IdMatriz) = HasMatriz_Update(instituicao.IdInstituicao);
-            DisposeAndGetNew();
             db.Entry(instituicao).State = System.Data.Entity.EntityState.Modified;
             db.SaveChanges();           
 
@@ -106,7 +105,7 @@ namespace TaCertoForms.Controllers{
             if (id == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            Instituicao instituicao = db.Instituicao.Find(id);
+            Instituicao instituicao = FindMinhaInstituicao(id);
             if (instituicao == null)
                 return HttpNotFound();
 
@@ -133,14 +132,12 @@ namespace TaCertoForms.Controllers{
                 db.Dispose();
             base.Dispose(disposing);
         }
-        private void DisposeAndGetNew(){
-            Dispose(true);
-            db = new Context();
-        }
 
         //checa se a instituicao possui matriz ou é matriz e atualiza os campos (IsMatriz, IdMatriz)
         private (bool, int?) HasMatriz_Update(int id){
+            Context db = new Context();
             Instituicao i = db.Instituicao.Find(id);
+            db.Dispose();
             if(i.IsMatriz)
                 return (true, null);
             else

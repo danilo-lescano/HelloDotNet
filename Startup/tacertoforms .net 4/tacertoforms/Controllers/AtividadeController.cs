@@ -11,24 +11,20 @@ namespace TaCertoForms.Controllers{
     [SomenteLogado]
     public class AtividadeController : ControladoraBase {        
 
-        [Perfil(Perfil.Administrador, Perfil.Autor)]
+        [Perfil(Perfil.Autor)]
         public ActionResult Index(){
-            List<Atividade> atividades = db.Atividade.ToList();
+            List<Atividade> atividades = GetMinhasAtividades();
             List<ViewModelAtividade> vmAtividades = new List<ViewModelAtividade>();
             foreach (var a in atividades){
                 ViewModelAtividade vma = new ViewModelAtividade();
                 vma.Atividade = a;
-                TurmaDisciplinaAutor tda = db.TurmaDisciplinaAutor.Find(a.IdTurmaDisciplinaAutor);
-                DisciplinaTurma dt = db.DisciplinaTurma.Find(tda.IdDisciplinaTurma);
-                Turma t = db.Turma.Find(dt.IdTurma);
-                Disciplina d = db.Disciplina.Find(dt.IdDisciplina);
-                vma.nome_da_materia = d.Nome;
-                vma.nome_da_turma = t.Serie;
+                (vma.nome_da_materia, vma.nome_da_turma) = GetNomeTurmaNomeDisciplina(a.IdTurmaDisciplinaAutor);
                 vmAtividades.Add(vma);
             }
             return View(vmAtividades);
         }
 
+        [Perfil(Perfil.Autor)]
         public ActionResult Create(){
             List<Instituicao> list = db.Instituicao.ToList();
             ViewBag.InstituicaoList = new SelectList(list, "IdInstituicao", "NomeFantasia");
@@ -36,6 +32,7 @@ namespace TaCertoForms.Controllers{
         }
 
         [HttpPost]
+        [Perfil(Perfil.Autor)]
         public ActionResult Create(ViewModelAtividade vmAtividade){
             Atividade atividade = vmAtividade.Atividade;
             int IdUsuario = (int)Session["IdPessoa"];
@@ -51,6 +48,7 @@ namespace TaCertoForms.Controllers{
             return RedirectToAction("Edit", new { id = atividade.IdAtividade});
         }
 
+        [Perfil(Perfil.Autor)]
         public ActionResult Edit(int? id){
             if (id == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -62,10 +60,22 @@ namespace TaCertoForms.Controllers{
             if (vmAtividade.IdAtividade == 0)
                 return HttpNotFound();
             vmAtividade.setPeriodo();
+
+            ViewBag.Instituicao = db.Instituicao.Find((int)Session["IdInstituicao"]);
+            //Buscando Turma
+            TurmaDisciplinaAutor tda = db.TurmaDisciplinaAutor.Find(vmAtividade.IdTurmaDisciplinaAutor);
+            DisciplinaTurma dt = db.DisciplinaTurma.Find(tda.IdDisciplinaTurma);
+            Turma turma = db.Turma.Find(dt.IdTurma);
+            Disciplina disciplina = db.Disciplina.Find(dt.IdDisciplina);
+            
+            ViewBag.Turma = turma;
+            ViewBag.Disciplina = disciplina;
+
             return View(vmAtividade);
         }
 
         [HttpPost]
+        [Perfil(Perfil.Autor)]
         public ActionResult Edit(ViewModelAtividade vmAtividade){
             Atividade atividade = vmAtividade.Atividade; 
             if(atividade != null && atividade.IdAtividade != 0){
@@ -76,6 +86,7 @@ namespace TaCertoForms.Controllers{
             return View(atividade);
         }
 
+        [Perfil(Perfil.Autor)]
         public ActionResult Delete(int? id){
             if (id == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -87,6 +98,7 @@ namespace TaCertoForms.Controllers{
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Perfil(Perfil.Autor)]
         public ActionResult DeleteConfirmed(int id){
             Atividade atividade = db.Atividade.Find(id);
             db.Atividade.Remove(atividade);

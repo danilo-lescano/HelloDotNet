@@ -62,7 +62,7 @@
 
                             <div class="form-group col-xs-12 col-md-3">
                                 @Html.Label("Email")
-                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
                                 @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
                             </div>
 
@@ -171,6 +171,7 @@
                 alert('Por favor, preencha o vínculo de turma e disciplina.');
                 return false;
             }
+            return true;
         }
 
         function validacoes_alunos() {
@@ -179,6 +180,7 @@
                 alert('Por favor, preencha o vínculo de turma.');
                 return false;
             }
+            return true;
         }
 
         //******************* Ajax Autores *******************

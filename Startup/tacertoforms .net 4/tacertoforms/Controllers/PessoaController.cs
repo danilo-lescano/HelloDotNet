@@ -12,28 +12,14 @@ namespace TaCertoForms.Controllers{
     [SomenteLogado]
     public class PessoaController : ControladoraBase{
         public ActionResult Index(){
-            List<ViewModelAluno> alunos = new List<ViewModelAluno>();
-            foreach (var aluno in db.Pessoa.ToList()){                
-                ViewModelAluno vmAluno = new ViewModelAluno() {
-                    IdPessoa = aluno.IdPessoa,
-                    Perfil   = aluno.Perfil,
-                    Nome     = aluno.Nome,
-                    CPF      = aluno.CPF,
-                    Email    = aluno.Email                    
-                };
+            List<ViewModelPessoa> alunos = new List<ViewModelPessoa>();
+            foreach (var aluno in db.Pessoa.ToList()){
+                ViewModelPessoa vmAluno = new ViewModelPessoa();
+                vmAluno.Pessoa = aluno;
                 vmAluno.Instituicao.Add(db.Instituicao.Find(aluno.IdInstituicao));
                 alunos.Add(vmAluno);
             }
-            return View(alunos);            
-        }
-
-        public ActionResult Details(int? id){
-            if (id == null)
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            Pessoa pessoa = db.Pessoa.Find(id);
-            if (pessoa == null)
-                return HttpNotFound();
-            return View(pessoa);
+            return View(alunos);
         }
 
         public ActionResult Create(){
@@ -42,8 +28,8 @@ namespace TaCertoForms.Controllers{
             return View();
         }
 
-        [HttpPost]        
-        public ActionResult Create(Pessoa pessoa){            
+        [HttpPost]
+        public ActionResult Create(Pessoa pessoa){
             if (ModelState.IsValid){
                 db.Pessoa.Add(pessoa);
                 db.SaveChanges();

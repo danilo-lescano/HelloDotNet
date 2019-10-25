@@ -31,7 +31,7 @@ namespace TaCertoForms.Models {
             DataFim = DateTime.Parse(fim);
         }
         public void setPeriodo(){
-            Periodo = DataInicio.ToString("dd/MM/yyy", DateTimeFormatInfo.InvariantInfo) + " - " + DataFim.ToString("dd/MM/yyy", DateTimeFormatInfo.InvariantInfo);
+            Periodo = DataInicio.ToString("dd/MM/yyyy h:mm:ss", DateTimeFormatInfo.InvariantInfo) + " - " + DataFim.ToString("dd/MM/yyy", DateTimeFormatInfo.InvariantInfo);
         }        
 
         public Atividade Atividade {
