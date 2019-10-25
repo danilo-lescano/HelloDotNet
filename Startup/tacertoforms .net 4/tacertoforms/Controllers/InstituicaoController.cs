@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using TaCertoForms.Models;
 using TaCertoForms.Attributes;
+using TaCertoForms.Contexts;
 using TaCertoForms.Controllers.Base;
 
 namespace TaCertoForms.Controllers{
@@ -39,6 +40,7 @@ namespace TaCertoForms.Controllers{
             Instituicao instituicao = viewModel.instituicao;
             instituicao.IdEnderecoCobranca = IdEnderecoCobranca;
             instituicao.IdEnderecoPrincipal = IdEnderecoPrincipal;
+            instituicao.IdMatriz = (int?)Session["IdMatriz"];
             db.Instituicao.Add(instituicao);
             db.SaveChanges();
             return RedirectToAction("Index");
@@ -91,7 +93,9 @@ namespace TaCertoForms.Controllers{
             db.Entry(principal).State = System.Data.Entity.EntityState.Modified;
             db.SaveChanges();
 
-            //Atualizando instituição                
+            //Atualizando instituição
+            (instituicao.IsMatriz, instituicao.IdMatriz) = HasMatriz_Update(instituicao.IdInstituicao);
+            DisposeAndGetNew();
             db.Entry(instituicao).State = System.Data.Entity.EntityState.Modified;
             db.SaveChanges();           
 
@@ -128,6 +132,19 @@ namespace TaCertoForms.Controllers{
             if (disposing)
                 db.Dispose();
             base.Dispose(disposing);
+        }
+        private void DisposeAndGetNew(){
+            Dispose(true);
+            db = new Context();
+        }
+
+        //checa se a instituicao possui matriz ou é matriz e atualiza os campos (IsMatriz, IdMatriz)
+        private (bool, int?) HasMatriz_Update(int id){
+            Instituicao i = db.Instituicao.Find(id);
+            if(i.IsMatriz)
+                return (true, null);
+            else
+                return (false, i.IdMatriz);
         }
     }
 }

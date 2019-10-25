@@ -44,6 +44,10 @@ namespace TaCertoForms.Contexts {
                 .WithMany()
                 .HasForeignKey(I => I.IdEnderecoCobranca)
                 .WillCascadeOnDelete(false);
+            modelBuilder.Entity<Instituicao>()
+                .HasOptional(I => I.Matriz)
+                .WithMany()
+                .HasForeignKey(I => I.IdMatriz);
             modelBuilder.Entity<LogLogin>()
                 .HasRequired(LL => LL.Pessoa)
                 .WithMany()

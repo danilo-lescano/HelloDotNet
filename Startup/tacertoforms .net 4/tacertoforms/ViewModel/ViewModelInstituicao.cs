@@ -17,6 +17,8 @@ namespace TaCertoForms.Models {
 	    public string Telefone { get; set; }
 	    public int IdEnderecoPrincipal { get; set; }
 	    public int IdEnderecoCobranca { get; set; }
+        public bool IsMatriz { get; set; }
+        public int? IdMatriz { get; set; }
         //Endereço Principal
 	    public string PaisPrincipal { get; set; }
 	    public string UFPrincipal { get; set; }

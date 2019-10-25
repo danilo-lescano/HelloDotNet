@@ -25,6 +25,7 @@ namespace TaCertoForms.Controllers{
                 Instituicao instituicao = db.Instituicao.Find(pessoa.IdInstituicao);
                 Session["Logado"] = true;
                 Session["IdPessoa"] = pessoa.IdPessoa;
+                Session["IdMatriz"] = GetIdMatriz(pessoa);
                 Session["NomeUsuario"] = pessoa.Nome;
                 Session["IdInstituicao"] = pessoa.IdInstituicao;
                 Session["NomeInstituicao"] = instituicao.NomeFantasia;
@@ -43,6 +44,7 @@ namespace TaCertoForms.Controllers{
         public ActionResult LogOff(){
             Session["Logado"] = null;
             Session["IdPessoa"] = null;
+            Session["IdMatriz"] = null;
             Session["NomeUsuario"] = null;
             Session["IdInstituicao"] = null;
             Session["NomeInstituicao"] = null;
@@ -51,6 +53,16 @@ namespace TaCertoForms.Controllers{
                 { "controller", "Login" },
                 { "action", "Index" }
             });
+        }
+
+        private int GetIdMatriz(Pessoa p){
+            Instituicao i = db.Instituicao.Find(p.IdInstituicao);
+            if(i.IsMatriz)
+                return i.IdInstituicao;
+            else{
+                i = db.Instituicao.Find(i.IdMatriz);
+                return i.IdInstituicao;
+            }
         }
     }
 }

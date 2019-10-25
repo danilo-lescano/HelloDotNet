@@ -210,6 +210,14 @@
     <Compile Include="Migrations\201910242045556_Primeira migration.designer.cs">
       <DependentUpon>201910242045556_Primeira migration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201910250331260_matriz.cs" />
+    <Compile Include="Migrations\201910250331260_matriz.designer.cs">
+      <DependentUpon>201910250331260_matriz.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201910250340100_matriz 2.cs" />
+    <Compile Include="Migrations\201910250340100_matriz 2.designer.cs">
+      <DependentUpon>201910250340100_matriz 2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DisciplinaTurma.cs" />
     <Compile Include="Context\Context.cs" />
@@ -3243,6 +3251,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201910242045556_Primeira migration.resx">
       <DependentUpon>201910242045556_Primeira migration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910250331260_matriz.resx">
+      <DependentUpon>201910250331260_matriz.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910250340100_matriz 2.resx">
+      <DependentUpon>201910250340100_matriz 2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
