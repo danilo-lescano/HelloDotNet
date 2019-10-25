@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization; 
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -13,9 +14,29 @@ namespace TaCertoForms.Models {
         public int NumeroTentativas { get; set; }
         public bool IsAleatorio { get; set; }
         public bool IsProva { get; set; }
-        public List<Questao> Questoes { get; set; } = new List<Questao>();        
+        public List<Questao> Questoes { get; set; } = new List<Questao>();     
+
+        public string nome_da_turma { get; set; }
+        public string nome_da_materia { get; set; }
+        public int IdTurma { get; set; }
+        public int IdDisciplinaTurma { get; set; }
+        public string Periodo { get; set; }
+        private void assertPeriodo(){
+            string inicio, fim;
+            string[] datas = Periodo.Split('-');
+            if(datas.Length != 2) return;
+            inicio = datas[0].Trim();
+            fim = datas[1].Trim();
+            DataInicio = DateTime.Parse(inicio);
+            DataFim = DateTime.Parse(fim);
+        }
+        public void setPeriodo(){
+            Periodo = DataInicio.ToString("dd/MM/yyy", DateTimeFormatInfo.InvariantInfo) + " - " + DataFim.ToString("dd/MM/yyy", DateTimeFormatInfo.InvariantInfo);
+        }        
+
         public Atividade Atividade {
             get{
+                assertPeriodo();
                 return new Atividade {
                     IdAtividade = this.IdAtividade,
                     IdTurmaDisciplinaAutor = this.IdTurmaDisciplinaAutor,

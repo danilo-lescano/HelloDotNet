@@ -1,0 +1,612 @@
+﻿@model TaCertoForms.Models.ViewModelAtividade
+
+@{
+    ViewBag.Title = "Edit";
+}
+<div class="content-wrapper">
+    <section class="content-header">
+        <h1>Criação de Instituição</h1>
+        <ol class="breadcrumb">
+            <li>
+                <a href="@Url.Action("Index", "Home")"><i class="fa fa-home"></i>Início</a>
+            </li>
+            <li class="active">
+                <a href="@Url.Action("Index", "Atividade")">Atividades</a>
+            </li>
+        </ol>
+    </section>
+    <section class="content">
+        @using (Html.BeginForm())
+{
+            @Html.AntiForgeryToken()
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Novo Registro</h3>
+                    <a href="@Url.Action("Index", "Atividade")" class="btn btn-sm btn-default btn-flat pull-right">Voltar</a>
+                </div>
+                <div class="box-body">
+                    <div class="col-xs-12">
+                        <div class="row">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            @Html.HiddenFor(model => model.IdAtividade, new { htmlAttributes = new { @class = "form-control" } })
+                            <div class="form-group col-xs-12 col-md-6">
+                                @Html.Label("Turma + matéria")
+                                @Html.EditorFor(model => model.IdTurmaDisciplinaAutor, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.IdTurmaDisciplinaAutor, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group col-xs-12 col-md-6">
+                                @Html.Label("Período")
+                                @Html.TextBox("Periodo", null, new { @class = "form-control", @type = "text", @id = "periodo" })
+                                @Html.ValidationMessageFor(model => model.DataInicio, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group col-xs-12 col-md-6">
+                                @Html.Label("Número de tentativas")
+                                @Html.EditorFor(model => model.NumeroTentativas, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.NumeroTentativas, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group col-xs-12 col-md-6">
+                                @Html.Label("É aleatório")
+                                @Html.EditorFor(model => model.IsAleatorio)
+                                @Html.ValidationMessageFor(model => model.IsAleatorio, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group col-xs-12 col-md-6">
+                                @Html.Label("É prova")
+                                @Html.EditorFor(model => model.IsProva)
+                                @Html.ValidationMessageFor(model => model.IsProva, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12" style="margin-top: 20px;">
+                        <div class="row">
+                            <div class="col-xs-12 form-group">
+                                <!-- Custom Tabs (Pulled to the right) -->
+                                <div class="nav-tabs-custom">
+                                    <ul class="nav nav-tabs pull-right">
+                                        <li class="active">
+                                            <a href="#tab-listagem" data-toggle="tab" aria-expanded="true">
+                                                Listagem de Questões&nbsp;<span id="label_Listagem_num" class="label label-primary pull-right">0</span>
+                                            </a>
+                                        </li>
+                                        <li class="tab-button">
+                                            <a href="#tab-certo-errado" data-toggle="tab" aria-expanded="false">
+                                                Modo Certo e Errado&nbsp;<span id="label_CertoErrado_num" class="label label-primary pull-right">0</span>
+                                            </a>
+                                        </li>
+                                        <li class="tab-button">
+                                            <a href="#tab-lacuna" data-toggle="tab" aria-expanded="false">
+                                                Modo Lacuna&nbsp;<span id="label_Lacuna_num" class="label label-primary pull-right">0</span>
+                                            </a>
+                                        </li>
+                                        <li class="tab-button">
+                                            <a href="#tab-coluna" data-toggle="tab" aria-expanded="false">
+                                                Modo Coluna&nbsp;<span id="label_Coluna_num" class="label label-primary pull-right">0</span>
+                                            </a>
+                                        </li>
+                                        <li class="tab-button">
+                                            <a href="#tab-associacao" data-toggle="tab" aria-expanded="false">
+                                                Modo Associação &nbsp;<span id="label_Associacao_num" class="label label-primary pull-right">0</span>
+                                            </a>
+                                        </li>
+                                        <li class="pull-left header"><i class="fa fa-th"></i> Cadastro de Questões</li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <!-- tab Listagem de Questões -->
+                                        <div class="tab-pane active" id="tab-listagem">
+                                            @Html.Partial("QuestoesListagem", @Model)
+                                        </div>
+                                        <!-- tab Certo e Errado -->
+                                        <div class="tab-pane" id="tab-certo-errado">
+                                            @Html.Partial("QuestoesCertoErrado", @Model)
+                                        </div>
+                                        <!-- tab Lacuna -->
+                                        <div class="tab-pane" id="tab-lacuna">
+                                            @Html.Partial("QuestoesLacuna", @Model)
+                                        </div>
+                                        <!-- tab Coluna -->
+                                        <div class="tab-pane" id="tab-coluna">
+                                            @Html.Partial("QuestoesColuna", @Model)
+                                        </div>
+                                        <!-- tab Associação -->
+                                        <div class="tab-pane" id="tab-associacao">
+                                            @Html.Partial("QuestoesAssociacao", @Model)
+                                        </div>
+                                        <!-- /.tab-content -->
+                                    </div>
+                                </div>
+                                <!-- nav-tabs-custom -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="box-footer">
+                    <input type="submit" value="Salvar" class="btn btn-primary pull-right" />
+                </div>
+            </div>
+}
+    </section>
+</div>
+
+<style>
+    .select2-container--default .select2-selection--multiple .select2-selection__choice{color: #000 !important}
+</style>
+<script>
+    //Configurações de elementos
+    var select2 = $('.select2').select2({ tags: true, tokenSeparators: [','], width: '100%' });
+
+    $('#tabela-de-colunaNumeroLinhas').on('change', function () { 
+        $('.linhas-input').html(''); //TODO permitir a inserção e exclusão de linhas sem perder o conteúdo
+        for (var i = 0; i < $(this).val(); i++) {
+            $('.linhas-input').append(
+                '<div class="form-group col-xs-12 col-md-6">' +
+                    '<input type="text" class="form-control" value="" id="coluna1-linha-'+i+'" />' +
+                '</div>' +
+                '<div class="form-group col-xs-12 col-md-6">' +
+                    '<input type="text" class="form-control" value="" id="coluna2-linha-'+i+'"/>' +
+                '</div>'
+            );
+        }
+    });
+</script>
+<script>        
+    //Funções ajax  
+    //##### Midias #####
+    function AjaxIndexMidia(t, IdQuestao) {
+        $.ajax({
+            url: '@Url.Action("Index", "Midia")' + '?IdOrigem=' + IdQuestao +'&Tabela=Questao',
+            cache: false,
+            dataType: 'json',            
+            success: function (result) {
+                midiaCreateSingleImage($('#' + t + 'ImagemField'), result[0]);                
+            },
+            error: function () {
+                return "erro";
+                alert('Ocorreu algum erro de conexão. Por favor, tente novamente mais tarde');
+            }
+        });        
+    }
+    async function AjaxCreateMidia(IdQuestao) {
+        return $.ajax({
+            url: '@Url.Action("Save", "Midia")',
+            data: {
+                IdQuestao: IdQuestao,
+                Tabela: "Questao"
+            },
+            cache: false,
+            dataType: 'html',
+            type: 'post',
+            error: function () {
+                alert('Ocorreu algum erro de conexão. Por favor, tente novamente mais tarde');
+            }
+        });
+    }
+
+    function AjaxIndex(idTipoQuestao, callback) {        
+        $.ajax({
+            url: '@Url.Action("Index", "Questao")' + '?idAtividade=@Html.Raw(Model.IdAtividade)&IdTipoQuestao=' + idTipoQuestao,            
+            cache: false,
+            dataType: 'html',  
+            success: function (data) {
+                //Irá ser retornado a todas as questões
+                return callback(JSON.parse(data));
+            },
+            error: function () {
+                alert('Ocorreu algum erro de conexão. Por favor, tente novamente mais tarde');
+            }
+        });   
+    }
+
+    async function AjaxCreate(IdAtividade, IdQuestao = 0, IdTipoQuestao, Titulo, Enunciado, PesoNota, JsonQuestao) {
+        return $.ajax({
+            url: '@Url.Action("Create", "Questao")',
+            data: {
+                IdQuestao: IdQuestao,
+                IdAtividade: IdAtividade,
+                IdTipoQuestao: IdTipoQuestao, //Código de modo associação no banco
+                Titulo: Titulo,
+                Enunciado: Enunciado,
+                PesoNota: PesoNota,
+                JsonQuestao: JsonQuestao
+            },
+            cache: false,
+            dataType: 'html',
+            type: 'post',
+            error: function () {
+                alert('Ocorreu algum erro de conexão. Por favor, tente novamente mais tarde');
+            }
+        });
+    }
+
+    async function AjaxGetQuestaoById(IdQuestao) {        
+        return $.ajax({
+            url: '@Url.Action("Edit", "Questao")'+'?id='+IdQuestao,            
+            cache: false,
+            dataType: 'html',            
+            error: function () {
+                alert('Ocorreu algum erro de conexão. Por favor, tente novamente mais tarde');
+            }
+        });        
+    }
+
+    function AjaxDelete(IdQuestao) {
+        $.ajax({
+            url: '@Url.Action("Delete", "Questao")',
+            data: {
+                id: IdQuestao                
+            },
+            cache: false,
+            dataType: 'html',
+            type: 'post',
+            success: function (data) {
+                if (data == 'True') {
+                    //Será retornado True, se a questão foi deletada do banco
+                }                
+            },
+            error: function () {
+                alert('Ocorreu algum erro de conexão. Por favor, tente novamente mais tarde');
+            }
+        });        
+    }
+</script>
+
+<script>    
+    //Manipulação da tabela
+    var aux_edit_el = {};
+    async function AddQuestao(tabela){
+        var questao = GetQuestaoLocal(tabela);        
+        if(!(questao.IdQuestao) || questao.IdQuestao == null || questao.IdQuestao == undefined || questao.IdQuestao == 0){
+            questao = JSON.parse(await AjaxCreate(questao.IdAtividade, questao.IdQuestao, questao.IdTipoQuestao, questao.Titulo, questao.Enunciado, questao.PesoNota,  questao.JsonQuestao));
+            $("#"+tabela).DataTable().row.add([
+                questao.IdQuestao,
+                questao.Titulo,
+                questao.Enunciado,
+                questao.PesoNota,
+                '<a class="btn btn-primary btn-xs" onclick="EditQuestao(this, ' + questao.IdQuestao + ', \'' + tabela + '\')"><i class="fa fa-pencil"></i></a>'+
+                '&nbsp;'+
+                '<a class="btn btn-danger btn-xs" onclick="DeletQuestao(this, ' + questao.IdQuestao + ', \'' + tabela + '\')"><i class="fa fa-remove"></i></a>'
+            ]).draw(false);
+            LabelNumAdd(tabela);
+        }
+        else{
+            AjaxCreate(questao.IdAtividade, questao.IdQuestao, questao.IdTipoQuestao, questao.Titulo, questao.Enunciado, questao.PesoNota,  questao.JsonQuestao);
+
+            var pageParamTable = $('#'+tabela).DataTable();
+            var tableRow = pageParamTable.row($(aux_edit_el[tabela]).parents('tr'));
+            var rData = [
+                questao.IdQuestao,
+                questao.Titulo,
+                questao.Enunciado,
+                questao.PesoNota,
+                '<a class="btn btn-primary btn-xs" onclick="EditQuestao(this, ' + questao.IdQuestao + ', \'' + tabela + '\')"><i class="fa fa-pencil"></i></a>'+
+                '&nbsp;'+
+                '<a class="btn btn-danger btn-xs" onclick="DeletQuestao(this, ' + questao.IdQuestao + ', \'' + tabela + '\')"><i class="fa fa-remove"></i></a>'
+            ];
+            pageParamTable
+                .row(tableRow)
+                .data(rData)
+                .draw();
+        }
+        limpaformcache(tabela);
+    }
+    async function EditQuestao(el, id, t){
+        aux_edit_el[t] = el;
+        var q = JSON.parse(await AjaxGetQuestaoById(id));
+        povoaform(t, q);
+    }
+    function DeletQuestao(el, id, t){
+        AjaxDelete(id);
+        LabelNumRemove(t);
+        $('#'+t).DataTable().row($(el).parents('tr')).remove().draw(false);   
+    }
+    function GetQuestaoLocal(t){
+        return {
+            IdQuestao: document.getElementById(t+"IdQuestao").value,
+            IdAtividade: @Html.Raw(Model.IdAtividade),
+            IdTipoQuestao: GetIdTipoQuestao(t),
+            Titulo: document.getElementById(t+"Titulo").value,
+            Enunciado: document.getElementById(t+"Enunciado").value,
+            PesoNota: document.getElementById(t+"PesoNota").value,
+            JsonQuestao: JSON.stringify(GetLocalJSONQuestao(t))
+        }
+    }
+    function GetLocalJSONQuestao(t){
+        if(t === "tabela-de-associacao"){
+            return {
+                certas: $('#'+t+'Certas').val(),
+                erradas: $('#'+t+'Erradas').val()
+            }
+        }
+        else if (t === "tabela-de-certo-errado") {            
+            return {
+                isVerdadeiro: $('#'+t+'Resposta').val() === "True",                
+            }
+        }
+        else if(t === "tabela-de-coluna") {            
+            var colunas = document.getElementById("ID_COLUNAS").childNodes;        
+            var json = {
+                coluna1: [],
+                coluna2: [],
+            }        
+            if (colunas.length > 1) {        
+                var aux_c1 = 0;
+                var aux_c2 = 0;
+                for (var i = 0; i < colunas.length; i++) {
+                    if (i % 2 === 0) {
+                        json.coluna1[json.coluna1.length] = {
+                            index: aux_c1,
+                            texto: colunas[i].childNodes[0].value
+                        }
+                        aux_c1++;
+                    } else {
+                        json.coluna2[json.coluna2.length] = {
+                            index: aux_c2,
+                            texto: colunas[i].childNodes[0].value
+                        }
+                        aux_c2++;
+                    }                    
+                }
+            }  
+            return json;
+        }
+        else if(t === "tabela-de-lacuna"){
+            return GetJsonLacuna();
+        }
+    }
+    function GetIdTipoQuestao(t){
+        if(t === "tabela-de-certo-errado")
+            return 1;
+        else if(t === "tabela-de-lacuna")
+            return 2;
+        else if(t === "tabela-de-coluna")
+            return 3;
+        else if(t === "tabela-de-associacao")
+            return 4;
+    }
+    function limpaformcache(t){
+        document.getElementById(t+"IdQuestao").value = '';
+        document.getElementById(t+"Titulo").value = '';
+        document.getElementById(t+"Enunciado").value = '';
+        document.getElementById(t+"PesoNota").value = 1;
+        if(t === "tabela-de-associacao"){ //TODO bug palavras n sendo retiradas completamente
+            $('#tabela-de-associacaoCertas').val(null).trigger('change');
+            $('#tabela-de-associacaoErradas').val(null).trigger('change');
+        }
+        else if (t === "tabela-de-certo-errado") {
+            $('#'+t+'Resposta').val("True");
+        }
+        else if (t === "tabela-de-coluna") {
+            $('#'+t+'NumeroLinhas').val(0).change();
+        }
+        else if (t === "tabela-de-lacuna") {
+            CL.LacunaReset();
+        }
+    }
+    function povoaform(t, q){
+        document.getElementById(t+"IdQuestao").value = q.IdQuestao;
+        document.getElementById(t+"Titulo").value = q.Titulo;
+        document.getElementById(t+"Enunciado").value = q.Enunciado;
+        document.getElementById(t + "PesoNota").value = q.PesoNota;        
+        q.JsonQuestao = JSON.parse(q.JsonQuestao);
+        if(t === "tabela-de-associacao"){
+            for(var i = 0; i < q.JsonQuestao.certas.length; i++){
+                $('#' + t + 'Certas').append(
+                    new Option(q.JsonQuestao.certas[i], q.JsonQuestao.certas[i], false, true)
+                ).trigger('change');
+            }
+            for(var i = 0; i < q.JsonQuestao.erradas.length; i++){
+                $('#' + t + 'Erradas').append(
+                    new Option(q.JsonQuestao.erradas[i], q.JsonQuestao.erradas[i], false, true)
+                ).trigger('change');
+            }
+        }
+        else if (t === "tabela-de-certo-errado") {            
+            if (q.JsonQuestao.isVerdadeiro) {
+                $('#'+t + "Resposta").val("True");
+            } else {
+                $('#'+t + "Resposta").val("False");
+            }            
+        }
+        else if (t === "tabela-de-coluna") {            
+            $('#' + t + 'NumeroLinhas').val(q.JsonQuestao.coluna1.length).change();
+            for (var i = 0; i < q.JsonQuestao.coluna1.length; i++) {
+                $('#coluna1-linha-' + i).val(q.JsonQuestao.coluna1[i].texto);
+                $('#coluna2-linha-' + i).val(q.JsonQuestao.coluna2[i].texto);
+            }
+        }
+        else if (t === "tabela-de-lacuna") {            
+            CL.PovoaLacuna(q.JsonQuestao);            
+        }
+
+        //Midias        
+        $('#' + t + "DivImagem").html(
+            '<div class="form-group col-xs-12 col-md-6">'+
+                '<label for="' + t + 'Imagem">Adicionar Imagem</label>' +
+                '<input type="file" class="input-img" id="' + t + 'Imagem" IdQuestao="' + q.IdQuestao + '">' +
+            '</div>'+
+            '<div class="form-group col-xs-12 col-md-6 ImagemField" id="'+t+'ImagemField"></div>'
+        );
+        AjaxIndexMidia(t, q.IdQuestao)
+    }
+
+    $('.tab-content').on('change', '.input-img', function (e) {                  
+        var el = $(this).parents('.div-image').find('.ImagemField');        
+        var files = e.target.files;            
+        if (files.length > 0) {
+           if (window.FormData !== undefined) {
+               var data = new FormData();
+               for (var x = 0; x < files.length; x++){
+                   data.append("file" + x, files[x]);
+               }
+               $.ajax({
+                   type: 'POST',
+                   url: '@Url.Action("Save", "Midia")' + '?id=' + $(this).attr('IdQuestao') + "&tabela=Questao" ,
+                   contentType: false,
+                   processData: false,
+                   data: data,
+                   success: function (result) {                            
+                       midiaCreateSingleImage(el, result[0]);
+                   },
+                   error: function (xhr, status, p3, p4){
+                       var err = "Error " + " " + status + " " + p3 + " " + p4;
+                       if (xhr.responseText && xhr.responseText[0] == "{")
+                           err = JSON.parse(xhr.responseText).Message;
+                           console.log(err);
+                        }
+                    });               
+            } else {
+                alert("This browser doesn't support HTML5 file uploads!");
+              }
+         }
+    });
+
+    $('.tab-content').on('click', '.btn-single-remove', function (e) {
+        var el = $(this).parents('.div-image').find('.ImagemField');        
+        $.ajax({
+            url: '@Url.Action("Delete", "Midia")',
+            data: {
+                id: $(this).attr('id')                
+            },
+            cache: false,                        
+            success: function (data) {                
+                if (data == "True") {
+                    el.html('');
+                } else {
+                    alert('Falha ao deletar imagem. Por favor, entre em contato com o administrador do sistema.');
+                }
+            },
+            error: function () {
+                alert('Ocorreu algum erro de conexão. Por favor, tente novamente mais tarde');
+            }
+        });    
+    });  
+</script>
+
+<script>
+    var tipoquestao = {
+           @{
+               var tq = Get.TipoQuestoes();
+
+               for (var i = 0; i < tq.Count; i++ )
+               {                   
+                   @Html.Raw(i+1 +": '" + tq[i].Nome + "',")                   
+               }
+           }
+    };    
+</script>
+
+<script>
+    //atualizacao dos numeros de questao
+    function LabelNumAdd(t){
+        if (t === "tabela-de-associacao") LabelNum.Associacao++;
+        else if (t === "tabela-de-certo-errado") LabelNum.CertoErrado++;
+        else if (t === "tabela-de-coluna") LabelNum.Coluna++;
+        else if (t === "tabela-de-lacuna") LabelNum.Lacuna++;
+    }
+    function LabelNumRemove(t){
+        if (t === "tabela-de-associacao") LabelNum.Associacao--;
+        else if (t === "tabela-de-certo-errado") LabelNum.CertoErrado--;
+        else if (t === "tabela-de-coluna") LabelNum.Coluna--;
+        else if (t === "tabela-de-lacuna") LabelNum.Lacuna--;
+    }
+    var LabelNum = {
+        _CertoErrado: 0,
+        _Lacuna: 0,
+        _Coluna: 0,
+        _Associacao: 0,
+        get CertoErrado(){ return this._CertoErrado; },
+        set CertoErrado(value){
+            this._CertoErrado = value;
+            document.getElementById("label_CertoErrado_num").innerHTML = this._CertoErrado;
+            document.getElementById("label_Listagem_num").innerHTML = this._CertoErrado + this._Lacuna + this._Coluna + this._Associacao;
+        },
+        get Lacuna(){ return this._Lacuna; },
+        set Lacuna(value){
+            this._Lacuna = value;
+            document.getElementById("label_Lacuna_num").innerHTML = this._Lacuna;
+            document.getElementById("label_Listagem_num").innerHTML = this._CertoErrado + this._Lacuna + this._Coluna + this._Associacao;
+        },
+        get Coluna(){ return this._Coluna; },
+        set Coluna(value){
+            this._Coluna = value;
+            document.getElementById("label_Coluna_num").innerHTML = this._Coluna;
+            document.getElementById("label_Listagem_num").innerHTML = this._CertoErrado + this._Lacuna + this._Coluna + this._Associacao;
+        },
+        get Associacao(){ return this._Associacao; },
+        set Associacao(value){
+            this._Associacao = value;
+            document.getElementById("label_Associacao_num").innerHTML = this._Associacao;
+            document.getElementById("label_Listagem_num").innerHTML = this._CertoErrado + this._Lacuna + this._Coluna + this._Associacao;
+        },
+    };
+
+    AjaxIndex(null, (q) => {        
+        for(var i = 0; i < q.length; i++){
+            $('#tabela-de-listagem').DataTable().row.add([
+                q[i].IdQuestao,
+                q[i].Titulo,
+                tipoquestao[q[i].IdTipoQuestao],
+                '<a class="btn btn-primary btn-xs" onclick="EditQuestao(this, ' + q[i].IdQuestao + ', \'tabela-de-certo-errado\')"><i class="fa fa-pencil"></i></a>'                
+            ]).draw(false);
+            
+        }
+    });
+
+    AjaxIndex(1, (q)=>{
+        for(var i = 0; i < q.length; i++){
+            $('#tabela-de-certo-errado').DataTable().row.add([
+                q[i].IdQuestao,
+                q[i].Titulo,
+                q[i].Enunciado,
+                q[i].PesoNota,
+                '<a class="btn btn-primary btn-xs" onclick="EditQuestao(this, ' + q[i].IdQuestao + ', \'tabela-de-certo-errado\')"><i class="fa fa-pencil"></i></a>'+
+                '&nbsp;'+
+                '<a class="btn btn-danger btn-xs" onclick="DeletQuestao(this, ' + q[i].IdQuestao + ', \'tabela-de-certo-errado\')"><i class="fa fa-remove"></i></a>'
+            ]).draw(false);
+            LabelNum.CertoErrado++;
+        }
+    });
+
+    AjaxIndex(2, (q)=>{
+        for(var i = 0; i < q.length; i++){
+            $('#tabela-de-lacuna').DataTable().row.add([
+                q[i].IdQuestao,
+                q[i].Titulo,
+                q[i].Enunciado,
+                q[i].PesoNota,
+                '<a class="btn btn-primary btn-xs" onclick="EditQuestao(this, ' + q[i].IdQuestao + ', \'tabela-de-lacuna\')"><i class="fa fa-pencil"></i></a>'+
+                '&nbsp;'+
+                '<a class="btn btn-danger btn-xs" onclick="DeletQuestao(this, ' + q[i].IdQuestao + ', \'tabela-de-lacuna\')"><i class="fa fa-remove"></i></a>'
+            ]).draw(false);
+            LabelNum.Lacuna++;
+        }
+    });
+
+    AjaxIndex(3, (q)=>{
+        for(var i = 0; i < q.length; i++){
+            $('#tabela-de-coluna').DataTable().row.add([
+                q[i].IdQuestao,
+                q[i].Titulo,
+                q[i].Enunciado,
+                q[i].PesoNota,
+                '<a class="btn btn-primary btn-xs" onclick="EditQuestao(this, ' + q[i].IdQuestao + ', \'tabela-de-coluna\')"><i class="fa fa-pencil"></i></a>'+
+                '&nbsp;'+
+                '<a class="btn btn-danger btn-xs" onclick="DeletQuestao(this, ' + q[i].IdQuestao + ', \'tabela-de-coluna\')"><i class="fa fa-remove"></i></a>'
+            ]).draw(false);
+            LabelNum.Coluna++;
+        }
+    });
+
+    AjaxIndex(4, (q)=>{
+        for(var i = 0; i < q.length; i++){
+            $('#tabela-de-associacao').DataTable().row.add([
+                q[i].IdQuestao,
+                q[i].Titulo,
+                q[i].Enunciado,
+                q[i].PesoNota,
+                '<a class="btn btn-primary btn-xs" onclick="EditQuestao(this, ' + q[i].IdQuestao + ', \'tabela-de-associacao\')"><i class="fa fa-pencil"></i></a>'+
+                '&nbsp;'+
+                '<a class="btn btn-danger btn-xs" onclick="DeletQuestao(this, ' + q[i].IdQuestao + ', \'tabela-de-associacao\')"><i class="fa fa-remove"></i></a>'
+            ]).draw(false);
+            LabelNum.Associacao++;
+        }
+    });
+</script>

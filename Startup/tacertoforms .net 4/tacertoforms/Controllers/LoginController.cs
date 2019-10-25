@@ -5,8 +5,7 @@ using TaCertoForms.Models;
 using TaCertoForms.Controllers.Base;
 
 namespace TaCertoForms.Controllers{
-    public class LoginController : ControladoraBase
-    {        
+    public class LoginController : ControladoraBase{        
         public ActionResult Index(){
             return View();
         }
@@ -29,6 +28,11 @@ namespace TaCertoForms.Controllers{
                 Session["NomeUsuario"] = pessoa.Nome;
                 Session["IdInstituicao"] = pessoa.IdInstituicao;
                 Session["NomeInstituicao"] = instituicao.NomeFantasia;
+
+                Midia midia = db.Midia.Where(x => x.IdOrigem == pessoa.IdPessoa && x.Tabela == "Pessoa").FirstOrDefault();
+                if(midia != null) { 
+                    Session["FotoPerfil"] = midia.Tabela + '/' + midia.IdMidia + midia.Extensao;
+                }
                 return RedirectToRoute(new RouteValueDictionary{
                     { "controller", "Home" },
                     { "action", "Index" }

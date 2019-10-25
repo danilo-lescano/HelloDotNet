@@ -1,0 +1,89 @@
+﻿@model IEnumerable<TaCertoForms.Models.ViewModelAluno>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="content-wrapper">
+    <section class="content-header">
+        <h1>
+            Pessoas
+        </h1>
+        <ol class="breadcrumb">
+            <li>
+                <a href="@Url.Action("Index", "Home")"><i class="fa fa-home"></i> Início</a>
+            </li>
+            <li class="active">
+                <a href="@Url.Action("Index", "Pessoa")">Pessoas</a>
+            </li>
+        </ol>
+    </section>
+
+    <section class="content">
+        <div class="box">
+            <div class="box-header with-border">
+                <h3 class="box-title">Listagem de registros</h3>
+                <a href="@Url.Action("Create", "Pessoa")" class="btn btn-sm btn-primary btn-flat pull-right">Novo registro</a>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <table id="example1" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>
+                                Instituição
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Perfil)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Nome)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.CPF)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Email)
+                            </th>                         
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Instituicao[0].NomeFantasia)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Perfil)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Nome)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CPF)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Email)
+                                </td>                               
+                                <td>
+                                    <a href="@Url.Action("Edit", "Pessoa", new { id = item.IdPessoa })" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
+                                    <a href="@Url.Action("Delete", "Pessoa", new { id = item.IdPessoa })" class="btn btn-danger btn-xs"><i class="fa fa-remove"></i></a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+    </section>
+</div>
+
+<script type="text/javascript">
+    $('#example1').DataTable({
+         "language": dados_translate
+    });
+</script>

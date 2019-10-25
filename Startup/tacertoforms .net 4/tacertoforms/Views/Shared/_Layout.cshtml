@@ -46,8 +46,12 @@
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav">
                         <li class="dropdown user user-menu">
-                            <a href="#">
-                                <img src="~/Content/images/user2-160x160.jpg" class="user-image" alt="User Image">
+                            <a href="javascript:void(0)">
+                                @if (@Session["FotoPerfil"] != null)
+                                {
+                                <img src="~/Content/images/upload/@Session["FotoPerfil"]" class="user-image" alt="User Image">
+                                }
+
                                 @Session["NomeUsuario"]
                             </a>
                         </li>
@@ -79,16 +83,15 @@
                     </li>*@
                     <li><a href="@Url.Action("Index", "Home")"><i class="fa fa-home"></i> <span>Início</span></a></li>
                     <li><a href="@Url.Action("Relatorios", "Home")"><i class="fa fa-tasks"></i> <span>Relatórios</span></a></li>
-                    <li><a href="@Url.Action("Index", "Instituicaos")"><i class="fa fa-institution"></i> <span>Instituições</span></a></li>
-                    <li><a href="@Url.Action("Index", "Pessoas")"><i class="fa fa-user"></i><span>Pessoas</span></a></li>
-                    <li><a href="@Url.Action("Index", "Turmas")"><i class="fa fa-users"></i> <span>Turmas</span></a></li>
-                    <li><a href="@Url.Action("Index", "Disciplinas")"><i class="fa fa-reorder"></i> <span>Disciplinas</span></a></li>
-                    <li><a href="@Url.Action("Index", "Atividades")"><i class="fa fa-th-list"></i> <span>Atividades</span></a></li>
+                    <li><a href="@Url.Action("Index", "Instituicao")"><i class="fa fa-institution"></i> <span>Instituições</span></a></li>
+                    <li><a href="@Url.Action("Index", "Pessoa")"><i class="fa fa-user"></i><span>Pessoas</span></a></li>
+                    <li><a href="@Url.Action("Index", "Turma")"><i class="fa fa-users"></i> <span>Turmas</span></a></li>
+                    <li><a href="@Url.Action("Index", "Disciplina")"><i class="fa fa-reorder"></i> <span>Disciplinas</span></a></li>
+                    <li><a href="@Url.Action("Index", "Atividade")"><i class="fa fa-th-list"></i> <span>Atividades</span></a></li>
                     <li><a href="@Url.Action("LogOff", "Login")"><i class="fa fa-external-link"></i> <span>Sair</span></a></li>
                 </ul>
             </section>
         </aside>
-        @Scripts.Render("~/Scripts/functions.js")
         @Scripts.Render("~/Scripts/jquery.min.js")
         @Scripts.Render("~/Scripts/bootstrap.min.js")
         @Scripts.Render("~/Scripts/fastclick.js")
@@ -113,6 +116,7 @@
         @Scripts.Render("~/Scripts/icheck.min.js")
         @Scripts.Render("~/Scripts/select2.min.js")
         @Scripts.Render("~/Scripts/dashboard2.js")
+        @Scripts.Render("~/Scripts/functions.js")
 
         @RenderSection("scripts", required: false)
 

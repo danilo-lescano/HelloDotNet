@@ -55,3 +55,13 @@ var locale_drp = {
     ],
     "firstDay": 1
 };
+
+function midiaCreateSingleImage(el, data, width = "100%") {    
+    
+    el.html(
+        '<img src="/Content/images/upload/' + data.Tabela + '/' + data.IdMidia + data.Extensao +'" width="'+ width +'">' +
+        '<a href="javascript:void(0)" id="' + data.IdMidia +'" class="btn btn-danger btn-xs btn-single-remove"><i class="fa fa-remove"></i></a>'+
+    '');
+    console.log(el);
+    //el.remove();
+}

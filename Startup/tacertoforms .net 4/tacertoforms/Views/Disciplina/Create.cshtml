@@ -1,0 +1,129 @@
+﻿@model TaCertoForms.Models.ViewModelDisciplina
+
+@{
+    ViewBag.Title = "Create";
+}
+<div class="content-wrapper">
+    <section class="content-header">
+        <h1>
+            Criação de Disciplinas
+        </h1>
+        <ol class="breadcrumb">
+            <li>
+                <a href="@Url.Action("Index", "Home")"><i class="fa fa-home"></i>Início</a>
+            </li>
+            <li class="active">
+                <a href="@Url.Action("Index", "Disciplina")">Disciplinas</a>
+            </li>
+        </ol>
+    </section>
+
+    <section class="content">
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title">Novo Registro</h3>
+                <a href="@Url.Action("Index", "Disciplina")" class="btn btn-sm btn-default btn-flat pull-right">Voltar</a>
+            </div>
+
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="box-body">
+                    <div class="col-xs-6">
+                        <div class="row">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="form-group col-xs-12">
+                                @Html.Label("Nome")                                
+                                @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })                                
+                            </div>
+
+                            <div class="form-group col-xs-12">
+                                @Html.Label("Descrição")
+                                @Html.EditorFor(model => model.Descricao, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Descricao, "", new { @class = "text-danger" })
+                            </div>
+                            
+                            <div class="form-group col-xs-12">
+                                @Html.HiddenFor(model => model.idTurmas, new { htmlAttributes = new { @class = "form-control" } })
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12"></div>
+                    <div class="col-xs-6">
+                        <script>
+                            function filtroInstituicao(val){
+                                var turmas = document.getElementsByClassName("turmas");
+                                if(val == "all"){
+                                    for(var i = 0; i < turmas.length; i++)
+                                        turmas[i].style.display = "block";
+                                }
+                                else{
+                                    for(var i = 0; i < turmas.length; i++)
+                                        if(turmas[i].classList.contains("turma_"+val))
+                                            turmas[i].style.display = "block";
+                                        else
+                                            turmas[i].style.display = "none";
+                                }
+                            }
+                            function addRemoveTurma(idTurma){
+                                var idTurmas = document.getElementById("idTurmas");
+                                var aux = idTurmas.value.split(";"); var newValue = "";
+                                var flag = true;
+                                for(var i = 0; i < aux.length; i++){
+                                    if(aux[i] == idTurma)
+                                        flag = false;
+                                    else
+                                        if(newValue == "")
+                                            newValue += aux[i];
+                                        else
+                                            newValue += ";" + aux[i];
+                                }
+                                
+                                if(flag)
+                                    if(idTurmas.value == "")
+                                        idTurmas.value += idTurma;
+                                    else
+                                        idTurmas.value += ";" + idTurma;
+                                else{
+                                    idTurmas.value = newValue;
+                                }
+                            }
+                        </script>
+                        <table id="example1" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        @Html.Label("Instituição")
+                                        <select class="form-control" onchange="filtroInstituicao(this.value)">
+                                            <option value="all">Todas</option>
+                                            @foreach(var instituicao in ViewBag.InstituicaoList){
+                                                <option value="@instituicao.IdInstituicao">@instituicao.NomeFantasia</option>
+                                            }
+                                        </select>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            @foreach(var t in ViewBag.turmas){
+                                <tr class="turmas turma_@t.IdInstituicao">
+                                    <th>
+                                        <input type="checkbox" id="@t.IdTurma" onclick="addRemoveTurma(this.id)"> <label for="@t.IdTurma">@t.Serie</label>
+                                    </th>
+                                </tr>
+                            }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="box-footer">
+                    <input type="submit" value="Salvar" class="btn btn-primary pull-right" />
+                </div>
+            }
+        </div>
+    </section>
+</div>

@@ -4,8 +4,7 @@ using TaCertoForms.Controllers.Base;
 
 namespace TaCertoForms.Controllers{
     [SomenteLogado]
-    public class HomeController : ControladoraBase
-    {
+    public class HomeController : ControladoraBase{
         public ActionResult Index(){
             return View();
         }

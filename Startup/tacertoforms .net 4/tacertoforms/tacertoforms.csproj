@@ -192,23 +192,23 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Attributes\SomenteLogadoAttribute.cs" />
     <Compile Include="Attributes\PerfilAttribute.cs" />
-    <Compile Include="Controllers\AtividadesController.cs" />
+    <Compile Include="Controllers\AtividadeController.cs" />
     <Compile Include="Controllers\Base\ControladoraBase.cs" />
-    <Compile Include="Controllers\DisciplinasController.cs" />
+    <Compile Include="Controllers\DisciplinaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\InstituicaosController.cs" />
+    <Compile Include="Controllers\InstituicaoController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
-    <Compile Include="Controllers\MidiasController.cs" />
-    <Compile Include="Controllers\PessoasController.cs" />
+    <Compile Include="Controllers\MidiaController.cs" />
+    <Compile Include="Controllers\PessoaController.cs" />
     <Compile Include="Controllers\QuestaoController.cs" />
-    <Compile Include="Controllers\TurmasController.cs" />
+    <Compile Include="Controllers\TurmaController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\MidiasHelper.cs" />
-    <Compile Include="Migrations\201910242017555_Primeira migracao.cs" />
-    <Compile Include="Migrations\201910242017555_Primeira migracao.designer.cs">
-      <DependentUpon>201910242017555_Primeira migracao.cs</DependentUpon>
+    <Compile Include="Migrations\201910242045556_Primeira migration.cs" />
+    <Compile Include="Migrations\201910242045556_Primeira migration.designer.cs">
+      <DependentUpon>201910242045556_Primeira migration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DisciplinaTurma.cs" />
@@ -3186,42 +3186,42 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Disciplinas\Create.cshtml" />
-    <Content Include="Views\Disciplinas\Delete.cshtml" />
-    <Content Include="Views\Disciplinas\Details.cshtml" />
-    <Content Include="Views\Disciplinas\Edit.cshtml" />
-    <Content Include="Views\Disciplinas\Index.cshtml" />
-    <Content Include="Views\Atividades\Create.cshtml" />
-    <Content Include="Views\Atividades\Delete.cshtml" />
-    <Content Include="Views\Atividades\Details.cshtml" />
-    <Content Include="Views\Atividades\Edit.cshtml" />
-    <Content Include="Views\Atividades\Index.cshtml" />
-    <Content Include="Views\Instituicaos\Create.cshtml" />
-    <Content Include="Views\Instituicaos\Delete.cshtml" />
-    <Content Include="Views\Instituicaos\Details.cshtml" />
-    <Content Include="Views\Instituicaos\Edit.cshtml" />
-    <Content Include="Views\Instituicaos\Index.cshtml" />
-    <Content Include="Views\Turmas\Create.cshtml" />
-    <Content Include="Views\Turmas\Delete.cshtml" />
-    <Content Include="Views\Turmas\Details.cshtml" />
-    <Content Include="Views\Turmas\Edit.cshtml" />
-    <Content Include="Views\Turmas\Index.cshtml" />
-    <Content Include="Views\Pessoas\Create.cshtml" />
-    <Content Include="Views\Pessoas\Delete.cshtml" />
-    <Content Include="Views\Pessoas\Details.cshtml" />
-    <Content Include="Views\Pessoas\Edit.cshtml" />
-    <Content Include="Views\Pessoas\Index.cshtml" />
-    <Content Include="Views\Atividades\QuestoesAssociacao.cshtml" />
-    <Content Include="Views\Atividades\QuestoesCertoErrado.cshtml" />
-    <Content Include="Views\Atividades\QuestoesColuna.cshtml" />
-    <Content Include="Views\Atividades\QuestoesListagem.cshtml" />
+    <Content Include="Views\Disciplina\Create.cshtml" />
+    <Content Include="Views\Disciplina\Delete.cshtml" />
+    <Content Include="Views\Disciplina\Details.cshtml" />
+    <Content Include="Views\Disciplina\Edit.cshtml" />
+    <Content Include="Views\Disciplina\Index.cshtml" />
+    <Content Include="Views\Atividade\Create.cshtml" />
+    <Content Include="Views\Atividade\Delete.cshtml" />
+    <Content Include="Views\Atividade\Details.cshtml" />
+    <Content Include="Views\Atividade\Edit.cshtml" />
+    <Content Include="Views\Atividade\Index.cshtml" />
+    <Content Include="Views\Instituicao\Create.cshtml" />
+    <Content Include="Views\Instituicao\Delete.cshtml" />
+    <Content Include="Views\Instituicao\Details.cshtml" />
+    <Content Include="Views\Instituicao\Edit.cshtml" />
+    <Content Include="Views\Instituicao\Index.cshtml" />
+    <Content Include="Views\Turma\Create.cshtml" />
+    <Content Include="Views\Turma\Delete.cshtml" />
+    <Content Include="Views\Turma\Details.cshtml" />
+    <Content Include="Views\Turma\Edit.cshtml" />
+    <Content Include="Views\Turma\Index.cshtml" />
+    <Content Include="Views\Pessoa\Create.cshtml" />
+    <Content Include="Views\Pessoa\Delete.cshtml" />
+    <Content Include="Views\Pessoa\Details.cshtml" />
+    <Content Include="Views\Pessoa\Edit.cshtml" />
+    <Content Include="Views\Pessoa\Index.cshtml" />
+    <Content Include="Views\Atividade\QuestoesAssociacao.cshtml" />
+    <Content Include="Views\Atividade\QuestoesCertoErrado.cshtml" />
+    <Content Include="Views\Atividade\QuestoesColuna.cshtml" />
+    <Content Include="Views\Atividade\QuestoesListagem.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Login\_Layout.cshtml" />
-    <Content Include="Views\Turmas\AjaxTurmas.cshtml" />
-    <Content Include="Views\Disciplinas\AjaxDisciplinas.cshtml" />
-    <Content Include="Views\Turmas\AjaxTurmasDisciplinas.cshtml" />
-    <Content Include="Views\Turmas\AjaxTurmasAlunos.cshtml" />
-    <Content Include="Views\Atividades\QuestoesLacuna.cshtml" />
+    <Content Include="Views\Turma\AjaxTurmas.cshtml" />
+    <Content Include="Views\Disciplina\AjaxDisciplinas.cshtml" />
+    <Content Include="Views\Turma\AjaxTurmasDisciplinas.cshtml" />
+    <Content Include="Views\Turma\AjaxTurmasAlunos.cshtml" />
+    <Content Include="Views\Atividade\QuestoesLacuna.cshtml" />
     <Content Include="Views\Home\Relatorios.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -3241,8 +3241,8 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201910242017555_Primeira migracao.resx">
-      <DependentUpon>201910242017555_Primeira migracao.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201910242045556_Primeira migration.resx">
+      <DependentUpon>201910242045556_Primeira migration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

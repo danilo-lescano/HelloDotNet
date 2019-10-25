@@ -1,5 +1,5 @@
 public enum Perfil{
     Administrador,
-    Professor,
+    Autor,
     Aluno
 }
