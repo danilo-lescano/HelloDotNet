@@ -202,6 +202,12 @@
     <Compile Include="Controllers\PessoaController.cs" />
     <Compile Include="Controllers\QuestaoController.cs" />
     <Compile Include="Controllers\TurmaController.cs" />
+    <Compile Include="Factory\MyModelFactory\Concreate Creator\AtividadeMatrizCreator.cs" />
+    <Compile Include="Factory\MyModelFactory\Concreate Creator\PessoaMatrizCreator.cs" />
+    <Compile Include="Factory\MyModelFactory\FactoryCollectionMatriz.cs" />
+    <Compile Include="Factory\MyModelFactory\Interface Creators\IAtividade.cs" />
+    <Compile Include="Factory\MyModelFactory\Interface Creators\ICollection.cs" />
+    <Compile Include="Factory\MyModelFactory\Interface Creators\IPessoa.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
