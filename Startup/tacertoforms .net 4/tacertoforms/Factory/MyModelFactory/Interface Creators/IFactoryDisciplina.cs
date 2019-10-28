@@ -5,8 +5,8 @@ namespace TaCertoForms.Factory{
     public interface IFactoryDisciplina{
         Disciplina FindDisciplina(int? id);
         List<Disciplina> DisciplinaList();
-        Disciplina CreateDisciplina(int? id);
-        Disciplina EditDisciplina(int? id);
+        Disciplina CreateDisciplina(Disciplina disciplina);
+        Disciplina EditDisciplina(Disciplina disciplina);
         bool DeleteDisciplina(int? id);
     }
 }

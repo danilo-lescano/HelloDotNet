@@ -203,8 +203,6 @@
     <Compile Include="Controllers\QuestaoController.cs" />
     <Compile Include="Controllers\TurmaController.cs" />
     <Compile Include="Factory\MyModelFactory\Base\BaseCreator.cs" />
-    <Compile Include="Factory\MyModelFactory\Concreate Creator\AtividadeMatrizCreator.cs" />
-    <Compile Include="Factory\MyModelFactory\Concreate Creator\PessoaMatrizCreator.cs" />
     <Compile Include="Factory\MyModelFactory\FactoryCollectionMatriz.cs" />
     <Compile Include="Factory\MyModelFactory\Interface Creators\IFactoryAtividade.cs" />
     <Compile Include="Factory\MyModelFactory\Interface Creators\IFactoryCollection.cs" />
@@ -220,6 +218,8 @@
     <Compile Include="Factory\MyModelFactory\Interface Creators\IFactoryTurma.cs" />
     <Compile Include="Factory\MyModelFactory\Interface Creators\IFactoryTurmaAluno.cs" />
     <Compile Include="Factory\MyModelFactory\Interface Creators\IFactoryTurmaDisciplinaAutor.cs" />
+    <Compile Include="Factory\MyModelFactory\Matriz Creator\AtividadeMatrizCreator.cs" />
+    <Compile Include="Factory\MyModelFactory\Matriz Creator\PessoaMatrizCreator.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

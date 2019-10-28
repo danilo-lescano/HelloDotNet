@@ -4,7 +4,6 @@ using TaCertoForms.Models;
 
 namespace TaCertoForms.Factory{
     public class BaseCreator{
-        protected Context db = new Context();
         protected int IdMatriz { get; set; }
         protected int IdPessoa { get; set; }
 

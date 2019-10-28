@@ -5,8 +5,8 @@ namespace TaCertoForms.Factory{
     public interface IFactoryInstituicao{
         Instituicao FindInstituicao(int? id);
         List<Instituicao> InstituicaoList();
-        Instituicao CreateInstituicao(int? id);
-        Instituicao EditInstituicao(int? id);
+        Instituicao CreateInstituicao(Instituicao instituicao);
+        Instituicao EditInstituicao(Instituicao instituicao);
         bool DeleteInstituicao(int? id);
     }
 }

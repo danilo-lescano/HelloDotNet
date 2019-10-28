@@ -5,8 +5,8 @@ namespace TaCertoForms.Factory{
     public interface IFactoryPessoa{
         Pessoa FindPessoa(int? id);
         List<Pessoa> PessoaList();
-        Pessoa CreatePessoa(int? id);
-        Pessoa EditPessoa(int? id);
+        Pessoa CreatePessoa(Pessoa pessoa);
+        Pessoa EditPessoa(Pessoa pessoa);
         bool DeletePessoa(int? id);
     }
 }

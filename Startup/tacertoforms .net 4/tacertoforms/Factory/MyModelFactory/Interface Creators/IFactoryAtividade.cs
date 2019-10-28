@@ -5,8 +5,8 @@ namespace TaCertoForms.Factory{
     public interface IFactoryAtividade{
         Atividade FindAtividade(int? id);
         List<Atividade> AtividadeList();
-        Atividade CreateAtividade(int? id);
-        Atividade EditAtividade(int? id);
+        Atividade CreateAtividade(Atividade atividade);
+        Atividade EditAtividade(Atividade atividade);
         bool DeleteAtividade(int? id);
     }
 }

@@ -5,8 +5,8 @@ namespace TaCertoForms.Factory{
     public interface IFactoryEndereco{
         Endereco FindEndereco(int? id);
         List<Endereco> EnderecoList();
-        Endereco CreateEndereco(int? id);
-        Endereco EditEndereco(int? id);
+        Endereco CreateEndereco(Endereco endereco);
+        Endereco EditEndereco(Endereco endereco);
         bool DeleteEndereco(int? id);
     }
 }

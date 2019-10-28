@@ -4,7 +4,7 @@ namespace TaCertoForms.Factory{
     //IFactoryDisciplina,
     //IFactoryDisciplinaTurma,
     //IFactoryEndereco,
-    //IFactoryInstituicao,
+    IFactoryInstituicao,
     //IFactoryLogLogin,
     //IFactoryMidia,
     IFactoryPessoa

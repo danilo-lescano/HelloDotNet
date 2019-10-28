@@ -5,8 +5,8 @@ namespace TaCertoForms.Factory{
     public interface IFactoryQuestao{
         Questao FindQuestao(int? id);
         List<Questao> QuestaoList();
-        Questao CreateQuestao(int? id);
-        Questao EditQuestao(int? id);
+        Questao CreateQuestao(Questao questao);
+        Questao EditQuestao(Questao questao);
         bool DeleteQuestao(int? id);
     }
 }
