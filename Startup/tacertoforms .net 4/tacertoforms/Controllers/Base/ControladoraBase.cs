@@ -2,12 +2,24 @@
 using System.Linq;
 using System.Web.Mvc;
 using System.Collections.Generic;
-using TaCertoForms.Models;
 using TaCertoForms.Contexts;
+using TaCertoForms.Factory;
+using TaCertoForms.Models;
 
 namespace TaCertoForms.Controllers.Base{
     public class ControladoraBase : Controller{
         protected Context db = new Context();
+
+        FactoryCollectionMatriz collectionMatriz;
+        protected FactoryCollectionMatriz CollectionMatriz {
+            get{
+                if(collectionMatriz == null)
+                    return collectionMatriz = new FactoryCollectionMatriz((int)Session["IdMatriz"], (int)Session["IdPessoa"]);
+                else
+                    return collectionMatriz;
+            }
+        }
+
 
         protected List<Pessoa> GetMeusAlunos(){
             Context db = new Context();
@@ -44,21 +56,6 @@ namespace TaCertoForms.Controllers.Base{
             }
             db.Dispose();
             return pessoas;
-        }
-
-        //Dado um IdTurmaDisciplinaAutor (tda_id) devolve nome de disciplina e turma respectivamente
-        protected (string, string) GetNomeTurmaNomeDisciplina(int tda_id){
-            Context db = new Context();
-            TurmaDisciplinaAutor tda = db.TurmaDisciplinaAutor.Find(tda_id);
-            if(tda == null) return ("", "");
-            DisciplinaTurma dt = db.DisciplinaTurma.Find(tda.IdDisciplinaTurma);
-            if(dt == null) return ("", "");
-            Turma t = db.Turma.Find(dt.IdTurma);
-            if(t == null) return ("", "");
-            Disciplina d = db.Disciplina.Find(dt.IdDisciplina);
-            if(d == null) return ("", "");
-            db.Dispose();
-            return (d.Nome, t.Serie);
         }
 
         protected List<Atividade> GetMinhasAtividades(){

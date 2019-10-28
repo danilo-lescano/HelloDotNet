@@ -3,17 +3,17 @@ using System.Data;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
+using TaCertoForms.Contexts;
 using TaCertoForms.Models;
 using TaCertoForms.Attributes;
 using TaCertoForms.Controllers.Base;
 
 namespace TaCertoForms.Controllers{
     [SomenteLogado]
-    public class AtividadeController : ControladoraBase {        
-
+    public class AtividadeController : ControladoraBase {
         [Perfil(Perfil.Autor)]
         public ActionResult Index(){
-            List<Atividade> atividades = GetMinhasAtividades();
+            List<Atividade> atividades = CollectionMatriz.AtividadeList();
             List<ViewModelAtividade> vmAtividades = new List<ViewModelAtividade>();
             foreach (var a in atividades){
                 ViewModelAtividade vma = new ViewModelAtividade();
@@ -110,6 +110,20 @@ namespace TaCertoForms.Controllers{
             if (disposing)
                 db.Dispose();
             base.Dispose(disposing);
+        }
+                //Dado um IdTurmaDisciplinaAutor (tda_id) devolve nome de disciplina e turma respectivamente
+        private (string, string) GetNomeTurmaNomeDisciplina(int tda_id){
+            Context db = new Context();
+            TurmaDisciplinaAutor tda = db.TurmaDisciplinaAutor.Find(tda_id);
+            if(tda == null) return ("", "");
+            DisciplinaTurma dt = db.DisciplinaTurma.Find(tda.IdDisciplinaTurma);
+            if(dt == null) return ("", "");
+            Turma t = db.Turma.Find(dt.IdTurma);
+            if(t == null) return ("", "");
+            Disciplina d = db.Disciplina.Find(dt.IdDisciplina);
+            if(d == null) return ("", "");
+            db.Dispose();
+            return (d.Nome, t.Serie);
         }
     }
 }

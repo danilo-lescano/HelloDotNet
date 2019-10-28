@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Collections.Generic;
 using TaCertoForms.Models;
 using TaCertoForms.Contexts;
@@ -11,7 +12,17 @@ namespace TaCertoForms.Factory{
             throw new System.NotImplementedException();
         }
         public List<Atividade> AtividadeList(){
-            throw new System.NotImplementedException();
+            Context db = new Context();
+            Pessoa pessoa = db.Pessoa.Find(IdPessoa);
+            List<TurmaDisciplinaAutor> turmaDisciplinaAutorList = db.TurmaDisciplinaAutor.Where(tda => tda.IdAutor == pessoa.IdPessoa).ToList();
+            List<Atividade> atividadeList = new List<Atividade>();
+            if(turmaDisciplinaAutorList != null)
+                foreach (var tda in turmaDisciplinaAutorList){
+                    List<Atividade> atividadeList_aux = db.Atividade.Where(a => a.IdTurmaDisciplinaAutor == tda.IdTurmaDisciplinaAutor && !atividadeList.Contains(a)).ToList();
+                    atividadeList = atividadeList.Concat(atividadeList_aux).ToList();
+                }
+            db.Dispose();
+            return atividadeList;
         }
 
         public Atividade CreateAtividade(int? id){
