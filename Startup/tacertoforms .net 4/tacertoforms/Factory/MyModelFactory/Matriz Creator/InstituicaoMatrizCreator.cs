@@ -20,7 +20,7 @@ namespace TaCertoForms.Factory{
         }
         public List<Instituicao> InstituicaoList(){
             Context db = new Context();
-            
+
             List<Instituicao> instituicaoList = db.Instituicao.Where(i => i.IdInstituicao == IdMatriz || (i.IdMatriz != null && i.IdMatriz == IdMatriz)).ToList();
             if(instituicaoList == null || instituicaoList.Count == 0) return null;
 
@@ -29,15 +29,45 @@ namespace TaCertoForms.Factory{
         }
 
         public Instituicao CreateInstituicao(Instituicao Instituicao){
-            throw new System.NotImplementedException();
+            Context db = new Context();
+
+            Instituicao instituicao_aux = db.Instituicao.Find(instituicao.IdInstituicao);
+            if(instituicao_aux != null)
+                return null;
+            instituicao.IdMatriz = IdMatriz;
+            Instituicao.IsMatriz = false;
+            db.Instituicao.Add(instituicao);
+            db.SaveChanges();
+            db.Dispose()
+            return instituicao;
         }
 
         public Instituicao EditInstituicao(Instituicao Instituicao){
-            throw new System.NotImplementedException();
+            Context db = new Context();
+
+            Instituicao instituicao_aux = db.Instituicao.Find(instituicao.IdInstituicao);
+            if(instituicao_aux == null)
+                return null;
+            if(instituicao.IdMatriz != IdMatriz && Instituicao.IsMatriz)
+                return null;
+            else if(Instituicao.IdMatriz != IdMatriz && Instituicao.IdInstituicao != IdMatriz)
+                return null;
+            db.Entry(instituicao).State = System.Data.Entity.EntityState.Modified;
+            db.SaveChanges();
+            db.Dispose()
+            return instituicao;
         }
 
         public bool DeleteInstituicao(int? id){
-            throw new System.NotImplementedException();
+            if(id == null) return false;
+            Context db = new Context();
+            Instituicao instituicao = db.Instituicao.Find(id);
+            if(instituicao == null) return false;
+            if(instituicao.IdInstituicao == IdMatriz || instituicao.IdMatriz != IdMatriz) return false;
+            db.Instituicao.Remove(instituicao);
+            db.SaveChanges();
+            db.Dispose();
+            return true;
         }
     }
 }

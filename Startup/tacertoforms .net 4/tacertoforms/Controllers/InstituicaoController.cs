@@ -13,7 +13,7 @@ namespace TaCertoForms.Controllers{
     public class InstituicaoController : ControladoraBase {
         
         public ActionResult Index() {            
-            return View(GetMinhasInstituicoes());
+            return View(CollectionMatriz.InstituicaoList());
         }
         public ActionResult Create() {
             return View();
