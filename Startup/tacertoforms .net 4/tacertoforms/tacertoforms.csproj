@@ -221,7 +221,9 @@
     <Compile Include="Factory\MyModelFactory\Matriz Creator\AtividadeMatrizCreator.cs" />
     <Compile Include="Factory\MyModelFactory\Matriz Creator\EnderecoMatrizCreator.cs" />
     <Compile Include="Factory\MyModelFactory\Matriz Creator\InstituicaoMatrizCreator.cs" />
+    <Compile Include="Factory\MyModelFactory\Matriz Creator\DisciplinaMatrizCreator.cs" />
     <Compile Include="Factory\MyModelFactory\Matriz Creator\PessoaMatrizCreator.cs" />
+    <Compile Include="Factory\MyModelFactory\Matriz Creator\QuestaoMatrizCreator.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

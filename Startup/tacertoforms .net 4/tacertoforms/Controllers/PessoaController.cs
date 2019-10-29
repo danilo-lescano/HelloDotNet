@@ -12,14 +12,14 @@ namespace TaCertoForms.Controllers{
     [SomenteLogado]
     public class PessoaController : ControladoraBase{
         public ActionResult Index(){
-            List<ViewModelPessoa> alunos = new List<ViewModelPessoa>();
-            foreach (var aluno in db.Pessoa.ToList()){
-                ViewModelPessoa vmAluno = new ViewModelPessoa();
-                vmAluno.Pessoa = aluno;
-                vmAluno.Instituicao.Add(db.Instituicao.Find(aluno.IdInstituicao));
-                alunos.Add(vmAluno);
+            List<ViewModelPessoa> pessoas = new List<ViewModelPessoa>();
+            foreach (var pessoa in CollectionMatriz.PessoaList()){
+                ViewModelPessoa vmPessoa = new ViewModelPessoa();
+                vmPessoa.Pessoa = pessoa;
+                vmPessoa.Instituicao.Add(CollectionMatriz.FindInstituicao(pessoa.IdInstituicao));
+                pessoas.Add(vmPessoa);
             }
-            return View(alunos);
+            return View(pessoas);
         }
 
         public ActionResult Create(){

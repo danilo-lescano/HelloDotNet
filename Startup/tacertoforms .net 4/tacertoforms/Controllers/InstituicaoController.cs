@@ -23,15 +23,13 @@ namespace TaCertoForms.Controllers{
         public ActionResult Create(ViewModelInstituicao viewModel) {
             //Todo validar se algum field veio null
             Endereco principal = viewModel.enderecoPrincipal;
-            db.Endereco.Add(principal);
-            db.SaveChanges();
+            CollectionMatriz.CreateEndereco(principal);
             //Capturando o id do endereço principal que foi inserido no banco
             int IdEnderecoPrincipal = principal.IdEndereco;
             int IdEnderecoCobranca;
             Endereco cobranca = viewModel.enderecoCobranca;
             if (cobranca != null) {
-                db.Endereco.Add(cobranca);
-                db.SaveChanges();
+                CollectionMatriz.CreateEndereco(cobranca);
                 //Capturando o id do endereço de cobrança que foi inserido no banco
                 IdEnderecoCobranca = cobranca.IdEndereco;
             }
@@ -54,10 +52,10 @@ namespace TaCertoForms.Controllers{
                 return HttpNotFound();
             vmInstituicao.instituicao = instituicao;
 
-            Endereco enderecoPrincipal = db.Endereco.Find(instituicao.IdEnderecoPrincipal);
+            Endereco enderecoPrincipal = CollectionMatriz.FindEndereco(instituicao.IdEnderecoPrincipal);
             Endereco enderecoCobranca = null;
             if (instituicao.IdEnderecoPrincipal != instituicao.IdEnderecoCobranca)
-                enderecoCobranca = db.Endereco.Find(instituicao.IdEnderecoCobranca);
+                enderecoCobranca = CollectionMatriz.FindEndereco(instituicao.IdEnderecoCobranca);
             ViewBag.enderecoCobranca = enderecoCobranca;
             ViewBag.enderecoPrincipal = enderecoPrincipal;
 
@@ -78,20 +76,17 @@ namespace TaCertoForms.Controllers{
             }
             else if (viewModel.EqualEnderecoCobranca == false && viewModel.IdEnderecoCobranca == viewModel.IdEnderecoPrincipal) {
                 Endereco cobranca = viewModel.enderecoCobranca;
-                db.Endereco.Add(cobranca);
-                db.SaveChanges();
+                CollectionMatriz.CreateEndereco(cobranca);
                 instituicao.IdEnderecoCobranca = cobranca.IdEndereco;
             }
             else if (viewModel.EqualEnderecoCobranca == false) {
                 //Atualizando endereço cobranca
                 Endereco cobranca = viewModel.enderecoCobranca;
-                db.Entry(cobranca).State = System.Data.Entity.EntityState.Modified;
-                db.SaveChanges();
+                CollectionMatriz.EditEndereco(cobranca);
             }
             //Atualizando endereço principal
             Endereco principal = viewModel.enderecoPrincipal;
-            db.Entry(principal).State = System.Data.Entity.EntityState.Modified;
-            db.SaveChanges();
+            CollectionMatriz.EditEndereco(principal);
 
             CollectionMatriz.EditInstituicao(instituicao);
 
@@ -106,10 +101,10 @@ namespace TaCertoForms.Controllers{
             if (instituicao == null)
                 return HttpNotFound();
 
-            Endereco enderecoPrincipal = db.Endereco.Find(instituicao.IdEnderecoPrincipal);
+            Endereco enderecoPrincipal = CollectionMatriz.FindEndereco(instituicao.IdEnderecoPrincipal);
             Endereco enderecoCobranca = null;
             if (instituicao.IdEnderecoPrincipal != instituicao.IdEnderecoCobranca)
-                enderecoCobranca = db.Endereco.Find(instituicao.IdEnderecoCobranca);
+                enderecoCobranca = CollectionMatriz.FindEndereco(instituicao.IdEnderecoCobranca);
             ViewBag.enderecoCobranca = enderecoCobranca;
             ViewBag.enderecoPrincipal = enderecoPrincipal;
             return View(instituicao);

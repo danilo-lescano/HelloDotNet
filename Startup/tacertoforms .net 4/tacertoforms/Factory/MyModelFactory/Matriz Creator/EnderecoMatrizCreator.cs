@@ -25,7 +25,7 @@ namespace TaCertoForms.Factory{
             Context db = new Context();
             List<Instituicao> instituicaoList = db.Instituicao.Where(i => i.IdInstituicao == IdMatriz || (i.IdMatriz != null && i.IdMatriz == IdMatriz)).ToList();
             List<int> idEndereco = new List<int>();
-            foreach (Instituica i in instituicaoList){
+            foreach (Instituicao i in instituicaoList){
                 if(!idEndereco.Contains(i.IdEnderecoCobranca))
                     idEndereco.Add(i.IdEnderecoCobranca);
                 if(!idEndereco.Contains(i.IdEnderecoPrincipal))
@@ -42,6 +42,8 @@ namespace TaCertoForms.Factory{
             Endereco endereco_aux = db.Endereco.Find(endereco.IdEndereco);
             if(endereco_aux != null)
                 return null;
+            db.Dispose();
+            db = new Context();
             db.Endereco.Add(endereco);
             db.SaveChanges();
             db.Dispose();
@@ -53,13 +55,15 @@ namespace TaCertoForms.Factory{
             Endereco endereco_aux = db.Endereco.Find(endereco.IdEndereco);
             if(endereco_aux == null)
                 return null;
+            db.Dispose();
+            db = new Context();
             List<Instituicao> instituicaoList = db.Instituicao.Where(i => (i.IdInstituicao == IdMatriz || i.IdMatriz == IdMatriz) && (i.IdEnderecoCobranca == endereco.IdEndereco || i.IdEnderecoPrincipal == endereco.IdEndereco)).ToList();
             if(instituicaoList == null || instituicaoList.Count == 0)
                 return null;
             db.Entry(endereco).State = System.Data.Entity.EntityState.Modified;
             db.SaveChanges();
             db.Dispose();
-            return Endereco;
+            return endereco;
         }
 
         public bool DeleteEndereco(int? id){
@@ -67,9 +71,11 @@ namespace TaCertoForms.Factory{
             Context db = new Context();
             Endereco endereco = db.Endereco.Find(id);
             if(endereco == null) return false;
+            db.Dispose();
+            db = new Context();
             List<Instituicao> instituicaoList = db.Instituicao.Where(i => (i.IdInstituicao == IdMatriz || i.IdMatriz == IdMatriz) && (i.IdEnderecoCobranca == endereco.IdEndereco || i.IdEnderecoPrincipal == endereco.IdEndereco)).ToList();
             if(instituicaoList == null || instituicaoList.Count == 0)
-                return null;
+                return false;
             db.Endereco.Remove(endereco);
             db.SaveChanges();
             db.Dispose();

@@ -3,12 +3,12 @@ namespace TaCertoForms.Factory{
     IFactoryAtividade,
     //IFactoryDisciplina,
     //IFactoryDisciplinaTurma,
-    //IFactoryEndereco,
+    IFactoryEndereco,
     IFactoryInstituicao,
     //IFactoryLogLogin,
     //IFactoryMidia,
-    IFactoryPessoa
-    //IFactoryQuestao,
+    IFactoryPessoa,
+    IFactoryQuestao
     //IFactoryTipoQuestao,
     //IFactoryTurma,
     //IFactoryTurmaAluno,

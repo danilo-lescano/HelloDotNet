@@ -7,13 +7,19 @@ namespace TaCertoForms.Factory{
     public class FactoryCollectionMatriz : IFactoryCollection{
 
         AtividadeMatrizCreator atividadeMatrizCreator { get; set; }
+        DisciplinaMatrizCreator disciplinaMatrizCreator { get; set; }
+        EnderecoMatrizCreator enderecoMatrizCreator { get; set; }
         InstituicaoMatrizCreator instituicaoMatrizCreator { get; set; }
         PessoaMatrizCreator pessoaMatrizCreator { get; set; }
+        QuestaoMatrizCreator questaoMatrizCreator { get; set; }
 
         public FactoryCollectionMatriz(int IdMatriz, int IdPessoa){
             atividadeMatrizCreator = new AtividadeMatrizCreator(IdMatriz, IdPessoa);
+            disciplinaMatrizCreator = new DisciplinaMatrizCreator(IdMatriz, IdPessoa);
+            enderecoMatrizCreator = new EnderecoMatrizCreator(IdMatriz, IdPessoa);
             instituicaoMatrizCreator = new InstituicaoMatrizCreator(IdMatriz, IdPessoa);
             pessoaMatrizCreator = new PessoaMatrizCreator(IdMatriz, IdPessoa);
+            questaoMatrizCreator = new QuestaoMatrizCreator(IdMatriz, IdPessoa);
         }
 
         public List<Atividade> AtividadeList() => atividadeMatrizCreator.AtividadeList();
@@ -21,6 +27,19 @@ namespace TaCertoForms.Factory{
         public Atividade CreateAtividade(Atividade atividade) => atividadeMatrizCreator.CreateAtividade(atividade);
         public Atividade EditAtividade(Atividade atividade) => atividadeMatrizCreator.EditAtividade(atividade);
         public bool DeleteAtividade(int? id) => atividadeMatrizCreator.DeleteAtividade(id);
+
+        public List<Disciplina> DisciplinaList() => disciplinaMatrizCreator.DisciplinaList();
+        public Disciplina FindDisciplina(int? id) => disciplinaMatrizCreator.FindDisciplina(id);
+        public Disciplina CreateDisciplina(Disciplina disciplina) => disciplinaMatrizCreator.CreateDisciplina(disciplina);
+        public Disciplina EditDisciplina(Disciplina disciplina) => disciplinaMatrizCreator.EditDisciplina(disciplina);
+        public bool DeleteDisciplina(int? id) => disciplinaMatrizCreator.DeleteDisciplina(id);
+
+
+        public List<Endereco> EnderecoList() => enderecoMatrizCreator.EnderecoList();
+        public Endereco FindEndereco(int? id) => enderecoMatrizCreator.FindEndereco(id);
+        public Endereco CreateEndereco(Endereco endereco) => enderecoMatrizCreator.CreateEndereco(endereco);
+        public Endereco EditEndereco(Endereco endereco) => enderecoMatrizCreator.EditEndereco(endereco);
+        public bool DeleteEndereco(int? id) => enderecoMatrizCreator.DeleteEndereco(id);
 
         public List<Instituicao> InstituicaoList() => instituicaoMatrizCreator.InstituicaoList();
         public Instituicao FindInstituicao(int? id) => instituicaoMatrizCreator.FindInstituicao(id);
@@ -33,5 +52,12 @@ namespace TaCertoForms.Factory{
         public Pessoa CreatePessoa(Pessoa pessoa) => pessoaMatrizCreator.CreatePessoa(pessoa);
         public Pessoa EditPessoa(Pessoa pessoa) => pessoaMatrizCreator.EditPessoa(pessoa);
         public bool DeletePessoa(int? id) => pessoaMatrizCreator.DeletePessoa(id);
+        
+        public List<Questao> QuestaoList() => questaoMatrizCreator.QuestaoList();
+        public Questao FindQuestao(int? id) => questaoMatrizCreator.FindQuestao(id);
+        public Questao CreateQuestao(Questao questao) => questaoMatrizCreator.CreateQuestao(questao);
+        public Questao EditQuestao(Questao questao) => questaoMatrizCreator.EditQuestao(questao);
+        public bool DeleteQuestao(int? id) => questaoMatrizCreator.DeleteQuestao(id);
+        
     }
 }

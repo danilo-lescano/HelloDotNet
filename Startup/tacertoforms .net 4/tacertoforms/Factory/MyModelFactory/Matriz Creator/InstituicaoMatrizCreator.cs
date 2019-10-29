@@ -20,10 +20,8 @@ namespace TaCertoForms.Factory{
         }
         public List<Instituicao> InstituicaoList(){
             Context db = new Context();
-
             List<Instituicao> instituicaoList = db.Instituicao.Where(i => i.IdInstituicao == IdMatriz || (i.IdMatriz != null && i.IdMatriz == IdMatriz)).ToList();
             if(instituicaoList == null || instituicaoList.Count == 0) return null;
-
             db.Dispose();
             return instituicaoList;
         }
@@ -46,10 +44,12 @@ namespace TaCertoForms.Factory{
             Instituicao instituicao_aux = db.Instituicao.Find(instituicao.IdInstituicao);
             if(instituicao_aux == null)
                 return null;
-            if(instituicao.IdMatriz != IdMatriz && instituicao.IsMatriz)
+            instituicao.IdMatriz = instituicao_aux.IdMatriz;
+            instituicao.IsMatriz = instituicao_aux.IsMatriz;
+            if(instituicao.IdMatriz != IdMatriz && instituicao.IdInstituicao != IdMatriz)
                 return null;
-            else if(instituicao.IdMatriz != IdMatriz && instituicao.IdInstituicao != IdMatriz)
-                return null;
+            db.Dispose();
+            db = new Context();
             db.Entry(instituicao).State = System.Data.Entity.EntityState.Modified;
             db.SaveChanges();
             db.Dispose();
