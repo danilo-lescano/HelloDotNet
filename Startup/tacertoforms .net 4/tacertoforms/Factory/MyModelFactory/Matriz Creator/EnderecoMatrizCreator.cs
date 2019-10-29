@@ -5,7 +5,7 @@ using TaCertoForms.Contexts;
 
 namespace TaCertoForms.Factory{
     //CLASSE EnderecoMatrizCreator - Responsavel por pegar no banco de dados apenas as endereços relacionadas a uma determinada matriz
-    public class EnderecoMatrizCreator {/*: BaseCreator, IFactoryEndereco{/* 
+    public class EnderecoMatrizCreator : BaseCreator, IFactoryEndereco{
         public EnderecoMatrizCreator(int IdMatriz, int IdPessoa) : base(IdMatriz,IdPessoa) {}
 
         public Endereco FindEndereco(int? id){
@@ -15,45 +15,48 @@ namespace TaCertoForms.Factory{
             if(endereco == null) return null;
             List<Instituicao> instituicoes = db.Instituicao.Where(i => i.IdEnderecoCobranca == endereco.IdEndereco || i.IdEnderecoPrincipal == endereco.IdEndereco).ToList();
             foreach (Instituicao i in instituicoes){
-                if(i.IdInstituicao != IdMatriz && (i.IdMatriz == null || i.IdMatriz != IdMatriz))
-                    return Instituicao;
+                if(i.IdInstituicao == IdMatriz || (i.IdMatriz != null && i.IdMatriz == IdMatriz))
+                    return endereco;
             }
             db.Dispose();
             return null;
         }
         public List<Endereco> EnderecoList(){
             Context db = new Context();
-
-            List<Endereco> EnderecoList = db.Endereco.Where(i => i.IdEndereco == IdMatriz || (i.IdMatriz != null && i.IdMatriz == IdMatriz)).ToList();
-            if(EnderecoList == null || EnderecoList.Count == 0) return null;
-
+            List<Instituicao> instituicaoList = db.Instituicao.Where(i => i.IdInstituicao == IdMatriz || (i.IdMatriz != null && i.IdMatriz == IdMatriz)).ToList();
+            List<int> idEndereco = new List<int>();
+            foreach (Instituica i in instituicaoList){
+                if(!idEndereco.Contains(i.IdEnderecoCobranca))
+                    idEndereco.Add(i.IdEnderecoCobranca);
+                if(!idEndereco.Contains(i.IdEnderecoPrincipal))
+                    idEndereco.Add(i.IdEnderecoPrincipal);
+            }
+            List<Endereco> enderecoList = db.Endereco.Where(e => idEndereco.Contains(e.IdEndereco)).ToList();
+            if(enderecoList == null || enderecoList.Count == 0) return null;
             db.Dispose();
-            return EnderecoList;
+            return enderecoList;
         }
 
-        public Endereco CreateEndereco(Endereco Endereco){
+        public Endereco CreateEndereco(Endereco endereco){
             Context db = new Context();
-            Endereco Endereco_aux = db.Endereco.Find(Endereco.IdEndereco);
-            if(Endereco_aux != null)
+            Endereco endereco_aux = db.Endereco.Find(endereco.IdEndereco);
+            if(endereco_aux != null)
                 return null;
-            Endereco.IdMatriz = IdMatriz;
-            Endereco.IsMatriz = false;
-            db.Endereco.Add(Endereco);
+            db.Endereco.Add(endereco);
             db.SaveChanges();
             db.Dispose();
-            return Endereco;
+            return endereco;
         }
 
-        public Endereco EditEndereco(Endereco Endereco){
+        public Endereco EditEndereco(Endereco endereco){
             Context db = new Context();
-            Endereco Endereco_aux = db.Endereco.Find(Endereco.IdEndereco);
-            if(Endereco_aux == null)
+            Endereco endereco_aux = db.Endereco.Find(endereco.IdEndereco);
+            if(endereco_aux == null)
                 return null;
-            if(Endereco.IdMatriz != IdMatriz && Endereco.IsMatriz)
+            List<Instituicao> instituicaoList = db.Instituicao.Where(i => (i.IdInstituicao == IdMatriz || i.IdMatriz == IdMatriz) && (i.IdEnderecoCobranca == endereco.IdEndereco || i.IdEnderecoPrincipal == endereco.IdEndereco)).ToList();
+            if(instituicaoList == null || instituicaoList.Count == 0)
                 return null;
-            else if(Endereco.IdMatriz != IdMatriz && Endereco.IdEndereco != IdMatriz)
-                return null;
-            db.Entry(Endereco).State = System.Data.Entity.EntityState.Modified;
+            db.Entry(endereco).State = System.Data.Entity.EntityState.Modified;
             db.SaveChanges();
             db.Dispose();
             return Endereco;
@@ -62,13 +65,15 @@ namespace TaCertoForms.Factory{
         public bool DeleteEndereco(int? id){
             if(id == null) return false;
             Context db = new Context();
-            Endereco Endereco = db.Endereco.Find(id);
-            if(Endereco == null) return false;
-            if(Endereco.IdEndereco == IdMatriz || Endereco.IdMatriz != IdMatriz) return false;
-            db.Endereco.Remove(Endereco);
+            Endereco endereco = db.Endereco.Find(id);
+            if(endereco == null) return false;
+            List<Instituicao> instituicaoList = db.Instituicao.Where(i => (i.IdInstituicao == IdMatriz || i.IdMatriz == IdMatriz) && (i.IdEnderecoCobranca == endereco.IdEndereco || i.IdEnderecoPrincipal == endereco.IdEndereco)).ToList();
+            if(instituicaoList == null || instituicaoList.Count == 0)
+                return null;
+            db.Endereco.Remove(endereco);
             db.SaveChanges();
             db.Dispose();
             return true;
-        }*/
+        }
     }
 }
