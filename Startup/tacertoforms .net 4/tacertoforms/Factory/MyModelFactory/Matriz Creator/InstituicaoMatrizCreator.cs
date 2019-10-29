@@ -30,7 +30,6 @@ namespace TaCertoForms.Factory{
 
         public Instituicao CreateInstituicao(Instituicao Instituicao){
             Context db = new Context();
-
             Instituicao instituicao_aux = db.Instituicao.Find(instituicao.IdInstituicao);
             if(instituicao_aux != null)
                 return null;
@@ -38,13 +37,12 @@ namespace TaCertoForms.Factory{
             Instituicao.IsMatriz = false;
             db.Instituicao.Add(instituicao);
             db.SaveChanges();
-            db.Dispose()
+            db.Dispose();
             return instituicao;
         }
 
         public Instituicao EditInstituicao(Instituicao Instituicao){
             Context db = new Context();
-
             Instituicao instituicao_aux = db.Instituicao.Find(instituicao.IdInstituicao);
             if(instituicao_aux == null)
                 return null;
@@ -54,7 +52,7 @@ namespace TaCertoForms.Factory{
                 return null;
             db.Entry(instituicao).State = System.Data.Entity.EntityState.Modified;
             db.SaveChanges();
-            db.Dispose()
+            db.Dispose();
             return instituicao;
         }
 

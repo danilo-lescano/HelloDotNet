@@ -40,9 +40,7 @@ namespace TaCertoForms.Controllers{
             Instituicao instituicao = viewModel.instituicao;
             instituicao.IdEnderecoCobranca = IdEnderecoCobranca;
             instituicao.IdEnderecoPrincipal = IdEnderecoPrincipal;
-            instituicao.IdMatriz = (int?)Session["IdMatriz"];
-            db.Instituicao.Add(instituicao);
-            db.SaveChanges();
+            CollectionMatriz.CreateInstituicao(instituicao);
             return RedirectToAction("Index");
         }
 
@@ -51,7 +49,7 @@ namespace TaCertoForms.Controllers{
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
             ViewModelInstituicao vmInstituicao = new ViewModelInstituicao();
-            Instituicao instituicao = FindMinhaInstituicao(id);
+            Instituicao instituicao = CollectionMatriz.FindInstituicao(id);
             if (instituicao == null)
                 return HttpNotFound();
             vmInstituicao.instituicao = instituicao;
@@ -71,6 +69,8 @@ namespace TaCertoForms.Controllers{
         [HttpPost]
         public ActionResult Edit(ViewModelInstituicao viewModel) {
             Instituicao instituicao = viewModel.instituicao;
+            if(CollectionMatriz.FindInstituicao(instituicao.IdInstituicao) == null)
+                return HttpNotFound();
             //Caso o usuário já tinha cadastrado um email de cobrança diferente do principal e optou por tornar o endereço de cobrança como o mesmo endereço principal            
             if (viewModel.EqualEnderecoCobranca && viewModel.IdEnderecoCobranca != viewModel.IdEnderecoPrincipal) {
                 viewModel.IdEnderecoCobranca = viewModel.IdEnderecoPrincipal;
@@ -93,10 +93,7 @@ namespace TaCertoForms.Controllers{
             db.Entry(principal).State = System.Data.Entity.EntityState.Modified;
             db.SaveChanges();
 
-            //Atualizando instituição
-            (instituicao.IsMatriz, instituicao.IdMatriz) = HasMatriz_Update(instituicao.IdInstituicao);
-            db.Entry(instituicao).State = System.Data.Entity.EntityState.Modified;
-            db.SaveChanges();           
+            CollectionMatriz.EditInstituicao(instituicao);
 
             return RedirectToAction("Index");
         }
@@ -105,7 +102,7 @@ namespace TaCertoForms.Controllers{
             if (id == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            Instituicao instituicao = FindMinhaInstituicao(id);
+            Instituicao instituicao = CollectionMatriz.FindInstituicao(id);
             if (instituicao == null)
                 return HttpNotFound();
 
@@ -121,9 +118,7 @@ namespace TaCertoForms.Controllers{
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id) {
-            Instituicao instituicao = db.Instituicao.Find(id);
-            db.Instituicao.Remove(instituicao);
-            db.SaveChanges();
+            CollectionMatriz.DeleteInstituicao(id);
             return RedirectToAction("Index");
         }
 
@@ -131,17 +126,6 @@ namespace TaCertoForms.Controllers{
             if (disposing)
                 db.Dispose();
             base.Dispose(disposing);
-        }
-
-        //checa se a instituicao possui matriz ou é matriz e atualiza os campos (IsMatriz, IdMatriz)
-        private (bool, int?) HasMatriz_Update(int id){
-            Context db = new Context();
-            Instituicao i = db.Instituicao.Find(id);
-            db.Dispose();
-            if(i.IsMatriz)
-                return (true, null);
-            else
-                return (false, i.IdMatriz);
         }
     }
 }
