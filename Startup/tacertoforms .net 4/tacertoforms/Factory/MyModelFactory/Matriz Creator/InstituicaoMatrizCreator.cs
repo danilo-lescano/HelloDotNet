@@ -28,27 +28,27 @@ namespace TaCertoForms.Factory{
             return instituicaoList;
         }
 
-        public Instituicao CreateInstituicao(Instituicao Instituicao){
+        public Instituicao CreateInstituicao(Instituicao instituicao){
             Context db = new Context();
             Instituicao instituicao_aux = db.Instituicao.Find(instituicao.IdInstituicao);
             if(instituicao_aux != null)
                 return null;
             instituicao.IdMatriz = IdMatriz;
-            Instituicao.IsMatriz = false;
+            instituicao.IsMatriz = false;
             db.Instituicao.Add(instituicao);
             db.SaveChanges();
             db.Dispose();
             return instituicao;
         }
 
-        public Instituicao EditInstituicao(Instituicao Instituicao){
+        public Instituicao EditInstituicao(Instituicao instituicao){
             Context db = new Context();
             Instituicao instituicao_aux = db.Instituicao.Find(instituicao.IdInstituicao);
             if(instituicao_aux == null)
                 return null;
-            if(instituicao.IdMatriz != IdMatriz && Instituicao.IsMatriz)
+            if(instituicao.IdMatriz != IdMatriz && instituicao.IsMatriz)
                 return null;
-            else if(Instituicao.IdMatriz != IdMatriz && Instituicao.IdInstituicao != IdMatriz)
+            else if(instituicao.IdMatriz != IdMatriz && instituicao.IdInstituicao != IdMatriz)
                 return null;
             db.Entry(instituicao).State = System.Data.Entity.EntityState.Modified;
             db.SaveChanges();

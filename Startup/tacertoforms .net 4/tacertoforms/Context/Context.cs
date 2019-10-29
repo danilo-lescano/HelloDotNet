@@ -24,6 +24,11 @@ namespace TaCertoForms.Contexts {
                 .WithMany()
                 .HasForeignKey(A => A.IdTurmaDisciplinaAutor)
                 .WillCascadeOnDelete(false);
+            modelBuilder.Entity<Disciplina>()
+                .HasRequired(D => D.Matriz)
+                .WithMany()
+                .HasForeignKey(D => D.IdMatriz)
+                .WillCascadeOnDelete(false);
             modelBuilder.Entity<DisciplinaTurma>()
                 .HasRequired(DT => DT.Turma)
                 .WithMany()

@@ -219,6 +219,8 @@
     <Compile Include="Factory\MyModelFactory\Interface Creators\IFactoryTurmaAluno.cs" />
     <Compile Include="Factory\MyModelFactory\Interface Creators\IFactoryTurmaDisciplinaAutor.cs" />
     <Compile Include="Factory\MyModelFactory\Matriz Creator\AtividadeMatrizCreator.cs" />
+    <Compile Include="Factory\MyModelFactory\Matriz Creator\EnderecoMatrizCreator.cs" />
+    <Compile Include="Factory\MyModelFactory\Matriz Creator\InstituicaoMatrizCreator.cs" />
     <Compile Include="Factory\MyModelFactory\Matriz Creator\PessoaMatrizCreator.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -235,6 +237,14 @@
     <Compile Include="Migrations\201910250340100_matriz 2.cs" />
     <Compile Include="Migrations\201910250340100_matriz 2.designer.cs">
       <DependentUpon>201910250340100_matriz 2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201910291456573_Disciplina IdMatriz.cs" />
+    <Compile Include="Migrations\201910291456573_Disciplina IdMatriz.designer.cs">
+      <DependentUpon>201910291456573_Disciplina IdMatriz.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201910291457523_Disciplina IdMatriz constraint.cs" />
+    <Compile Include="Migrations\201910291457523_Disciplina IdMatriz constraint.designer.cs">
+      <DependentUpon>201910291457523_Disciplina IdMatriz constraint.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DisciplinaTurma.cs" />
@@ -3275,6 +3285,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201910250340100_matriz 2.resx">
       <DependentUpon>201910250340100_matriz 2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910291456573_Disciplina IdMatriz.resx">
+      <DependentUpon>201910291456573_Disciplina IdMatriz.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910291457523_Disciplina IdMatriz constraint.resx">
+      <DependentUpon>201910291457523_Disciplina IdMatriz constraint.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
