@@ -16,8 +16,11 @@ namespace TaCertoForms.Controllers{
             foreach (var pessoa in CollectionMatriz.PessoaList()){
                 ViewModelPessoa vmPessoa = new ViewModelPessoa();
                 vmPessoa.Pessoa = pessoa;
-                vmPessoa.Instituicao.Add(CollectionMatriz.FindInstituicao(pessoa.IdInstituicao));
-                pessoas.Add(vmPessoa);
+                Instituicao i = CollectionMatriz.FindInstituicao(pessoa.IdInstituicao);
+                if(i != null){
+                    vmPessoa.Instituicao.Add(i);
+                    pessoas.Add(vmPessoa);
+                }
             }
             return View(pessoas);
         }
@@ -41,8 +44,9 @@ namespace TaCertoForms.Controllers{
         public ActionResult Edit(int? id){
             if (id == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            Pessoa pessoa = db.Pessoa.Find(id);
-            List<Instituicao> list = db.Instituicao.ToList();
+            Pessoa pessoa = CollectionMatriz.FindPessoa(id);
+            if(pessoa == null) return HttpNotFound();
+            List<Instituicao> list = CollectionMatriz.InstituicaoList();
             ViewBag.InstituicaoList = new SelectList(list, "IdInstituicao", "NomeFantasia");
             if (pessoa == null)
                 return HttpNotFound();
@@ -52,20 +56,14 @@ namespace TaCertoForms.Controllers{
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IdPessoa,IdInstituicao,Perfil,Nome,CPF,Email,Senha")] Pessoa pessoa){
-            if (ModelState.IsValid){
-                db.Entry(pessoa).State = System.Data.Entity.EntityState.Modified;
-                db.SaveChanges();
+        public ActionResult Edit(Pessoa pessoa){
+            if (CollectionMatriz.EditPessoa(pessoa) != null)
                 return RedirectToAction("Index");
-            }
             return View(pessoa);
         }
 
         public ActionResult Delete(int? id){
-            if (id == null)
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            Pessoa pessoa = db.Pessoa.Find(id);
+            Pessoa pessoa = CollectionMatriz.FindPessoa(id);
             if (pessoa == null)
                 return HttpNotFound();
             return View(pessoa);
@@ -74,9 +72,7 @@ namespace TaCertoForms.Controllers{
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id){
-            Pessoa pessoa = db.Pessoa.Find(id);
-            db.Pessoa.Remove(pessoa);
-            db.SaveChanges();
+            CollectionMatriz.DeletePessoa(id);
             return RedirectToAction("Index");
         }
 

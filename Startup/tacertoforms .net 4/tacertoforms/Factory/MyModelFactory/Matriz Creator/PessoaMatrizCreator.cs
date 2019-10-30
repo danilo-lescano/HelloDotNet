@@ -72,7 +72,7 @@ namespace TaCertoForms.Factory{
         public bool DeletePessoa(int? id){
             if(id == null) return false;
             Context db = new Context();
-            Instituicao pessoa = db.Pessoa.Find(id);
+            Pessoa pessoa = db.Pessoa.Find(id);
             if(pessoa == null) return false;
             
             Instituicao instituicao = db.Instituicao.Find(pessoa.IdInstituicao);
