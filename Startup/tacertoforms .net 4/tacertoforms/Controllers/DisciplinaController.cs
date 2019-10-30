@@ -15,8 +15,7 @@ namespace TaCertoForms.Controllers{
             List<ViewModelDisciplina> disciplinas = new List<ViewModelDisciplina>();
             List<Disciplina> disciplinasBanco = CollectionMatriz.DisciplinaList();
             if (disciplinasBanco != null) { 
-                foreach (var disc in disciplinasBanco)
-                {
+                foreach (var disc in disciplinasBanco){
                     ViewModelDisciplina vmDisc = new ViewModelDisciplina(){ IdDisciplina = disc.IdDisciplina, Nome = disc.Nome, Descricao = disc.Descricao };
                     List<DisciplinaTurma> aux = db.DisciplinaTurma.Where(dt => dt.IdDisciplina == disc.IdDisciplina).ToList();
 
@@ -55,6 +54,7 @@ namespace TaCertoForms.Controllers{
         [HttpPost]
         public ActionResult Create(ViewModelDisciplina vmDisciplina){
             Disciplina disciplina = vmDisciplina.Disciplina;
+            disciplina.IdMatriz = IdMatriz;
             db.Disciplina.Add(disciplina);
             db.SaveChanges();            
         

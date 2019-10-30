@@ -22,12 +22,9 @@ namespace TaCertoForms.Controllers{
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult Create(Turma turma){
-            if (ModelState.IsValid) {
-                CollectionMatriz.CreateTurma(turma);                
+            if (CollectionMatriz.CreateTurma(turma) != null)
                 return RedirectToAction("Index");
-            }
             return View(turma);
         }
 
@@ -42,12 +39,9 @@ namespace TaCertoForms.Controllers{
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult Edit(Turma turma){            
             if(CollectionMatriz.EditTurma(turma) != null)
-            {
                 return RedirectToAction("Index");
-            }
             return View(turma);
         }
 
