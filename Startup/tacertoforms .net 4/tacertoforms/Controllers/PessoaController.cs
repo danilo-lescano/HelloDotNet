@@ -23,19 +23,18 @@ namespace TaCertoForms.Controllers{
         }
 
         public ActionResult Create(){
-            List<Instituicao> list = db.Instituicao.ToList();
+            List<Instituicao> list = CollectionMatriz.InstituicaoList();
+            if(list == null)
+                list = new List<Instituicao>();
             ViewBag.InstituicaoList = new SelectList(list, "IdInstituicao", "NomeFantasia");
             return View();
         }
 
         [HttpPost]
         public ActionResult Create(Pessoa pessoa){
-            if (ModelState.IsValid){
-                db.Pessoa.Add(pessoa);
-                db.SaveChanges();
-
+            pessoa = CollectionMatriz.CreatePessoa(pessoa);
+            if(pessoa != null)
                 return RedirectToAction("Edit", "Pessoa", new { id = pessoa.IdPessoa });
-            }
             return View(pessoa);
         }
 
