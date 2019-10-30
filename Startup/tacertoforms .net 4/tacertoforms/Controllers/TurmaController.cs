@@ -11,69 +11,52 @@ namespace TaCertoForms.Controllers{
     [SomenteLogado]
     public class TurmaController : ControladoraBase{
         public ActionResult Index(){
-            List<Instituicao> list = db.Instituicao.ToList();
-            ViewBag.InstituicaoList = list;//new SelectList(list, "IdInstituicao", "NomeFantasia");
-            return View(db.Turma.ToList());
-        }       
-
-        public ActionResult Details(int? id){
-            if (id == null)
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            Turma turma = db.Turma.Find(id);
-            if (turma == null)
-                return HttpNotFound();
-            Instituicao instituicao = db.Instituicao.Find(turma.IdInstituicao);
-            ViewBag.NomeFantasia = instituicao.NomeFantasia;
-            return View(turma);
-        }
-
+            List<Instituicao> list = CollectionMatriz.InstituicaoList();
+            ViewBag.InstituicaoList = list;
+            return View(CollectionMatriz.TurmaList());
+        }               
         public ActionResult Create(){
-            List<Instituicao> list = db.Instituicao.ToList();
+            List<Instituicao> list = CollectionMatriz.InstituicaoList();
             ViewBag.InstituicaoList = new SelectList(list, "IdInstituicao", "NomeFantasia");
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IdTurma,IdInstituicao,Serie,Periodo")] Turma turma){
-            if (ModelState.IsValid){
-                db.Turma.Add(turma);
-                db.SaveChanges();
+        public ActionResult Create(Turma turma){
+            if (ModelState.IsValid) {
+                CollectionMatriz.CreateTurma(turma);                
                 return RedirectToAction("Index");
             }
             return View(turma);
         }
 
         public ActionResult Edit(int? id){
-            if (id == null)
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            Turma turma = db.Turma.Find(id);
-            if (turma == null)
-                return HttpNotFound();
-            List<Instituicao> list = db.Instituicao.ToList();
+            if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            Turma turma = CollectionMatriz.FindTurma(id);
+            if (turma == null) return new HttpStatusCodeResult(HttpStatusCode.NotFound);
+
+            List<Instituicao> list = CollectionMatriz.InstituicaoList();
             ViewBag.InstituicaoList = new SelectList(list, "IdInstituicao", "NomeFantasia");
             return View(turma);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IdTurma,IdInstituicao,Serie,Periodo")] Turma turma){
-            if (ModelState.IsValid){
-                db.Entry(turma).State = System.Data.Entity.EntityState.Modified;
-                db.SaveChanges();
+        public ActionResult Edit(Turma turma){            
+            if(CollectionMatriz.EditTurma(turma) != null)
+            {
                 return RedirectToAction("Index");
             }
             return View(turma);
         }
 
         public ActionResult Delete(int? id){
-            if (id == null)
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            Turma turma = db.Turma.Find(id);
-            if (turma == null)
-                return HttpNotFound();
+            if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            Turma turma = CollectionMatriz.FindTurma(id);
+            if (turma == null) return new HttpStatusCodeResult(HttpStatusCode.NotFound);
 
-            Instituicao instituicao = db.Instituicao.Find(turma.IdInstituicao);
+            Instituicao instituicao = CollectionMatriz.FindInstituicao(turma.IdInstituicao);
             ViewBag.NomeFantasia = instituicao.NomeFantasia;
 
             return View(turma);
@@ -82,9 +65,7 @@ namespace TaCertoForms.Controllers{
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id) {
-            Turma turma = db.Turma.Find(id);
-            db.Turma.Remove(turma);
-            db.SaveChanges();
+            CollectionMatriz.DeleteTurma(id);            
             return RedirectToAction("Index");
         }
 

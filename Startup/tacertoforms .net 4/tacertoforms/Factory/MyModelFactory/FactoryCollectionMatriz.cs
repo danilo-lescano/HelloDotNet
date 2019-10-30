@@ -12,6 +12,7 @@ namespace TaCertoForms.Factory{
         InstituicaoMatrizCreator instituicaoMatrizCreator { get; set; }
         PessoaMatrizCreator pessoaMatrizCreator { get; set; }
         QuestaoMatrizCreator questaoMatrizCreator { get; set; }
+        TurmaMatrizCreator turmaMatrizCreator { get; set; }
 
         public FactoryCollectionMatriz(int IdMatriz, int IdPessoa){
             atividadeMatrizCreator = new AtividadeMatrizCreator(IdMatriz, IdPessoa);
@@ -20,6 +21,7 @@ namespace TaCertoForms.Factory{
             instituicaoMatrizCreator = new InstituicaoMatrizCreator(IdMatriz, IdPessoa);
             pessoaMatrizCreator = new PessoaMatrizCreator(IdMatriz, IdPessoa);
             questaoMatrizCreator = new QuestaoMatrizCreator(IdMatriz, IdPessoa);
+            turmaMatrizCreator = new TurmaMatrizCreator(IdMatriz, IdPessoa);
         }
 
         public List<Atividade> AtividadeList() => atividadeMatrizCreator.AtividadeList();
@@ -59,5 +61,10 @@ namespace TaCertoForms.Factory{
         public Questao EditQuestao(Questao questao) => questaoMatrizCreator.EditQuestao(questao);
         public bool DeleteQuestao(int? id) => questaoMatrizCreator.DeleteQuestao(id);
         
+        public List<Turma> TurmaList() => turmaMatrizCreator.TurmaList();
+        public Turma FindTurma(int? id) => turmaMatrizCreator.FindTurma(id);
+        public Turma CreateTurma(Turma turma) => turmaMatrizCreator.CreateTurma(turma);
+        public Turma EditTurma(Turma turma) => turmaMatrizCreator.EditTurma(turma);
+        public bool DeleteTurma(int? id) => turmaMatrizCreator.DeleteTurma(id);
     }
 }

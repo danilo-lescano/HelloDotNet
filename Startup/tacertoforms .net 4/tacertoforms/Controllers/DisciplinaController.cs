@@ -46,19 +46,9 @@ namespace TaCertoForms.Controllers{
             ViewBag.DisciplinasList = new SelectList(disciplinas, "IdDisciplinaTurma", "Nome");
             return View();
         }
-
-        public ActionResult Details(int? id){
-            if (id == null)
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            Disciplina disciplina = db.Disciplina.Find(id);
-            if (disciplina == null)
-                return HttpNotFound();
-            return View(disciplina);
-        }
-
-        public ActionResult Create(){
-            ViewBag.turmas = db.Turma.ToList();
-            ViewBag.InstituicaoList = db.Instituicao.ToList();
+        public ActionResult Create() {
+            ViewBag.turmas = CollectionMatriz.TurmaList();
+            ViewBag.InstituicaoList = CollectionMatriz.InstituicaoList();
             return View();
         }
 
@@ -100,41 +90,39 @@ namespace TaCertoForms.Controllers{
 
         [HttpPost]
         public ActionResult Edit(ViewModelDisciplina vmDisciplina){            
-            Disciplina disciplina = vmDisciplina.Disciplina;            
-            db.Entry(disciplina).State = System.Data.Entity.EntityState.Modified;
-            db.SaveChanges();
+            Disciplina disciplina = CollectionMatriz.EditDisciplina(vmDisciplina.Disciplina);
+            if(disciplina == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
             string[] idTurmas = vmDisciplina.idTurmas != null ? vmDisciplina.idTurmas.Split(';') : new string[0];
-            foreach (var id in idTurmas)
-                vmDisciplina.Turmas.Add(db.Turma.Find(int.Parse(id)));
+                foreach (var id in idTurmas)
+                    vmDisciplina.Turmas.Add(db.Turma.Find(int.Parse(id)));
  
-            List<DisciplinaTurma> dts = db.DisciplinaTurma.Where(dt => dt.IdDisciplina == vmDisciplina.IdDisciplina).ToList();
-            List<Turma> turmasBanco = new List<Turma>();
-            foreach (var aux in dts)
-                turmasBanco.Add(db.Turma.Find(aux.IdTurma));
+                List<DisciplinaTurma> dts = db.DisciplinaTurma.Where(dt => dt.IdDisciplina == vmDisciplina.IdDisciplina).ToList();
+                List<Turma> turmasBanco = new List<Turma>();
+                foreach (var aux in dts)
+                    turmasBanco.Add(db.Turma.Find(aux.IdTurma));
 
-            for(int i = vmDisciplina.Turmas.Count - 1; i >= 0; i--){
-                bool flag = false;
-                for (int j = turmasBanco.Count - 1; j >= 0; j--){
-                    if(turmasBanco[j].IdTurma == vmDisciplina.Turmas[i].IdTurma){
-                        flag = true;
-                        turmasBanco.RemoveAt(j);
-                        break;
+                for(int i = vmDisciplina.Turmas.Count - 1; i >= 0; i--){
+                    bool flag = false;
+                    for (int j = turmasBanco.Count - 1; j >= 0; j--){
+                        if(turmasBanco[j].IdTurma == vmDisciplina.Turmas[i].IdTurma){
+                            flag = true;
+                            turmasBanco.RemoveAt(j);
+                            break;
+                        }
+                    }
+                    if(!flag){
+                        db.DisciplinaTurma.Add(new DisciplinaTurma() {IdDisciplina = disciplina.IdDisciplina, IdTurma = vmDisciplina.Turmas[i].IdTurma});
+                        db.SaveChanges();
                     }
                 }
-                if(!flag){
-                    db.DisciplinaTurma.Add(new DisciplinaTurma() {IdDisciplina = disciplina.IdDisciplina, IdTurma = vmDisciplina.Turmas[i].IdTurma});
-                    db.SaveChanges();
-                }
-            }
-            foreach (var item in turmasBanco){
-                DisciplinaTurma dt = db.DisciplinaTurma.Where(aux => aux.IdDisciplina == vmDisciplina.IdDisciplina && aux.IdTurma == item.IdTurma).Single();
-                if(dt != null){
-                    db.DisciplinaTurma.Remove(dt);
-                    db.SaveChanges();
-                }
-            }
-
+                foreach (var item in turmasBanco){
+                    DisciplinaTurma dt = db.DisciplinaTurma.Where(aux => aux.IdDisciplina == vmDisciplina.IdDisciplina && aux.IdTurma == item.IdTurma).Single();
+                    if(dt != null){
+                        db.DisciplinaTurma.Remove(dt);
+                        db.SaveChanges();
+                    }
+                }            
             return RedirectToAction("Index");
         }
 

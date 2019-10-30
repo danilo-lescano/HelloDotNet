@@ -19,28 +19,22 @@ namespace TaCertoForms.Factory{
             Context db = new Context();
             Pessoa pessoa = db.Pessoa.Find(IdPessoa);
             Instituicao instituicao = db.Instituicao.Find(pessoa.IdInstituicao);
-            if(pessoa == null || instituicao == null)
-                return null;
-            //List<Disciplina> disciplinas = db.Disciplina.Where(x => x.IdMatriz == instituicao.IdMatriz).ToList();
+            if(pessoa == null || instituicao == null) return null;
+            
+            List<Disciplina> disciplinas = db.Disciplina.Where(x => x.IdMatriz == instituicao.IdMatriz).ToList();
             db.Dispose();
-            //return disciplinas;
-            return null;
+            return disciplinas;            
         }
 
-        public Disciplina EditDisciplina(Disciplina disciplina){
-            /*
+        public Disciplina EditDisciplina(Disciplina disciplina){            
             Context db = new Context();
             Pessoa pessoa = db.Pessoa.Find(IdPessoa);
             Instituicao instituicao = db.Instituicao.Find(pessoa.IdInstituicao);
-            if (pessoa == null || instituicao == null){
-                return null;
-            }
-            //List<Disciplina> disciplinas = db.Disciplina.Where(x => x.IdMatriz == instituicao.IdMatriz).ToList();
+            if (pessoa == null || instituicao == null || db.Disciplina.Find(disciplina.IdDisciplina) == null) return null;
+            db.Entry(disciplina).State = System.Data.Entity.EntityState.Modified;
+            db.SaveChanges();
             db.Dispose();
-            //return disciplinas;
-            return null;
-            */
-            throw new System.NotImplementedException();
+            return disciplina;            
         }
 
         public Disciplina FindDisciplina(int? id){

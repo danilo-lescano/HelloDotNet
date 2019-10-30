@@ -1,11 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Reflection;
 using System.Web.Mvc;
 using System.Web.Mvc.Filters;
 using System.Web.Routing;
-using TaCertoForms.Models;
-using TaCertoForms.Contexts;
 
 namespace TaCertoForms.Attributes{
     public class SomenteLogadoAttribute : ActionFilterAttribute, IAuthenticationFilter{
@@ -22,5 +17,5 @@ namespace TaCertoForms.Attributes{
                 });
             }
         }
-    }
+    }   
 }

@@ -3,8 +3,10 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using TaCertoForms.Models;
 using TaCertoForms.Controllers.Base;
+using tacertoforms.Attributes;
 
 namespace TaCertoForms.Controllers{
+    [SomenteDeslogado]
     public class LoginController : ControladoraBase{        
         public ActionResult Index(){
             return View();
