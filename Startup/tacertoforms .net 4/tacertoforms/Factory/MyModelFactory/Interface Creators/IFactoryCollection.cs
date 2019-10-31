@@ -1,16 +1,16 @@
 namespace TaCertoForms.Factory{
     public interface IFactoryCollection :
     IFactoryAtividade,
-    //IFactoryDisciplina,
-    //IFactoryDisciplinaTurma,
+    IFactoryDisciplina,
+    IFactoryDisciplinaTurma,
     IFactoryEndereco,
     IFactoryInstituicao,
     //IFactoryLogLogin,
     //IFactoryMidia,
     IFactoryPessoa,
-    IFactoryQuestao
+    IFactoryQuestao,
     //IFactoryTipoQuestao,
-    //IFactoryTurma,
+    IFactoryTurma
     //IFactoryTurmaAluno,
     //IFactoryTurmaDisciplinaAutor
     { }

@@ -2,7 +2,6 @@
 using TaCertoForms.Models;
 using TaCertoForms.Contexts;
 using System.Linq;
-
 namespace TaCertoForms.Factory{
     public class DisciplinaMatrizCreator : BaseCreator, IFactoryDisciplina{
         public DisciplinaMatrizCreator(int IdMatriz, int IdPessoa) : base(IdMatriz, IdPessoa) { }

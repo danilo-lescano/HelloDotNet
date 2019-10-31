@@ -220,6 +220,7 @@
     <Compile Include="Factory\MyModelFactory\Interface Creators\IFactoryTurmaAluno.cs" />
     <Compile Include="Factory\MyModelFactory\Interface Creators\IFactoryTurmaDisciplinaAutor.cs" />
     <Compile Include="Factory\MyModelFactory\Matriz Creator\AtividadeMatrizCreator.cs" />
+    <Compile Include="Factory\MyModelFactory\Matriz Creator\DisciplinaTurmaMatrizCreator.cs" />
     <Compile Include="Factory\MyModelFactory\Matriz Creator\EnderecoMatrizCreator.cs" />
     <Compile Include="Factory\MyModelFactory\Matriz Creator\InstituicaoMatrizCreator.cs" />
     <Compile Include="Factory\MyModelFactory\Matriz Creator\DisciplinaMatrizCreator.cs" />

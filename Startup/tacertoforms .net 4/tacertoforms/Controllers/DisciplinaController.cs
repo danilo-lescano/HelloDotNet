@@ -20,7 +20,7 @@ namespace TaCertoForms.Controllers{
                     List<DisciplinaTurma> aux = db.DisciplinaTurma.Where(dt => dt.IdDisciplina == disc.IdDisciplina).ToList();
 
                     foreach (var discTurm in aux)
-                        vmDisc.Turmas.Add(db.Turma.Find(discTurm.IdTurma));
+                        vmDisc.Turmas.Add(CollectionMatriz.FindTurma(discTurm.IdTurma));
                     disciplinas.Add(vmDisc);
                 }
             }
@@ -54,14 +54,13 @@ namespace TaCertoForms.Controllers{
         [HttpPost]
         public ActionResult Create(ViewModelDisciplina vmDisciplina){
             Disciplina disciplina = vmDisciplina.Disciplina;
-            disciplina.IdMatriz = IdMatriz;
-            db.Disciplina.Add(disciplina);
-            db.SaveChanges();            
+            disciplina.IdMatriz = (int)Session["IdMatriz"];
+            CollectionMatriz.CreateDisciplina(disciplina);
         
             string[] idTurmas = vmDisciplina.idTurmas.Split(';');
             foreach (string t in idTurmas){
-                db.DisciplinaTurma.Add(new DisciplinaTurma(){ IdDisciplina = disciplina.IdDisciplina, IdTurma = int.Parse(t) });
-                db.SaveChanges();
+                DisciplinaTurma dt = new DisciplinaTurma(){ IdDisciplina = disciplina.IdDisciplina, IdTurma = int.Parse(t) };
+                CollectionMatriz.CreateDisciplinaTurma(dt);
             }
 
             return RedirectToAction("Index");
@@ -79,11 +78,11 @@ namespace TaCertoForms.Controllers{
 
             List<DisciplinaTurma> aux = db.DisciplinaTurma.Where(dt => dt.IdDisciplina == viewModelDisciplina.IdDisciplina).ToList();
             foreach (var discTurm in aux)
-                viewModelDisciplina.Turmas.Add(db.Turma.Find(discTurm.IdTurma));
+                viewModelDisciplina.Turmas.Add(CollectionMatriz.FindTurma(discTurm.IdTurma));
             viewModelDisciplina.EncherTurmas();
 
-            ViewBag.turmas = db.Turma.ToList();
-            ViewBag.InstituicaoList = db.Instituicao.ToList();
+            ViewBag.turmas = CollectionMatriz.TurmaList();
+            ViewBag.InstituicaoList = CollectionMatriz.InstituicaoList();
             
             return View(viewModelDisciplina);
         }
@@ -95,12 +94,12 @@ namespace TaCertoForms.Controllers{
 
             string[] idTurmas = vmDisciplina.idTurmas != null ? vmDisciplina.idTurmas.Split(';') : new string[0];
                 foreach (var id in idTurmas)
-                    vmDisciplina.Turmas.Add(db.Turma.Find(int.Parse(id)));
+                    vmDisciplina.Turmas.Add(CollectionMatriz.FindTurma(int.Parse(id)));
  
                 List<DisciplinaTurma> dts = db.DisciplinaTurma.Where(dt => dt.IdDisciplina == vmDisciplina.IdDisciplina).ToList();
                 List<Turma> turmasBanco = new List<Turma>();
                 foreach (var aux in dts)
-                    turmasBanco.Add(db.Turma.Find(aux.IdTurma));
+                    turmasBanco.Add(CollectionMatriz.FindTurma(aux.IdTurma));
 
                 for(int i = vmDisciplina.Turmas.Count - 1; i >= 0; i--){
                     bool flag = false;
@@ -112,16 +111,14 @@ namespace TaCertoForms.Controllers{
                         }
                     }
                     if(!flag){
-                        db.DisciplinaTurma.Add(new DisciplinaTurma() {IdDisciplina = disciplina.IdDisciplina, IdTurma = vmDisciplina.Turmas[i].IdTurma});
-                        db.SaveChanges();
+                        DisciplinaTurma dt = new DisciplinaTurma() {IdDisciplina = disciplina.IdDisciplina, IdTurma = vmDisciplina.Turmas[i].IdTurma};
+                        CollectionMatriz.CreateDisciplinaTurma(dt);
                     }
                 }
                 foreach (var item in turmasBanco){
                     DisciplinaTurma dt = db.DisciplinaTurma.Where(aux => aux.IdDisciplina == vmDisciplina.IdDisciplina && aux.IdTurma == item.IdTurma).Single();
-                    if(dt != null){
-                        db.DisciplinaTurma.Remove(dt);
-                        db.SaveChanges();
-                    }
+                    if(dt != null)
+                        CollectionMatriz.DeleteDisciplinaTurma(dt.IdDisciplinaTurma);
                 }            
             return RedirectToAction("Index");
         }
@@ -138,11 +135,11 @@ namespace TaCertoForms.Controllers{
 
             List<DisciplinaTurma> aux = db.DisciplinaTurma.Where(dt => dt.IdDisciplina == viewModelDisciplina.IdDisciplina).ToList();
             foreach (var discTurm in aux)
-                viewModelDisciplina.Turmas.Add(db.Turma.Find(discTurm.IdTurma));
+                viewModelDisciplina.Turmas.Add(CollectionMatriz.FindTurma(discTurm.IdTurma));
             viewModelDisciplina.EncherTurmas();
 
-            ViewBag.turmas = db.Turma.ToList();
-            ViewBag.InstituicaoList = db.Instituicao.ToList();
+            ViewBag.turmas = CollectionMatriz.TurmaList();
+            ViewBag.InstituicaoList = CollectionMatriz.InstituicaoList();
             
             return View(viewModelDisciplina);
         }
@@ -155,13 +152,10 @@ namespace TaCertoForms.Controllers{
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             
             List<DisciplinaTurma> disciplinaTurmas = db.DisciplinaTurma.Where(dt => dt.IdDisciplina == id).ToList();
-            foreach (var dt in disciplinaTurmas)
-            {
-                db.DisciplinaTurma.Remove(dt);
-                db.SaveChanges();
+            foreach (var dt in disciplinaTurmas){
+                CollectionMatriz.DeleteDisciplinaTurma(dt.IdDisciplinaTurma);
             }            
-            db.Disciplina.Remove(disciplina);
-            db.SaveChanges();
+            CollectionMatriz.DeleteDisciplina(disciplina.IdDisciplina);
             
             return RedirectToAction("Index");
         }

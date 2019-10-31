@@ -8,6 +8,7 @@ namespace TaCertoForms.Factory{
 
         AtividadeMatrizCreator atividadeMatrizCreator { get; set; }
         DisciplinaMatrizCreator disciplinaMatrizCreator { get; set; }
+        DisciplinaTurmaMatrizCreator disciplinaTurmaMatrizCreator { get; set; }
         EnderecoMatrizCreator enderecoMatrizCreator { get; set; }
         InstituicaoMatrizCreator instituicaoMatrizCreator { get; set; }
         PessoaMatrizCreator pessoaMatrizCreator { get; set; }
@@ -17,6 +18,7 @@ namespace TaCertoForms.Factory{
         public FactoryCollectionMatriz(int IdMatriz, int IdPessoa){
             atividadeMatrizCreator = new AtividadeMatrizCreator(IdMatriz, IdPessoa);
             disciplinaMatrizCreator = new DisciplinaMatrizCreator(IdMatriz, IdPessoa);
+            disciplinaTurmaMatrizCreator = new DisciplinaTurmaMatrizCreator(IdMatriz, IdPessoa);
             enderecoMatrizCreator = new EnderecoMatrizCreator(IdMatriz, IdPessoa);
             instituicaoMatrizCreator = new InstituicaoMatrizCreator(IdMatriz, IdPessoa);
             pessoaMatrizCreator = new PessoaMatrizCreator(IdMatriz, IdPessoa);
@@ -35,6 +37,12 @@ namespace TaCertoForms.Factory{
         public Disciplina CreateDisciplina(Disciplina disciplina) => disciplinaMatrizCreator.CreateDisciplina(disciplina);
         public Disciplina EditDisciplina(Disciplina disciplina) => disciplinaMatrizCreator.EditDisciplina(disciplina);
         public bool DeleteDisciplina(int? id) => disciplinaMatrizCreator.DeleteDisciplina(id);
+
+        public List<DisciplinaTurma> DisciplinaTurmaList() => disciplinaTurmaMatrizCreator.DisciplinaTurmaList();
+        public DisciplinaTurma FindDisciplinaTurma(int? id) => disciplinaTurmaMatrizCreator.FindDisciplinaTurma(id);
+        public DisciplinaTurma CreateDisciplinaTurma(DisciplinaTurma disciplinaTurma) => disciplinaTurmaMatrizCreator.CreateDisciplinaTurma(disciplinaTurma);
+        public DisciplinaTurma EditDisciplinaTurma(DisciplinaTurma disciplinaTurma) => disciplinaTurmaMatrizCreator.EditDisciplinaTurma(disciplinaTurma);
+        public bool DeleteDisciplinaTurma(int? id) => disciplinaTurmaMatrizCreator.DeleteDisciplinaTurma(id);
 
 
         public List<Endereco> EnderecoList() => enderecoMatrizCreator.EnderecoList();
