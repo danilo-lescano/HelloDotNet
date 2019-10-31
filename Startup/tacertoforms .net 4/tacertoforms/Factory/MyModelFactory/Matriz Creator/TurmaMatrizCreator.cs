@@ -5,7 +5,43 @@ using TaCertoForms.Contexts;
 
 namespace TaCertoForms.Factory{
     public class TurmaMatrizCreator : BaseCreator, IFactoryTurma{
+        
         public TurmaMatrizCreator(int IdMatriz, int IdPessoa) : base(IdMatriz, IdPessoa) { }
+        
+        public Turma CreateTurma(Turma turma){
+            Context db = new Context();
+            Pessoa pessoa = db.Pessoa.Find(IdPessoa);
+            Instituicao instituicao = db.Instituicao.Find(turma.IdInstituicao);
+            if (pessoa == null || instituicao == null) return null; //Caso seja uma requisição absurda
+            
+            if (instituicao.IdInstituicao == IdMatriz || (instituicao.IdMatriz != null && instituicao.IdMatriz == IdMatriz)){   
+                //Salvando a turma                
+                db.Turma.Add(turma);
+                db.SaveChanges();
+                db.Dispose();
+                return turma;
+            }
+            return null; 
+        }
+        public bool DeleteTurma(int? id){            
+            throw new System.NotImplementedException();
+        }
+
+        public Turma EditTurma(Turma turma){
+            //TODO Como será se após vinculado turma com aluno e disciplina, o usuário mudasse a turma?
+            Context db = new Context();
+            Pessoa pessoa = db.Pessoa.Find(IdPessoa);
+            Instituicao instituicao = db.Instituicao.Find(turma.IdInstituicao);
+            if (pessoa == null || instituicao == null) return null;
+
+            if (instituicao.IdInstituicao == IdMatriz || (instituicao.IdMatriz != null && instituicao.IdMatriz == IdMatriz)){   
+                db.Entry(turma).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();                
+                db.Dispose();
+                return turma;
+            }
+            return null; //Caso deu erro ao salvar 
+        }
 
         public Turma FindTurma(int? id){
             if (id == null) return null;
