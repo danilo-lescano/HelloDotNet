@@ -39,7 +39,7 @@ namespace TaCertoForms.Factory{
             List<Turma> turmaList = db.Turma.Where(t => idAuxList.Contains(t.IdInstituicao)).ToList();
             if(turmaList == null || turmaList.Count == 0) return null;
             idAuxList = new List<int>();
-            foreach(var i in turmaList) idAuxList.Add(t.IdTurma);
+            foreach(var t in turmaList) idAuxList.Add(t.IdTurma);
 
             List<DisciplinaTurma> disciplinaTurmaList = db.DisciplinaTurma.Where(dt => idAuxList.Contains(dt.IdTurma)).ToList();
             if(disciplinaTurmaList == null || disciplinaTurmaList.Count == 0) return null;
