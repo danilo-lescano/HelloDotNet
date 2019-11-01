@@ -11,7 +11,7 @@ namespace TaCertoForms.Models {
         public int IdTurmaDisciplinaAutor { get; set; }
         public DateTime DataInicio { get; set; }
         public DateTime DataFim { get; set; }
-        public string Nome { get; set; }
+        public string Titulo { get; set; }
         public int NumeroTentativas { get; set; }
         public bool IsAleatorio { get; set; }
         public bool IsProva { get; set; }
@@ -43,7 +43,7 @@ namespace TaCertoForms.Models {
                     IdTurmaDisciplinaAutor = this.IdTurmaDisciplinaAutor,
                     DataInicio = this.DataInicio,
                     DataFim = this.DataFim,
-                    Nome = this.Nome,
+                    Titulo = this.Titulo,
                     NumeroTentativas = this.NumeroTentativas,
                     IsAleatorio = this.IsAleatorio,
                     IsProva = this.IsProva
@@ -54,7 +54,7 @@ namespace TaCertoForms.Models {
                 this.IdTurmaDisciplinaAutor = value.IdTurmaDisciplinaAutor;
                 this.DataInicio = value.DataInicio;
                 this.DataFim = value.DataFim;
-                this.Nome = value.Nome;
+                this.Titulo = value.Titulo;
                 this.NumeroTentativas = value.NumeroTentativas;
                 this.IsAleatorio = value.IsAleatorio;
                 this.IsProva = value.IsProva;

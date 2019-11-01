@@ -266,6 +266,10 @@
     <Compile Include="Migrations\201911011436310_Atividade nome.designer.cs">
       <DependentUpon>201911011436310_Atividade nome.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201911011534000_Atividade nome titulo.cs" />
+    <Compile Include="Migrations\201911011534000_Atividade nome titulo.designer.cs">
+      <DependentUpon>201911011534000_Atividade nome titulo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DisciplinaTurma.cs" />
     <Compile Include="Context\Context.cs" />
@@ -3314,6 +3318,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201911011436310_Atividade nome.resx">
       <DependentUpon>201911011436310_Atividade nome.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911011534000_Atividade nome titulo.resx">
+      <DependentUpon>201911011534000_Atividade nome titulo.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
