@@ -1,7 +1,7 @@
 ﻿@model TaCertoForms.Models.Instituicao
 
 @{
-    ViewBag.Title = "Create";
+    
 }
 <div class="content-wrapper">
     <section class="content-header">
@@ -47,7 +47,7 @@
 
                     <div class="form-group col-xs-12 col-md-6">
                         @Html.Label("CNPJ")
-                        @Html.EditorFor(model => model.CNPJ, new { htmlAttributes = new { @class = "form-control cnpj", @required = "required" } })
+                        @Html.EditorFor(model => model.CNPJ, new { htmlAttributes = new { @class = "form-control cnpj", @required = "required"} })
                         @Html.ValidationMessageFor(model => model.CNPJ, "", new { @class = "text-danger" })
 
                     </div>
@@ -75,8 +75,9 @@
                         @Html.TextBox("CEPPrincipal", null, new { @class = "form-control cep", @id = "cep-principal", @required = "required" })
                     </div>
                     <div class="form-group col-xs-12 col-md-3">
-                        @Html.Label("País")
-                        @Html.TextBox("PaisPrincipal", null, new { @class = "form-control", @id = "pais-principal", @required = "required" })
+                        @Html.Label("País")                        
+                        <select class="paises">                            
+                        </select>
                     </div>
                     <div class="form-group col-xs-12 col-md-3">
                         @Html.Label("Logradouro")
@@ -100,7 +101,6 @@
                         new SelectList(new List<String>()),
                         "Estado",
                         new { @class = "form-control", @id = "estado-principal", @required = "required" })
-
                     </div>
                     <div class="form-group col-xs-12 col-md-3">
                         @Html.Label("Cidade")
@@ -166,13 +166,30 @@
 
 
 <script>
+
+    if (paises.length > 0) {
+        for (var i = 0; i < paises.length; i++){
+            var opt = document.createElement('option');
+            opt.value = i;
+            opt.innerHTML = i;
+            $('.paises').appendChild(opt);
+        }
+    }
+
+
     new dgCidadesEstados({estado: $('#estado-principal')[0], cidade: $('#cidade-principal')[0]});
     new dgCidadesEstados({estado: $('#estado-cobranca')[0],	cidade: $('#cidade-cobranca')[0]});
 
     $('.cep').inputmask("99.999-999");
     $('.cnpj').inputmask("99.999.999/9999-99");
     $('.telefone').inputmask("(99) 9999-9999");       
-   
+
+    $('.cnpj').on('blur', function () {
+        if (!validar_cnpj($(this).val())) {
+            $(this).val('');
+            alert('O CNPJ informado é inválido!');
+        }
+    });
     $('#form-instituicao input').on('change', function() {
         var selection_radio = $('input[name=EqualEnderecoCobranca]:checked', '#form-instituicao').val();                
         if (selection_radio == "True") {

@@ -10,24 +10,26 @@ using TaCertoForms.Controllers.Base;
 namespace TaCertoForms.Controllers{
     [SomenteLogado]
     public class TurmaController : ControladoraBase{
+        [Perfil(Perfil.Administrador)]
         public ActionResult Index(){
             List<Instituicao> list = CollectionMatriz.InstituicaoList();
             ViewBag.InstituicaoList = list;
             return View(CollectionMatriz.TurmaList());
-        }               
+        }
+        [Perfil(Perfil.Administrador)]
         public ActionResult Create(){
             List<Instituicao> list = CollectionMatriz.InstituicaoList();
             ViewBag.InstituicaoList = new SelectList(list, "IdInstituicao", "NomeFantasia");
             return View();
         }
-
+        [Perfil(Perfil.Administrador)]
         [HttpPost]
         public ActionResult Create(Turma turma){
             if (CollectionMatriz.CreateTurma(turma) != null)
                 return RedirectToAction("Index");
             return View(turma);
         }
-
+        [Perfil(Perfil.Administrador)]
         public ActionResult Edit(int? id){
             if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             Turma turma = CollectionMatriz.FindTurma(id);
@@ -37,14 +39,14 @@ namespace TaCertoForms.Controllers{
             ViewBag.InstituicaoList = new SelectList(list, "IdInstituicao", "NomeFantasia");
             return View(turma);
         }
-
+        [Perfil(Perfil.Administrador)]
         [HttpPost]
         public ActionResult Edit(Turma turma){            
             if(CollectionMatriz.EditTurma(turma) != null)
                 return RedirectToAction("Index");
             return View(turma);
         }
-
+        [Perfil(Perfil.Administrador)]
         public ActionResult Delete(int? id){
             if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             Turma turma = CollectionMatriz.FindTurma(id);
@@ -55,7 +57,7 @@ namespace TaCertoForms.Controllers{
 
             return View(turma);
         }
-
+        [Perfil(Perfil.Administrador)]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id) {
@@ -64,13 +66,14 @@ namespace TaCertoForms.Controllers{
         }
 
         //######################### AJAX (Turma Disciplina) #########################
+        [Perfil(Perfil.Administrador)]
         [HttpGet]
         public ActionResult AjaxTurmas(int IdInstituicao){
             List<Turma> turmas = db.Turma.Where(x => x.IdInstituicao == IdInstituicao).ToList();
             ViewBag.TurmasList = new SelectList(turmas, "IdTurma", "Serie");
             return View();
         }
-
+        [Perfil(Perfil.Administrador)]
         [HttpGet]
         public ActionResult AjaxTurmasDisciplinas(int IdAutor){
             List<ViewModelDisciplina> disciplinaTurma = new List<ViewModelDisciplina>();
@@ -86,8 +89,8 @@ namespace TaCertoForms.Controllers{
                 }
             }            
             return View(disciplinaTurma);
-        }        
-    
+        }
+        [Perfil(Perfil.Administrador)]
         [HttpPost]
         public void SalvarTurmaDisciplina(TurmaDisciplinaAutor turmaDisciplina){
             if (ModelState.IsValid){
@@ -95,6 +98,7 @@ namespace TaCertoForms.Controllers{
                 db.SaveChanges();                
             }            
         }
+        [Perfil(Perfil.Administrador)]
         [HttpPost]
         public void AjaxDesvincularTurmaDisciplina(int id){
             TurmaDisciplinaAutor tdp = db.TurmaDisciplinaAutor.Find(id);
@@ -103,6 +107,7 @@ namespace TaCertoForms.Controllers{
         }
         //######################### AJAX Alunos #########################
         //POST: Ajax
+        [Perfil(Perfil.Administrador)]
         [HttpPost]
         public void SalvarTurmaAluno(TurmaAluno turmaAluno){
             if (ModelState.IsValid){
@@ -110,7 +115,7 @@ namespace TaCertoForms.Controllers{
                 db.SaveChanges();
             }
         }
-
+        [Perfil(Perfil.Administrador)]
         [HttpGet]
         public ActionResult AjaxTurmasAlunos(int IdPessoa){            
             List<TurmaAluno> turmaAluno = db.TurmaAluno.Where(x => x.IdPessoa == IdPessoa).ToList();
@@ -124,16 +129,12 @@ namespace TaCertoForms.Controllers{
             return View(aluno);
         }
         //Desvincular turma e aluno
+        [Perfil(Perfil.Administrador)]
         [HttpPost]
         public void AjaxDesvincularTurmaAluno(int id){
             TurmaAluno ta = db.TurmaAluno.Find(id);
             db.TurmaAluno.Remove(ta);
             db.SaveChanges();
-        }
-        protected override void Dispose(bool disposing){
-            if (disposing)
-                db.Dispose();
-            base.Dispose(disposing);
-        }
+        }        
     }
 }

@@ -217,6 +217,12 @@
 
     $('.cep').inputmask("99.999-999");
     $('.cnpj').inputmask("99.999.999/9999-99");
+    $('.cnpj').on('blur', function () {
+        if (!validar_cnpj($(this).val())) {
+            $(this).val('');
+            alert('O CNPJ informado é inválido!');
+        }
+    });
     $('.telefone').inputmask("(99) 9999-9999");
 
     $('#form-instituicao input').on('change', function () {
@@ -302,7 +308,7 @@
                     alert('Falha ao deletar imagem. Por favor, entre em contato com o administrador do sistema.');
                 }
             },
-            error: function () {
+            error: function () {                
                 alert('Ocorreu algum erro de conexão. Por favor, tente novamente mais tarde');
             }
         });    
@@ -333,8 +339,8 @@
                         }
                     });               
             } else {
-                alert("This browser doesn't support HTML5 file uploads!");
-              }
+                alert("O seu browser não suporta o upload de arquivos. Por favor, utilize outro navegador.");
+            }
          }
     });
 </script>

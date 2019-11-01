@@ -9,7 +9,8 @@ using TaCertoForms.Controllers.Base;
 namespace TaCertoForms.Controllers{
     [SomenteLogado]
     public class QuestaoController : ControladoraBase
-    {        
+    {
+        [Perfil(Perfil.Autor)]
         [HttpGet]
         public JsonResult Index(int? idAtividade, int? idTipoQuestao){
             List<Questao> questao = new List<Questao>();            
@@ -21,6 +22,7 @@ namespace TaCertoForms.Controllers{
                 questao = db.Questao.Where(q => q.IdAtividade == idAtividade).ToList();                
             return Json(questao, JsonRequestBehavior.AllowGet);
         }
+        [Perfil(Perfil.Autor)]
         [HttpGet]
         public JsonResult Edit(int? id){
             Questao questao;
@@ -29,6 +31,7 @@ namespace TaCertoForms.Controllers{
             questao = db.Questao.Find(id);
             return Json(questao, JsonRequestBehavior.AllowGet);
         }
+        [Perfil(Perfil.Autor)]
         [HttpPost]
         public JsonResult Create(Questao questao){
             if(questao.IdQuestao == 0){
@@ -41,6 +44,7 @@ namespace TaCertoForms.Controllers{
             }
             return Json(questao);
         }
+        [Perfil(Perfil.Autor)]
         [HttpPost]
         public bool Delete(int? id){
             if(id == null)

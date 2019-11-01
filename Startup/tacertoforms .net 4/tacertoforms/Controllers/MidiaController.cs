@@ -1,16 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Web;
 using TaCertoForms.Attributes;
 using TaCertoForms.Models;
-using TaCertoForms.Contexts;
 using TaCertoForms.Controllers.Base;
 using System.Data;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
-using System.Threading.Tasks;
 
 namespace TaCertoForms.Controllers{
     [SomenteLogado]
@@ -28,12 +25,14 @@ namespace TaCertoForms.Controllers{
         }
 
         public JsonResult Index(int IdOrigem, string Tabela){            
-            return Json(db.Midia.Where(x => x.IdOrigem == IdOrigem && x.Tabela == Tabela).ToList(), JsonRequestBehavior.AllowGet);
+            return Json(CollectionMatriz.FindMidia(IdOrigem, Tabela), JsonRequestBehavior.AllowGet);
         }
         
         [HttpPost]
-        public JsonResult Save(int id, string tabela) {            
-            try{                   
+        public JsonResult Save(int id, string tabela) {                        
+            try{
+                if (!CollectionMatriz.HasPermissionMidia(id, tabela))
+                    throw new UnauthorizedAccessException();
                 List<Midia> arquivos = new List<Midia>();                
                 for (int i = 0; i < Request.Files.Count; i++){
                     var file = Request.Files[i];
@@ -54,35 +53,23 @@ namespace TaCertoForms.Controllers{
                         if (!Directory.Exists(caminho))
                             Directory.CreateDirectory(caminho);
                         file.SaveAs(path);
-                        db.Midia.Add(fileDetail);
-                        db.SaveChanges();
+                        CollectionMatriz.CreateMidia(id, tabela, fileDetail);                        
                     }
                     if (tabela == "Instituicao" || tabela == "Pessoa" || tabela == "Questao"){ //Caso tenha alguma mídia já salva
-                        Midia DeleteMidia = db.Midia.Where(x => x.IdOrigem == id && x.Tabela == tabela && x.IdMidia != hash).FirstOrDefault();
-                        if (DeleteMidia != null)
+                        Midia DeleteMidia = CollectionMatriz.FindMidia(id, tabela);
+                        if (DeleteMidia != null && DeleteMidia.IdMidia != hash)
                             Delete(DeleteMidia.IdMidia);
                     }
                 }                              
-                return Json(arquivos);
+                return Json(arquivos);                
             }
             catch (Exception){
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;
                 return Json("Erro no upload");
             }
         }
-
-        public bool Delete(Guid id){
-            Midia midia = db.Midia.Find(id);
-            if (midia != null){
-               //Deletando arquivo
-                var path = Path.Combine(System.Web.HttpContext.Current.Server.MapPath("~/Content/images/upload/" + midia.Tabela + '/'), midia.IdMidia + midia.Extensao);
-                if (System.IO.File.Exists(path))
-                    System.IO.File.Delete(path);
-                db.Midia.Remove(midia);
-                db.SaveChanges();
-                return true;
-            }
-            return false;
+        public bool Delete(Guid id) {            
+            return CollectionMatriz.DeleteMidia(id);                
         }
     }
 }

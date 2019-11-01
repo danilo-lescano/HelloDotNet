@@ -6,7 +6,7 @@ namespace TaCertoForms.Factory{
     IFactoryEndereco,
     IFactoryInstituicao,
     //IFactoryLogLogin,
-    //IFactoryMidia,
+    IFactoryMidia,
     IFactoryPessoa,
     IFactoryQuestao,
     //IFactoryTipoQuestao,

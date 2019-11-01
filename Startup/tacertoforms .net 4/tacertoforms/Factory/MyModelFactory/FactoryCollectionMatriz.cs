@@ -1,5 +1,5 @@
+using System;
 using System.Collections.Generic;
-using System.Runtime.Remoting.Contexts;
 using TaCertoForms.Models;
 
 namespace TaCertoForms.Factory{
@@ -11,6 +11,7 @@ namespace TaCertoForms.Factory{
         DisciplinaTurmaMatrizCreator disciplinaTurmaMatrizCreator { get; set; }
         EnderecoMatrizCreator enderecoMatrizCreator { get; set; }
         InstituicaoMatrizCreator instituicaoMatrizCreator { get; set; }
+        MidiaMatrizCreator midiaMatrizCreator { get; set; }
         PessoaMatrizCreator pessoaMatrizCreator { get; set; }
         QuestaoMatrizCreator questaoMatrizCreator { get; set; }
         TurmaMatrizCreator turmaMatrizCreator { get; set; }
@@ -21,6 +22,7 @@ namespace TaCertoForms.Factory{
             disciplinaTurmaMatrizCreator = new DisciplinaTurmaMatrizCreator(IdMatriz, IdPessoa);
             enderecoMatrizCreator = new EnderecoMatrizCreator(IdMatriz, IdPessoa);
             instituicaoMatrizCreator = new InstituicaoMatrizCreator(IdMatriz, IdPessoa);
+            midiaMatrizCreator = new MidiaMatrizCreator(IdMatriz, IdPessoa);
             pessoaMatrizCreator = new PessoaMatrizCreator(IdMatriz, IdPessoa);
             questaoMatrizCreator = new QuestaoMatrizCreator(IdMatriz, IdPessoa);
             turmaMatrizCreator = new TurmaMatrizCreator(IdMatriz, IdPessoa);
@@ -57,6 +59,14 @@ namespace TaCertoForms.Factory{
         public Instituicao EditInstituicao(Instituicao atividade) => instituicaoMatrizCreator.EditInstituicao(atividade);
         public bool DeleteInstituicao(int? id) => instituicaoMatrizCreator.DeleteInstituicao(id);
 
+
+        public Midia CreateMidia(int? IdOrigem, string Tabela, Midia midia) => midiaMatrizCreator.CreateMidia(IdOrigem, Tabela, midia);
+        public bool DeleteMidia(Guid? id) => midiaMatrizCreator.DeleteMidia(id);
+        public Midia EditMidia(int? IdOrigem, string Tabela, Midia midia) => midiaMatrizCreator.EditMidia(IdOrigem, Tabela, midia);
+        public Midia FindMidia(int? IdOrigem, string Tabela) => midiaMatrizCreator.FindMidia(IdOrigem, Tabela);
+        public bool HasPermissionMidia(int? IdOrigem, string Tabela) => midiaMatrizCreator.HasPermissionMidia(IdOrigem, Tabela);
+        public List<Midia> MidiaList(int? IdOrigem, string Tabela) => midiaMatrizCreator.MidiaList(IdOrigem, Tabela);
+        
         public List<Pessoa> PessoaList() => pessoaMatrizCreator.PessoaList();
         public Pessoa FindPessoa(int? id) => pessoaMatrizCreator.FindPessoa(id);
         public Pessoa CreatePessoa(Pessoa pessoa) => pessoaMatrizCreator.CreatePessoa(pessoa);

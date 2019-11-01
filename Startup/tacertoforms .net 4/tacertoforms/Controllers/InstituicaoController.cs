@@ -1,24 +1,22 @@
-﻿using System.Data;
-using System.Linq;
-using System.Net;
-using System.Web;
+﻿using System.Net;
 using System.Web.Mvc;
 using TaCertoForms.Models;
 using TaCertoForms.Attributes;
-using TaCertoForms.Contexts;
 using TaCertoForms.Controllers.Base;
 
 namespace TaCertoForms.Controllers{
     [SomenteLogado]
     public class InstituicaoController : ControladoraBase {
-        
+        [Perfil(Perfil.Administrador)]
         public ActionResult Index() {            
             return View(CollectionMatriz.InstituicaoList());
         }
+        [Perfil(Perfil.Administrador)]
         public ActionResult Create() {
             return View();
         }
 
+        [Perfil(Perfil.Administrador)]
         [HttpPost]
         public ActionResult Create(ViewModelInstituicao viewModel) {
             //Todo validar se algum field veio null
@@ -41,7 +39,7 @@ namespace TaCertoForms.Controllers{
             CollectionMatriz.CreateInstituicao(instituicao);
             return RedirectToAction("Index");
         }
-
+        [Perfil(Perfil.Administrador)]
         public ActionResult Edit(int? id) {
             if (id == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -58,12 +56,11 @@ namespace TaCertoForms.Controllers{
                 enderecoCobranca = CollectionMatriz.FindEndereco(instituicao.IdEnderecoCobranca);
             ViewBag.enderecoCobranca = enderecoCobranca;
             ViewBag.enderecoPrincipal = enderecoPrincipal;
-
-            vmInstituicao.Midia = db.Midia.Where(x => x.IdOrigem == id && x.Tabela == "Instituicao").FirstOrDefault<Midia>();
-                        
+            
+            vmInstituicao.Midia = CollectionMatriz.FindMidia(id, "Instituicao");
             return View(vmInstituicao);
         }
-
+        [Perfil(Perfil.Administrador)]
         [HttpPost]
         public ActionResult Edit(ViewModelInstituicao viewModel) {
             Instituicao instituicao = viewModel.instituicao;
@@ -92,7 +89,7 @@ namespace TaCertoForms.Controllers{
 
             return RedirectToAction("Index");
         }
-
+        [Perfil(Perfil.Administrador)]
         public ActionResult Delete(int? id) {
             if (id == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -109,18 +106,12 @@ namespace TaCertoForms.Controllers{
             ViewBag.enderecoPrincipal = enderecoPrincipal;
             return View(instituicao);
         }
-
+        [Perfil(Perfil.Administrador)]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id) {
             CollectionMatriz.DeleteInstituicao(id);
             return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing) {
-            if (disposing)
-                db.Dispose();
-            base.Dispose(disposing);
-        }
+        }                
     }
 }

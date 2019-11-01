@@ -188,8 +188,8 @@
             url: '@Url.Action("Index", "Midia")' + '?IdOrigem=' + IdQuestao +'&Tabela=Questao',
             cache: false,
             dataType: 'json',            
-            success: function (result) {
-                midiaCreateSingleImage($('#' + t + 'ImagemField'), result[0]);                
+            success: function (result) {                
+                midiaCreateSingleImage($('#' + t + 'ImagemField'), result);                
             },
             error: function () {
                 return "erro";
@@ -197,6 +197,8 @@
             }
         });        
     }
+    //Teste de Mídia 
+    // Professor João, id questão 13
     async function AjaxCreateMidia(IdQuestao) {
         return $.ajax({
             url: '@Url.Action("Save", "Midia")',
@@ -298,7 +300,7 @@
                 '<a class="btn btn-danger btn-xs" onclick="DeletQuestao(this, ' + questao.IdQuestao + ', \'' + tabela + '\')"><i class="fa fa-remove"></i></a>'
             ]).draw(false);
             LabelNumAdd(tabela);
-            $('#' + tabela + 'ImagemField').html("");
+            $('#' + tabela + 'ImagemField').html("");            
         }
         else{
             AjaxCreate(questao.IdAtividade, questao.IdQuestao, questao.IdTipoQuestao, questao.Titulo, questao.Enunciado, questao.PesoNota,  questao.JsonQuestao);
@@ -319,7 +321,7 @@
                 .data(rData)
                 .draw();
         }
-        limpaformcache(tabela);
+        limpaformcache(tabela);        
     }
     async function EditQuestao(el, id, t){
         aux_edit_el[t] = el;
@@ -401,8 +403,8 @@
         document.getElementById(t+"Enunciado").value = '';
         document.getElementById(t+"PesoNota").value = 1;
         if(t === "tabela-de-associacao"){ //TODO bug palavras n sendo retiradas completamente
-            $('#tabela-de-associacaoCertas').val(null).trigger('change');
-            $('#tabela-de-associacaoErradas').val(null).trigger('change');
+            $('#' + t + 'Certas').val(null).trigger('change');
+            $('#' + t + 'Erradas').val(null).trigger('change');
         }
         else if (t === "tabela-de-certo-errado") {
             $('#'+t+'Resposta').val("True");
@@ -413,6 +415,7 @@
         else if (t === "tabela-de-lacuna") {
             CL.LacunaReset();
         }
+        $('.div-image').html('');
     }
     function povoaform(t, q){
         document.getElementById(t+"IdQuestao").value = q.IdQuestao;
@@ -420,7 +423,8 @@
         document.getElementById(t+"Enunciado").value = q.Enunciado;
         document.getElementById(t + "PesoNota").value = q.PesoNota;        
         q.JsonQuestao = JSON.parse(q.JsonQuestao);
-        if(t === "tabela-de-associacao"){
+        if (t === "tabela-de-associacao") {
+            //TODO arrumar bug editar 2x povoa questoes certas e erradas novamente. Verificar se já foi povoado
             for(var i = 0; i < q.JsonQuestao.certas.length; i++){
                 $('#' + t + 'Certas').append(
                     new Option(q.JsonQuestao.certas[i], q.JsonQuestao.certas[i], false, true)

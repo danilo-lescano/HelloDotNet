@@ -205,6 +205,7 @@
     <Compile Include="Controllers\TurmaController.cs" />
     <Compile Include="Factory\MyModelFactory\Base\BaseCreator.cs" />
     <Compile Include="Factory\MyModelFactory\FactoryCollectionMatriz.cs" />
+    <Compile Include="Factory\MyModelFactory\FactoryCollectionProfessor.cs" />
     <Compile Include="Factory\MyModelFactory\Interface Creators\IFactoryAtividade.cs" />
     <Compile Include="Factory\MyModelFactory\Interface Creators\IFactoryCollection.cs" />
     <Compile Include="Factory\MyModelFactory\Interface Creators\IFactoryDisciplina.cs" />
@@ -224,9 +225,19 @@
     <Compile Include="Factory\MyModelFactory\Matriz Creator\EnderecoMatrizCreator.cs" />
     <Compile Include="Factory\MyModelFactory\Matriz Creator\InstituicaoMatrizCreator.cs" />
     <Compile Include="Factory\MyModelFactory\Matriz Creator\DisciplinaMatrizCreator.cs" />
+    <Compile Include="Factory\MyModelFactory\Matriz Creator\MidiaMatrizCreator.cs" />
     <Compile Include="Factory\MyModelFactory\Matriz Creator\PessoaMatrizCreator.cs" />
     <Compile Include="Factory\MyModelFactory\Matriz Creator\QuestaoMatrizCreator.cs" />
     <Compile Include="Factory\MyModelFactory\Matriz Creator\TurmaMatrizCreator.cs" />
+    <Compile Include="Factory\MyModelFactory\Professor Creator\AtividadeProfessorCreator.cs" />
+    <Compile Include="Factory\MyModelFactory\Professor Creator\DisciplinaProfessorCreator.cs" />
+    <Compile Include="Factory\MyModelFactory\Professor Creator\DisciplinaTurmaProfessorCreator.cs" />
+    <Compile Include="Factory\MyModelFactory\Professor Creator\EnderecoProfessorCreator.cs" />
+    <Compile Include="Factory\MyModelFactory\Professor Creator\InstituicaoProfessorCreator.cs" />
+    <Compile Include="Factory\MyModelFactory\Professor Creator\MidiaProfessorCreator.cs" />
+    <Compile Include="Factory\MyModelFactory\Professor Creator\PessoaProfessorCreator.cs" />
+    <Compile Include="Factory\MyModelFactory\Professor Creator\QuestaoProfessorCreator.cs" />
+    <Compile Include="Factory\MyModelFactory\Professor Creator\TurmaProfessorCreator.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

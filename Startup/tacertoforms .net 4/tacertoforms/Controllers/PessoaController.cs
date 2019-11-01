@@ -1,8 +1,5 @@
 using System.Collections.Generic;
-using System.Data;
-using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using TaCertoForms.Models;
 using TaCertoForms.Attributes;
@@ -11,6 +8,7 @@ using TaCertoForms.Controllers.Base;
 namespace TaCertoForms.Controllers{
     [SomenteLogado]
     public class PessoaController : ControladoraBase{
+        [Perfil(Perfil.Administrador)]
         public ActionResult Index(){
             List<ViewModelPessoa> pessoas = new List<ViewModelPessoa>();
             foreach (var pessoa in CollectionMatriz.PessoaList()){
@@ -24,7 +22,7 @@ namespace TaCertoForms.Controllers{
             }
             return View(pessoas);
         }
-
+        [Perfil(Perfil.Administrador)]
         public ActionResult Create(){
             List<Instituicao> list = CollectionMatriz.InstituicaoList();
             if(list == null)
@@ -32,7 +30,7 @@ namespace TaCertoForms.Controllers{
             ViewBag.InstituicaoList = new SelectList(list, "IdInstituicao", "NomeFantasia");
             return View();
         }
-
+        [Perfil(Perfil.Administrador)]
         [HttpPost]
         public ActionResult Create(Pessoa pessoa){
             pessoa = CollectionMatriz.CreatePessoa(pessoa);
@@ -51,7 +49,7 @@ namespace TaCertoForms.Controllers{
             if (pessoa == null)
                 return HttpNotFound();
             
-            ViewBag.Midia = db.Midia.Where(x => x.IdOrigem == id && x.Tabela == "Pessoa").FirstOrDefault<Midia>();  
+            ViewBag.Midia = CollectionMatriz.FindMidia(id, "Pessoa");  
             return View(pessoa);
         }
 
@@ -61,25 +59,19 @@ namespace TaCertoForms.Controllers{
                 return RedirectToAction("Index");
             return View(pessoa);
         }
-
+        [Perfil(Perfil.Administrador)]
         public ActionResult Delete(int? id){
             Pessoa pessoa = CollectionMatriz.FindPessoa(id);
             if (pessoa == null)
                 return HttpNotFound();
             return View(pessoa);
         }
-
+        [Perfil(Perfil.Administrador)]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id){
             CollectionMatriz.DeletePessoa(id);
             return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing){
-            if (disposing)
-                db.Dispose();
-            base.Dispose(disposing);
         }
     }
 }
