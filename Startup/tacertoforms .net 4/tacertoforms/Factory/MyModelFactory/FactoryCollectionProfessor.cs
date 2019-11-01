@@ -2,11 +2,9 @@ using System;
 using System.Collections.Generic;
 using TaCertoForms.Models;
 
-namespace TaCertoForms.Factory
-{
+namespace TaCertoForms.Factory{
     //CLASSE FactoryCollectionProfessor - Responsavel pelas regras de negocio de seleção do banco dedos. Essa classe pega todos os modelos relacionados a Professor de requisição atual
-    public class FactoryCollectionProfessor : IFactoryCollection
-    {
+    public class FactoryCollectionProfessor : IFactoryCollection{
         AtividadeProfessorCreator atividadeProfessorCreator { get; set; }
         DisciplinaProfessorCreator disciplinaProfessorCreator { get; set; }
         DisciplinaTurmaProfessorCreator disciplinaTurmaProfessorCreator { get; set; }
@@ -20,13 +18,13 @@ namespace TaCertoForms.Factory
         public FactoryCollectionProfessor(int IdProfessor, int IdPessoa){
             atividadeProfessorCreator = new AtividadeProfessorCreator(IdProfessor, IdPessoa);
             disciplinaProfessorCreator = new DisciplinaProfessorCreator(IdProfessor, IdPessoa);
+            disciplinaTurmaProfessorCreator = new DisciplinaTurmaProfessorCreator(IdProfessor, IdPessoa);
             enderecoProfessorCreator = new EnderecoProfessorCreator(IdProfessor, IdPessoa);
             instituicaoProfessorCreator = new InstituicaoProfessorCreator(IdProfessor, IdPessoa);
             midiaProfessorCreator = new MidiaProfessorCreator(IdProfessor, IdPessoa);
             pessoaProfessorCreator = new PessoaProfessorCreator(IdProfessor, IdPessoa);
             questaoProfessorCreator = new QuestaoProfessorCreator(IdProfessor, IdPessoa);
             turmaProfessorCreator = new TurmaProfessorCreator(IdProfessor, IdPessoa);
-            disciplinaTurmaProfessorCreator = new DisciplinaTurmaProfessorCreator(IdProfessor, IdPessoa);
         }
 
         public List<Atividade> AtividadeList() => atividadeProfessorCreator.AtividadeList();
