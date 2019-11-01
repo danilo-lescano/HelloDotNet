@@ -32,8 +32,8 @@ namespace TaCertoForms.Factory{
             Pessoa pessoa = db.Pessoa.Find(IdPessoa);
             Instituicao instituicao = db.Instituicao.Find(pessoa.IdInstituicao);
             if(pessoa == null || instituicao == null) return null;
-            
-            List<DisciplinaTurma> disciplinaTurmas = db.DisciplinaTurma.Where(x => x.IdMatriz == instituicao.IdMatriz).ToList();
+
+            List<DisciplinaTurma> disciplinaTurmas = new List<DisciplinaTurma>();//db.DisciplinaTurma.Where(x => x.IdMatriz == instituicao.IdMatriz).ToList();
             db.Dispose();
             return disciplinaTurmas;
         }

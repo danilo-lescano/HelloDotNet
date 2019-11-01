@@ -8,9 +8,9 @@ namespace TaCertoForms.Factory{
         public DisciplinaMatrizCreator(int IdMatriz, int IdPessoa) : base(IdMatriz, IdPessoa) { }
 
         public Disciplina FindDisciplina(int? id){
-            if(id == null) return false;
+            if(id == null) return null;
             Context db = new Context();
-            Disciplina disciplina = db.Disciplina.Where(d => d.IdMatriz = IdMatriz && d.IdDisciplina == id);
+            Disciplina disciplina = new Disciplina();//db.Disciplina.Where(d => d.IdMatriz = IdMatriz && d.IdDisciplina == id);
             db.Dispose();
             return disciplina;   
         }
@@ -25,7 +25,7 @@ namespace TaCertoForms.Factory{
         public Disciplina CreateDisciplina(Disciplina disciplina){
             Context db = new Context();
             disciplina.IdMatriz = IdMatriz;
-            db.Disciplina.Add(db);
+            db.Disciplina.Add(disciplina);
             db.SaveChanges();
             db.Dispose();
             return disciplina;
