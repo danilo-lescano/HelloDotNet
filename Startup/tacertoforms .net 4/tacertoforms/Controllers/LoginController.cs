@@ -31,7 +31,7 @@ namespace TaCertoForms.Controllers{
                 Session["NomeUsuario"] = pessoa.Nome;
                 Session["IdInstituicao"] = pessoa.IdInstituicao;
                 Session["NomeInstituicao"] = instituicao.NomeFantasia;
-                Session["Perfil"] = pessoa.Perfil;
+                Session["Perfil"] = pessoa.Perfil;                
 
                 Midia midia = db.Midia.Where(x => x.IdOrigem == pessoa.IdPessoa && x.Tabela == "Pessoa").FirstOrDefault();
                 if(midia != null) { 

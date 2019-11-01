@@ -10,12 +10,50 @@ namespace TaCertoForms.Factory{
 
         public List<Atividade> AtividadeList()
         {
-            throw new System.NotImplementedException();
+            Context db = new Context();
+            List<int> idAuxList;
+
+            List<Instituicao> instituicaoList = db.Instituicao.Where(i => i.IdInstituicao == IdMatriz || (i.IdMatriz != null && i.IdMatriz == IdMatriz)).ToList();
+            if (instituicaoList == null || instituicaoList.Count == 0) return null;
+            idAuxList = new List<int>();
+            foreach (var i in instituicaoList) idAuxList.Add(i.IdInstituicao);
+
+            List<Pessoa> pessoaList = db.Pessoa.Where(p => idAuxList.Contains(p.IdInstituicao)).ToList();
+            if (pessoaList == null || pessoaList.Count == 0) return null;
+            idAuxList = new List<int>();
+            foreach (var p in pessoaList) idAuxList.Add(p.IdPessoa);
+
+            List<TurmaDisciplinaAutor> turmaDisciplinaAutorList = db.TurmaDisciplinaAutor.Where(tda => idAuxList.Contains(tda.IdAutor)).ToList();
+            if (turmaDisciplinaAutorList == null || turmaDisciplinaAutorList.Count == 0) return null;
+            idAuxList = new List<int>();
+            foreach (var tda in turmaDisciplinaAutorList) idAuxList.Add(tda.IdTurmaDisciplinaAutor);
+
+            List<Atividade> atividadeList = db.Atividade.Where(a => idAuxList.Contains(a.IdTurmaDisciplinaAutor)).ToList();
+            if (atividadeList == null || atividadeList.Count == 0) return null;
+
+            db.Dispose();
+            return atividadeList;
         }
 
         public Atividade CreateAtividade(Atividade atividade)
         {
-            throw new System.NotImplementedException();
+            Context db = new Context();
+            Pessoa pessoa = db.Pessoa.Find(IdPessoa);
+            if (pessoa == null) return null;
+                        
+            List<int> idAuxList = new List<int>();
+            List<TurmaDisciplinaAutor> tda = db.TurmaDisciplinaAutor.Where(x => x.IdAutor == pessoa.IdPessoa).ToList();
+            if (tda == null || tda.Count == 0) return null;
+            foreach (var t in tda) idAuxList.Add(t.IdTurmaDisciplinaAutor);
+
+            if (!idAuxList.Contains(atividade.IdTurmaDisciplinaAutor)) return null;
+
+
+
+
+            db.Dispose();
+
+            return atividade;
         }
 
         public bool DeleteAtividade(int? id)

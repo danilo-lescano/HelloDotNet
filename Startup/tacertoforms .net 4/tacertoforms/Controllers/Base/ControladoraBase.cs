@@ -6,21 +6,26 @@ using TaCertoForms.Contexts;
 using TaCertoForms.Factory;
 using TaCertoForms.Models;
 
+
 namespace TaCertoForms.Controllers.Base{
     public class ControladoraBase : Controller{
         protected Context db = new Context();
 
-        FactoryCollectionMatriz collectionMatriz;
-        protected FactoryCollectionMatriz CollectionMatriz {
-            get{
-                if(collectionMatriz == null)
-                    return collectionMatriz = new FactoryCollectionMatriz((int)Session["IdMatriz"], (int)Session["IdPessoa"]);
-                else
-                    return collectionMatriz;
+        IFactoryCollection collection;
+        protected IFactoryCollection Collection {
+            get {
+                if (collection == null)
+                {
+                    if (Session["Perfil"].Equals(Perfil.Autor))                    
+                        return collection = new FactoryCollectionProfessor((int)Session["IdMatriz"], (int)Session["IdPessoa"]);
+                    else if (Session["Perfil"].Equals(Perfil.Administrador))                    
+                        return collection = new FactoryCollectionMatriz((int)Session["IdMatriz"], (int)Session["IdPessoa"]);                    
+                } else {
+                    return collection;
+                }
+                return null;
             }
         }
-
-
         protected List<Pessoa> GetMeusAlunos(){
             Context db = new Context();
             List<TurmaAluno> turmaAlunos = new List<TurmaAluno>();

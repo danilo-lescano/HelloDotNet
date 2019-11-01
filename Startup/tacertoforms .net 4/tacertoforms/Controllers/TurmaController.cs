@@ -12,47 +12,47 @@ namespace TaCertoForms.Controllers{
     public class TurmaController : ControladoraBase{
         [Perfil(Perfil.Administrador)]
         public ActionResult Index(){
-            List<Instituicao> list = CollectionMatriz.InstituicaoList();
+            List<Instituicao> list = Collection.InstituicaoList();
             ViewBag.InstituicaoList = list;
-            return View(CollectionMatriz.TurmaList());
+            return View(Collection.TurmaList());
         }
         [Perfil(Perfil.Administrador)]
         public ActionResult Create(){
-            List<Instituicao> list = CollectionMatriz.InstituicaoList();
+            List<Instituicao> list = Collection.InstituicaoList();
             ViewBag.InstituicaoList = new SelectList(list, "IdInstituicao", "NomeFantasia");
             return View();
         }
         [Perfil(Perfil.Administrador)]
         [HttpPost]
         public ActionResult Create(Turma turma){
-            if (CollectionMatriz.CreateTurma(turma) != null)
+            if (Collection.CreateTurma(turma) != null)
                 return RedirectToAction("Index");
             return View(turma);
         }
         [Perfil(Perfil.Administrador)]
         public ActionResult Edit(int? id){
             if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            Turma turma = CollectionMatriz.FindTurma(id);
+            Turma turma = Collection.FindTurma(id);
             if (turma == null) return new HttpStatusCodeResult(HttpStatusCode.NotFound);
 
-            List<Instituicao> list = CollectionMatriz.InstituicaoList();
+            List<Instituicao> list = Collection.InstituicaoList();
             ViewBag.InstituicaoList = new SelectList(list, "IdInstituicao", "NomeFantasia");
             return View(turma);
         }
         [Perfil(Perfil.Administrador)]
         [HttpPost]
         public ActionResult Edit(Turma turma){            
-            if(CollectionMatriz.EditTurma(turma) != null)
+            if(Collection.EditTurma(turma) != null)
                 return RedirectToAction("Index");
             return View(turma);
         }
         [Perfil(Perfil.Administrador)]
         public ActionResult Delete(int? id){
             if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            Turma turma = CollectionMatriz.FindTurma(id);
+            Turma turma = Collection.FindTurma(id);
             if (turma == null) return new HttpStatusCodeResult(HttpStatusCode.NotFound);
 
-            Instituicao instituicao = CollectionMatriz.FindInstituicao(turma.IdInstituicao);
+            Instituicao instituicao = Collection.FindInstituicao(turma.IdInstituicao);
             ViewBag.NomeFantasia = instituicao.NomeFantasia;
 
             return View(turma);
@@ -61,7 +61,7 @@ namespace TaCertoForms.Controllers{
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id) {
-            CollectionMatriz.DeleteTurma(id);            
+            Collection.DeleteTurma(id);            
             return RedirectToAction("Index");
         }
 

@@ -13,7 +13,7 @@ namespace TaCertoForms.Controllers{
     public class AtividadeController : ControladoraBase {
         [Perfil(Perfil.Autor)]
         public ActionResult Index(){
-            List<Atividade> atividades = CollectionMatriz.AtividadeList();
+            List<Atividade> atividades = Collection.AtividadeList();
             List<ViewModelAtividade> vmAtividades = new List<ViewModelAtividade>();
             foreach (var a in atividades){
                 ViewModelAtividade vma = new ViewModelAtividade();
@@ -25,21 +25,19 @@ namespace TaCertoForms.Controllers{
         }
 
         [Perfil(Perfil.Autor)]
-        public ActionResult Create(){
-            List<Instituicao> list = db.Instituicao.ToList();
-            ViewBag.InstituicaoList = new SelectList(list, "IdInstituicao", "NomeFantasia");
+        public ActionResult Create() {            
             return View();
         }
 
         [HttpPost]
         [Perfil(Perfil.Autor)]
         public ActionResult Create(ViewModelAtividade vmAtividade){
-            Atividade atividade = vmAtividade.Atividade;
-            int IdUsuario = (int)Session["IdPessoa"];
-            TurmaDisciplinaAutor tda_aux = db.TurmaDisciplinaAutor.Where(tda => tda.IdAutor == IdUsuario && tda.IdDisciplinaTurma == vmAtividade.IdDisciplinaTurma).FirstOrDefault();
-            atividade.IdTurmaDisciplinaAutor = tda_aux.IdTurmaDisciplinaAutor;
-            db.Atividade.Add(atividade);
-            db.SaveChanges();
+            Atividade atividade = vmAtividade.Atividade;            
+            TurmaDisciplinaAutor tda_aux = db.TurmaDisciplinaAutor.Where(tda => tda.IdAutor == (int)Session["IdPessoa"] && tda.IdDisciplinaTurma == vmAtividade.IdDisciplinaTurma).FirstOrDefault();
+            atividade.IdTurmaDisciplinaAutor = tda_aux.IdTurmaDisciplinaAutor;           
+
+            Collection.CreateAtividade(atividade);
+
             foreach (Questao q in vmAtividade.Questoes){
                 q.IdAtividade = atividade.IdAtividade;
                 db.Questao.Add(q);
@@ -105,13 +103,8 @@ namespace TaCertoForms.Controllers{
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-
-        protected override void Dispose(bool disposing){
-            if (disposing)
-                db.Dispose();
-            base.Dispose(disposing);
-        }
-                //Dado um IdTurmaDisciplinaAutor (tda_id) devolve nome de disciplina e turma respectivamente
+        
+        //Dado um IdTurmaDisciplinaAutor (tda_id) devolve nome de disciplina e turma respectivamente
         private (string, string) GetNomeTurmaNomeDisciplina(int tda_id){
             Context db = new Context();
             TurmaDisciplinaAutor tda = db.TurmaDisciplinaAutor.Find(tda_id);

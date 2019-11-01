@@ -9,7 +9,7 @@ namespace TaCertoForms.Controllers{
     public class InstituicaoController : ControladoraBase {
         [Perfil(Perfil.Administrador)]
         public ActionResult Index() {            
-            return View(CollectionMatriz.InstituicaoList());
+            return View(Collection.InstituicaoList());
         }
         [Perfil(Perfil.Administrador)]
         public ActionResult Create() {
@@ -21,13 +21,13 @@ namespace TaCertoForms.Controllers{
         public ActionResult Create(ViewModelInstituicao viewModel) {
             //Todo validar se algum field veio null
             Endereco principal = viewModel.enderecoPrincipal;
-            CollectionMatriz.CreateEndereco(principal);
+            Collection.CreateEndereco(principal);
             //Capturando o id do endereço principal que foi inserido no banco
             int IdEnderecoPrincipal = principal.IdEndereco;
             int IdEnderecoCobranca;
             Endereco cobranca = viewModel.enderecoCobranca;
             if (cobranca != null) {
-                CollectionMatriz.CreateEndereco(cobranca);
+                Collection.CreateEndereco(cobranca);
                 //Capturando o id do endereço de cobrança que foi inserido no banco
                 IdEnderecoCobranca = cobranca.IdEndereco;
             }
@@ -36,7 +36,7 @@ namespace TaCertoForms.Controllers{
             Instituicao instituicao = viewModel.instituicao;
             instituicao.IdEnderecoCobranca = IdEnderecoCobranca;
             instituicao.IdEnderecoPrincipal = IdEnderecoPrincipal;
-            CollectionMatriz.CreateInstituicao(instituicao);
+            Collection.CreateInstituicao(instituicao);
             return RedirectToAction("Index");
         }
         [Perfil(Perfil.Administrador)]
@@ -45,26 +45,26 @@ namespace TaCertoForms.Controllers{
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
             ViewModelInstituicao vmInstituicao = new ViewModelInstituicao();
-            Instituicao instituicao = CollectionMatriz.FindInstituicao(id);
+            Instituicao instituicao = Collection.FindInstituicao(id);
             if (instituicao == null)
                 return HttpNotFound();
             vmInstituicao.instituicao = instituicao;
 
-            Endereco enderecoPrincipal = CollectionMatriz.FindEndereco(instituicao.IdEnderecoPrincipal);
+            Endereco enderecoPrincipal = Collection.FindEndereco(instituicao.IdEnderecoPrincipal);
             Endereco enderecoCobranca = null;
             if (instituicao.IdEnderecoPrincipal != instituicao.IdEnderecoCobranca)
-                enderecoCobranca = CollectionMatriz.FindEndereco(instituicao.IdEnderecoCobranca);
+                enderecoCobranca = Collection.FindEndereco(instituicao.IdEnderecoCobranca);
             ViewBag.enderecoCobranca = enderecoCobranca;
             ViewBag.enderecoPrincipal = enderecoPrincipal;
             
-            vmInstituicao.Midia = CollectionMatriz.FindMidia(id, "Instituicao");
+            vmInstituicao.Midia = Collection.FindMidia(id, "Instituicao");
             return View(vmInstituicao);
         }
         [Perfil(Perfil.Administrador)]
         [HttpPost]
         public ActionResult Edit(ViewModelInstituicao viewModel) {
             Instituicao instituicao = viewModel.instituicao;
-            if(CollectionMatriz.FindInstituicao(instituicao.IdInstituicao) == null)
+            if(Collection.FindInstituicao(instituicao.IdInstituicao) == null)
                 return HttpNotFound();
             //Caso o usuário já tinha cadastrado um email de cobrança diferente do principal e optou por tornar o endereço de cobrança como o mesmo endereço principal            
             if (viewModel.EqualEnderecoCobranca && viewModel.IdEnderecoCobranca != viewModel.IdEnderecoPrincipal) {
@@ -73,19 +73,19 @@ namespace TaCertoForms.Controllers{
             }
             else if (viewModel.EqualEnderecoCobranca == false && viewModel.IdEnderecoCobranca == viewModel.IdEnderecoPrincipal) {
                 Endereco cobranca = viewModel.enderecoCobranca;
-                CollectionMatriz.CreateEndereco(cobranca);
+                Collection.CreateEndereco(cobranca);
                 instituicao.IdEnderecoCobranca = cobranca.IdEndereco;
             }
             else if (viewModel.EqualEnderecoCobranca == false) {
                 //Atualizando endereço cobranca
                 Endereco cobranca = viewModel.enderecoCobranca;
-                CollectionMatriz.EditEndereco(cobranca);
+                Collection.EditEndereco(cobranca);
             }
             //Atualizando endereço principal
             Endereco principal = viewModel.enderecoPrincipal;
-            CollectionMatriz.EditEndereco(principal);
+            Collection.EditEndereco(principal);
 
-            CollectionMatriz.EditInstituicao(instituicao);
+            Collection.EditInstituicao(instituicao);
 
             return RedirectToAction("Index");
         }
@@ -94,14 +94,14 @@ namespace TaCertoForms.Controllers{
             if (id == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
-            Instituicao instituicao = CollectionMatriz.FindInstituicao(id);
+            Instituicao instituicao = Collection.FindInstituicao(id);
             if (instituicao == null)
                 return HttpNotFound();
 
-            Endereco enderecoPrincipal = CollectionMatriz.FindEndereco(instituicao.IdEnderecoPrincipal);
+            Endereco enderecoPrincipal = Collection.FindEndereco(instituicao.IdEnderecoPrincipal);
             Endereco enderecoCobranca = null;
             if (instituicao.IdEnderecoPrincipal != instituicao.IdEnderecoCobranca)
-                enderecoCobranca = CollectionMatriz.FindEndereco(instituicao.IdEnderecoCobranca);
+                enderecoCobranca = Collection.FindEndereco(instituicao.IdEnderecoCobranca);
             ViewBag.enderecoCobranca = enderecoCobranca;
             ViewBag.enderecoPrincipal = enderecoPrincipal;
             return View(instituicao);
@@ -110,7 +110,7 @@ namespace TaCertoForms.Controllers{
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id) {
-            CollectionMatriz.DeleteInstituicao(id);
+            Collection.DeleteInstituicao(id);
             return RedirectToAction("Index");
         }                
     }

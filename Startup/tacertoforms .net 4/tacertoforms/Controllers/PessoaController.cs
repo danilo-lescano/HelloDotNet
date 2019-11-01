@@ -11,10 +11,10 @@ namespace TaCertoForms.Controllers{
         [Perfil(Perfil.Administrador)]
         public ActionResult Index(){
             List<ViewModelPessoa> pessoas = new List<ViewModelPessoa>();
-            foreach (var pessoa in CollectionMatriz.PessoaList()){
+            foreach (var pessoa in Collection.PessoaList()){
                 ViewModelPessoa vmPessoa = new ViewModelPessoa();
                 vmPessoa.Pessoa = pessoa;
-                Instituicao i = CollectionMatriz.FindInstituicao(pessoa.IdInstituicao);
+                Instituicao i = Collection.FindInstituicao(pessoa.IdInstituicao);
                 if(i != null){
                     vmPessoa.Instituicao.Add(i);
                     pessoas.Add(vmPessoa);
@@ -24,7 +24,7 @@ namespace TaCertoForms.Controllers{
         }
         [Perfil(Perfil.Administrador)]
         public ActionResult Create(){
-            List<Instituicao> list = CollectionMatriz.InstituicaoList();
+            List<Instituicao> list = Collection.InstituicaoList();
             if(list == null)
                 list = new List<Instituicao>();
             ViewBag.InstituicaoList = new SelectList(list, "IdInstituicao", "NomeFantasia");
@@ -33,7 +33,7 @@ namespace TaCertoForms.Controllers{
         [Perfil(Perfil.Administrador)]
         [HttpPost]
         public ActionResult Create(Pessoa pessoa){
-            pessoa = CollectionMatriz.CreatePessoa(pessoa);
+            pessoa = Collection.CreatePessoa(pessoa);
             if(pessoa != null)
                 return RedirectToAction("Edit", "Pessoa", new { id = pessoa.IdPessoa });
             return View(pessoa);
@@ -42,26 +42,26 @@ namespace TaCertoForms.Controllers{
         public ActionResult Edit(int? id){
             if (id == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            Pessoa pessoa = CollectionMatriz.FindPessoa(id);
+            Pessoa pessoa = Collection.FindPessoa(id);
             if(pessoa == null) return HttpNotFound();
-            List<Instituicao> list = CollectionMatriz.InstituicaoList();
+            List<Instituicao> list = Collection.InstituicaoList();
             ViewBag.InstituicaoList = new SelectList(list, "IdInstituicao", "NomeFantasia");
             if (pessoa == null)
                 return HttpNotFound();
             
-            ViewBag.Midia = CollectionMatriz.FindMidia(id, "Pessoa");  
+            ViewBag.Midia = Collection.FindMidia(id, "Pessoa");  
             return View(pessoa);
         }
 
         [HttpPost]
         public ActionResult Edit(Pessoa pessoa){
-            if (CollectionMatriz.EditPessoa(pessoa) != null)
+            if (Collection.EditPessoa(pessoa) != null)
                 return RedirectToAction("Index");
             return View(pessoa);
         }
         [Perfil(Perfil.Administrador)]
         public ActionResult Delete(int? id){
-            Pessoa pessoa = CollectionMatriz.FindPessoa(id);
+            Pessoa pessoa = Collection.FindPessoa(id);
             if (pessoa == null)
                 return HttpNotFound();
             return View(pessoa);
@@ -70,7 +70,7 @@ namespace TaCertoForms.Controllers{
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id){
-            CollectionMatriz.DeletePessoa(id);
+            Collection.DeletePessoa(id);
             return RedirectToAction("Index");
         }
     }

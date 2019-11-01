@@ -25,13 +25,13 @@ namespace TaCertoForms.Controllers{
         }
 
         public JsonResult Index(int IdOrigem, string Tabela){            
-            return Json(CollectionMatriz.FindMidia(IdOrigem, Tabela), JsonRequestBehavior.AllowGet);
+            return Json(Collection.FindMidia(IdOrigem, Tabela), JsonRequestBehavior.AllowGet);
         }
         
         [HttpPost]
         public JsonResult Save(int id, string tabela) {                        
             try{
-                if (!CollectionMatriz.HasPermissionMidia(id, tabela))
+                if (!Collection.HasPermissionMidia(id, tabela))
                     throw new UnauthorizedAccessException();
                 List<Midia> arquivos = new List<Midia>();                
                 for (int i = 0; i < Request.Files.Count; i++){
@@ -53,10 +53,10 @@ namespace TaCertoForms.Controllers{
                         if (!Directory.Exists(caminho))
                             Directory.CreateDirectory(caminho);
                         file.SaveAs(path);
-                        CollectionMatriz.CreateMidia(id, tabela, fileDetail);                        
+                        Collection.CreateMidia(id, tabela, fileDetail);                        
                     }
                     if (tabela == "Instituicao" || tabela == "Pessoa" || tabela == "Questao"){ //Caso tenha alguma mídia já salva
-                        Midia DeleteMidia = CollectionMatriz.FindMidia(id, tabela);
+                        Midia DeleteMidia = Collection.FindMidia(id, tabela);
                         if (DeleteMidia != null && DeleteMidia.IdMidia != hash)
                             Delete(DeleteMidia.IdMidia);
                     }
@@ -69,7 +69,7 @@ namespace TaCertoForms.Controllers{
             }
         }
         public bool Delete(Guid id) {            
-            return CollectionMatriz.DeleteMidia(id);                
+            return Collection.DeleteMidia(id);                
         }
     }
 }
