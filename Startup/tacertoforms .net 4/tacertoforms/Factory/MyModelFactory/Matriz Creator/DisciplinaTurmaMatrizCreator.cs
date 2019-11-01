@@ -7,12 +7,24 @@ namespace TaCertoForms.Factory{
     public class DisciplinaTurmaMatrizCreator : BaseCreator, IFactoryDisciplinaTurma{
         public DisciplinaTurmaMatrizCreator(int IdMatriz, int IdPessoa) : base(IdMatriz, IdPessoa) { }
 
-        public DisciplinaTurma CreateDisciplinaTurma(DisciplinaTurma disciplinaTurma){
-            throw new System.NotImplementedException();
-        }
+        public DisciplinaTurma FindDisciplinaTurma(int? id){
+            if (id == null) return null;
+            Context db = new Context();
 
-        public bool DeleteDisciplinaTurma(int? id){
-            throw new System.NotImplementedException();
+            DisciplinaTurma disciplinaTurma = db.DisciplinaTurma.Find(id);
+            if(disciplinaTurma == null) return null;
+
+            Turma turma = db.Turma.Find(disciplinaTurma.IdTurma);
+            if(turma == null) return null;
+
+            Instituicao instituicao = db.Instituicao.Find(turma.IdInstituicao);
+            if(instituicao == null) return null;
+
+            if (instituicao.IdInstituicao != IdMatriz && (instituicao.IdMatriz == null || instituicao.IdMatriz != IdMatriz))
+                return null;
+
+            db.Dispose();
+            return disciplinaTurma;
         }
 
         public List<DisciplinaTurma> DisciplinaTurmaList(){
@@ -23,10 +35,14 @@ namespace TaCertoForms.Factory{
             
             List<DisciplinaTurma> disciplinaTurmas = db.DisciplinaTurma.Where(x => x.IdMatriz == instituicao.IdMatriz).ToList();
             db.Dispose();
-            return disciplinaTurmas;            
+            return disciplinaTurmas;
         }
 
-        public DisciplinaTurma EditDisciplinaTurma(DisciplinaTurma disciplinaTurma){            
+        public DisciplinaTurma CreateDisciplinaTurma(DisciplinaTurma disciplinaTurma){
+            throw new System.NotImplementedException();
+        }
+
+        public DisciplinaTurma EditDisciplinaTurma(DisciplinaTurma disciplinaTurma){
             Context db = new Context();
             Pessoa pessoa = db.Pessoa.Find(IdPessoa);
             Instituicao instituicao = db.Instituicao.Find(pessoa.IdInstituicao);
@@ -34,18 +50,11 @@ namespace TaCertoForms.Factory{
             db.Entry(disciplinaTurma).State = System.Data.Entity.EntityState.Modified;
             db.SaveChanges();
             db.Dispose();
-            return disciplinaTurma;            
+            return disciplinaTurma;
         }
 
-        public DisciplinaTurma FindDisciplinaTurma(int? id){
-            Context db = new Context();
-            Pessoa pessoa = db.Pessoa.Find(IdPessoa);
-            Instituicao instituicao = db.Instituicao.Find(pessoa.IdInstituicao);
-            if (pessoa == null || instituicao == null){
-                //DisciplinaTurma disciplinaTurma = db.DisciplinaTurma.Where(x => x.IdDisciplinaTurma == id && x.IdMatriz == instituicao.IdMatriz);
-                //return disciplinaTurma != null ? disciplinaTurma : null;
-            }
-            return null;
+        public bool DeleteDisciplinaTurma(int? id){
+            throw new System.NotImplementedException();
         }
     }
 }
