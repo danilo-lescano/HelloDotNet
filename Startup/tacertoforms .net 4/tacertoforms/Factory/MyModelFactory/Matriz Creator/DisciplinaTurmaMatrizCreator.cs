@@ -29,28 +29,44 @@ namespace TaCertoForms.Factory{
 
         public List<DisciplinaTurma> DisciplinaTurmaList(){
             Context db = new Context();
-            Pessoa pessoa = db.Pessoa.Find(IdPessoa);
-            Instituicao instituicao = db.Instituicao.Find(pessoa.IdInstituicao);
-            if(pessoa == null || instituicao == null) return null;
+            List<int> idAuxList;
 
-            List<DisciplinaTurma> disciplinaTurmas = new List<DisciplinaTurma>();//db.DisciplinaTurma.Where(x => x.IdMatriz == instituicao.IdMatriz).ToList();
+            List<Instituicao> instituicaoList = db.Instituicao.Where(i => i.IdInstituicao == IdMatriz || (i.IdMatriz != null && i.IdMatriz == IdMatriz)).ToList();
+            if(instituicaoList == null || instituicaoList.Count == 0) return null;
+            idAuxList = new List<int>();
+            foreach(var i in instituicaoList) idAuxList.Add(i.IdInstituicao);
+            
+            List<Turma> turmaList = db.Turma.Where(t => idAuxList.Contains(t.IdInstituicao)).ToList();
+            if(turmaList == null || turmaList.Count == 0) return null;
+            idAuxList = new List<int>();
+            foreach(var i in turmaList) idAuxList.Add(t.IdTurma);
+
+            List<DisciplinaTurma> disciplinaTurmaList = db.DisciplinaTurma.Where(dt => idAuxList.Contains(dt.IdTurma)).ToList();
+            if(disciplinaTurmaList == null || disciplinaTurmaList.Count == 0) return null;
+
             db.Dispose();
-            return disciplinaTurmas;
+            return disciplinaTurmaList;
         }
 
         public DisciplinaTurma CreateDisciplinaTurma(DisciplinaTurma disciplinaTurma){
-            throw new System.NotImplementedException();
-        }
-
-        public DisciplinaTurma EditDisciplinaTurma(DisciplinaTurma disciplinaTurma){
             Context db = new Context();
-            Pessoa pessoa = db.Pessoa.Find(IdPessoa);
-            Instituicao instituicao = db.Instituicao.Find(pessoa.IdInstituicao);
-            if (pessoa == null || instituicao == null || db.DisciplinaTurma.Find(disciplinaTurma.IdDisciplinaTurma) == null) return null;
-            db.Entry(disciplinaTurma).State = System.Data.Entity.EntityState.Modified;
+
+            Turma turma = db.Turma.Find(disciplinaTurma.IdTurma);
+            if(turma == null) return null;
+
+            Instituicao instituicao = db.Instituicao.Find(turma.IdInstituicao);
+            if(instituicao == null) return null;
+            if (instituicao.IdInstituicao != IdMatriz && (instituicao.IdMatriz == null || instituicao.IdMatriz != IdMatriz))
+                return null;
+
+            db.DisciplinaTurma.Add(disciplinaTurma);
             db.SaveChanges();
             db.Dispose();
             return disciplinaTurma;
+        }
+
+        public DisciplinaTurma EditDisciplinaTurma(DisciplinaTurma disciplinaTurma){
+            throw new System.NotImplementedException();
         }
 
         public bool DeleteDisciplinaTurma(int? id){
