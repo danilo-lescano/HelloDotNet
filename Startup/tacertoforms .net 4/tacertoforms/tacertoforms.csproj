@@ -262,6 +262,10 @@
     <Compile Include="Migrations\201910291457523_Disciplina IdMatriz constraint.designer.cs">
       <DependentUpon>201910291457523_Disciplina IdMatriz constraint.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201911011436310_Atividade nome.cs" />
+    <Compile Include="Migrations\201911011436310_Atividade nome.designer.cs">
+      <DependentUpon>201911011436310_Atividade nome.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DisciplinaTurma.cs" />
     <Compile Include="Context\Context.cs" />
@@ -3307,6 +3311,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201910291457523_Disciplina IdMatriz constraint.resx">
       <DependentUpon>201910291457523_Disciplina IdMatriz constraint.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911011436310_Atividade nome.resx">
+      <DependentUpon>201911011436310_Atividade nome.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

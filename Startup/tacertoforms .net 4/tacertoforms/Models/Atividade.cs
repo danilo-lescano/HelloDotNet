@@ -14,6 +14,7 @@ namespace TaCertoForms.Models{
         public int IdTurmaDisciplinaAutor { get; set; }
         public DateTime DataInicio { get; set; }
         public DateTime DataFim { get; set; }
+        public string Nome { get; set; }
         public int NumeroTentativas { get; set; }
         public bool IsAleatorio { get; set; }
         public bool IsProva { get; set; }
