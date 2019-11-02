@@ -66,7 +66,32 @@ namespace TaCertoForms.Factory{
         }
 
         public DisciplinaTurma EditDisciplinaTurma(DisciplinaTurma disciplinaTurma){
-            throw new System.NotImplementedException();
+            Context db = new Context();
+
+            DisciplinaTurma disciplinaTurma_aux = db.DisciplinaTurma.Find(disciplinaTurma.IdDisciplinaTurma);
+            if(disciplinaTurma_aux == null) return null;
+
+            if(disciplinaTurma_aux.IdTurma != disciplinaTurma.IdTurma){
+                Turma turma_aux = db.Turma.Find(disciplinaTurma_aux.IdTurma);
+                if(turma_aux == null) return null;
+
+                Instituicao instituicao_aux = db.Instituicao.Find(turma_aux.IdInstituicao);
+                if(instituicao_aux.IdInstituicao != IdMatriz && (instituicao_aux.IdMatriz == null || instituicao_aux.IdMatriz != IdMatriz)) return null;
+            }
+
+            if(disciplina_aux.IdDisciplina != disciplina.IdDisciplina){
+                Disciplina disciplina_aux = db.Disciplina.Find(disciplinaTurma_aux.IdDisciplina);
+                if(disciplina_aux == null) return null;
+                if(disciplina_aux.IdMatriz != IdMatriz) return null;
+            }
+
+            db.Dispose();
+            db = new Context();
+            db.Entry(disciplinaTurma).State = System.Data.Entity.EntityState.Modified;
+            db.SaveChanges();
+            db.Dispose();
+
+            return disciplinaTurma;
         }
 
         public bool DeleteDisciplinaTurma(int? id){
