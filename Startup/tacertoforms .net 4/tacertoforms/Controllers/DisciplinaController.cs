@@ -1,8 +1,8 @@
-using System.Collections.Generic;
+using System.Net;
 using System.Data;
 using System.Linq;
-using System.Net;
 using System.Web.Mvc;
+using System.Collections.Generic;
 using TaCertoForms.Models;
 using TaCertoForms.Attributes;
 using TaCertoForms.Controllers.Base;
@@ -14,10 +14,11 @@ namespace TaCertoForms.Controllers{
         public ActionResult Index(){
             List<ViewModelDisciplina> disciplinas = new List<ViewModelDisciplina>();
             List<Disciplina> disciplinasBanco = Collection.DisciplinaList();
+            List<DisciplinaTurma> disciplinaTurmaList = Collection.DisciplinaTurmaList();
             if (disciplinasBanco != null) { 
                 foreach (var disc in disciplinasBanco){
                     ViewModelDisciplina vmDisc = new ViewModelDisciplina(){ IdDisciplina = disc.IdDisciplina, Nome = disc.Nome, Descricao = disc.Descricao };
-                    List<DisciplinaTurma> aux = db.DisciplinaTurma.Where(dt => dt.IdDisciplina == disc.IdDisciplina).ToList();
+                    List<DisciplinaTurma> aux = disciplinaTurmaList.Where(dt => dt.IdDisciplina == disc.IdDisciplina).ToList();
 
                     foreach (var discTurm in aux)
                         vmDisc.Turmas.Add(Collection.FindTurma(discTurm.IdTurma));
@@ -31,10 +32,9 @@ namespace TaCertoForms.Controllers{
         [HttpGet]
         public ActionResult AjaxDisciplinas(int IdTurma){
             List<ViewModelDisciplina> disciplinas = new List<ViewModelDisciplina>();
-            List<DisciplinaTurma> disciplinasTurma = db.DisciplinaTurma.Where(x => x.IdTurma == IdTurma).ToList();
+            List<DisciplinaTurma> disciplinasTurma = Collection.DisciplinaTurmaList().Where(x => x.IdTurma == IdTurma).ToList();
             if(disciplinasTurma != null) { 
-                foreach (var disciplinaTurma in disciplinasTurma)
-                {                    
+                foreach (var disciplinaTurma in disciplinasTurma){                    
                     Disciplina disciplina = Collection.FindDisciplina(disciplinaTurma.IdDisciplina);
                     if(disciplina != null) { 
                         ViewModelDisciplina vmDisc = new ViewModelDisciplina() { IdDisciplinaTurma = disciplinaTurma.IdDisciplinaTurma, Nome = disciplina.Nome};
@@ -76,7 +76,7 @@ namespace TaCertoForms.Controllers{
             ViewModelDisciplina viewModelDisciplina = new ViewModelDisciplina();
             viewModelDisciplina.Disciplina = disciplina;
 
-            List<DisciplinaTurma> aux = db.DisciplinaTurma.Where(dt => dt.IdDisciplina == viewModelDisciplina.IdDisciplina).ToList();
+            List<DisciplinaTurma> aux = Collection.DisciplinaTurmaList().Where(dt => dt.IdDisciplina == viewModelDisciplina.IdDisciplina).ToList();
             foreach (var discTurm in aux)
                 viewModelDisciplina.Turmas.Add(Collection.FindTurma(discTurm.IdTurma));
             viewModelDisciplina.EncherTurmas();
@@ -96,7 +96,7 @@ namespace TaCertoForms.Controllers{
                 foreach (var id in idTurmas)
                     vmDisciplina.Turmas.Add(Collection.FindTurma(int.Parse(id)));
  
-                List<DisciplinaTurma> dts = db.DisciplinaTurma.Where(dt => dt.IdDisciplina == vmDisciplina.IdDisciplina).ToList();
+                List<DisciplinaTurma> dts = Collection.DisciplinaTurmaList().Where(dt => dt.IdDisciplina == vmDisciplina.IdDisciplina).ToList();
                 List<Turma> turmasBanco = new List<Turma>();
                 foreach (var aux in dts)
                     turmasBanco.Add(Collection.FindTurma(aux.IdTurma));
@@ -116,7 +116,7 @@ namespace TaCertoForms.Controllers{
                     }
                 }
                 foreach (var item in turmasBanco){
-                    DisciplinaTurma dt = db.DisciplinaTurma.Where(aux => aux.IdDisciplina == vmDisciplina.IdDisciplina && aux.IdTurma == item.IdTurma).Single();
+                    DisciplinaTurma dt = Collection.DisciplinaTurmaList().Where(aux => aux.IdDisciplina == vmDisciplina.IdDisciplina && aux.IdTurma == item.IdTurma).Single();
                     if(dt != null)
                         Collection.DeleteDisciplinaTurma(dt.IdDisciplinaTurma);
                 }            
@@ -133,7 +133,7 @@ namespace TaCertoForms.Controllers{
             ViewModelDisciplina viewModelDisciplina = new ViewModelDisciplina();
             viewModelDisciplina.Disciplina = disciplina;
 
-            List<DisciplinaTurma> aux = db.DisciplinaTurma.Where(dt => dt.IdDisciplina == viewModelDisciplina.IdDisciplina).ToList();
+            List<DisciplinaTurma> aux = Collection.DisciplinaTurmaList().Where(dt => dt.IdDisciplina == viewModelDisciplina.IdDisciplina).ToList();
             foreach (var discTurm in aux)
                 viewModelDisciplina.Turmas.Add(Collection.FindTurma(discTurm.IdTurma));
             viewModelDisciplina.EncherTurmas();
@@ -151,7 +151,7 @@ namespace TaCertoForms.Controllers{
             if (disciplina == null)            
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             
-            List<DisciplinaTurma> disciplinaTurmas = db.DisciplinaTurma.Where(dt => dt.IdDisciplina == id).ToList();
+            List<DisciplinaTurma> disciplinaTurmas = Collection.DisciplinaTurmaList().Where(dt => dt.IdDisciplina == id).ToList();
             foreach (var dt in disciplinaTurmas){
                 Collection.DeleteDisciplinaTurma(dt.IdDisciplinaTurma);
             }            
