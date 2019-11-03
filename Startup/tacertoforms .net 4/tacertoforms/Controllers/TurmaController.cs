@@ -84,7 +84,7 @@ namespace TaCertoForms.Controllers{
         [Perfil(Perfil.Administrador)]
         public ActionResult AjaxTurmasDisciplinas(int IdAutor){
             List<ViewModelDisciplina> disciplinaTurma = new List<ViewModelDisciplina>();
-            List<TurmaDisciplinaAutor> turmaDisciplinaProf = db.TurmaDisciplinaAutor.Where(x => x.IdAutor == IdAutor).ToList();
+            List<TurmaDisciplinaAutor> turmaDisciplinaProf = Collection.TurmaDisciplinaAutorList().Where(x => x.IdAutor == IdAutor).ToList();
             
             foreach (var td in turmaDisciplinaProf){
                 List<DisciplinaTurma> dt = Collection.DisciplinaTurmaList.Where(x => x.IdDisciplinaTurma == td.IdDisciplinaTurma).ToList();
@@ -101,33 +101,27 @@ namespace TaCertoForms.Controllers{
         [HttpPost]
         [Perfil(Perfil.Administrador)]
         public void SalvarTurmaDisciplina(TurmaDisciplinaAutor turmaDisciplina){
-            if (ModelState.IsValid){
-                db.TurmaDisciplinaAutor.Add(turmaDisciplina);
-                db.SaveChanges();                
-            }            
+            Controller.CreateTurmaDisciplinaAutor(turmaDisciplina);
         }
-        [Perfil(Perfil.Administrador)]
+
         [HttpPost]
+        [Perfil(Perfil.Administrador)]
         public void AjaxDesvincularTurmaDisciplina(int id){
-            TurmaDisciplinaAutor tdp = db.TurmaDisciplinaAutor.Find(id);
-            db.TurmaDisciplinaAutor.Remove(tdp);
-            db.SaveChanges();            
+            Controller.DeleteTurmaDisciplinaAutor(id);
         }
+
         //######################### AJAX Alunos #########################
         //POST: Ajax
         [HttpPost]
         [Perfil(Perfil.Administrador)]
         public void SalvarTurmaAluno(TurmaAluno turmaAluno){
-            if (ModelState.IsValid){
-                db.TurmaAluno.Add(turmaAluno);
-                db.SaveChanges();
-            }
+            Collection.CreateTurmaAluno(turmaAluno);
         }
 
         [HttpGet]
         [Perfil(Perfil.Administrador)]
         public ActionResult AjaxTurmasAlunos(int IdPessoa){            
-            List<TurmaAluno> turmaAluno = db.TurmaAluno.Where(x => x.IdPessoa == IdPessoa).ToList();
+            List<TurmaAluno> turmaAluno = Collection.TurmaAlunoList().Where(ta => ta.IdPessoa == IdPessoa).ToList();
             List<ViewModelPessoa> aluno = new List<ViewModelPessoa>().ToList();
 
             foreach (var ta in turmaAluno){
@@ -137,13 +131,12 @@ namespace TaCertoForms.Controllers{
             }
             return View(aluno);
         }
+
         //Desvincular turma e aluno
         [HttpPost]
         [Perfil(Perfil.Administrador)]
         public void AjaxDesvincularTurmaAluno(int id){
-            TurmaAluno ta = db.TurmaAluno.Find(id);
-            db.TurmaAluno.Remove(ta);
-            db.SaveChanges();
+            Collection.DeleteTurmaAluno(id);
         }        
     }
 }
