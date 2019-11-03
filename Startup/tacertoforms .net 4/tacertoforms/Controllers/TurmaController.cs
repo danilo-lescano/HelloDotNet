@@ -132,14 +132,14 @@ namespace TaCertoForms.Controllers{
 
             foreach (var ta in turmaAluno){
                 ViewModelPessoa vmAluno = new ViewModelPessoa() { IdTurmaAluno = ta.IdTurmaAluno };
-                vmAluno.Turma.Add(db.Turma.Find(ta.IdTurma));
+                vmAluno.Turma.Add(Collection.FindTurma(ta.IdTurma));
                 aluno.Add(vmAluno);
             }
             return View(aluno);
         }
         //Desvincular turma e aluno
-        [Perfil(Perfil.Administrador)]
         [HttpPost]
+        [Perfil(Perfil.Administrador)]
         public void AjaxDesvincularTurmaAluno(int id){
             TurmaAluno ta = db.TurmaAluno.Find(id);
             db.TurmaAluno.Remove(ta);
