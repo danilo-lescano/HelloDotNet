@@ -228,6 +228,8 @@
     <Compile Include="Factory\MyModelFactory\Matriz Creator\MidiaMatrizCreator.cs" />
     <Compile Include="Factory\MyModelFactory\Matriz Creator\PessoaMatrizCreator.cs" />
     <Compile Include="Factory\MyModelFactory\Matriz Creator\QuestaoMatrizCreator.cs" />
+    <Compile Include="Factory\MyModelFactory\Matriz Creator\TurmaAlunoMatrizCreator.cs" />
+    <Compile Include="Factory\MyModelFactory\Matriz Creator\TurmaDisciplinaAutorMatrizCreator.cs" />
     <Compile Include="Factory\MyModelFactory\Matriz Creator\TurmaMatrizCreator.cs" />
     <Compile Include="Factory\MyModelFactory\Professor Creator\AtividadeProfessorCreator.cs" />
     <Compile Include="Factory\MyModelFactory\Professor Creator\DisciplinaProfessorCreator.cs" />
@@ -237,6 +239,8 @@
     <Compile Include="Factory\MyModelFactory\Professor Creator\MidiaProfessorCreator.cs" />
     <Compile Include="Factory\MyModelFactory\Professor Creator\PessoaProfessorCreator.cs" />
     <Compile Include="Factory\MyModelFactory\Professor Creator\QuestaoProfessorCreator.cs" />
+    <Compile Include="Factory\MyModelFactory\Professor Creator\TurmaAlunoProfessorCreator.cs" />
+    <Compile Include="Factory\MyModelFactory\Professor Creator\TurmaDisciplinaAutorProfessorCreator.cs" />
     <Compile Include="Factory\MyModelFactory\Professor Creator\TurmaProfessorCreator.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
