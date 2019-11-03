@@ -14,17 +14,21 @@ namespace TaCertoForms.Factory{
         PessoaProfessorCreator pessoaProfessorCreator { get; set; }
         QuestaoProfessorCreator questaoProfessorCreator { get; set; }
         TurmaProfessorCreator turmaProfessorCreator { get; set; }
+        TurmaAlunoProfessorCreator turmaAlunoProfessorCreator { get; set; }
+        TurmaDisciplinaAutorProfessorCreator turmaDisciplinaAutorProfessorCreator { get; set; }
 
-        public FactoryCollectionProfessor(int IdProfessor, int IdPessoa){
-            atividadeProfessorCreator = new AtividadeProfessorCreator(IdProfessor, IdPessoa);
-            disciplinaProfessorCreator = new DisciplinaProfessorCreator(IdProfessor, IdPessoa);
-            disciplinaTurmaProfessorCreator = new DisciplinaTurmaProfessorCreator(IdProfessor, IdPessoa);
-            enderecoProfessorCreator = new EnderecoProfessorCreator(IdProfessor, IdPessoa);
-            instituicaoProfessorCreator = new InstituicaoProfessorCreator(IdProfessor, IdPessoa);
-            midiaProfessorCreator = new MidiaProfessorCreator(IdProfessor, IdPessoa);
-            pessoaProfessorCreator = new PessoaProfessorCreator(IdProfessor, IdPessoa);
-            questaoProfessorCreator = new QuestaoProfessorCreator(IdProfessor, IdPessoa);
-            turmaProfessorCreator = new TurmaProfessorCreator(IdProfessor, IdPessoa);
+        public FactoryCollectionProfessor(int IdMatriz, int IdPessoa){
+            atividadeProfessorCreator = new AtividadeProfessorCreator(IdMatriz, IdPessoa);
+            disciplinaProfessorCreator = new DisciplinaProfessorCreator(IdMatriz, IdPessoa);
+            disciplinaTurmaProfessorCreator = new DisciplinaTurmaProfessorCreator(IdMatriz, IdPessoa);
+            enderecoProfessorCreator = new EnderecoProfessorCreator(IdMatriz, IdPessoa);
+            instituicaoProfessorCreator = new InstituicaoProfessorCreator(IdMatriz, IdPessoa);
+            midiaProfessorCreator = new MidiaProfessorCreator(IdMatriz, IdPessoa);
+            pessoaProfessorCreator = new PessoaProfessorCreator(IdMatriz, IdPessoa);
+            questaoProfessorCreator = new QuestaoProfessorCreator(IdMatriz, IdPessoa);
+            turmaProfessorCreator = new TurmaProfessorCreator(IdMatriz, IdPessoa);
+            turmaAlunoProfessorCreator = new TurmaAlunoProfessorCreator(IdMatriz, IdPessoa);
+            turmaDisciplinaAutorProfessorCreator = new TurmaDisciplinaAutorProfessorCreator(IdMatriz, IdPessoa);
         }
 
         public List<Atividade> AtividadeList() => atividadeProfessorCreator.AtividadeList();
@@ -84,5 +88,17 @@ namespace TaCertoForms.Factory{
         public Turma CreateTurma(Turma turma) => turmaProfessorCreator.CreateTurma(turma);
         public Turma EditTurma(Turma turma) => turmaProfessorCreator.EditTurma(turma);
         public bool DeleteTurma(int? id) => turmaProfessorCreator.DeleteTurma(id);
+        
+        public List<TurmaAluno> TurmaAlunoList() => turmaAlunoProfessorCreator.TurmaAlunoList();
+        public TurmaAluno FindTurmaAluno(int? id) => turmaAlunoProfessorCreator.FindTurmaAluno(id);
+        public TurmaAluno CreateTurmaAluno(TurmaAluno turmaAluno) => turmaAlunoProfessorCreator.CreateTurmaAluno(turmaAluno);
+        public TurmaAluno EditTurmaAluno(TurmaAluno turmaAluno) => turmaAlunoProfessorCreator.EditTurmaAluno(turmaAluno);
+        public bool DeleteTurmaAluno(int? id) => turmaAlunoProfessorCreator.DeleteTurmaAluno(id);
+
+        public List<TurmaDisciplinaAutor> TurmaDisciplinaAutorList() => turmaDisciplinaAutorProfessorCreator.TurmaDisciplinaAutorList();
+        public TurmaDisciplinaAutor FindTurmaDisciplinaAutor(int? id) => turmaDisciplinaAutorProfessorCreator.FindTurmaDisciplinaAutor(id);
+        public TurmaDisciplinaAutor CreateTurmaDisciplinaAutor(TurmaDisciplinaAutor turmaDisciplinaAutor) => turmaDisciplinaAutorProfessorCreator.CreateTurmaDisciplinaAutor(turmaDisciplinaAutor);
+        public TurmaDisciplinaAutor EditTurmaDisciplinaAutor(TurmaDisciplinaAutor turmaDisciplinaAutor) => turmaDisciplinaAutorProfessorCreator.EditTurmaDisciplinaAutor(turmaDisciplinaAutor);
+        public bool DeleteTurmaDisciplinaAutor(int? id) => turmaDisciplinaAutorProfessorCreator.DeleteTurmaDisciplinaAutor(id);
     }
 }

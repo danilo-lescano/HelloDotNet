@@ -15,6 +15,8 @@ namespace TaCertoForms.Factory{
         PessoaMatrizCreator pessoaMatrizCreator { get; set; }
         QuestaoMatrizCreator questaoMatrizCreator { get; set; }
         TurmaMatrizCreator turmaMatrizCreator { get; set; }
+        TurmaAlunoMatrizCreator turmaAlunoMatrizCreator { get; set; }
+        TurmaDisciplinaAutorMatrizCreator turmaDisciplinaAutorMatrizCreator { get; set; }
 
         public FactoryCollectionMatriz(int IdMatriz, int IdPessoa){
             atividadeMatrizCreator = new AtividadeMatrizCreator(IdMatriz, IdPessoa);
@@ -26,6 +28,8 @@ namespace TaCertoForms.Factory{
             pessoaMatrizCreator = new PessoaMatrizCreator(IdMatriz, IdPessoa);
             questaoMatrizCreator = new QuestaoMatrizCreator(IdMatriz, IdPessoa);
             turmaMatrizCreator = new TurmaMatrizCreator(IdMatriz, IdPessoa);
+            turmaAlunoMatrizCreator = new TurmaAlunoMatrizCreator(IdMatriz, IdPessoa);
+            turmaDisciplinaAutorMatrizCreator = new TurmaDisciplinaAutorMatrizCreator(IdMatriz, IdPessoa);
         }
 
         public List<Atividade> AtividadeList() => atividadeMatrizCreator.AtividadeList();
@@ -84,5 +88,17 @@ namespace TaCertoForms.Factory{
         public Turma CreateTurma(Turma turma) => turmaMatrizCreator.CreateTurma(turma);
         public Turma EditTurma(Turma turma) => turmaMatrizCreator.EditTurma(turma);
         public bool DeleteTurma(int? id) => turmaMatrizCreator.DeleteTurma(id);
+
+        public List<TurmaAluno> TurmaAlunoList() => turmaAlunoMatrizCreator.TurmaAlunoList();
+        public TurmaAluno FindTurmaAluno(int? id) => turmaAlunoMatrizCreator.FindTurmaAluno(id);
+        public TurmaAluno CreateTurmaAluno(TurmaAluno turmaAluno) => turmaAlunoMatrizCreator.CreateTurmaAluno(turmaAluno);
+        public TurmaAluno EditTurmaAluno(TurmaAluno turmaAluno) => turmaAlunoMatrizCreator.EditTurmaAluno(turmaAluno);
+        public bool DeleteTurmaAluno(int? id) => turmaAlunoMatrizCreator.DeleteTurmaAluno(id);
+
+        public List<TurmaDisciplinaAutor> TurmaDisciplinaAutorList() => turmaDisciplinaAutorMatrizCreator.TurmaDisciplinaAutorList();
+        public TurmaDisciplinaAutor FindTurmaDisciplinaAutor(int? id) => turmaDisciplinaAutorMatrizCreator.FindTurmaDisciplinaAutor(id);
+        public TurmaDisciplinaAutor CreateTurmaDisciplinaAutor(TurmaDisciplinaAutor turmaDisciplinaAutor) => turmaDisciplinaAutorMatrizCreator.CreateTurmaDisciplinaAutor(turmaDisciplinaAutor);
+        public TurmaDisciplinaAutor EditTurmaDisciplinaAutor(TurmaDisciplinaAutor turmaDisciplinaAutor) => turmaDisciplinaAutorMatrizCreator.EditTurmaDisciplinaAutor(turmaDisciplinaAutor);
+        public bool DeleteTurmaDisciplinaAutor(int? id) => turmaDisciplinaAutorMatrizCreator.DeleteTurmaDisciplinaAutor(id);
     }
 }
