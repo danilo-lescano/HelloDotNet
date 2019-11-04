@@ -72,7 +72,7 @@ namespace TaCertoForms.Controllers{
         }
 
         //######################### AJAX (Turma Disciplina) #########################
-        [Perfil(Perfil.Administrador)]
+        [Perfil(Perfil.Administrador, Perfil.Autor)]
         [HttpGet]
         public ActionResult AjaxTurmas(int IdInstituicao){
             List<Turma> turmas = Collection.TurmaList()?.Where(t => t.IdInstituicao == IdInstituicao).ToList();

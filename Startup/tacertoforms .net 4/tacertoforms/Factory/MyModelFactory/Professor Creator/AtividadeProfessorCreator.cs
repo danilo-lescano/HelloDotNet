@@ -47,10 +47,9 @@ namespace TaCertoForms.Factory{
             foreach (var t in tda) idAuxList.Add(t.IdTurmaDisciplinaAutor);
 
             if (!idAuxList.Contains(atividade.IdTurmaDisciplinaAutor)) return null;
-
-
-
-
+                        
+            db.Atividade.Add(atividade);
+            db.SaveChanges();
             db.Dispose();
 
             return atividade;

@@ -93,52 +93,56 @@
 </div>
 
 <script>    
-    $('#periodo').daterangepicker({
-        timePicker: true,
-        timePickerIncrement: 30,
-        locale: { format: 'DD/MM/YYYY hh:mm:ss' }    }
-    );
+    $(document).ready(function () {
 
+        $('#periodo').daterangepicker({
+            timePicker: true,
+            timePickerIncrement: 30,
+            locale: { format: 'DD/MM/YYYY hh:mm:ss' }
+        });
     
-    $('.turmas').on('change', '#turmas-select', function () {
-        if ($(this).val() != '') {
-            atualizar_disciplinas($(this).val());
-        } else {
-            $('#disciplinas-select').find('option').remove().end().append('<option value="">Disciplina</option>').val('');
-        }
-    });
-
-    function atualizar_turmas() {
-            $.ajax({
-            url: '@Url.Action("AjaxTurmas", "Turma")',
-                data: {
-                    IdInstituicao: '@Html.Raw(Session["IdInstituicao"])'
-            },
-            cache: false,
-            dataType: 'html',
-            success: function (data) {
-                $('.turmas').html(data);
-            },
-            error: function () {
-                alert('Ocorreu algum erro de conexão. Por favor, tente novamente mais tarde');
+        $('.turmas').on('change', '#turmas-select', function () {
+            if ($(this).val() != '') {
+                atualizar_disciplinas($(this).val());
+            } else {
+                $('#disciplinas-select').find('option').remove().end().append('<option value="">Disciplina</option>').val('');
             }
         });
-    }
-    atualizar_turmas();
-     function atualizar_disciplinas(IdTurma) {
+        
+        function atualizar_turmas() {
+            $.ajax({
+                url: '@Url.Action("AjaxTurmas", "Turma")',
+                    data: {
+                        IdInstituicao: '@Html.Raw(Session["IdInstituicao"])'
+                },
+                cache: false,
+                dataType: 'html',
+                success: function (data) {   
+                    $('.turmas').html(data);
+                },
+                error: function () {
+                    alert('Ocorreu algum erro de conexão. Por favor, tente novamente mais tarde');
+                }
+            });
+        }
+        atualizar_turmas();    
+
+        function atualizar_disciplinas(IdTurma) {
             $.ajax({
             url: '@Url.Action("AjaxDisciplinas", "Disciplina")',
                 data: {
                     IdTurma: IdTurma
             },
-            cache: false,
+            cache: false,                
             dataType: 'html',
-            success: function (data) {
+                success: function (data) {
+                    console.log(data);
                 $('.disciplinas').html(data);
             },
             error: function () {
                 alert('Ocorreu algum erro de conexão. Por favor, tente novamente mais tarde');
             }
-        });
-    }
+            });
+        }
+    });    
 </script>

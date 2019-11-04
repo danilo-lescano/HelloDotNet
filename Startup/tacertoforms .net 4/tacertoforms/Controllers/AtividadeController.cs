@@ -32,17 +32,8 @@ namespace TaCertoForms.Controllers{
         [HttpPost]
         [Perfil(Perfil.Autor)]
         public ActionResult Create(ViewModelAtividade vmAtividade){
-            Atividade atividade = vmAtividade.Atividade;            
-            TurmaDisciplinaAutor tda_aux = db.TurmaDisciplinaAutor.Where(tda => tda.IdAutor == (int)Session["IdPessoa"] && tda.IdDisciplinaTurma == vmAtividade.IdDisciplinaTurma).FirstOrDefault();
-            atividade.IdTurmaDisciplinaAutor = tda_aux.IdTurmaDisciplinaAutor;           
-
-            Collection.CreateAtividade(atividade);
-
-            foreach (Questao q in vmAtividade.Questoes){
-                q.IdAtividade = atividade.IdAtividade;
-                db.Questao.Add(q);
-                db.SaveChanges();
-            }
+            Atividade atividade = vmAtividade.Atividade;                       
+            Collection.CreateAtividade(atividade);            
             return RedirectToAction("Edit", new { id = atividade.IdAtividade});
         }
 
