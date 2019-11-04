@@ -10,7 +10,7 @@ namespace TaCertoForms.Factory{
         public Disciplina FindDisciplina(int? id){
             if(id == null) return null;
             Context db = new Context();
-            Disciplina disciplina = new Disciplina();//db.Disciplina.Where(d => d.IdMatriz = IdMatriz && d.IdDisciplina == id);
+            Disciplina disciplina = db.Disciplina.Where(d => d.IdMatriz == IdMatriz).FirstOrDefault();
             db.Dispose();
             return disciplina;   
         }
@@ -33,7 +33,14 @@ namespace TaCertoForms.Factory{
         
         public Disciplina EditDisciplina(Disciplina disciplina){
             Context db = new Context();
-            if(disciplina.IdMatriz != IdMatriz) return null;
+            
+            Disciplina disciplina_aux = db.Disciplina.Find(disciplina.IdDisciplina);
+            if(disciplina_aux == null || disciplina_aux.IdMatriz != IdMatriz) return null;
+
+            disciplina.IdMatriz = IdMatriz;
+            
+            db.Dispose();
+            db = new Context();
             db.Entry(disciplina).State = System.Data.Entity.EntityState.Modified;
             db.SaveChanges();
             db.Dispose();

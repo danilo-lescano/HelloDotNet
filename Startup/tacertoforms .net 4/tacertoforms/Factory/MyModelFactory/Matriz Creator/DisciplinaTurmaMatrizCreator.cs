@@ -79,7 +79,7 @@ namespace TaCertoForms.Factory{
                 if(instituicao_aux.IdInstituicao != IdMatriz && (instituicao_aux.IdMatriz == null || instituicao_aux.IdMatriz != IdMatriz)) return null;
             }
 
-            if(disciplina_aux.IdDisciplina != disciplina.IdDisciplina){
+            if(disciplinaTurma_aux.IdDisciplina != disciplinaTurma.IdDisciplina){
                 Disciplina disciplina_aux = db.Disciplina.Find(disciplinaTurma_aux.IdDisciplina);
                 if(disciplina_aux == null) return null;
                 if(disciplina_aux.IdMatriz != IdMatriz) return null;
@@ -95,7 +95,15 @@ namespace TaCertoForms.Factory{
         }
 
         public bool DeleteDisciplinaTurma(int? id){
-            throw new System.NotImplementedException();
+            if(id == null) return false;
+            Context db = new Context();
+            DisciplinaTurma disciplinaTurma = db.DisciplinaTurma.Find(id);
+            if(disciplinaTurma == null || disciplinaTurma.IdMatriz != IdMatriz)
+                return false;
+            db.DisciplinaTurma.Remove(disciplinaTurma);
+            db.SaveChanges();
+            db.Dispose();
+            return true;
         }
     }
 }

@@ -4,7 +4,7 @@ using TaCertoForms.Models;
 using TaCertoForms.Contexts;
 
 namespace TaCertoForms.Factory{
-    public class TurmaAlunoProfessorCreator : BaseCreator, IFactoryTurma{
+    public class TurmaAlunoProfessorCreator : BaseCreator, IFactoryTurmaAluno{
 
         public TurmaAlunoProfessorCreator(int IdMatriz, int IdPessoa) : base(IdMatriz, IdPessoa) { }
 
