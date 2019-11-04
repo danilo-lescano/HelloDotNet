@@ -97,9 +97,16 @@ namespace TaCertoForms.Factory{
         public bool DeleteDisciplinaTurma(int? id){
             if(id == null) return false;
             Context db = new Context();
+
             DisciplinaTurma disciplinaTurma = db.DisciplinaTurma.Find(id);
-            if(disciplinaTurma == null || disciplinaTurma.IdMatriz != IdMatriz)
-                return false;
+            if(disciplinaTurma == null) return false;
+
+            Turma turma = db.Turma.Find(disciplinaTurma.IdTurma);
+            if(turma == null) return false;
+
+            Instituicao instituicao = db.Instituicao.Find(turma.IdInstituicao);
+            if(instituicao == null || (instituicao.IdInstituicao != IdMatriz && instituicao.IdMatriz != IdMatriz)) return false;
+
             db.DisciplinaTurma.Remove(disciplinaTurma);
             db.SaveChanges();
             db.Dispose();

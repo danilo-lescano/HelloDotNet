@@ -10,7 +10,7 @@ namespace TaCertoForms.Factory{
         public Disciplina FindDisciplina(int? id){
             if(id == null) return null;
             Context db = new Context();
-            Disciplina disciplina = db.Disciplina.Where(d => d.IdMatriz == IdMatriz).FirstOrDefault();
+            Disciplina disciplina = db.Disciplina.Where(d => d.IdDisciplina == id && d.IdMatriz == IdMatriz).FirstOrDefault();
             db.Dispose();
             return disciplina;   
         }

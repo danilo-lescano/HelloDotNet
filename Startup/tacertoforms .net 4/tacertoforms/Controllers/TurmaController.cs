@@ -75,7 +75,7 @@ namespace TaCertoForms.Controllers{
         [Perfil(Perfil.Administrador)]
         [HttpGet]
         public ActionResult AjaxTurmas(int IdInstituicao){
-            List<Turma> turmas = Collection.TurmaList().Where(t => t.IdInstituicao == IdInstituicao).ToList();
+            List<Turma> turmas = Collection.TurmaList()?.Where(t => t.IdInstituicao == IdInstituicao).ToList();
             ViewBag.TurmasList = new SelectList(turmas, "IdTurma", "Serie");
             return View();
         }
@@ -84,10 +84,10 @@ namespace TaCertoForms.Controllers{
         [Perfil(Perfil.Administrador)]
         public ActionResult AjaxTurmasDisciplinas(int IdAutor){
             List<ViewModelDisciplina> disciplinaTurma = new List<ViewModelDisciplina>();
-            List<TurmaDisciplinaAutor> turmaDisciplinaProf = Collection.TurmaDisciplinaAutorList().Where(x => x.IdAutor == IdAutor).ToList();
-            
+            List<TurmaDisciplinaAutor> turmaDisciplinaProf = Collection.TurmaDisciplinaAutorList()?.Where(tda => tda.IdAutor == IdAutor).ToList();
+
             foreach (var td in turmaDisciplinaProf){
-                List<DisciplinaTurma> dt = Collection.DisciplinaTurmaList().Where(x => x.IdDisciplinaTurma == td.IdDisciplinaTurma).ToList();
+                List<DisciplinaTurma> dt = Collection.DisciplinaTurmaList()?.Where(dta => dta.IdDisciplinaTurma == td.IdDisciplinaTurma).ToList();
                 foreach (var discTurm in dt){
                     Disciplina disciplina = Collection.FindDisciplina(discTurm.IdDisciplina);
                     ViewModelDisciplina vmDisc = new ViewModelDisciplina() { Nome = disciplina.Nome, IdTurmaDisciplinaAutor = td.IdTurmaDisciplinaAutor};
@@ -121,14 +121,16 @@ namespace TaCertoForms.Controllers{
         [HttpGet]
         [Perfil(Perfil.Administrador)]
         public ActionResult AjaxTurmasAlunos(int IdPessoa){            
-            List<TurmaAluno> turmaAluno = Collection.TurmaAlunoList().Where(ta => ta.IdPessoa == IdPessoa).ToList();
-            List<ViewModelPessoa> aluno = new List<ViewModelPessoa>().ToList();
+            List<TurmaAluno> turmaAluno = Collection.TurmaAlunoList();
+            if(turmaAluno != null) turmaAluno.Where(ta => ta.IdPessoa == IdPessoa).ToList();
+            List<ViewModelPessoa> aluno = new List<ViewModelPessoa>();
 
-            foreach (var ta in turmaAluno){
-                ViewModelPessoa vmAluno = new ViewModelPessoa() { IdTurmaAluno = ta.IdTurmaAluno };
-                vmAluno.Turma.Add(Collection.FindTurma(ta.IdTurma));
-                aluno.Add(vmAluno);
-            }
+            if(turmaAluno != null)
+                foreach(var ta in turmaAluno){
+                    ViewModelPessoa vmAluno = new ViewModelPessoa() { IdTurmaAluno = ta.IdTurmaAluno };
+                    vmAluno.Turma.Add(Collection.FindTurma(ta.IdTurma));
+                    aluno.Add(vmAluno);
+                }
             return View(aluno);
         }
 

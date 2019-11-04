@@ -48,7 +48,7 @@ namespace TaCertoForms.Factory{
             List<DisciplinaTurma> disciplinaTurmaList = db.DisciplinaTurma.Where(dt => idAuxList.Contains(dt.IdTurma)).ToList();
             if(disciplinaTurmaList == null || disciplinaTurmaList.Count == 0) return null;
             idAuxList = new List<int>();
-            foreach(var dt in disciplinaTurmaList) idAuxList.Add(dt.IdTurma);
+            foreach(var dt in disciplinaTurmaList) idAuxList.Add(dt.IdDisciplinaTurma);
 
             List<TurmaDisciplinaAutor> turmadisciplinaAutorList = db.TurmaDisciplinaAutor.Where(tda => idAuxList.Contains(tda.IdDisciplinaTurma)).ToList();
             if(turmadisciplinaAutorList == null || turmadisciplinaAutorList.Count == 0) return null;
@@ -113,7 +113,25 @@ namespace TaCertoForms.Factory{
         }
 
         public bool DeleteTurmaDisciplinaAutor(int? id){
-            throw new System.NotImplementedException();
+            if(id == null) return false;
+            Context db = new Context();
+
+            TurmaDisciplinaAutor turmaDisciplinaAutor = db.TurmaDisciplinaAutor.Find(id);
+            if(turmaDisciplinaAutor == null) return false;
+
+            DisciplinaTurma disciplinaTurma = db.DisciplinaTurma.Find(turmaDisciplinaAutor.IdDisciplinaTurma);
+            if(disciplinaTurma == null) return false;
+
+            Turma turma = db.Turma.Find(disciplinaTurma.IdTurma);
+            if(turma == null) return false;
+
+            Instituicao instituicao = db.Instituicao.Find(turma.IdInstituicao);
+            if(instituicao == null || (instituicao.IdInstituicao != IdMatriz && instituicao.IdMatriz != IdMatriz)) return false;
+
+            db.TurmaDisciplinaAutor.Remove(turmaDisciplinaAutor);
+            db.SaveChanges();
+            db.Dispose();
+            return true;
         }
     }
 }

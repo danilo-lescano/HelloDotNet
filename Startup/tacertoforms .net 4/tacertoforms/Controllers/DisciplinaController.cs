@@ -32,11 +32,12 @@ namespace TaCertoForms.Controllers{
         [HttpGet]
         public ActionResult AjaxDisciplinas(int IdTurma){
             List<ViewModelDisciplina> disciplinas = new List<ViewModelDisciplina>();
-            List<DisciplinaTurma> disciplinasTurma = Collection.DisciplinaTurmaList().Where(x => x.IdTurma == IdTurma).ToList();
-            if(disciplinasTurma != null) { 
-                foreach (var disciplinaTurma in disciplinasTurma){                    
-                    Disciplina disciplina = Collection.FindDisciplina(disciplinaTurma.IdDisciplina);
-                    if(disciplina != null) { 
+            List<DisciplinaTurma> disciplinasTurma = Collection.DisciplinaTurmaList()?.Where(x => x.IdTurma == IdTurma).ToList();
+            List<Disciplina> disciplinaList = Collection.DisciplinaList();
+            if(disciplinasTurma != null){
+                foreach (var disciplinaTurma in disciplinasTurma){
+                    Disciplina disciplina = disciplinaList?.Where(d => d.IdDisciplina == disciplinaTurma.IdDisciplina).FirstOrDefault();
+                    if(disciplina != null){
                         ViewModelDisciplina vmDisc = new ViewModelDisciplina() { IdDisciplinaTurma = disciplinaTurma.IdDisciplinaTurma, Nome = disciplina.Nome};
                         disciplinas.Add(vmDisc);
                     }
@@ -56,7 +57,7 @@ namespace TaCertoForms.Controllers{
             Disciplina disciplina = vmDisciplina.Disciplina;
             disciplina.IdMatriz = (int)Session["IdMatriz"];
             Collection.CreateDisciplina(disciplina);
-        
+
             string[] idTurmas = vmDisciplina.idTurmas.Split(';');
             foreach (string t in idTurmas){
                 DisciplinaTurma dt = new DisciplinaTurma(){ IdDisciplina = disciplina.IdDisciplina, IdTurma = int.Parse(t) };
@@ -69,21 +70,21 @@ namespace TaCertoForms.Controllers{
         public ActionResult Edit(int? id){
             if (id == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            Disciplina disciplina = Collection.FindDisciplina(id);            
+            Disciplina disciplina = Collection.FindDisciplina(id);
             if (disciplina == null)
                 return HttpNotFound();
 
             ViewModelDisciplina viewModelDisciplina = new ViewModelDisciplina();
             viewModelDisciplina.Disciplina = disciplina;
 
-            List<DisciplinaTurma> aux = Collection.DisciplinaTurmaList().Where(dt => dt.IdDisciplina == viewModelDisciplina.IdDisciplina).ToList();
+            List<DisciplinaTurma> aux = Collection.DisciplinaTurmaList()?.Where(dt => dt.IdDisciplina == viewModelDisciplina.IdDisciplina).ToList();
             foreach (var discTurm in aux)
                 viewModelDisciplina.Turmas.Add(Collection.FindTurma(discTurm.IdTurma));
             viewModelDisciplina.EncherTurmas();
 
             ViewBag.turmas = Collection.TurmaList();
             ViewBag.InstituicaoList = Collection.InstituicaoList();
-            
+
             return View(viewModelDisciplina);
         }
 
@@ -140,7 +141,7 @@ namespace TaCertoForms.Controllers{
 
             ViewBag.turmas = Collection.TurmaList();
             ViewBag.InstituicaoList = Collection.InstituicaoList();
-            
+
             return View(viewModelDisciplina);
         }
 
@@ -150,13 +151,12 @@ namespace TaCertoForms.Controllers{
             Disciplina disciplina = Collection.FindDisciplina(id);
             if (disciplina == null)            
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            
+
             List<DisciplinaTurma> disciplinaTurmas = Collection.DisciplinaTurmaList().Where(dt => dt.IdDisciplina == id).ToList();
-            foreach (var dt in disciplinaTurmas){
+            foreach (var dt in disciplinaTurmas)
                 Collection.DeleteDisciplinaTurma(dt.IdDisciplinaTurma);
-            }            
             Collection.DeleteDisciplina(disciplina.IdDisciplina);
-            
+
             return RedirectToAction("Index");
         }
     }
