@@ -32,8 +32,8 @@ namespace TaCertoForms.Controllers{
         [HttpPost]
         [Perfil(Perfil.Autor)]
         public ActionResult Create(ViewModelAtividade vmAtividade){
-            Atividade atividade = vmAtividade.Atividade;                       
-            Collection.CreateAtividade(atividade);            
+            Atividade atividade = vmAtividade.Atividade;
+            Collection.CreateAtividade(atividade);
             return RedirectToAction("Edit", new { id = atividade.IdAtividade});
         }
 

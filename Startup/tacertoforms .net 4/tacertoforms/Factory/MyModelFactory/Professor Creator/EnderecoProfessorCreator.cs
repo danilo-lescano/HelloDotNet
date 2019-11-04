@@ -8,28 +8,23 @@ namespace TaCertoForms.Factory{
     public class EnderecoProfessorCreator : BaseCreator, IFactoryEndereco{
         public EnderecoProfessorCreator(int IdMatriz, int IdPessoa) : base(IdMatriz,IdPessoa) {}
 
-        public Endereco CreateEndereco(Endereco endereco)
-        {
+        public Endereco CreateEndereco(Endereco endereco){
             throw new System.NotImplementedException();
         }
 
-        public bool DeleteEndereco(int? id)
-        {
+        public bool DeleteEndereco(int? id){
             throw new System.NotImplementedException();
         }
 
-        public Endereco EditEndereco(Endereco endereco)
-        {
+        public Endereco EditEndereco(Endereco endereco){
             throw new System.NotImplementedException();
         }
 
-        public List<Endereco> EnderecoList()
-        {
+        public List<Endereco> EnderecoList(){
             throw new System.NotImplementedException();
         }
 
-        public Endereco FindEndereco(int? id)
-        {
+        public Endereco FindEndereco(int? id){
             throw new System.NotImplementedException();
         }
     }

@@ -8,28 +8,23 @@ namespace TaCertoForms.Factory{
     public class QuestaoProfessorCreator : BaseCreator, IFactoryQuestao{
         public QuestaoProfessorCreator(int IdMatriz, int IdPessoa) : base(IdMatriz,IdPessoa) {}
 
-        public Questao CreateQuestao(Questao questao)
-        {
+        public Questao CreateQuestao(Questao questao){
             throw new System.NotImplementedException();
         }
 
-        public bool DeleteQuestao(int? id)
-        {
+        public bool DeleteQuestao(int? id){
             throw new System.NotImplementedException();
         }
 
-        public Questao EditQuestao(Questao questao)
-        {
+        public Questao EditQuestao(Questao questao){
             throw new System.NotImplementedException();
         }
 
-        public Questao FindQuestao(int? id)
-        {
+        public Questao FindQuestao(int? id){
             throw new System.NotImplementedException();
         }
 
-        public List<Questao> QuestaoList()
-        {
+        public List<Questao> QuestaoList(){
             throw new System.NotImplementedException();
         }
     }

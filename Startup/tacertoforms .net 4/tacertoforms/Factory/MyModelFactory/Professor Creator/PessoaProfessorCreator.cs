@@ -7,28 +7,23 @@ namespace TaCertoForms.Factory{
     public class PessoaProfessorCreator : BaseCreator, IFactoryPessoa{
         public PessoaProfessorCreator(int IdMatriz, int IdPessoa) : base(IdMatriz,IdPessoa) {}
 
-        public Pessoa CreatePessoa(Pessoa pessoa)
-        {
+        public Pessoa CreatePessoa(Pessoa pessoa){
             throw new System.NotImplementedException();
         }
 
-        public bool DeletePessoa(int? id)
-        {
+        public bool DeletePessoa(int? id){
             throw new System.NotImplementedException();
         }
 
-        public Pessoa EditPessoa(Pessoa pessoa)
-        {
+        public Pessoa EditPessoa(Pessoa pessoa){
             throw new System.NotImplementedException();
         }
 
-        public Pessoa FindPessoa(int? id)
-        {
+        public Pessoa FindPessoa(int? id){
             throw new System.NotImplementedException();
         }
 
-        public List<Pessoa> PessoaList()
-        {
+        public List<Pessoa> PessoaList(){
             throw new System.NotImplementedException();
         }
     }

@@ -7,18 +7,15 @@ namespace TaCertoForms.Factory{
     public class DisciplinaProfessorCreator : BaseCreator, IFactoryDisciplina{
         public DisciplinaProfessorCreator(int IdMatriz, int IdPessoa) : base(IdMatriz, IdPessoa) { }
 
-        public Disciplina CreateDisciplina(Disciplina disciplina)
-        {
+        public Disciplina CreateDisciplina(Disciplina disciplina){
             throw new System.NotImplementedException();
         }
 
-        public bool DeleteDisciplina(int? id)
-        {
+        public bool DeleteDisciplina(int? id){
             throw new System.NotImplementedException();
         }
 
-        public List<Disciplina> DisciplinaList()
-        {            
+        public List<Disciplina> DisciplinaList(){            
             Context db = new Context();
 
             Pessoa pessoa = db.Pessoa.Find(IdPessoa);            
@@ -40,13 +37,11 @@ namespace TaCertoForms.Factory{
             return disciplinaList;                        
         }
 
-        public Disciplina EditDisciplina(Disciplina disciplina)
-        {
+        public Disciplina EditDisciplina(Disciplina disciplina){
             throw new System.NotImplementedException();
         }
 
-        public Disciplina FindDisciplina(int? id)
-        {
+        public Disciplina FindDisciplina(int? id){
             if (id == null) return null;
             Context db = new Context();
 

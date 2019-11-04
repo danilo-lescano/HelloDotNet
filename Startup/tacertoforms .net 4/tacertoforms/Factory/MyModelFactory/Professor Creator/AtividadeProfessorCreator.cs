@@ -8,8 +8,7 @@ namespace TaCertoForms.Factory{
     public class AtividadeProfessorCreator : BaseCreator, IFactoryAtividade{
         public AtividadeProfessorCreator(int IdMatriz, int IdPessoa) : base(IdMatriz,IdPessoa) {}
 
-        public List<Atividade> AtividadeList()
-        {
+        public List<Atividade> AtividadeList(){
             Context db = new Context();
             List<int> idAuxList;
 
@@ -35,8 +34,7 @@ namespace TaCertoForms.Factory{
             return atividadeList;
         }
 
-        public Atividade CreateAtividade(Atividade atividade)
-        {
+        public Atividade CreateAtividade(Atividade atividade){
             Context db = new Context();
             Pessoa pessoa = db.Pessoa.Find(IdPessoa);
             if (pessoa == null) return null;
@@ -55,18 +53,15 @@ namespace TaCertoForms.Factory{
             return atividade;
         }
 
-        public bool DeleteAtividade(int? id)
-        {
+        public bool DeleteAtividade(int? id){
             throw new System.NotImplementedException();
         }
 
-        public Atividade EditAtividade(Atividade atividade)
-        {
+        public Atividade EditAtividade(Atividade atividade){
             throw new System.NotImplementedException();
         }
 
-        public Atividade FindAtividade(int? id)
-        {
+        public Atividade FindAtividade(int? id){
             throw new System.NotImplementedException();
         }
     }
