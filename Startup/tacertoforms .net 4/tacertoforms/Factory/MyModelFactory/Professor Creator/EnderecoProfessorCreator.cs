@@ -1,8 +1,7 @@
-using System.Web;
-using System.Linq;
 using System.Collections.Generic;
+using System.Web;
+
 using TaCertoForms.Models;
-using TaCertoForms.Contexts;
 
 namespace TaCertoForms.Factory{
     //CLASSE EnderecoProfessorCreator - Responsavel por pegar no banco de dados apenas as endereços relacionadas a uma determinada matriz

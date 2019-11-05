@@ -1,21 +1,19 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 
 using TaCertoForms.Contexts;
 using TaCertoForms.Models;
 
-namespace TaCertoForms.Factory
-{
-    public class MidiaProfessorCreator : BaseCreator, IFactoryMidia
-    {
+namespace TaCertoForms.Factory {
+    public class MidiaProfessorCreator : BaseCreator, IFactoryMidia {
         public MidiaProfessorCreator(HttpSessionStateBase session) : base(session) {}
-        public Midia CreateMidia(int? IdOrigem, string Tabela, Midia midia)
-        {
-            if (IdOrigem == null || Tabela == null || Tabela == "" || midia == null) return null;
+        public Midia CreateMidia(int? IdOrigem, string Tabela, Midia midia) {
+            if(IdOrigem == null || Tabela == null || Tabela == "" || midia == null) return null;
 
-            if (HasPermissionMidia(IdOrigem, Tabela))
-            {
+            if(HasPermissionMidia(IdOrigem, Tabela)) {
                 Context db = new Context();
                 db.Midia.Add(midia);
                 db.SaveChanges();
@@ -25,19 +23,17 @@ namespace TaCertoForms.Factory
             return null;
         }
 
-        public bool DeleteMidia(Guid? id)
-        {
-            if (id == null) return false;
+        public bool DeleteMidia(Guid? id) {
+            if(id == null) return false;
 
             Context db = new Context();
             Midia midia = db.Midia.Find(id);
-            if (midia == null) return false;
+            if(midia == null) return false;
 
-            if (HasPermissionMidia(midia.IdOrigem, midia.Tabela))
-            {
+            if(HasPermissionMidia(midia.IdOrigem, midia.Tabela)) {
                 //Deletando arquivo
                 var path = Path.Combine(System.Web.HttpContext.Current.Server.MapPath("~/Content/images/upload/" + midia.Tabela + '/'), midia.IdMidia + midia.Extensao);
-                if (File.Exists(path))
+                if(File.Exists(path))
                     File.Delete(path);
 
                 db.Midia.Remove(midia);
@@ -47,16 +43,14 @@ namespace TaCertoForms.Factory
             return false;
         }
 
-        public Midia EditMidia(int? IdOrigem, string Tabela, Midia midia){
+        public Midia EditMidia(int? IdOrigem, string Tabela, Midia midia) {
             throw new NotImplementedException();
         }
 
-        public Midia FindMidia(int? IdOrigem, string Tabela)
-        {
-            if (IdOrigem == null || Tabela == null || Tabela == "") return null;
+        public Midia FindMidia(int? IdOrigem, string Tabela) {
+            if(IdOrigem == null || Tabela == null || Tabela == "") return null;
 
-            if (HasPermissionMidia(IdOrigem, Tabela))
-            {
+            if(HasPermissionMidia(IdOrigem, Tabela)) {
                 Context db = new Context();
                 Midia midia = db.Midia.Where(x => x.IdOrigem == IdOrigem && x.Tabela == Tabela).FirstOrDefault<Midia>();
                 if (midia == null) return null;
@@ -67,16 +61,15 @@ namespace TaCertoForms.Factory
             return null;
         }
 
-        public bool HasPermissionMidia(int? IdOrigem, string Tabela)
-        {
-            if (IdOrigem == null || Tabela == null || Tabela == "") return false;
+        public bool HasPermissionMidia(int? IdOrigem, string Tabela) {
+            if(IdOrigem == null || Tabela == null || Tabela == "") return false;
 
             Context db = new Context();
             Pessoa pessoa = db.Pessoa.Find(IdPessoa);
-            if (pessoa == null) return false;
+            if(pessoa == null) return false;
 
             //Buscando todas as instituições matriz e filiais relacionadas ao usuário cadastrado
-            if (Tabela == "Questao") {
+            if(Tabela == "Questao") {
                 List<int> idAuxList = new List<int>();
                 
                 List<TurmaDisciplinaAutor> turmaDisciplinaAutorList = db.TurmaDisciplinaAutor.Where(tda => tda.IdAutor == pessoa.IdPessoa).ToList();
@@ -97,7 +90,6 @@ namespace TaCertoForms.Factory
                 return true;
             } 
             return false; //A tabela que o usuário está tentando capturar mídia, não foi tratada nenhuma regra de permissão.
-                       
         }
 
         public List<Midia> MidiaList(int? IdOrigem, string Tabela){
