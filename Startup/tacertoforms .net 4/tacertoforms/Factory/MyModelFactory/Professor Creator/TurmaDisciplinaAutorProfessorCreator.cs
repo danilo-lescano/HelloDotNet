@@ -9,11 +9,16 @@ namespace TaCertoForms.Factory{
         public TurmaDisciplinaAutorProfessorCreator(int IdMatriz, int IdPessoa) : base(IdMatriz, IdPessoa) { }
 
         public TurmaDisciplinaAutor FindTurmaDisciplinaAutor(int? id){
-            throw new System.NotImplementedException();
+            if(id == null) return null;
+            Context db = new Context();
+            TurmaDisciplinaAutor turmaDisciplinaAutor = db.TurmaDisciplinaAutor.Where(tda => tda.IdTurmaDisciplinaAutor == id && tda.IdPessoa == IdPessoa).FirstOrDefault();
+            return turmaDisciplinaAutor;
         }
 
         public List<TurmaDisciplinaAutor> TurmaDisciplinaAutorList(){
-            throw new System.NotImplementedException();
+            Context db = new Context();
+            List<TurmaDisciplinaAutor> turmaDisciplinaAutor = db.TurmaDisciplinaAutor.Where(tda => tda.IdPessoa == IdPessoa).ToList();
+            return turmaDisciplinaAutor;
         }
 
         public TurmaDisciplinaAutor CreateTurmaDisciplinaAutor(TurmaDisciplinaAutor turmaDisciplinaAutor){
