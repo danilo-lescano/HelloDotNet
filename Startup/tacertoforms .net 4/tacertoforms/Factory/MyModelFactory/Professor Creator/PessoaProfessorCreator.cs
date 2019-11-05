@@ -13,19 +13,19 @@ namespace TaCertoForms.Factory{
             List<int> idAuxList;
 
             List<TurmaDisciplinaAutor> turmaDisciplinaAutorList = db.TurmaDisciplinaAutor.Where(tda => tda.IdAutor == IdPessoa).ToList();
-            if(turmaDisciplinaAutorList == null || turmaDisciplinaAutorList.Count) return null;
+            if(turmaDisciplinaAutorList == null || turmaDisciplinaAutorList.Count == 0) return null;
             idAuxList = new List<int>();
             foreach (var item in turmaDisciplinaAutorList) idAuxList.Add(item.IdDisciplinaTurma);
 
             List<DisciplinaTurma> disciplinaTurmaList = db.DisciplinaTurma.Where(dt => idAuxList.Contains(dt.IdDisciplinaTurma)).ToList();
-            if(disciplinaTurmaList == null || disciplinaTurmaList.Count) return null;
+            if(disciplinaTurmaList == null || disciplinaTurmaList.Count == 0) return null;
             idAuxList = new List<int>();
             foreach (var item in disciplinaTurmaList) idAuxList.Add(item.IdTurma);
 
-            List<TurmaAluno> turmaAlunoList = db.TurmaAluno.Where(ta => idAuxList.Contains(ta.IdTurma) && ta.IdAulo == Id).ToList();
-            if(turmaAlunoList == null || turmaAlunoList.Count) return null;
+            List<TurmaAluno> turmaAlunoList = db.TurmaAluno.Where(ta => idAuxList.Contains(ta.IdTurma) && ta.IdPessoa == id).ToList();
+            if(turmaAlunoList == null || turmaAlunoList.Count == 0) return null;
 
-            Pessoa pessoa = pessoaList.Find(id);
+            Pessoa pessoa = db.Pessoa.Find(id);
             return pessoa;
         }
 
