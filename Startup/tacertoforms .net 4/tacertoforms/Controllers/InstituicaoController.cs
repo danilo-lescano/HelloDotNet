@@ -1,23 +1,25 @@
 ﻿using System.Net;
 using System.Web.Mvc;
-using TaCertoForms.Models;
+
 using TaCertoForms.Attributes;
 using TaCertoForms.Controllers.Base;
+using TaCertoForms.Models;
 
-namespace TaCertoForms.Controllers{
+namespace TaCertoForms.Controllers {
     [SomenteLogado]
     public class InstituicaoController : ControladoraBase {
         [Perfil(Perfil.Administrador)]
-        public ActionResult Index() {            
+        public ActionResult Index() {
             return View(Collection.InstituicaoList());
         }
+
         [Perfil(Perfil.Administrador)]
         public ActionResult Create() {
             return View();
         }
 
-        [Perfil(Perfil.Administrador)]
         [HttpPost]
+        [Perfil(Perfil.Administrador)]
         public ActionResult Create(ViewModelInstituicao viewModel) {
             //Todo validar se algum field veio null
             Endereco principal = viewModel.enderecoPrincipal;
@@ -26,7 +28,7 @@ namespace TaCertoForms.Controllers{
             int IdEnderecoPrincipal = principal.IdEndereco;
             int IdEnderecoCobranca;
             Endereco cobranca = viewModel.enderecoCobranca;
-            if (cobranca != null) {
+            if(cobranca != null) {
                 Collection.CreateEndereco(cobranca);
                 //Capturando o id do endereço de cobrança que foi inserido no banco
                 IdEnderecoCobranca = cobranca.IdEndereco;
@@ -39,20 +41,21 @@ namespace TaCertoForms.Controllers{
             Collection.CreateInstituicao(instituicao);
             return RedirectToAction("Index");
         }
+
         [Perfil(Perfil.Administrador)]
         public ActionResult Edit(int? id) {
-            if (id == null)
+            if(id == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
             ViewModelInstituicao vmInstituicao = new ViewModelInstituicao();
             Instituicao instituicao = Collection.FindInstituicao(id);
-            if (instituicao == null)
+            if(instituicao == null)
                 return HttpNotFound();
             vmInstituicao.instituicao = instituicao;
 
             Endereco enderecoPrincipal = Collection.FindEndereco(instituicao.IdEnderecoPrincipal);
             Endereco enderecoCobranca = null;
-            if (instituicao.IdEnderecoPrincipal != instituicao.IdEnderecoCobranca)
+            if(instituicao.IdEnderecoPrincipal != instituicao.IdEnderecoCobranca)
                 enderecoCobranca = Collection.FindEndereco(instituicao.IdEnderecoCobranca);
             ViewBag.enderecoCobranca = enderecoCobranca;
             ViewBag.enderecoPrincipal = enderecoPrincipal;
@@ -60,23 +63,24 @@ namespace TaCertoForms.Controllers{
             vmInstituicao.Midia = Collection.FindMidia(id, "Instituicao");
             return View(vmInstituicao);
         }
+
         [Perfil(Perfil.Administrador)]
         [HttpPost]
         public ActionResult Edit(ViewModelInstituicao viewModel) {
             Instituicao instituicao = viewModel.instituicao;
             if(Collection.FindInstituicao(instituicao.IdInstituicao) == null)
                 return HttpNotFound();
-            //Caso o usuário já tinha cadastrado um email de cobrança diferente do principal e optou por tornar o endereço de cobrança como o mesmo endereço principal            
-            if (viewModel.EqualEnderecoCobranca && viewModel.IdEnderecoCobranca != viewModel.IdEnderecoPrincipal) {
+            //Caso o usuário já tinha cadastrado um email de cobrança diferente do principal e optou por tornar o endereço de cobrança como o mesmo endereço principal
+            if(viewModel.EqualEnderecoCobranca && viewModel.IdEnderecoCobranca != viewModel.IdEnderecoPrincipal) {
                 viewModel.IdEnderecoCobranca = viewModel.IdEnderecoPrincipal;
                 instituicao.IdEnderecoCobranca = viewModel.IdEnderecoPrincipal;
             }
-            else if (viewModel.EqualEnderecoCobranca == false && viewModel.IdEnderecoCobranca == viewModel.IdEnderecoPrincipal) {
+            else if(viewModel.EqualEnderecoCobranca == false && viewModel.IdEnderecoCobranca == viewModel.IdEnderecoPrincipal) {
                 Endereco cobranca = viewModel.enderecoCobranca;
                 Collection.CreateEndereco(cobranca);
                 instituicao.IdEnderecoCobranca = cobranca.IdEndereco;
             }
-            else if (viewModel.EqualEnderecoCobranca == false) {
+            else if(viewModel.EqualEnderecoCobranca == false) {
                 //Atualizando endereço cobranca
                 Endereco cobranca = viewModel.enderecoCobranca;
                 Collection.EditEndereco(cobranca);
@@ -89,29 +93,30 @@ namespace TaCertoForms.Controllers{
 
             return RedirectToAction("Index");
         }
+
         [Perfil(Perfil.Administrador)]
         public ActionResult Delete(int? id) {
-            if (id == null)
+            if(id == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
             Instituicao instituicao = Collection.FindInstituicao(id);
-            if (instituicao == null)
+            if(instituicao == null)
                 return HttpNotFound();
 
             Endereco enderecoPrincipal = Collection.FindEndereco(instituicao.IdEnderecoPrincipal);
             Endereco enderecoCobranca = null;
-            if (instituicao.IdEnderecoPrincipal != instituicao.IdEnderecoCobranca)
+            if(instituicao.IdEnderecoPrincipal != instituicao.IdEnderecoCobranca)
                 enderecoCobranca = Collection.FindEndereco(instituicao.IdEnderecoCobranca);
             ViewBag.enderecoCobranca = enderecoCobranca;
             ViewBag.enderecoPrincipal = enderecoPrincipal;
             return View(instituicao);
         }
+
         [Perfil(Perfil.Administrador)]
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id) {
             Collection.DeleteInstituicao(id);
             return RedirectToAction("Index");
-        }                
+        }
     }
 }

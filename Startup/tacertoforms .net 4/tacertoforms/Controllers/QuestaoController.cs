@@ -2,50 +2,52 @@
 using System.Data;
 using System.Linq;
 using System.Web.Mvc;
-using TaCertoForms.Models;
+
 using TaCertoForms.Attributes;
 using TaCertoForms.Controllers.Base;
+using TaCertoForms.Models;
 
-namespace TaCertoForms.Controllers{
+namespace TaCertoForms.Controllers {
     [SomenteLogado]
-    public class QuestaoController : ControladoraBase
-    {
-        [Perfil(Perfil.Autor)]
+    public class QuestaoController : ControladoraBase {
         [HttpGet]
-        public JsonResult Index(int? idAtividade, int? idTipoQuestao){
-            List<Questao> questao = new List<Questao>();            
+        [Perfil(Perfil.Autor)]
+        public JsonResult Index(int? idAtividade, int? idTipoQuestao) {
+            List<Questao> questao = new List<Questao>();
             if(idAtividade == null)
                 return Json(null, JsonRequestBehavior.AllowGet);
-            if (idTipoQuestao != null)
+            if(idTipoQuestao != null)
                 questao = Collection.FindQuestaoByTypeAndActivity(idAtividade, idTipoQuestao);
             else
-                questao = Collection.FindQuestaoByTypeAndActivity(idAtividade, null);              
+                questao = Collection.FindQuestaoByTypeAndActivity(idAtividade, null);
             return Json(questao, JsonRequestBehavior.AllowGet);
         }
-        [Perfil(Perfil.Autor)]
+
         [HttpGet]
-        public JsonResult Edit(int? id){
+        [Perfil(Perfil.Autor)]
+        public JsonResult Edit(int? id) {
             Questao questao;
-            if (id == null)
+            if(id == null)
                 return Json(null, JsonRequestBehavior.AllowGet);
             questao = Collection.FindQuestao(id);
             return Json(questao, JsonRequestBehavior.AllowGet);
         }
-        [Perfil(Perfil.Autor)]
+
         [HttpPost]
-        public JsonResult Create(Questao questao){
-            if(questao.IdQuestao == 0){
+        [Perfil(Perfil.Autor)]
+        public JsonResult Create(Questao questao) {
+            if(questao.IdQuestao == 0)
                 Collection.CreateQuestao(questao);
-            } else {
-                Collection.EditQuestao(questao);                
-            }
+            else
+                Collection.EditQuestao(questao);
             return Json(questao);
         }
-        [Perfil(Perfil.Autor)]
+
         [HttpPost]
-        public bool Delete(int? id){
+        [Perfil(Perfil.Autor)]
+        public bool Delete(int? id) {
             if(id == null) return false;
-            return Collection.DeleteQuestao(id);            
+            return Collection.DeleteQuestao(id);
         }
     }
 }

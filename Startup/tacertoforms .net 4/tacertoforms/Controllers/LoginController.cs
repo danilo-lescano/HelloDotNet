@@ -5,25 +5,25 @@ using TaCertoForms.Models;
 using TaCertoForms.Controllers.Base;
 using tacertoforms.Attributes;
 
-namespace TaCertoForms.Controllers{
+namespace TaCertoForms.Controllers {
     [SomenteDeslogado]
-    public class LoginController : ControladoraBase{        
-        public ActionResult Index(){
+    public class LoginController : ControladoraBase {
+        public ActionResult Index() {
             return View();
         }
 
         [HttpPost]
-        public ActionResult Autenticar(string email, string senha){
+        public ActionResult Autenticar(string email, string senha) {
             Pessoa pessoa = db.Pessoa.Where(p => p.Email == email && p.Senha == senha).FirstOrDefault();
 
-            if(pessoa == null){
+            if(pessoa == null) {
                 ViewBag.ToastMessage = "Senha ou login inválidos!";
-                return RedirectToRoute(new RouteValueDictionary{
+                return RedirectToRoute(new RouteValueDictionary {
                     { "controller", "Login" },
                     { "action", "Index" }
                });
             }
-            else{
+            else {
                 Instituicao instituicao = db.Instituicao.Find(pessoa.IdInstituicao);
                 Session["Logado"] = true;
                 Session["IdPessoa"] = pessoa.IdPessoa;
@@ -31,20 +31,20 @@ namespace TaCertoForms.Controllers{
                 Session["NomeUsuario"] = pessoa.Nome;
                 Session["IdInstituicao"] = pessoa.IdInstituicao;
                 Session["NomeInstituicao"] = instituicao.NomeFantasia;
-                Session["Perfil"] = pessoa.Perfil;                
+                Session["Perfil"] = pessoa.Perfil;
 
                 Midia midia = db.Midia.Where(x => x.IdOrigem == pessoa.IdPessoa && x.Tabela == "Pessoa").FirstOrDefault();
                 if(midia != null) { 
                     Session["FotoPerfil"] = midia.Tabela + '/' + midia.IdMidia + midia.Extensao;
                 }
-                return RedirectToRoute(new RouteValueDictionary{
+                return RedirectToRoute(new RouteValueDictionary {
                     { "controller", "Home" },
                     { "action", "Index" }
                });
             }
         }
 
-        public ActionResult LogOff(){
+        public ActionResult LogOff() {
             Session["Logado"] = null;
             Session["IdPessoa"] = null;
             Session["IdMatriz"] = null;
@@ -54,17 +54,17 @@ namespace TaCertoForms.Controllers{
             Session["FotoPerfil"] = null;
             Session["Perfil"] = null;
 
-            return RedirectToRoute(new RouteValueDictionary{
+            return RedirectToRoute(new RouteValueDictionary {
                 { "controller", "Login" },
                 { "action", "Index" }
             });
         }
 
-        private int GetIdMatriz(Pessoa p){
+        private int GetIdMatriz(Pessoa p) {
             Instituicao i = db.Instituicao.Find(p.IdInstituicao);
             if(i.IsMatriz)
                 return i.IdInstituicao;
-            else{
+            else {
                 i = db.Instituicao.Find(i.IdMatriz);
                 return i.IdInstituicao;
             }

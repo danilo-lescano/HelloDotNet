@@ -1,24 +1,25 @@
-﻿using System.Net;
+﻿using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Net;
 using System.Web.Mvc;
-using System.Collections.Generic;
-using TaCertoForms.Models;
+
 using TaCertoForms.Attributes;
 using TaCertoForms.Controllers.Base;
+using TaCertoForms.Models;
 
-namespace TaCertoForms.Controllers{
+namespace TaCertoForms.Controllers {
     [SomenteLogado]
-    public class TurmaController : ControladoraBase{
+    public class TurmaController : ControladoraBase {
         [Perfil(Perfil.Administrador)]
-        public ActionResult Index(){
+        public ActionResult Index() {
             List<Instituicao> list = Collection.InstituicaoList();
             ViewBag.InstituicaoList = list;
             return View(Collection.TurmaList());
         }
 
         [Perfil(Perfil.Administrador)]
-        public ActionResult Create(){
+        public ActionResult Create() {
             List<Instituicao> list = Collection.InstituicaoList();
             ViewBag.InstituicaoList = new SelectList(list, "IdInstituicao", "NomeFantasia");
             return View();
@@ -26,36 +27,36 @@ namespace TaCertoForms.Controllers{
 
         [HttpPost]
         [Perfil(Perfil.Administrador)]
-        public ActionResult Create(Turma turma){
+        public ActionResult Create(Turma turma) {
             if(Collection.CreateTurma(turma) != null)
                 return RedirectToAction("Index");
             return View(turma);
         }
 
         [Perfil(Perfil.Administrador)]
-        public ActionResult Edit(int? id){
-            if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        public ActionResult Edit(int? id) {
+            if(id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             Turma turma = Collection.FindTurma(id);
-            if (turma == null) return new HttpStatusCodeResult(HttpStatusCode.NotFound);
+            if(turma == null) return new HttpStatusCodeResult(HttpStatusCode.NotFound);
 
             List<Instituicao> list = Collection.InstituicaoList();
             ViewBag.InstituicaoList = new SelectList(list, "IdInstituicao", "NomeFantasia");
             return View(turma);
         }
 
-        [Perfil(Perfil.Administrador)]
         [HttpPost]
-        public ActionResult Edit(Turma turma){            
+        [Perfil(Perfil.Administrador)]
+        public ActionResult Edit(Turma turma) {
             if(Collection.EditTurma(turma) != null)
                 return RedirectToAction("Index");
             return View(turma);
         }
 
         [Perfil(Perfil.Administrador)]
-        public ActionResult Delete(int? id){
-            if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        public ActionResult Delete(int? id) {
+            if(id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             Turma turma = Collection.FindTurma(id);
-            if (turma == null) return new HttpStatusCodeResult(HttpStatusCode.NotFound);
+            if(turma == null) return new HttpStatusCodeResult(HttpStatusCode.NotFound);
 
             Instituicao instituicao = Collection.FindInstituicao(turma.IdInstituicao);
             ViewBag.NomeFantasia = instituicao.NomeFantasia;
@@ -65,16 +66,15 @@ namespace TaCertoForms.Controllers{
 
         [Perfil(Perfil.Administrador)]
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id) {
-            Collection.DeleteTurma(id);            
+            Collection.DeleteTurma(id);
             return RedirectToAction("Index");
         }
 
         //######################### AJAX (Turma Disciplina) #########################
-        [Perfil(Perfil.Administrador, Perfil.Autor)]
         [HttpGet]
-        public ActionResult AjaxTurmas(int IdInstituicao){
+        [Perfil(Perfil.Administrador, Perfil.Autor)]
+        public ActionResult AjaxTurmas(int IdInstituicao) {
             List<Turma> turmas = Collection.TurmaList()?.Where(t => t.IdInstituicao == IdInstituicao).ToList();
             ViewBag.TurmasList = new SelectList(turmas, "IdTurma", "Serie");
             return View();
@@ -82,31 +82,31 @@ namespace TaCertoForms.Controllers{
 
         [HttpGet]
         [Perfil(Perfil.Administrador)]
-        public ActionResult AjaxTurmasDisciplinas(int IdAutor){
+        public ActionResult AjaxTurmasDisciplinas(int IdAutor) {
             List<ViewModelDisciplina> disciplinaTurma = new List<ViewModelDisciplina>();
             List<TurmaDisciplinaAutor> turmaDisciplinaProf = Collection.TurmaDisciplinaAutorList()?.Where(tda => tda.IdAutor == IdAutor).ToList();
 
-            foreach (var td in turmaDisciplinaProf){
+            foreach(var td in turmaDisciplinaProf) {
                 List<DisciplinaTurma> dt = Collection.DisciplinaTurmaList()?.Where(dta => dta.IdDisciplinaTurma == td.IdDisciplinaTurma).ToList();
-                foreach (var discTurm in dt){
+                foreach(var discTurm in dt) {
                     Disciplina disciplina = Collection.FindDisciplina(discTurm.IdDisciplina);
-                    ViewModelDisciplina vmDisc = new ViewModelDisciplina() { Nome = disciplina.Nome, IdTurmaDisciplinaAutor = td.IdTurmaDisciplinaAutor};
+                    ViewModelDisciplina vmDisc = new ViewModelDisciplina() { Nome = disciplina.Nome, IdTurmaDisciplinaAutor = td.IdTurmaDisciplinaAutor };
                     vmDisc.Turmas.Add(Collection.FindTurma(discTurm.IdTurma));
                     disciplinaTurma.Add(vmDisc);
                 }
-            }            
+            }
             return View(disciplinaTurma);
         }
 
         [HttpPost]
         [Perfil(Perfil.Administrador)]
-        public void SalvarTurmaDisciplina(TurmaDisciplinaAutor turmaDisciplina){
+        public void SalvarTurmaDisciplina(TurmaDisciplinaAutor turmaDisciplina) {
             Collection.CreateTurmaDisciplinaAutor(turmaDisciplina);
         }
 
         [HttpPost]
         [Perfil(Perfil.Administrador)]
-        public void AjaxDesvincularTurmaDisciplina(int id){
+        public void AjaxDesvincularTurmaDisciplina(int id) {
             Collection.DeleteTurmaDisciplinaAutor(id);
         }
 
@@ -114,19 +114,19 @@ namespace TaCertoForms.Controllers{
         //POST: Ajax
         [HttpPost]
         [Perfil(Perfil.Administrador)]
-        public void SalvarTurmaAluno(TurmaAluno turmaAluno){
+        public void SalvarTurmaAluno(TurmaAluno turmaAluno) {
             Collection.CreateTurmaAluno(turmaAluno);
         }
 
         [HttpGet]
         [Perfil(Perfil.Administrador)]
-        public ActionResult AjaxTurmasAlunos(int IdPessoa){            
+        public ActionResult AjaxTurmasAlunos(int IdPessoa) {
             List<TurmaAluno> turmaAluno = Collection.TurmaAlunoList();
             if(turmaAluno != null) turmaAluno.Where(ta => ta.IdPessoa == IdPessoa).ToList();
             List<ViewModelPessoa> aluno = new List<ViewModelPessoa>();
 
             if(turmaAluno != null)
-                foreach(var ta in turmaAluno){
+                foreach(var ta in turmaAluno) {
                     ViewModelPessoa vmAluno = new ViewModelPessoa() { IdTurmaAluno = ta.IdTurmaAluno };
                     vmAluno.Turma.Add(Collection.FindTurma(ta.IdTurma));
                     aluno.Add(vmAluno);
@@ -137,8 +137,8 @@ namespace TaCertoForms.Controllers{
         //Desvincular turma e aluno
         [HttpPost]
         [Perfil(Perfil.Administrador)]
-        public void AjaxDesvincularTurmaAluno(int id){
+        public void AjaxDesvincularTurmaAluno(int id) {
             Collection.DeleteTurmaAluno(id);
-        }        
+        }
     }
 }
