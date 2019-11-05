@@ -58,8 +58,29 @@ namespace TaCertoForms.Factory{
             throw new System.NotImplementedException();
         }
 
-        public Atividade EditAtividade(Atividade atividade){
-            throw new System.NotImplementedException();
+        public Atividade EditAtividade(Atividade atividade)
+        {
+            Context db = new Context();
+
+            Pessoa pessoa = db.Pessoa.Find(IdPessoa);
+            Atividade atividadeBanco = db.Atividade.Find(atividade.IdAtividade);
+            if (pessoa == null || atividadeBanco == null || atividade.IdAtividade == 0) return null;
+
+            List<int> idAuxList = new List<int>();
+            List<TurmaDisciplinaAutor> turmaDisciplinaAutorList = db.TurmaDisciplinaAutor.Where(tda => tda.IdAutor == pessoa.IdPessoa).ToList();
+            if (turmaDisciplinaAutorList == null || turmaDisciplinaAutorList.Count == 0) return null;
+            foreach (var tda in turmaDisciplinaAutorList) idAuxList.Add(tda.IdTurmaDisciplinaAutor);
+                        
+            if (idAuxList.Contains(atividade.IdTurmaDisciplinaAutor))
+            {
+                db.Dispose();
+                db = new Context();
+                db.Entry(atividade).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+                db.Dispose();
+                return atividade;
+            }
+            return null;
         }
 
         public Atividade FindAtividade(int? id){

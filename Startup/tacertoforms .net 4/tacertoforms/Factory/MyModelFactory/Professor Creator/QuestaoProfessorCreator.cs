@@ -46,7 +46,7 @@ namespace TaCertoForms.Factory{
             List<int> idAuxList = new List<int>();
             List<TurmaDisciplinaAutor> turmaDisciplinaAutorList = db.TurmaDisciplinaAutor.Where(tda => tda.IdAutor == pessoa.IdPessoa).ToList();
             if (turmaDisciplinaAutorList == null || turmaDisciplinaAutorList.Count == 0) return false;
-            foreach (var tda in turmaDisciplinaAutorList) idAuxList.Add(tda.IdDisciplinaTurma);
+            foreach (var tda in turmaDisciplinaAutorList) idAuxList.Add(tda.IdTurmaDisciplinaAutor);
 
             List<Atividade> atividadeList = db.Atividade.Where(at => idAuxList.Contains(at.IdTurmaDisciplinaAutor)).ToList();
             if (atividadeList == null || atividadeList.Count == 0) return false;
@@ -67,12 +67,12 @@ namespace TaCertoForms.Factory{
 
             Pessoa pessoa = db.Pessoa.Find(IdPessoa);
             Questao questaoBanco = db.Questao.Find(questao.IdQuestao);
-            if (pessoa == null || questaoBanco == null) return null;            
+            if (pessoa == null || questaoBanco == null || questao.IdQuestao == 0) return null;            
 
             List<int> idAuxList = new List<int>();
             List<TurmaDisciplinaAutor> turmaDisciplinaAutorList = db.TurmaDisciplinaAutor.Where(tda => tda.IdAutor == pessoa.IdPessoa).ToList();
             if (turmaDisciplinaAutorList == null || turmaDisciplinaAutorList.Count == 0) return null;
-            foreach (var tda in turmaDisciplinaAutorList) idAuxList.Add(tda.IdDisciplinaTurma);
+            foreach (var tda in turmaDisciplinaAutorList) idAuxList.Add(tda.IdTurmaDisciplinaAutor);
 
             List<Atividade> atividadeList = db.Atividade.Where(at => idAuxList.Contains(at.IdTurmaDisciplinaAutor)).ToList();
             if (atividadeList == null || atividadeList.Count == 0) return null;
@@ -80,7 +80,9 @@ namespace TaCertoForms.Factory{
             foreach (var at in atividadeList) idAuxList.Add(at.IdAtividade);
 
             if (idAuxList.Contains(questao.IdAtividade))
-            {                
+            {
+                db.Dispose();
+                db = new Context();
                 db.Entry(questao).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
                 db.Dispose();
@@ -99,7 +101,7 @@ namespace TaCertoForms.Factory{
             List<int> idAuxList = new List<int>();
             List<TurmaDisciplinaAutor> turmaDisciplinaAutorList = db.TurmaDisciplinaAutor.Where(tda => tda.IdAutor == pessoa.IdPessoa).ToList();
             if (turmaDisciplinaAutorList == null || turmaDisciplinaAutorList.Count == 0) return null;
-            foreach (var tda in turmaDisciplinaAutorList) idAuxList.Add(tda.IdDisciplinaTurma);
+            foreach (var tda in turmaDisciplinaAutorList) idAuxList.Add(tda.IdTurmaDisciplinaAutor);
 
             List<Atividade> atividadeList = db.Atividade.Where(at => idAuxList.Contains(at.IdTurmaDisciplinaAutor)).ToList();
             if (atividadeList == null || atividadeList.Count == 0) return null;
@@ -127,11 +129,11 @@ namespace TaCertoForms.Factory{
             idAuxList = new List<int>();
             foreach (var at in atividadeList) idAuxList.Add(at.IdAtividade);
                         
-            if (idAtividade != null && idAuxList.Contains((int)idAtividade)) {
+            if (idAtividade != null && idTipoQuestao == null && idAuxList.Contains((int)idAtividade)) {
                 return db.Questao.Where(q => q.IdAtividade == idAtividade).ToList();
-            } else if (idTipoQuestao != null) {
-                return db.Questao.Where(q => q.IdTipoQuestao == idTipoQuestao && idAuxList.Contains(q.IdAtividade)).ToList();
-            } else if (idAtividade != null && idAuxList.Contains((int)idAtividade) && idTipoQuestao != null) {
+            } else if (idTipoQuestao != null && idAuxList.Contains((int)idAtividade)) {
+                return db.Questao.Where(q => q.IdTipoQuestao == idTipoQuestao && q.IdAtividade == idAtividade).ToList();
+            } else if (idAtividade != null && idTipoQuestao != null && idAuxList.Contains((int)idAtividade) ) {
                 return db.Questao.Where(q => q.IdAtividade == idAtividade && q.IdTipoQuestao == idTipoQuestao).ToList();
             }
             return null;

@@ -65,7 +65,7 @@ namespace TaCertoForms.Factory{
             if (IdOrigem == null || Tabela == null || Tabela == "") return false;
 
             Context db = new Context();
-            Pessoa pessoa = db.Pessoa.Find(IdPessoa);            
+            Pessoa pessoa = db.Pessoa.Find(IdPessoa);
             if (pessoa == null) return false;
 
             //Buscando todas as instituições matriz e filiais relacionadas ao usuário cadastrado
@@ -87,33 +87,9 @@ namespace TaCertoForms.Factory{
                     if(idInstituicaoList.Contains((int)pessoaFind.IdInstituicao))
                         return true;
                 }
-            }
-            else if(Tabela == "Questao") {
-                List<int> idAuxList = new List<int>();
-
-                List<Pessoa> pessoaList = db.Pessoa.Where(p => idInstituicaoList.Contains(p.IdInstituicao)).ToList();
-                if(pessoaList == null || pessoaList.Count == 0) return false;
-                foreach(var p in pessoaList) idAuxList.Add(p.IdPessoa); //Populando idAuxList com Id's de todos os usuários que estiverem no guarda-chuva da instituição 
-
-                List<TurmaDisciplinaAutor> turmaDisciplinaAutorList = db.TurmaDisciplinaAutor.Where(tda => idAuxList.Contains(tda.IdAutor)).ToList();
-                if(turmaDisciplinaAutorList == null || turmaDisciplinaAutorList.Count == 0) return false;
-                idAuxList = new List<int>();
-                foreach(var tda in turmaDisciplinaAutorList) idAuxList.Add(tda.IdTurmaDisciplinaAutor); //Populando idAuxList com IdTurmaDisciplinaAutor da instituição
-
-                List<Atividade> atividadeList = db.Atividade.Where(a => idAuxList.Contains(a.IdTurmaDisciplinaAutor)).ToList();
-                if(atividadeList == null || atividadeList.Count == 0) return false;
-                idAuxList = new List<int>();
-                foreach(var at in atividadeList) idAuxList.Add(at.IdAtividade); //Populando idAuxList com IdTurmaDisciplinaAutor da instituição
-                if(atividadeList == null || atividadeList.Count == 0) return false;
-
-                List<Questao> questaoList = db.Questao.Where(q => idAuxList.Contains(q.IdAtividade)).ToList();
-                if(questaoList == null || questaoList.Count == 0) return false;
-
-                db.Dispose();
-                return true;
-            }
-            else
+            } else {
                 return false; //A tabela que o usuário está tentando capturar mídia, não foi tratada nenhuma regra de permissão.
+            }
             return false;            
         }
 

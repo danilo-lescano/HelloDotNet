@@ -73,12 +73,9 @@ namespace TaCertoForms.Controllers{
         [HttpPost]
         [Perfil(Perfil.Autor)]
         public ActionResult Edit(ViewModelAtividade vmAtividade){
-            Atividade atividade = vmAtividade.Atividade; 
-            if(atividade != null && atividade.IdAtividade != 0){
-                db.Entry(atividade).State = System.Data.Entity.EntityState.Modified;
-                db.SaveChanges();
+            Atividade atividade = vmAtividade.Atividade;                        
+            if(Collection.EditAtividade(atividade) != null)                
                 return RedirectToAction("Index");
-            }
             return View(atividade);
         }
 
