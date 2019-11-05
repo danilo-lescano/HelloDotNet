@@ -25,7 +25,9 @@ namespace TaCertoForms.Factory{
 
             Turma turma = db.Turma.Where(t => t.IdTurma == id && idAuxList.Contains(t.IdTurma)).FirstOrDefault();
 
-            return turma;
+            TurmaAluno turmaAluno = db.TurmaAluno.Where(ta => ta.IdTurmaAluno == id && ta.IdTurma == turma.IdTurma).FirstOrDefault();
+
+            return turmaAluno;
         }
 
         public List<TurmaAluno> TurmaAlunoList(){
@@ -42,9 +44,9 @@ namespace TaCertoForms.Factory{
             idAuxList = new List<int>();
             foreach(var dt in disciplinaTurmaList) idAuxList.Add(dt.IdTurma);
 
-            List<Turma> turmaList = db.Turma.Where(t => && idAuxList.Contains(t.IdTurma)).ToList();
+            List<TurmaAluno> turmaAlunoList = db.TurmaAluno.Where(ta => idAuxList.Contains(ta.IdTurma)).ToList();
 
-            return turmaList;
+            return turmaAlunoList;
         }
 
         public TurmaAluno CreateTurmaAluno(TurmaAluno turmaAluno){
