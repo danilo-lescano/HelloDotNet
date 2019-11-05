@@ -8,7 +8,25 @@ namespace TaCertoForms.Factory{
         public PessoaProfessorCreator(int IdMatriz, int IdPessoa) : base(IdMatriz,IdPessoa) {}
 
         public Pessoa FindPessoa(int? id){
-            throw new System.NotImplementedException();
+            if(id == null) return null;
+            Context db = new Context();
+            List<int> idAuxList;
+
+            List<TurmaDisciplinaAutor> turmaDisciplinaAutorList = db.TurmaDisciplinaAutor.Where(tda => tda.IdAutor == IdPessoa).ToList();
+            if(turmaDisciplinaAutorList == null || turmaDisciplinaAutorList.Count) return null;
+            idAuxList = new List<int>();
+            foreach (var item in turmaDisciplinaAutorList) idAuxList.Add(item.IdDisciplinaTurma);
+
+            List<DisciplinaTurma> disciplinaTurmaList = db.DisciplinaTurma.Where(dt => idAuxList.Contains(dt.IdDisciplinaTurma)).ToList();
+            if(disciplinaTurmaList == null || disciplinaTurmaList.Count) return null;
+            idAuxList = new List<int>();
+            foreach (var item in disciplinaTurmaList) idAuxList.Add(item.IdTurma);
+
+            List<TurmaAluno> turmaAlunoList = db.TurmaAluno.Where(ta => idAuxList.Contains(ta.IdTurma) && ta.IdAulo == Id).ToList();
+            if(turmaAlunoList == null || turmaAlunoList.Count) return null;
+
+            Pessoa pessoa = pessoaList.Find(id);
+            return pessoa;
         }
 
         public List<Pessoa> PessoaList(){
