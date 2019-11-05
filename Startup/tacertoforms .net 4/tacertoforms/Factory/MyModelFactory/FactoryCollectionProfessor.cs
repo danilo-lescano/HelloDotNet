@@ -1,4 +1,5 @@
 using System;
+using System.Web;
 using System.Collections.Generic;
 using TaCertoForms.Models;
 
@@ -17,18 +18,18 @@ namespace TaCertoForms.Factory{
         TurmaAlunoProfessorCreator turmaAlunoProfessorCreator { get; set; }
         TurmaDisciplinaAutorProfessorCreator turmaDisciplinaAutorProfessorCreator { get; set; }
 
-        public FactoryCollectionProfessor(int IdMatriz, int IdPessoa){
-            atividadeProfessorCreator = new AtividadeProfessorCreator(IdMatriz, IdPessoa);
-            disciplinaProfessorCreator = new DisciplinaProfessorCreator(IdMatriz, IdPessoa);
-            disciplinaTurmaProfessorCreator = new DisciplinaTurmaProfessorCreator(IdMatriz, IdPessoa);
-            enderecoProfessorCreator = new EnderecoProfessorCreator(IdMatriz, IdPessoa);
-            instituicaoProfessorCreator = new InstituicaoProfessorCreator(IdMatriz, IdPessoa);
-            midiaProfessorCreator = new MidiaProfessorCreator(IdMatriz, IdPessoa);
-            pessoaProfessorCreator = new PessoaProfessorCreator(IdMatriz, IdPessoa);
-            questaoProfessorCreator = new QuestaoProfessorCreator(IdMatriz, IdPessoa);
-            turmaProfessorCreator = new TurmaProfessorCreator(IdMatriz, IdPessoa);
-            turmaAlunoProfessorCreator = new TurmaAlunoProfessorCreator(IdMatriz, IdPessoa);
-            turmaDisciplinaAutorProfessorCreator = new TurmaDisciplinaAutorProfessorCreator(IdMatriz, IdPessoa);
+        public FactoryCollectionProfessor(HttpSessionStateBase session){
+            atividadeProfessorCreator = new AtividadeProfessorCreator(session);
+            disciplinaProfessorCreator = new DisciplinaProfessorCreator(session);
+            disciplinaTurmaProfessorCreator = new DisciplinaTurmaProfessorCreator(session);
+            enderecoProfessorCreator = new EnderecoProfessorCreator(session);
+            instituicaoProfessorCreator = new InstituicaoProfessorCreator(session);
+            midiaProfessorCreator = new MidiaProfessorCreator(session);
+            pessoaProfessorCreator = new PessoaProfessorCreator(session);
+            questaoProfessorCreator = new QuestaoProfessorCreator(session);
+            turmaProfessorCreator = new TurmaProfessorCreator(session);
+            turmaAlunoProfessorCreator = new TurmaAlunoProfessorCreator(session);
+            turmaDisciplinaAutorProfessorCreator = new TurmaDisciplinaAutorProfessorCreator(session);
         }
 
         public List<Atividade> AtividadeList() => atividadeProfessorCreator.AtividadeList();

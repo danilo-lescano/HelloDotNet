@@ -1,3 +1,4 @@
+using System.Web;
 using System.Linq;
 using System.Collections.Generic;
 using TaCertoForms.Models;
@@ -6,7 +7,7 @@ using TaCertoForms.Contexts;
 namespace TaCertoForms.Factory{
     public class TurmaDisciplinaAutorProfessorCreator : BaseCreator, IFactoryTurmaDisciplinaAutor{
 
-        public TurmaDisciplinaAutorProfessorCreator(int IdMatriz, int IdPessoa) : base(IdMatriz, IdPessoa) { }
+        public TurmaDisciplinaAutorProfessorCreator(HttpSessionStateBase session) : base(session) { }
 
         public TurmaDisciplinaAutor FindTurmaDisciplinaAutor(int? id){
             Context db = new Context();

@@ -14,15 +14,14 @@ namespace TaCertoForms.Controllers.Base{
         IFactoryCollection collection;
         protected IFactoryCollection Collection {
             get {
-                if (collection == null)
-                {
+                if (collection == null){
                     if (Session["Perfil"].Equals(Perfil.Autor))                    
-                        return collection = new FactoryCollectionProfessor((int)Session["IdMatriz"], (int)Session["IdPessoa"]);
-                    else if (Session["Perfil"].Equals(Perfil.Administrador))                    
-                        return collection = new FactoryCollectionMatriz((int)Session["IdMatriz"], (int)Session["IdPessoa"]);                    
-                } else {
-                    return collection;
+                        return collection = new FactoryCollectionProfessor(Session);
+                    else if (Session["Perfil"].Equals(Perfil.Administrador))
+                        return collection = new FactoryCollectionMatriz(Session);
                 }
+                else
+                    return collection;
                 return null;
             }
         }

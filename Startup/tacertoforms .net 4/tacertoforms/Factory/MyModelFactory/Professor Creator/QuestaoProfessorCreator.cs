@@ -1,3 +1,4 @@
+using System.Web;
 using System.Linq;
 using System.Collections.Generic;
 using TaCertoForms.Models;
@@ -6,7 +7,7 @@ using TaCertoForms.Contexts;
 namespace TaCertoForms.Factory{
     //CLASSE QuestaoProfessorCreator - Responsavel por pegar no banco de dados apenas as Questaos relacionadas a uma determinada matriz
     public class QuestaoProfessorCreator : BaseCreator, IFactoryQuestao{
-        public QuestaoProfessorCreator(int IdMatriz, int IdPessoa) : base(IdMatriz,IdPessoa) {}
+        public QuestaoProfessorCreator(HttpSessionStateBase session) : base(session) {}
 
         public Questao CreateQuestao(Questao questao){
             Context db = new Context();

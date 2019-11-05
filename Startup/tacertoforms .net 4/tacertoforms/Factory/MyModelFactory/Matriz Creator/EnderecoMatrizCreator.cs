@@ -1,3 +1,4 @@
+using System.Web;
 using System.Linq;
 using System.Collections.Generic;
 using TaCertoForms.Models;
@@ -6,7 +7,7 @@ using TaCertoForms.Contexts;
 namespace TaCertoForms.Factory{
     //CLASSE EnderecoMatrizCreator - Responsavel por pegar no banco de dados apenas as endereços relacionadas a uma determinada matriz
     public class EnderecoMatrizCreator : BaseCreator, IFactoryEndereco{
-        public EnderecoMatrizCreator(int IdMatriz, int IdPessoa) : base(IdMatriz,IdPessoa) {}
+        public EnderecoMatrizCreator(HttpSessionStateBase session) : base(session) {}
 
         public Endereco FindEndereco(int? id){
             if(id == null) return null;

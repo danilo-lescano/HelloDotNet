@@ -1,3 +1,4 @@
+using System.Web;
 using System.Linq;
 using System.Collections.Generic;
 using TaCertoForms.Models;
@@ -5,7 +6,7 @@ using TaCertoForms.Contexts;
 
 namespace TaCertoForms.Factory{
     public class PessoaProfessorCreator : BaseCreator, IFactoryPessoa{
-        public PessoaProfessorCreator(int IdMatriz, int IdPessoa) : base(IdMatriz,IdPessoa) {}
+        public PessoaProfessorCreator(HttpSessionStateBase session) : base(session) {}
 
         public Pessoa FindPessoa(int? id){
             if(id == null) return null;

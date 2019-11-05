@@ -1,4 +1,5 @@
 using System;
+using System.Web;
 using System.Collections.Generic;
 using TaCertoForms.Models;
 
@@ -17,19 +18,18 @@ namespace TaCertoForms.Factory{
         TurmaMatrizCreator turmaMatrizCreator { get; set; }
         TurmaAlunoMatrizCreator turmaAlunoMatrizCreator { get; set; }
         TurmaDisciplinaAutorMatrizCreator turmaDisciplinaAutorMatrizCreator { get; set; }
-
-        public FactoryCollectionMatriz(int IdMatriz, int IdPessoa){
-            atividadeMatrizCreator = new AtividadeMatrizCreator(IdMatriz, IdPessoa);
-            disciplinaMatrizCreator = new DisciplinaMatrizCreator(IdMatriz, IdPessoa);
-            disciplinaTurmaMatrizCreator = new DisciplinaTurmaMatrizCreator(IdMatriz, IdPessoa);
-            enderecoMatrizCreator = new EnderecoMatrizCreator(IdMatriz, IdPessoa);
-            instituicaoMatrizCreator = new InstituicaoMatrizCreator(IdMatriz, IdPessoa);
-            midiaMatrizCreator = new MidiaMatrizCreator(IdMatriz, IdPessoa);
-            pessoaMatrizCreator = new PessoaMatrizCreator(IdMatriz, IdPessoa);
-            questaoMatrizCreator = new QuestaoMatrizCreator(IdMatriz, IdPessoa);
-            turmaMatrizCreator = new TurmaMatrizCreator(IdMatriz, IdPessoa);
-            turmaAlunoMatrizCreator = new TurmaAlunoMatrizCreator(IdMatriz, IdPessoa);
-            turmaDisciplinaAutorMatrizCreator = new TurmaDisciplinaAutorMatrizCreator(IdMatriz, IdPessoa);
+        public FactoryCollectionMatriz(HttpSessionStateBase session){
+            atividadeMatrizCreator = new AtividadeMatrizCreator(session);
+            disciplinaMatrizCreator = new DisciplinaMatrizCreator(session);
+            disciplinaTurmaMatrizCreator = new DisciplinaTurmaMatrizCreator(session);
+            enderecoMatrizCreator = new EnderecoMatrizCreator(session);
+            instituicaoMatrizCreator = new InstituicaoMatrizCreator(session);
+            midiaMatrizCreator = new MidiaMatrizCreator(session);
+            pessoaMatrizCreator = new PessoaMatrizCreator(session);
+            questaoMatrizCreator = new QuestaoMatrizCreator(session);
+            turmaMatrizCreator = new TurmaMatrizCreator(session);
+            turmaAlunoMatrizCreator = new TurmaAlunoMatrizCreator(session);
+            turmaDisciplinaAutorMatrizCreator = new TurmaDisciplinaAutorMatrizCreator(session);
         }
 
         public List<Atividade> AtividadeList() => atividadeMatrizCreator.AtividadeList();

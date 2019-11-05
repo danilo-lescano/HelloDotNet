@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System.Web;
+using System.Linq;
+using System.Collections.Generic;
 using TaCertoForms.Models;
 using TaCertoForms.Contexts;
-using System.Linq;
 
 namespace TaCertoForms.Factory{
     public class DisciplinaMatrizCreator : BaseCreator, IFactoryDisciplina{
-        public DisciplinaMatrizCreator(int IdMatriz, int IdPessoa) : base(IdMatriz, IdPessoa) { }
+        public DisciplinaMatrizCreator(HttpSessionStateBase session) : base(session) { }
 
         public Disciplina FindDisciplina(int? id){
             if(id == null) return null;

@@ -1,3 +1,4 @@
+using System.Web;
 using System.Linq;
 using System.Collections.Generic;
 using TaCertoForms.Models;
@@ -6,7 +7,7 @@ using TaCertoForms.Contexts;
 namespace TaCertoForms.Factory{
     //CLASSE AtividadeMatrizCreator - Responsavel por pegar no banco de dados apenas as Atividades relacionadas a uma determinada matriz
     public class AtividadeMatrizCreator : BaseCreator, IFactoryAtividade{
-        public AtividadeMatrizCreator(int IdMatriz, int IdPessoa) : base(IdMatriz,IdPessoa) {}
+        public AtividadeMatrizCreator(HttpSessionStateBase session) : base(session) {}
 
         public Atividade FindAtividade(int? id){
             if(id == null) return null;

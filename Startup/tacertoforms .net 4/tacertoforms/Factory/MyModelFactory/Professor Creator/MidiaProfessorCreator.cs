@@ -1,13 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Web;
 using System.IO;
 using System.Linq;
+using System.Collections.Generic;
 using TaCertoForms.Contexts;
 using TaCertoForms.Models;
 
 namespace TaCertoForms.Factory{
     public class MidiaProfessorCreator : BaseCreator, IFactoryMidia{
-        public MidiaProfessorCreator(int IdMatriz, int IdPessoa) : base(IdMatriz, IdPessoa) { }
+        public MidiaProfessorCreator(HttpSessionStateBase session) : base(session) { }
         public Midia CreateMidia(int? IdOrigem, string Tabela, Midia midia){
             throw new NotImplementedException();
         }

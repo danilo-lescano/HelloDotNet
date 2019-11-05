@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System.Web;
+using System.Linq;
+using System.Collections.Generic;
 using TaCertoForms.Models;
 using TaCertoForms.Contexts;
-using System.Linq;
 
 namespace TaCertoForms.Factory{
     public class DisciplinaTurmaProfessorCreator : BaseCreator, IFactoryDisciplinaTurma{
-        public DisciplinaTurmaProfessorCreator(int IdMatriz, int IdPessoa) : base(IdMatriz, IdPessoa) { }
+        public DisciplinaTurmaProfessorCreator(HttpSessionStateBase session) : base(session) { }
 
         public DisciplinaTurma CreateDisciplinaTurma(DisciplinaTurma disciplinaTurma){
             throw new System.NotImplementedException();

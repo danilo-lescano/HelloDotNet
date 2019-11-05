@@ -1,3 +1,4 @@
+using System.Web;
 using System.Linq;
 using System.Collections.Generic;
 using TaCertoForms.Models;
@@ -6,7 +7,7 @@ using TaCertoForms.Contexts;
 namespace TaCertoForms.Factory{
     //CLASSE InstituicaoProfessorCreator - Responsavel por pegar no banco de dados apenas as Instituicoes relacionadas a uma determinada matriz
     public class InstituicaoProfessorCreator : BaseCreator, IFactoryInstituicao{
-        public InstituicaoProfessorCreator(int IdMatriz, int IdPessoa) : base(IdMatriz,IdPessoa) {}
+        public InstituicaoProfessorCreator(HttpSessionStateBase session) : base(session) {}
 
         public Instituicao FindInstituicao(int? id){
             Context db = new Context();

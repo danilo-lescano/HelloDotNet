@@ -1,12 +1,12 @@
-﻿using System.Linq;
+﻿using System.Web;
+using System.Linq;
 using System.Collections.Generic;
 using TaCertoForms.Models;
 using TaCertoForms.Contexts;
 
 namespace TaCertoForms.Factory{
     public class TurmaProfessorCreator : BaseCreator, IFactoryTurma{
-        public TurmaProfessorCreator(int IdMatriz, int IdPessoa) : base(IdMatriz, IdPessoa) { }
-
+        public TurmaProfessorCreator(HttpSessionStateBase session) : base(session) { }
 
         public Turma FindTurma(int? id){
             Context db = new Context();
@@ -18,7 +18,7 @@ namespace TaCertoForms.Factory{
             List<int> idAuxList = new List<int>();
             List<TurmaDisciplinaAutor> turmaDisciplinaAutorList = db.TurmaDisciplinaAutor.Where(tda => tda.IdAutor == pessoa.IdPessoa).ToList();
             if (turmaDisciplinaAutorList == null || turmaDisciplinaAutorList.Count == 0) return null;
-            foreach (var tda in turmaDisciplinaAutorList) idAuxList.Add(tda.IdDisciplinaTurma);            
+            foreach (var tda in turmaDisciplinaAutorList) idAuxList.Add(tda.IdDisciplinaTurma);
 
             db.Dispose();
             if (idAuxList.Contains(turma.IdTurma)) return turma;
@@ -37,7 +37,7 @@ namespace TaCertoForms.Factory{
             foreach (var tda in turmaDisciplinaAutorList) idAuxList.Add(tda.IdDisciplinaTurma);
                         
             List<Turma> turmas = db.Turma.Where(a => idAuxList.Contains(a.IdTurma)).ToList();
-            if (turmas == null || turmas.Count == 0) return null;           
+            if (turmas == null || turmas.Count == 0) return null;
 
             db.Dispose();
             return turmas;
