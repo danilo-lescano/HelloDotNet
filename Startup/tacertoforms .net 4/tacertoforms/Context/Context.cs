@@ -15,7 +15,7 @@ namespace TaCertoForms.Contexts {
         public DbSet<Pessoa> Pessoa { get; set; }
         public DbSet<Questao> Questao { get; set; }
         public DbSet<TipoQuestao> TipoQuestao { get; set; }
-        public DbSet<Turma> Turma { get; set; }        
+        public DbSet<Turma> Turma { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder) {
             Database.SetInitializer<Context>(null);
             modelBuilder.HasDefaultSchema("TaCerto");

@@ -64,8 +64,8 @@ namespace TaCertoForms.Controllers {
             return View(vmInstituicao);
         }
 
-        [Perfil(Perfil.Administrador)]
         [HttpPost]
+        [Perfil(Perfil.Administrador)]
         public ActionResult Edit(ViewModelInstituicao viewModel) {
             Instituicao instituicao = viewModel.instituicao;
             if(Collection.FindInstituicao(instituicao.IdInstituicao) == null)

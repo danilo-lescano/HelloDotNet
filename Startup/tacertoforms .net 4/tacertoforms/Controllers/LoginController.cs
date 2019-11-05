@@ -1,9 +1,10 @@
 using System.Linq;
 using System.Web.Mvc;
 using System.Web.Routing;
-using TaCertoForms.Models;
+
+using TaCertoForms.Attributes;
 using TaCertoForms.Controllers.Base;
-using tacertoforms.Attributes;
+using TaCertoForms.Models;
 
 namespace TaCertoForms.Controllers {
     [SomenteDeslogado]
@@ -18,10 +19,12 @@ namespace TaCertoForms.Controllers {
 
             if(pessoa == null) {
                 ViewBag.ToastMessage = "Senha ou login inválidos!";
-                return RedirectToRoute(new RouteValueDictionary {
-                    { "controller", "Login" },
-                    { "action", "Index" }
-               });
+                return RedirectToRoute(
+                    new RouteValueDictionary {
+                        { "controller", "Login" },
+                        { "action", "Index" }
+                    }
+                );
             }
             else {
                 Instituicao instituicao = db.Instituicao.Find(pessoa.IdInstituicao);
@@ -34,9 +37,8 @@ namespace TaCertoForms.Controllers {
                 Session["Perfil"] = pessoa.Perfil;
 
                 Midia midia = db.Midia.Where(x => x.IdOrigem == pessoa.IdPessoa && x.Tabela == "Pessoa").FirstOrDefault();
-                if(midia != null) { 
+                if(midia != null)
                     Session["FotoPerfil"] = midia.Tabela + '/' + midia.IdMidia + midia.Extensao;
-                }
                 return RedirectToRoute(new RouteValueDictionary {
                     { "controller", "Home" },
                     { "action", "Index" }
@@ -54,10 +56,12 @@ namespace TaCertoForms.Controllers {
             Session["FotoPerfil"] = null;
             Session["Perfil"] = null;
 
-            return RedirectToRoute(new RouteValueDictionary {
-                { "controller", "Login" },
-                { "action", "Index" }
-            });
+            return RedirectToRoute(
+                new RouteValueDictionary {
+                    { "controller", "Login" },
+                    { "action", "Index" }
+                }
+            );
         }
 
         private int GetIdMatriz(Pessoa p) {

@@ -28,9 +28,10 @@ namespace TaCertoForms.Controllers {
             }
             return View(disciplinas);
         }
-        [Perfil(Perfil.Administrador, Perfil.Autor)]
+
         //GET: Ajax
         [HttpGet]
+        [Perfil(Perfil.Administrador, Perfil.Autor)]
         public ActionResult AjaxDisciplinas(int IdTurma) {
             
             List<ViewModelDisciplina> disciplinas = new List<ViewModelDisciplina>();
@@ -151,7 +152,7 @@ namespace TaCertoForms.Controllers {
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id) {
             Disciplina disciplina = Collection.FindDisciplina(id);
-            if(disciplina == null)            
+            if(disciplina == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
             List<DisciplinaTurma> disciplinaTurmas = Collection.DisciplinaTurmaList().Where(dt => dt.IdDisciplina == id).ToList();

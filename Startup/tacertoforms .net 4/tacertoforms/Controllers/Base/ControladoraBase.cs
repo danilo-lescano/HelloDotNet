@@ -14,7 +14,7 @@ namespace TaCertoForms.Controllers.Base {
 
         protected IFactoryCollection Collection {
             get {
-                if(collection == null){
+                if(collection == null) {
                     if(Session["Perfil"].Equals(Perfil.Autor))
                         return collection = new FactoryCollectionProfessor(Session);
                     else if(Session["Perfil"].Equals(Perfil.Administrador))
@@ -25,6 +25,7 @@ namespace TaCertoForms.Controllers.Base {
                 return null;
             }
         }
+
         protected List<Pessoa> GetMeusAlunos() {
             Context db = new Context();
             List<TurmaAluno> turmaAlunos = new List<TurmaAluno>();
@@ -66,15 +67,15 @@ namespace TaCertoForms.Controllers.Base {
             Context db = new Context();
             int id =(int)Session["IdPessoa"];
             Pessoa p = db.Pessoa.Find(id);
-            List<TurmaDisciplinaAutor> tdas = db.TurmaDisciplinaAutor.Where(tda => tda.IdAutor == p.IdPessoa).ToList();
-            List<Atividade> atividades = new List<Atividade>();
-            if(tdas != null)
-                foreach(var tda in tdas) {
-                    List<Atividade> atividade_aux = db.Atividade.Where(a => a.IdTurmaDisciplinaAutor == tda.IdTurmaDisciplinaAutor && !atividades.Contains(a)).ToList();
-                    atividades = atividades.Concat(atividade_aux).ToList();
+            List<TurmaDisciplinaAutor> turmaDisciplinaAutorList = db.TurmaDisciplinaAutor.Where(tda => tda.IdAutor == p.IdPessoa).ToList();
+            List<Atividade> atividadeList = new List<Atividade>();
+            if(turmaDisciplinaAutorList != null)
+                foreach(var tda in turmaDisciplinaAutorList) {
+                    List<Atividade> atividade_aux = db.Atividade.Where(a => a.IdTurmaDisciplinaAutor == tda.IdTurmaDisciplinaAutor && !atividadeList.Contains(a)).ToList();
+                    atividadeList = atividadeList.Concat(atividade_aux).ToList();
                 }
             db.Dispose();
-            return atividades;
+            return atividadeList;
         }
 
         protected List<Instituicao> GetMinhasInstituicoes() {
