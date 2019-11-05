@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+
 using TaCertoForms.Models;
 
 namespace TaCertoForms.Factory{
@@ -10,6 +11,5 @@ namespace TaCertoForms.Factory{
         Midia FindMidia(int? IdOrigem, string Tabela);
         bool HasPermissionMidia(int? IdOrigem, string Tabela);
         List<Midia> MidiaList(int? IdOrigem, string Tabela);        
-
     }
 }

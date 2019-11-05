@@ -1,7 +1,7 @@
 using System.Collections.Generic;
+
 using TaCertoForms.Models;
 
 namespace TaCertoForms.Factory{
-    public interface IFactoryLogLogin{
-    }
+    public interface IFactoryLogLogin{ }
 }

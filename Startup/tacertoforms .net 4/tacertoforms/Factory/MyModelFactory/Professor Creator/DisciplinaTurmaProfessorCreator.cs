@@ -1,8 +1,9 @@
-﻿using System.Web;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Collections.Generic;
-using TaCertoForms.Models;
+using System.Web;
+
 using TaCertoForms.Contexts;
+using TaCertoForms.Models;
 
 namespace TaCertoForms.Factory{
     public class DisciplinaTurmaProfessorCreator : BaseCreator, IFactoryDisciplinaTurma{
