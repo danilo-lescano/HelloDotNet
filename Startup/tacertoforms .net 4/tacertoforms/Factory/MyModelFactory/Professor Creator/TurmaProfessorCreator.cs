@@ -60,12 +60,39 @@ namespace TaCertoForms.Factory{
             throw new System.NotImplementedException();
         }
 
-        public Turma EditTurma(Turma turma){
-            throw new System.NotImplementedException();
+        public Turma FindTurma(int? id){
+            Context db = new Context();
+
+            Pessoa pessoa = db.Pessoa.Find(IdPessoa);
+            Turma turma = db.Turma.Find(id);
+            if (pessoa == null || turma == null) return null;
+
+            List<int> idAuxList = new List<int>();
+            List<TurmaDisciplinaAutor> turmaDisciplinaAutorList = db.TurmaDisciplinaAutor.Where(tda => tda.IdAutor == pessoa.IdPessoa).ToList();
+            if (turmaDisciplinaAutorList == null || turmaDisciplinaAutorList.Count == 0) return null;
+            foreach (var tda in turmaDisciplinaAutorList) idAuxList.Add(tda.IdDisciplinaTurma);            
+
+            db.Dispose();
+            if (idAuxList.Contains(turma.IdTurma)) return turma;
+            return null;
         }
 
-        public bool DeleteTurma(int? id){
-            throw new System.NotImplementedException();
+        public List<Turma> TurmaList(){
+            Context db = new Context();
+
+            Pessoa pessoa = db.Pessoa.Find(IdPessoa);
+            if (pessoa == null) return null;
+
+            List<int> idAuxList = new List<int>();
+            List<TurmaDisciplinaAutor> turmaDisciplinaAutorList = db.TurmaDisciplinaAutor.Where(tda => tda.IdAutor == pessoa.IdPessoa).ToList();
+            if (turmaDisciplinaAutorList == null || turmaDisciplinaAutorList.Count == 0) return null;
+            foreach (var tda in turmaDisciplinaAutorList) idAuxList.Add(tda.IdDisciplinaTurma);
+                        
+            List<Turma> turmas = db.Turma.Where(a => idAuxList.Contains(a.IdTurma)).ToList();
+            if (turmas == null || turmas.Count == 0) return null;           
+
+            db.Dispose();
+            return turmas;
         }
     }
 }

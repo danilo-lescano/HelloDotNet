@@ -31,7 +31,7 @@ namespace TaCertoForms.Controllers{
         //GET: Ajax
         [HttpGet]
         public ActionResult AjaxDisciplinas(int IdTurma){
-            /*
+            
             List<ViewModelDisciplina> disciplinas = new List<ViewModelDisciplina>();
             List<DisciplinaTurma> disciplinasTurma = Collection.DisciplinaTurmaList()?.Where(x => x.IdTurma == IdTurma).ToList();
             List<Disciplina> disciplinaList = Collection.DisciplinaList();
@@ -43,18 +43,6 @@ namespace TaCertoForms.Controllers{
                         disciplinas.Add(vmDisc);
                     }
                 }
-            }
-            ViewBag.DisciplinasList = new SelectList(disciplinas, "IdDisciplinaTurma", "Nome");
-            return View();
-            */
-
-            List<ViewModelDisciplina> disciplinasView = new List<ViewModelDisciplina>();
-            List<Disciplina> disciplinas = Collection.DisciplinaList();
-            List<DisciplinaTurma> disciplinaTurmas = Collection.DisciplinaTurmaList();            
-            if (disciplinas != null && disciplinaTurmas != null) {            
-                foreach (var disciplinaTurma in disciplinaTurmas) {
-                    disciplinas.Where(d => d.IdDisciplina == disciplinaTurma.IdDisciplina);                    
-                }          
             }
             ViewBag.DisciplinasList = new SelectList(disciplinas, "IdDisciplinaTurma", "Nome");
             return View();

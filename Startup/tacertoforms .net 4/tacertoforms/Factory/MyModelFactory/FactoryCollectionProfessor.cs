@@ -79,6 +79,7 @@ namespace TaCertoForms.Factory{
 
         public List<Questao> QuestaoList() => questaoProfessorCreator.QuestaoList();
         public Questao FindQuestao(int? id) => questaoProfessorCreator.FindQuestao(id);
+        public List<Questao> FindQuestaoByTypeAndActivity(int? idAtividade, int? idTipoQuestao) => questaoProfessorCreator.FindQuestaoByTypeAndActivity(idAtividade, idTipoQuestao);
         public Questao CreateQuestao(Questao questao) => questaoProfessorCreator.CreateQuestao(questao);
         public Questao EditQuestao(Questao questao) => questaoProfessorCreator.EditQuestao(questao);
         public bool DeleteQuestao(int? id) => questaoProfessorCreator.DeleteQuestao(id);

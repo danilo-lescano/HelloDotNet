@@ -57,7 +57,7 @@ namespace TaCertoForms.Factory{
             List<DisciplinaTurma> disciplinaTurmaList = db.DisciplinaTurma.Where(dt => idAuxList.Contains(dt.IdDisciplinaTurma)).ToList();
             if (disciplinaTurmaList == null || disciplinaTurmaList.Count == 0) return null;
             idAuxList = new List<int>();
-            foreach (var dt in disciplinaTurmaList) idAuxList.Add(dt.IdDisciplinaTurma);
+            foreach (var dt in disciplinaTurmaList) idAuxList.Add(dt.IdDisciplina);
 
             db.Dispose();
             if (idAuxList.Contains(disciplina.IdDisciplina)) return disciplina; 

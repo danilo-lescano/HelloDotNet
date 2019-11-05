@@ -38,7 +38,20 @@ namespace TaCertoForms.Factory{
         }
 
         public DisciplinaTurma FindDisciplinaTurma(int? id){
-            throw new System.NotImplementedException();
+            Context db = new Context();
+
+            Pessoa pessoa = db.Pessoa.Find(IdPessoa);
+            DisciplinaTurma disciplinaTurma = db.DisciplinaTurma.Find(id);
+            if (pessoa == null || disciplinaTurma == null) return null;
+
+            List<int> idAuxList = new List<int>();
+            List<TurmaDisciplinaAutor> turmaDisciplinaAutorList = db.TurmaDisciplinaAutor.Where(tda => tda.IdAutor == pessoa.IdPessoa).ToList();
+            if (turmaDisciplinaAutorList == null || turmaDisciplinaAutorList.Count == 0) return null;
+            foreach (var tda in turmaDisciplinaAutorList) idAuxList.Add(tda.IdDisciplinaTurma);
+
+            db.Dispose();
+            if (idAuxList.Contains(disciplinaTurma.IdDisciplinaTurma)) return disciplinaTurma;            
+            return null;
         }
     }
 }

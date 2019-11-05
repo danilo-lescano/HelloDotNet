@@ -32,31 +32,38 @@ namespace TaCertoForms.Controllers{
         [HttpPost]
         [Perfil(Perfil.Autor)]
         public ActionResult Create(ViewModelAtividade vmAtividade){
-            Atividade atividade = vmAtividade.Atividade;
-            Collection.CreateAtividade(atividade);
+            Atividade atividade = new Atividade();            
+            List<TurmaDisciplinaAutor> tda = Collection.TurmaDisciplinaAutorList();            
+
+            TurmaDisciplinaAutor turmaDisciplinaAutor = tda?.Where(x => x.IdDisciplinaTurma == vmAtividade.IdDisciplinaTurma).FirstOrDefault();
+            vmAtividade.IdTurmaDisciplinaAutor = turmaDisciplinaAutor.IdTurmaDisciplinaAutor;            
+            atividade = Collection.CreateAtividade(vmAtividade.Atividade);       
+            
             return RedirectToAction("Edit", new { id = atividade.IdAtividade});
         }
 
         [Perfil(Perfil.Autor)]
         public ActionResult Edit(int? id){
-            if (id == null)
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
             ViewModelAtividade vmAtividade = new ViewModelAtividade();
-            vmAtividade.Atividade = db.Atividade.Find(id);
-            vmAtividade.Questoes = db.Questao.Where(q => q.IdAtividade == vmAtividade.IdAtividade).ToList();
-            if(vmAtividade.Questoes == null)
-                vmAtividade.Questoes = new List<Questao>();
-            if (vmAtividade.IdAtividade == 0)
-                return HttpNotFound();
+            vmAtividade.Atividade = Collection.FindAtividade(id);            
             vmAtividade.setPeriodo();
 
-            ViewBag.Instituicao = db.Instituicao.Find((int)Session["IdInstituicao"]);
-            //Buscando Turma
-            TurmaDisciplinaAutor tda = db.TurmaDisciplinaAutor.Find(vmAtividade.IdTurmaDisciplinaAutor);
-            DisciplinaTurma dt = db.DisciplinaTurma.Find(tda.IdDisciplinaTurma);
-            Turma turma = db.Turma.Find(dt.IdTurma);
-            Disciplina disciplina = db.Disciplina.Find(dt.IdDisciplina);
-            
+                    
+            //Buscando Turma e Disciplina
+            TurmaDisciplinaAutor tda = Collection.FindTurmaDisciplinaAutor(vmAtividade.IdTurmaDisciplinaAutor);
+            if (tda == null) return new HttpStatusCodeResult(HttpStatusCode.NotFound);
+
+            DisciplinaTurma dt = Collection.FindDisciplinaTurma(tda.IdDisciplinaTurma);
+            if (dt == null) return new HttpStatusCodeResult(HttpStatusCode.NotFound);
+
+            Turma turma = Collection.FindTurma(dt.IdTurma);
+            if (turma == null) return new HttpStatusCodeResult(HttpStatusCode.NotFound);
+
+            Disciplina disciplina = Collection.FindDisciplina(dt.IdDisciplina);
+            if (disciplina == null) return new HttpStatusCodeResult(HttpStatusCode.NotFound);
+
             ViewBag.Turma = turma;
             ViewBag.Disciplina = disciplina;
 

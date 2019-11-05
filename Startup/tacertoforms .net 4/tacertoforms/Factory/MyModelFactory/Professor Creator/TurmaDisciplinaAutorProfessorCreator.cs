@@ -9,16 +9,28 @@ namespace TaCertoForms.Factory{
         public TurmaDisciplinaAutorProfessorCreator(int IdMatriz, int IdPessoa) : base(IdMatriz, IdPessoa) { }
 
         public TurmaDisciplinaAutor FindTurmaDisciplinaAutor(int? id){
-            if(id == null) return null;
             Context db = new Context();
-            TurmaDisciplinaAutor turmaDisciplinaAutor = db.TurmaDisciplinaAutor.Where(tda => tda.IdTurmaDisciplinaAutor == id && tda.IdPessoa == IdPessoa).FirstOrDefault();
-            return turmaDisciplinaAutor;
+
+            Pessoa pessoa = db.Pessoa.Find(IdPessoa);
+            TurmaDisciplinaAutor tda = db.TurmaDisciplinaAutor.Find(id);
+            if (pessoa == null || tda == null) return null;
+
+            db.Dispose();
+            if (tda.IdAutor == pessoa.IdPessoa) return tda;
+            return null;
         }
 
         public List<TurmaDisciplinaAutor> TurmaDisciplinaAutorList(){
             Context db = new Context();
-            List<TurmaDisciplinaAutor> turmaDisciplinaAutor = db.TurmaDisciplinaAutor.Where(tda => tda.IdPessoa == IdPessoa).ToList();
-            return turmaDisciplinaAutor;
+
+            Pessoa pessoa = db.Pessoa.Find(IdPessoa);
+            if (pessoa == null) return null;
+                        
+            List<TurmaDisciplinaAutor> turmaDisciplinaAutorList = db.TurmaDisciplinaAutor.Where(tda => tda.IdAutor == pessoa.IdPessoa).ToList();
+            if (turmaDisciplinaAutorList == null || turmaDisciplinaAutorList.Count == 0) return null;
+
+            db.Dispose();
+            return turmaDisciplinaAutorList;
         }
 
         public TurmaDisciplinaAutor CreateTurmaDisciplinaAutor(TurmaDisciplinaAutor turmaDisciplinaAutor){

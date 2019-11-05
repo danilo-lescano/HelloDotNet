@@ -73,5 +73,10 @@ namespace TaCertoForms.Factory{
         public bool DeleteQuestao(int? id){
             throw new System.NotImplementedException();
         }
+
+        public List<Questao> FindQuestaoByTypeAndActivity(int? idAtividade, int? idTipoQuestao)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

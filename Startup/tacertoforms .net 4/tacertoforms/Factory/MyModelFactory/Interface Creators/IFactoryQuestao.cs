@@ -3,10 +3,11 @@ using TaCertoForms.Models;
 
 namespace TaCertoForms.Factory{
     public interface IFactoryQuestao{
-        Questao FindQuestao(int? id);
-        List<Questao> QuestaoList();
         Questao CreateQuestao(Questao questao);
-        Questao EditQuestao(Questao questao);
         bool DeleteQuestao(int? id);
+        Questao EditQuestao(Questao questao);
+        Questao FindQuestao(int? id);
+        List<Questao> FindQuestaoByTypeAndActivity(int? idAtividade, int? idTipoQuestao);
+        List<Questao> QuestaoList();
     }
 }
