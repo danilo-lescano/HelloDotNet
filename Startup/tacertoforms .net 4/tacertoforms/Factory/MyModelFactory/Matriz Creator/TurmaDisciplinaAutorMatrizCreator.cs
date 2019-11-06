@@ -62,7 +62,6 @@ namespace TaCertoForms.Factory{
         public TurmaDisciplinaAutor CreateTurmaDisciplinaAutor(TurmaDisciplinaAutor turmaDisciplinaAutor){
             Context db = new Context();
 
-
             DisciplinaTurma disciplinaTurma = db.DisciplinaTurma.Find(turmaDisciplinaAutor.IdDisciplinaTurma);
             if(disciplinaTurma == null) return null;
 

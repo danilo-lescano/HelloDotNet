@@ -168,8 +168,10 @@
     $('#periodo').daterangepicker({
         timePicker: true,
         timePickerIncrement: 30,
-        locale: { format: 'DD/MM/YYYY hh:mm:ss' }    }
-    );
+        minDate: new Date(Date.now()),
+        locale: { format: 'DD/MM/YYYY hh:mm:ss' }
+    });
+    document.getElementById("periodo").value = "@Model.Periodo";
 
     $('#tabela-de-colunaNumeroLinhas').on('change', function () { 
         $('.linhas-input').html(''); //TODO permitir a inserção e exclusão de linhas sem perder o conteúdo
