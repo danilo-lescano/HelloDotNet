@@ -5,11 +5,11 @@ using System.Web;
 using TaCertoForms.Contexts;
 using TaCertoForms.Models;
 
-namespace TaCertoForms.Factory{
-    public class TurmaAlunoProfessorCreator : BaseCreator, IFactoryTurmaAluno{
+namespace TaCertoForms.Factory {
+    public class TurmaAlunoProfessorCreator : BaseCreator, IFactoryTurmaAluno {
         public TurmaAlunoProfessorCreator(HttpSessionStateBase session) : base(session) { }
 
-        public TurmaAluno FindTurmaAluno(int? id){
+        public TurmaAluno FindTurmaAluno(int? id) {
             if(id == null) return null;
             Context db = new Context();
             List<int> idAuxList;
@@ -31,7 +31,7 @@ namespace TaCertoForms.Factory{
             return turmaAluno;
         }
 
-        public List<TurmaAluno> TurmaAlunoList(){
+        public List<TurmaAluno> TurmaAlunoList() {
             Context db = new Context();
             List<int> idAuxList;
 
@@ -50,15 +50,15 @@ namespace TaCertoForms.Factory{
             return turmaAlunoList;
         }
 
-        public TurmaAluno CreateTurmaAluno(TurmaAluno turmaAluno){
+        public TurmaAluno CreateTurmaAluno(TurmaAluno turmaAluno) {
             throw new System.NotImplementedException();
         }
 
-        public TurmaAluno EditTurmaAluno(TurmaAluno turmaAluno){
+        public TurmaAluno EditTurmaAluno(TurmaAluno turmaAluno) {
             throw new System.NotImplementedException();
         }
 
-        public bool DeleteTurmaAluno(int? id){
+        public bool DeleteTurmaAluno(int? id) {
             throw new System.NotImplementedException();
         }
     }

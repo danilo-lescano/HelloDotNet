@@ -5,12 +5,12 @@ using System.Web;
 using TaCertoForms.Contexts;
 using TaCertoForms.Models;
 
-namespace TaCertoForms.Factory{
-    public class TurmaAlunoMatrizCreator : BaseCreator, IFactoryTurmaAluno{
+namespace TaCertoForms.Factory {
+    public class TurmaAlunoMatrizCreator : BaseCreator, IFactoryTurmaAluno {
 
         public TurmaAlunoMatrizCreator(HttpSessionStateBase session) : base(session) { }
 
-        public TurmaAluno FindTurmaAluno(int? id){
+        public TurmaAluno FindTurmaAluno(int? id) {
             if(id == null) return null;
             Context db = new Context();
 
@@ -26,14 +26,14 @@ namespace TaCertoForms.Factory{
             return turmaAluno;
         }
 
-        public List<TurmaAluno> TurmaAlunoList(){
+        public List<TurmaAluno> TurmaAlunoList() {
             Context db = new Context();
             List<int> idAuxList;
 
             List<Instituicao> instituicaoList = db.Instituicao.Where(i => i.IdInstituicao == IdMatriz || i.IdMatriz == IdMatriz).ToList();
             if(instituicaoList == null || instituicaoList.Count == 0) return null;
             idAuxList = new List<int>();
-            foreach (var i in instituicaoList) idAuxList.Add(i.IdInstituicao);
+            foreach(var i in instituicaoList) idAuxList.Add(i.IdInstituicao);
 
             List<Turma> turmaList = db.Turma.Where(t => idAuxList.Contains(t.IdInstituicao)).ToList();
             if(turmaList == null || turmaList.Count == 0) return null;
@@ -46,7 +46,7 @@ namespace TaCertoForms.Factory{
             return turmaAlunoList;
         }
 
-        public TurmaAluno CreateTurmaAluno(TurmaAluno turmaAluno){
+        public TurmaAluno CreateTurmaAluno(TurmaAluno turmaAluno) {
             Context db = new Context();
 
             Turma turma = db.Turma.Find(turmaAluno.IdTurma);
@@ -54,7 +54,7 @@ namespace TaCertoForms.Factory{
 
             Instituicao instituicao = db.Instituicao.Find(turma.IdInstituicao);
             if(instituicao == null) return null;
-            if (instituicao.IdInstituicao != IdMatriz && (instituicao.IdMatriz == null || instituicao.IdMatriz != IdMatriz))
+            if(instituicao.IdInstituicao != IdMatriz && (instituicao.IdMatriz == null || instituicao.IdMatriz != IdMatriz))
                 return null;
 
             db.TurmaAluno.Add(turmaAluno);
@@ -63,25 +63,25 @@ namespace TaCertoForms.Factory{
             return turmaAluno;
         }
 
-        public TurmaAluno EditTurmaAluno(TurmaAluno turmaAluno){
+        public TurmaAluno EditTurmaAluno(TurmaAluno turmaAluno) {
             Context db = new Context();
 
             TurmaAluno turmaAluno_aux = db.TurmaAluno.Find(turmaAluno.IdTurmaAluno);
             if(turmaAluno_aux == null) return null;
-            if(turmaAluno_aux.IdTurmaAluno != turmaAluno.IdTurmaAluno){
+            if(turmaAluno_aux.IdTurmaAluno != turmaAluno.IdTurmaAluno) {
                 Turma turma = db.Turma.Find(turmaAluno.IdTurma);
                 if(turma == null) return null;
 
                 Instituicao instituicao_aux = db.Instituicao.Find(turma.IdInstituicao);
-                if (instituicao_aux.IdInstituicao != IdMatriz && (instituicao_aux.IdMatriz == null || instituicao_aux.IdMatriz != IdMatriz))
+                if(instituicao_aux.IdInstituicao != IdMatriz && (instituicao_aux.IdMatriz == null || instituicao_aux.IdMatriz != IdMatriz))
                     return null;
             }
-            if(turmaAluno_aux.IdPessoa != turmaAluno.IdPessoa){
+            if(turmaAluno_aux.IdPessoa != turmaAluno.IdPessoa) {
                 Pessoa pessoa = db.Pessoa.Find(turmaAluno.IdPessoa);
                 if(pessoa == null) return null;
 
                 Instituicao instituicao_aux = db.Instituicao.Find(pessoa.IdInstituicao);
-                if (instituicao_aux.IdInstituicao != IdMatriz && (instituicao_aux.IdMatriz == null || instituicao_aux.IdMatriz != IdMatriz))
+                if(instituicao_aux.IdInstituicao != IdMatriz && (instituicao_aux.IdMatriz == null || instituicao_aux.IdMatriz != IdMatriz))
                     return null;
             }
 
@@ -94,7 +94,7 @@ namespace TaCertoForms.Factory{
             return turmaAluno;
         }
 
-        public bool DeleteTurmaAluno(int? id){
+        public bool DeleteTurmaAluno(int? id) {
             throw new System.NotImplementedException();
         }
     }

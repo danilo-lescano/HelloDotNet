@@ -5,12 +5,12 @@ using System.Web;
 using TaCertoForms.Contexts;
 using TaCertoForms.Models;
 
-namespace TaCertoForms.Factory{
+namespace TaCertoForms.Factory {
     //CLASSE InstituicaoMatrizCreator - Responsavel por pegar no banco de dados apenas as Instituicoes relacionadas a uma determinada matriz
-    public class InstituicaoMatrizCreator : BaseCreator, IFactoryInstituicao{
-        public InstituicaoMatrizCreator(HttpSessionStateBase session) : base(session) {}
+    public class InstituicaoMatrizCreator : BaseCreator, IFactoryInstituicao {
+        public InstituicaoMatrizCreator(HttpSessionStateBase session) : base(session) { }
 
-        public Instituicao FindInstituicao(int? id){
+        public Instituicao FindInstituicao(int? id) {
             if(id == null) return null;
             Context db = new Context();
             Instituicao instituicao = db.Instituicao.Find(id);
@@ -20,7 +20,8 @@ namespace TaCertoForms.Factory{
             db.Dispose();
             return null;
         }
-        public List<Instituicao> InstituicaoList(){
+
+        public List<Instituicao> InstituicaoList() {
             Context db = new Context();
             List<Instituicao> instituicaoList = db.Instituicao.Where(i => i.IdInstituicao == IdMatriz || (i.IdMatriz != null && i.IdMatriz == IdMatriz)).ToList();
             if(instituicaoList == null || instituicaoList.Count == 0) return null;
@@ -28,7 +29,7 @@ namespace TaCertoForms.Factory{
             return instituicaoList;
         }
 
-        public Instituicao CreateInstituicao(Instituicao instituicao){
+        public Instituicao CreateInstituicao(Instituicao instituicao) {
             Context db = new Context();
             Instituicao instituicao_aux = db.Instituicao.Find(instituicao.IdInstituicao);
             if(instituicao_aux != null)
@@ -41,7 +42,7 @@ namespace TaCertoForms.Factory{
             return instituicao;
         }
 
-        public Instituicao EditInstituicao(Instituicao instituicao){
+        public Instituicao EditInstituicao(Instituicao instituicao) {
             Context db = new Context();
             Instituicao instituicao_aux = db.Instituicao.Find(instituicao.IdInstituicao);
             if(instituicao_aux == null)
@@ -58,7 +59,7 @@ namespace TaCertoForms.Factory{
             return instituicao;
         }
 
-        public bool DeleteInstituicao(int? id){
+        public bool DeleteInstituicao(int? id) {
             if(id == null) return false;
             Context db = new Context();
             Instituicao instituicao = db.Instituicao.Find(id);

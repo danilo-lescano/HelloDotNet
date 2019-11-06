@@ -5,11 +5,11 @@ using System.Web;
 using TaCertoForms.Contexts;
 using TaCertoForms.Models;
 
-namespace TaCertoForms.Factory{
-    public class PessoaMatrizCreator : BaseCreator, IFactoryPessoa{
-        public PessoaMatrizCreator(HttpSessionStateBase session) : base(session) {}
+namespace TaCertoForms.Factory {
+    public class PessoaMatrizCreator : BaseCreator, IFactoryPessoa {
+        public PessoaMatrizCreator(HttpSessionStateBase session) : base(session) { }
 
-        public Pessoa FindPessoa(int? id){
+        public Pessoa FindPessoa(int? id) {
             if(id == null) return null;
             Context db = new Context();
             Pessoa pessoa = db.Pessoa.Find(id);
@@ -21,14 +21,15 @@ namespace TaCertoForms.Factory{
             db.Dispose();
             return null;
         }
-        public List<Pessoa> PessoaList(){
+
+        public List<Pessoa> PessoaList() {
             Context db = new Context();
             List<int> idAuxList;
             
             List<Instituicao> instituicaoList = db.Instituicao.Where(i => i.IdInstituicao == IdMatriz || (i.IdMatriz != null && i.IdMatriz == IdMatriz)).ToList();
             if(instituicaoList == null || instituicaoList.Count == 0) return null;
             idAuxList = new List<int>();
-            foreach (var i in instituicaoList) idAuxList.Add(i.IdInstituicao);
+            foreach(var i in instituicaoList) idAuxList.Add(i.IdInstituicao);
 
             List<Pessoa> pessoaList = db.Pessoa.Where(p => idAuxList.Contains(p.IdInstituicao)).ToList();
             if(pessoaList == null || pessoaList.Count == 0) return null;
@@ -36,7 +37,8 @@ namespace TaCertoForms.Factory{
             db.Dispose();
             return pessoaList;
         }
-        public Pessoa CreatePessoa(Pessoa pessoa){
+
+        public Pessoa CreatePessoa(Pessoa pessoa) {
             Context db = new Context();
 
             Instituicao instituicao = db.Instituicao.Find(pessoa.IdInstituicao);
@@ -48,7 +50,8 @@ namespace TaCertoForms.Factory{
             db.SaveChanges();
             return pessoa;
         }
-        public Pessoa EditPessoa(Pessoa pessoa){
+
+        public Pessoa EditPessoa(Pessoa pessoa) {
             Context db = new Context();
 
             Pessoa pessoa_aux = db.Pessoa.Find(pessoa.IdPessoa);
@@ -71,7 +74,8 @@ namespace TaCertoForms.Factory{
             db.Dispose();
             return pessoa;
         }
-        public bool DeletePessoa(int? id){
+
+        public bool DeletePessoa(int? id) {
             if(id == null) return false;
             Context db = new Context();
             Pessoa pessoa = db.Pessoa.Find(id);

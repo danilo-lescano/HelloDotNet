@@ -5,12 +5,12 @@ using System.Web;
 using TaCertoForms.Contexts;
 using TaCertoForms.Models;
 
-namespace TaCertoForms.Factory{
-    public class DisciplinaTurmaMatrizCreator : BaseCreator, IFactoryDisciplinaTurma{
+namespace TaCertoForms.Factory {
+    public class DisciplinaTurmaMatrizCreator : BaseCreator, IFactoryDisciplinaTurma {
         public DisciplinaTurmaMatrizCreator(HttpSessionStateBase session) : base(session) { }
 
-        public DisciplinaTurma FindDisciplinaTurma(int? id){
-            if (id == null) return null;
+        public DisciplinaTurma FindDisciplinaTurma(int? id) {
+            if(id == null) return null;
             Context db = new Context();
 
             DisciplinaTurma disciplinaTurma = db.DisciplinaTurma.Find(id);
@@ -22,14 +22,14 @@ namespace TaCertoForms.Factory{
             Instituicao instituicao = db.Instituicao.Find(turma.IdInstituicao);
             if(instituicao == null) return null;
 
-            if (instituicao.IdInstituicao != IdMatriz && (instituicao.IdMatriz == null || instituicao.IdMatriz != IdMatriz))
+            if(instituicao.IdInstituicao != IdMatriz && (instituicao.IdMatriz == null || instituicao.IdMatriz != IdMatriz))
                 return null;
 
             db.Dispose();
             return disciplinaTurma;
         }
 
-        public List<DisciplinaTurma> DisciplinaTurmaList(){
+        public List<DisciplinaTurma> DisciplinaTurmaList() {
             Context db = new Context();
             List<int> idAuxList;
 
@@ -50,7 +50,7 @@ namespace TaCertoForms.Factory{
             return disciplinaTurmaList;
         }
 
-        public DisciplinaTurma CreateDisciplinaTurma(DisciplinaTurma disciplinaTurma){
+        public DisciplinaTurma CreateDisciplinaTurma(DisciplinaTurma disciplinaTurma) {
             Context db = new Context();
 
             Turma turma = db.Turma.Find(disciplinaTurma.IdTurma);
@@ -58,7 +58,7 @@ namespace TaCertoForms.Factory{
 
             Instituicao instituicao = db.Instituicao.Find(turma.IdInstituicao);
             if(instituicao == null) return null;
-            if (instituicao.IdInstituicao != IdMatriz && (instituicao.IdMatriz == null || instituicao.IdMatriz != IdMatriz))
+            if(instituicao.IdInstituicao != IdMatriz && (instituicao.IdMatriz == null || instituicao.IdMatriz != IdMatriz))
                 return null;
 
             db.DisciplinaTurma.Add(disciplinaTurma);
@@ -67,13 +67,13 @@ namespace TaCertoForms.Factory{
             return disciplinaTurma;
         }
 
-        public DisciplinaTurma EditDisciplinaTurma(DisciplinaTurma disciplinaTurma){
+        public DisciplinaTurma EditDisciplinaTurma(DisciplinaTurma disciplinaTurma) {
             Context db = new Context();
 
             DisciplinaTurma disciplinaTurma_aux = db.DisciplinaTurma.Find(disciplinaTurma.IdDisciplinaTurma);
             if(disciplinaTurma_aux == null) return null;
 
-            if(disciplinaTurma_aux.IdTurma != disciplinaTurma.IdTurma){
+            if(disciplinaTurma_aux.IdTurma != disciplinaTurma.IdTurma) {
                 Turma turma_aux = db.Turma.Find(disciplinaTurma_aux.IdTurma);
                 if(turma_aux == null) return null;
 
@@ -81,7 +81,7 @@ namespace TaCertoForms.Factory{
                 if(instituicao_aux.IdInstituicao != IdMatriz && (instituicao_aux.IdMatriz == null || instituicao_aux.IdMatriz != IdMatriz)) return null;
             }
 
-            if(disciplinaTurma_aux.IdDisciplina != disciplinaTurma.IdDisciplina){
+            if(disciplinaTurma_aux.IdDisciplina != disciplinaTurma.IdDisciplina) {
                 Disciplina disciplina_aux = db.Disciplina.Find(disciplinaTurma_aux.IdDisciplina);
                 if(disciplina_aux == null) return null;
                 if(disciplina_aux.IdMatriz != IdMatriz) return null;
@@ -96,7 +96,7 @@ namespace TaCertoForms.Factory{
             return disciplinaTurma;
         }
 
-        public bool DeleteDisciplinaTurma(int? id){
+        public bool DeleteDisciplinaTurma(int? id) {
             if(id == null) return false;
             Context db = new Context();
 

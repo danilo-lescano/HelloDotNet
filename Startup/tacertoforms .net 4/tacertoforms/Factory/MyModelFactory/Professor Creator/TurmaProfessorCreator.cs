@@ -55,12 +55,15 @@ namespace TaCertoForms.Factory {
             db.Dispose();
             return turmas;
         }
+
         public Turma CreateTurma(Turma turma) {
             throw new System.NotImplementedException();
         }
+
         public Turma EditTurma(Turma turma) {
             throw new System.NotImplementedException();
         }
+
         public bool DeleteTurma(int? id) {
             throw new System.NotImplementedException();
         }

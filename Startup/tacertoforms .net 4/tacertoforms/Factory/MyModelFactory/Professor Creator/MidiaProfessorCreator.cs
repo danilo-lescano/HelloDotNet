@@ -9,7 +9,7 @@ using TaCertoForms.Models;
 
 namespace TaCertoForms.Factory {
     public class MidiaProfessorCreator : BaseCreator, IFactoryMidia {
-        public MidiaProfessorCreator(HttpSessionStateBase session) : base(session) {}
+        public MidiaProfessorCreator(HttpSessionStateBase session) : base(session) { }
         public Midia CreateMidia(int? IdOrigem, string Tabela, Midia midia) {
             if(IdOrigem == null || Tabela == null || Tabela == "" || midia == null) return null;
 

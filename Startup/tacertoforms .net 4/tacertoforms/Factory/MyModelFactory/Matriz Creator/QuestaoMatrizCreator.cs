@@ -5,12 +5,12 @@ using System.Web;
 using TaCertoForms.Contexts;
 using TaCertoForms.Models;
 
-namespace TaCertoForms.Factory{
+namespace TaCertoForms.Factory {
     //CLASSE QuestaoMatrizCreator - Responsavel por pegar no banco de dados apenas as Questaos relacionadas a uma determinada matriz
-    public class QuestaoMatrizCreator : BaseCreator, IFactoryQuestao{
-        public QuestaoMatrizCreator(HttpSessionStateBase session) : base(session) {}
+    public class QuestaoMatrizCreator : BaseCreator, IFactoryQuestao {
+        public QuestaoMatrizCreator(HttpSessionStateBase session) : base(session) { }
 
-        public Questao FindQuestao(int? id){
+        public Questao FindQuestao(int? id) {
             if(id == null) return null;
             Context db = new Context();
             Questao questao = db.Questao.Find(id);
@@ -33,7 +33,8 @@ namespace TaCertoForms.Factory{
             db.Dispose();
             return null;
         }
-        public List<Questao> QuestaoList(){
+
+        public List<Questao> QuestaoList() {
             Context db = new Context();
             List<int> idAuxList;
             
@@ -64,20 +65,19 @@ namespace TaCertoForms.Factory{
             return questaoList;
         }
 
-        public Questao CreateQuestao(Questao atividade){
+        public Questao CreateQuestao(Questao atividade) {
             throw new System.NotImplementedException();
         }
 
-        public Questao EditQuestao(Questao atividade){
+        public Questao EditQuestao(Questao atividade) {
             throw new System.NotImplementedException();
         }
 
-        public bool DeleteQuestao(int? id){
+        public bool DeleteQuestao(int? id) {
             throw new System.NotImplementedException();
         }
 
-        public List<Questao> FindQuestaoByTypeAndActivity(int? idAtividade, int? idTipoQuestao)
-        {
+        public List<Questao> FindQuestaoByTypeAndActivity(int? idAtividade, int? idTipoQuestao) {
             throw new System.NotImplementedException();
         }
     }

@@ -5,12 +5,12 @@ using System.Web;
 using TaCertoForms.Contexts;
 using TaCertoForms.Models;
 
-namespace TaCertoForms.Factory{
+namespace TaCertoForms.Factory {
     //CLASSE InstituicaoProfessorCreator - Responsavel por pegar no banco de dados apenas as Instituicoes relacionadas a uma determinada matriz
-    public class InstituicaoProfessorCreator : BaseCreator, IFactoryInstituicao{
-        public InstituicaoProfessorCreator(HttpSessionStateBase session) : base(session) {}
+    public class InstituicaoProfessorCreator : BaseCreator, IFactoryInstituicao {
+        public InstituicaoProfessorCreator(HttpSessionStateBase session) : base(session) { }
 
-        public Instituicao FindInstituicao(int? id){
+        public Instituicao FindInstituicao(int? id) {
             Context db = new Context();
             Pessoa pessoa = db.Pessoa.Find(IdPessoa);
             if(pessoa == null) return null;
@@ -19,7 +19,7 @@ namespace TaCertoForms.Factory{
             return instituicao;
         }
 
-        public List<Instituicao> InstituicaoList(){
+        public List<Instituicao> InstituicaoList() {
             Context db = new Context();
             Pessoa pessoa = db.Pessoa.Find(IdPessoa);
             if(pessoa == null) return null;
@@ -27,15 +27,15 @@ namespace TaCertoForms.Factory{
             return instituicaoList;
         }
 
-        public Instituicao CreateInstituicao(Instituicao instituicao){
+        public Instituicao CreateInstituicao(Instituicao instituicao) {
             throw new System.NotImplementedException();
         }
 
-        public Instituicao EditInstituicao(Instituicao instituicao){
+        public Instituicao EditInstituicao(Instituicao instituicao) {
             throw new System.NotImplementedException();
         }
 
-        public bool DeleteInstituicao(int? id){
+        public bool DeleteInstituicao(int? id) {
             throw new System.NotImplementedException();
         }
     }
