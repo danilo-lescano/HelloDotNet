@@ -16,6 +16,7 @@ namespace TaCertoForms.Controllers {
         public ActionResult Index() {
             List<Atividade> atividades = Collection.AtividadeList();
             List<ViewModelAtividade> vmAtividades = new List<ViewModelAtividade>();
+            if(atividades == null) atividades = new List<Atividade>();
             foreach(var a in atividades) {
                 ViewModelAtividade vma = new ViewModelAtividade();
                 vma.Atividade = a;
