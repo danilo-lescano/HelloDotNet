@@ -11,15 +11,21 @@ namespace TaCertoForms.Factory {
 
         public Turma FindTurma(int? id) {
             Context db = new Context();
+            List<int> idAuxList;
 
             Pessoa pessoa = db.Pessoa.Find(IdPessoa);
             Turma turma = db.Turma.Find(id);
             if(pessoa == null || turma == null) return null;
 
-            List<int> idAuxList = new List<int>();
             List<TurmaDisciplinaAutor> turmaDisciplinaAutorList = db.TurmaDisciplinaAutor.Where(tda => tda.IdAutor == pessoa.IdPessoa).ToList();
             if(turmaDisciplinaAutorList == null || turmaDisciplinaAutorList.Count == 0) return null;
+            idAuxList = new List<int>();
             foreach(var tda in turmaDisciplinaAutorList) idAuxList.Add(tda.IdDisciplinaTurma);
+
+            List<DisciplinaTurma> disciplinaTurmaList = db.DisciplinaTurma.Where(dt => idAuxList.Contains(dt.IdDisciplinaTurma)).ToList();
+            if(disciplinaTurmaList == null || disciplinaTurmaList.Count == 0) return null;
+            idAuxList = new List<int>();
+            foreach(var dt in disciplinaTurmaList) idAuxList.Add(dt.IdTurma);
 
             db.Dispose();
             if(idAuxList.Contains(turma.IdTurma)) return turma;
