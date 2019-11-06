@@ -76,6 +76,7 @@ namespace TaCertoForms.Controllers {
         [Perfil(Perfil.Administrador, Perfil.Autor)]
         public ActionResult AjaxTurmas(int IdInstituicao) {
             List<Turma> turmas = Collection.TurmaList()?.Where(t => t.IdInstituicao == IdInstituicao).ToList();
+            if(turmas == null) turmas = new List<Turma>();
             ViewBag.TurmasList = new SelectList(turmas, "IdTurma", "Serie");
             return View();
         }
