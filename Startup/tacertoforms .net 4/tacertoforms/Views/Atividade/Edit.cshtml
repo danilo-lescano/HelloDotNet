@@ -54,7 +54,7 @@
                             </div>
                             <div class="form-group col-xs-12 col-md-6">
                                 @Html.Label("Período")
-                                @Html.TextBox("Periodo", null, new { @class = "form-control", @type = "text", @id = "periodo" })
+                                @Html.TextBox("Periodo", null, new { @class = "form-control", @type = "text", @id = "periodo", @onchange = "changePeriodo(this.value)" })
                                 @Html.ValidationMessageFor(model => model.DataInicio, "", new { @class = "text-danger" })
                             </div>
                             <div class="form-group col-xs-12 col-md-6">
@@ -163,7 +163,9 @@
     .select2-container--default .select2-selection--multiple .select2-selection__choice{color: #000 !important}
 </style>
 <script>
-    //Configurações de elementos
+    function changePeriodo(val) {
+    }
+
     var select2 = $('.select2').select2({ tags: true, tokenSeparators: [','], width: '100%' });
     $('#periodo').daterangepicker({
         timePicker: true,
@@ -171,6 +173,8 @@
         minDate: new Date(Date.now()),
         locale: { format: 'DD/MM/YYYY hh:mm:ss' }
     });
+
+    
     document.getElementById("periodo").value = "@Model.Periodo";
 
     $('#tabela-de-colunaNumeroLinhas').on('change', function () { 

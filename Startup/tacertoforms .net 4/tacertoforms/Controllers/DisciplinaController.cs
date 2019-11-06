@@ -61,11 +61,12 @@ namespace TaCertoForms.Controllers {
             disciplina.IdMatriz = (int)Session["IdMatriz"];
             Collection.CreateDisciplina(disciplina);
 
-            string[] idTurmas = vmDisciplina.idTurmas.Split(';');
-            foreach(string t in idTurmas) {
-                DisciplinaTurma dt = new DisciplinaTurma() { IdDisciplina = disciplina.IdDisciplina, IdTurma = int.Parse(t) };
-                Collection.CreateDisciplinaTurma(dt);
-            }
+            string[] idTurmas = vmDisciplina.idTurmas?.Split(';');
+            if(idTurmas != null)
+                foreach(string t in idTurmas) {
+                    DisciplinaTurma dt = new DisciplinaTurma() { IdDisciplina = disciplina.IdDisciplina, IdTurma = int.Parse(t) };
+                    Collection.CreateDisciplinaTurma(dt);
+                }
 
             return RedirectToAction("Index");
         }
