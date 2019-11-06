@@ -144,8 +144,8 @@
                     );
                 }
                 while(spans.length > 0){
-                    substr = substr.replace("❂", spans[0]);
-                    spans.shift();
+                    substr = substr.replace("❂", spans[spans.length - 1]);
+                    spans.pop();
                 }
             }
             return txt.substring(0, o) + substr +  txt.substring(f, txt.length);
