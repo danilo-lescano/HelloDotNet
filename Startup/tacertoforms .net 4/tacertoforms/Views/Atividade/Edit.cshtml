@@ -587,7 +587,12 @@
         },
     };
 
-    AjaxIndex(null, (q) => {        
+    AjaxIndex(null, (q) => {
+        $('#tabela-de-listagem').dataTable( {
+            "language": {
+                "emptyTable": "Sem questões aqui"
+            }
+        } );
         for(var i = 0; i < q.length; i++){
             $('#tabela-de-listagem').DataTable().row.add([
                 q[i].IdQuestao,
@@ -600,6 +605,11 @@
     });
 
     AjaxIndex(1, (q)=>{
+        $('#tabela-de-certo-errado').dataTable( {
+            "language": {
+                "emptyTable": "Sem questões aqui"
+            }
+        } );
         for(var i = 0; i < q.length; i++){
             $('#tabela-de-certo-errado').DataTable().row.add([
                 q[i].IdQuestao,
@@ -615,6 +625,11 @@
     });
 
     AjaxIndex(2, (q)=>{
+        $('#tabela-de-lacuna').dataTable( {
+            "language": {
+                "emptyTable": "Sem questões aqui"
+            }
+        } );
         for(var i = 0; i < q.length; i++){
             $('#tabela-de-lacuna').DataTable().row.add([
                 q[i].IdQuestao,
@@ -630,6 +645,11 @@
     });
 
     AjaxIndex(3, (q)=>{
+        $('#tabela-de-coluna').dataTable( {
+            "language": {
+                "emptyTable": "Sem questões aqui"
+            }
+        } );
         for(var i = 0; i < q.length; i++){
             $('#tabela-de-coluna').DataTable().row.add([
                 q[i].IdQuestao,
@@ -645,6 +665,11 @@
     });
 
     AjaxIndex(4, (q)=>{
+        $('#tabela-de-associacao').dataTable( {
+            "language": {
+                "emptyTable": "Sem questões aqui"
+            }
+        } );
         for(var i = 0; i < q.length; i++){
             $('#tabela-de-associacao').DataTable().row.add([
                 q[i].IdQuestao,
@@ -658,4 +683,20 @@
             LabelNum.Associacao++;
         }
     });
+</script>
+
+<script>
+    /*var arr = [
+        "#tab-listagem",
+        "#tabela-de-associacao",
+        "#tabela-de-certo-errado",
+        "#tabela-de-coluna",
+        "#tabela-de-lacuna",
+    ];
+    for(var i = 0; i < arr.length; i++)
+        $(arr[i]).dataTable( {
+            "language": {
+                "emptyTable": "Sem questões aqui"
+            }
+        } );*/
 </script>
