@@ -54,7 +54,7 @@
                             <div class="form-group col-xs-12 col-md-3">
                                 @Html.Label("CPF")
                                 @Html.EditorFor(model => model.CPF, new { htmlAttributes = new { @class = "form-control cpf", @required = "required" } })
-                                @Html.ValidationMessageFor(model => model.CPF, "", new { @class = "text-danger" })
+                                @Html.ValidationMessageFor(model => model.CPF, "Por favor, forneça um CPF válido.", new { @class = "help-block" })
                             </div>
 
                             <div class="form-group col-xs-12 col-md-3">
@@ -79,7 +79,17 @@
     </section>
 </div>
 
-
-<script>    
+<script>
     $('.cpf').inputmask("999.999.999-99");
+    $('.cpf').on('blur', function () {            
+        var value = $('.cpf').val(); 
+        if (value != '') {
+            if (!valida_cpf(value) || value == '11111111111' || value == '22222222222' || value == '33333333333' || value == '44444444444' || value == '55555555555' || value == '66666666666' || value == '77777777777' || value == '88888888888' || value == '99999999999' || value == '00000000000') {
+                $(this).val('');
+                mensagensValidacao(false, $(this).parents('.form-group'), "CPF Inválido.");
+            } else {
+                mensagensValidacao(true, $(this).parents('.form-group'));                    
+            }
+        }
+    });
 </script>

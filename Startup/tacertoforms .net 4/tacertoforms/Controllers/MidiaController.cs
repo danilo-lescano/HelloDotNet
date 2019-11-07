@@ -55,14 +55,18 @@ namespace TaCertoForms.Controllers {
                             Directory.CreateDirectory(caminho);
                         file.SaveAs(path);
                         Collection.CreateMidia(id, tabela, fileDetail);
+
+                        if(tabela == "Pessoa" && id == (int)Session["IdPessoa"]) {
+                            Session["FotoPerfil"] = fileDetail.Tabela + '/' + fileDetail.IdMidia + fileDetail.Extensao;
+                        }
                     }
                     if(tabela == "Instituicao" || tabela == "Pessoa" || tabela == "Questao") { //Caso tenha alguma mídia já salva
                         Midia DeleteMidia = Collection.FindMidia(id, tabela);
                         if(DeleteMidia != null && DeleteMidia.IdMidia != hash)
                             Delete(DeleteMidia.IdMidia);
-                    }
-                }
-                return Json(arquivos);
+                    }                  
+                }                    
+                return Json(arquivos);                
             }
             catch(Exception) {
                 Response.StatusCode = (int)HttpStatusCode.BadRequest;

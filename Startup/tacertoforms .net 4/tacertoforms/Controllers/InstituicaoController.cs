@@ -68,10 +68,13 @@ namespace TaCertoForms.Controllers {
         [Perfil(Perfil.Administrador)]
         public ActionResult Edit(ViewModelInstituicao viewModel) {
             Instituicao instituicao = viewModel.instituicao;
-            if(Collection.FindInstituicao(instituicao.IdInstituicao) == null)
-                return HttpNotFound();
-            //Caso o usuário já tinha cadastrado um email de cobrança diferente do principal e optou por tornar o endereço de cobrança como o mesmo endereço principal
+            if(Collection.FindInstituicao(instituicao.IdInstituicao) == null) return HttpNotFound();
+
+            int apagarEndereco = 0;
+            //Caso o usuário já tinha cadastrado um endereço de cobrança diferente do principal e optou por tornar o endereço de cobrança como o mesmo endereço principal
             if(viewModel.EqualEnderecoCobranca && viewModel.IdEnderecoCobranca != viewModel.IdEnderecoPrincipal) {
+                //Apagando endereço de cobrança do banco
+                apagarEndereco = viewModel.IdEnderecoCobranca;
                 viewModel.IdEnderecoCobranca = viewModel.IdEnderecoPrincipal;
                 instituicao.IdEnderecoCobranca = viewModel.IdEnderecoPrincipal;
             }
@@ -88,8 +91,8 @@ namespace TaCertoForms.Controllers {
             //Atualizando endereço principal
             Endereco principal = viewModel.enderecoPrincipal;
             Collection.EditEndereco(principal);
-
             Collection.EditInstituicao(instituicao);
+            if(apagarEndereco != 0) Collection.DeleteEndereco(apagarEndereco);
 
             return RedirectToAction("Index");
         }

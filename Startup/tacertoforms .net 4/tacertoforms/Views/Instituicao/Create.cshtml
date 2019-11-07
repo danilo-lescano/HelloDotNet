@@ -48,7 +48,7 @@
                     <div class="form-group col-xs-12 col-md-6">
                         @Html.Label("CNPJ")
                         @Html.EditorFor(model => model.CNPJ, new { htmlAttributes = new { @class = "form-control cnpj", @required = "required"} })
-                        @Html.ValidationMessageFor(model => model.CNPJ, "", new { @class = "text-danger" })
+                        @Html.ValidationMessageFor(model => model.CNPJ, "Por favor, forneça um CNPJ válido.", new { @class = "help-block" })
 
                     </div>
 
@@ -76,7 +76,7 @@
                     </div>
                     <div class="form-group col-xs-12 col-md-3">
                         @Html.Label("País")                        
-                        <select class="paises">                            
+                        <select class="paises form-control" name="PaisPrincipal">                            
                         </select>
                     </div>
                     <div class="form-group col-xs-12 col-md-3">
@@ -119,7 +119,8 @@
                         </div>
                         <div class="form-group col-xs-12 col-md-3">
                             @Html.Label("País")
-                            @Html.TextBox("PaisCobranca", null, new { @class = "form-control", @id = "pais-cobranca" })
+                            <select class="pais-cobranca form-control" name="PaisCobranca">
+                            </select>
                         </div>
                         <div class="form-group col-xs-12 col-md-3">
                             @Html.Label("Logradouro")
@@ -166,28 +167,24 @@
 
 
 <script>
-
-    if (paises.length > 0) {
-        for (var i = 0; i < paises.length; i++){
-            var opt = document.createElement('option');
-            opt.value = i;
-            opt.innerHTML = i;
-            $('.paises').appendChild(opt);
-        }
+        
+    for (var i = 0; i < paises.length; i++) {                
+        $('.paises').append(new Option(paises[i], paises[i], false, paises[i] == "Brasil" ? true : false));        
+        $('.pais-cobranca').append(new Option(paises[i], paises[i], false, paises[i] == "Brasil" ? true : false));
     }
-
 
     new dgCidadesEstados({estado: $('#estado-principal')[0], cidade: $('#cidade-principal')[0]});
     new dgCidadesEstados({estado: $('#estado-cobranca')[0],	cidade: $('#cidade-cobranca')[0]});
-
-    $('.cep').inputmask("99.999-999");
+        
     $('.cnpj').inputmask("99.999.999/9999-99");
     $('.telefone').inputmask("(99) 9999-9999");       
 
     $('.cnpj').on('blur', function () {
-        if (!validar_cnpj($(this).val())) {
-            $(this).val('');
-            alert('O CNPJ informado é inválido!');
+        if ($(this).val() != '' && !validar_cnpj($(this).val())) {
+            $(this).val('');            
+            mensagensValidacao(false, $(this).parents('.form-group'), "O CNPJ informado é inválido!");
+        } else {
+            mensagensValidacao(true, $(this).parents('.form-group'));
         }
     });
     $('#form-instituicao input').on('change', function() {

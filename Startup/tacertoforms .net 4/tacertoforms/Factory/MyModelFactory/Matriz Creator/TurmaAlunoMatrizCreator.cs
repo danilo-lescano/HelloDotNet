@@ -49,6 +49,9 @@ namespace TaCertoForms.Factory {
         public TurmaAluno CreateTurmaAluno(TurmaAluno turmaAluno) {
             Context db = new Context();
 
+            TurmaAluno ta = db.TurmaAluno.Where(x => x.IdTurma == turmaAluno.IdTurma && x.IdPessoa == turmaAluno.IdPessoa).FirstOrDefault();
+            if (ta != null) return null;
+
             Turma turma = db.Turma.Find(turmaAluno.IdTurma);
             if(turma == null) return null;
 
@@ -94,8 +97,22 @@ namespace TaCertoForms.Factory {
             return turmaAluno;
         }
 
-        public bool DeleteTurmaAluno(int? id) {
-            throw new System.NotImplementedException();
+        public bool DeleteTurmaAluno(int? id){
+            if (id == null) return false;
+            Context db = new Context();
+            TurmaAluno ta = db.TurmaAluno.Find(id);
+            if (ta == null) return false;
+                                    
+            Turma turma = db.Turma.Find(ta.IdTurma);
+            if (turma == null) return false;
+
+            Instituicao instituicao = db.Instituicao.Find(turma.IdInstituicao);
+            if (instituicao == null || (instituicao.IdInstituicao != IdMatriz && instituicao.IdMatriz != IdMatriz)) return false;
+
+            db.TurmaAluno.Remove(ta);
+            db.SaveChanges();
+            db.Dispose();
+            return true;
         }
     }
 }

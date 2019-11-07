@@ -14,6 +14,9 @@ namespace TaCertoForms.Factory {
             Context db = new Context();
             List<int> idAuxList;
 
+            Pessoa pessoa = db.Pessoa.Find(id);
+            if (id == IdPessoa) return pessoa;
+
             List<TurmaDisciplinaAutor> turmaDisciplinaAutorList = db.TurmaDisciplinaAutor.Where(tda => tda.IdAutor == IdPessoa).ToList();
             if(turmaDisciplinaAutorList == null || turmaDisciplinaAutorList.Count == 0) return null;
             idAuxList = new List<int>();
@@ -26,8 +29,7 @@ namespace TaCertoForms.Factory {
 
             List<TurmaAluno> turmaAlunoList = db.TurmaAluno.Where(ta => idAuxList.Contains(ta.IdTurma) && ta.IdPessoa == id).ToList();
             if(turmaAlunoList == null || turmaAlunoList.Count == 0) return null;
-
-            Pessoa pessoa = db.Pessoa.Find(id);
+            
             return pessoa;
         }
 
@@ -56,9 +58,21 @@ namespace TaCertoForms.Factory {
         }
 
         public Pessoa EditPessoa(Pessoa pessoa){
-            throw new System.NotImplementedException();
+            Context db = new Context();
+
+            Pessoa pessoa_aux = db.Pessoa.Find(pessoa.IdPessoa);
+            if (pessoa_aux == null) return null;
+            if (pessoa.IdPessoa != IdPessoa) return null;
+
+            pessoa.Perfil = Perfil.Autor;
+            db.Dispose();
+            db = new Context();
+            db.Entry(pessoa).State = System.Data.Entity.EntityState.Modified;
+            db.SaveChanges();
+            db.Dispose();
+            return pessoa;            
         }
-        
+
         public bool DeletePessoa(int? id){
             throw new System.NotImplementedException();
         }

@@ -72,12 +72,11 @@ namespace TaCertoForms.Factory {
             if(id == null) return false;
             Context db = new Context();
             Endereco endereco = db.Endereco.Find(id);
-            if(endereco == null) return false;
-            db.Dispose();
-            db = new Context();
-            List<Instituicao> instituicaoList = db.Instituicao.Where(i => (i.IdInstituicao == IdMatriz || i.IdMatriz == IdMatriz) && (i.IdEnderecoCobranca == endereco.IdEndereco || i.IdEnderecoPrincipal == endereco.IdEndereco)).ToList();
+
+            if (endereco == null) return false;
+            List<Instituicao> instituicaoList = db.Instituicao.Where(i => (i.IdInstituicao == IdMatriz || i.IdMatriz == IdMatriz)).ToList();
             if(instituicaoList == null || instituicaoList.Count == 0)
-                return false;
+                return false;            
             db.Endereco.Remove(endereco);
             db.SaveChanges();
             db.Dispose();

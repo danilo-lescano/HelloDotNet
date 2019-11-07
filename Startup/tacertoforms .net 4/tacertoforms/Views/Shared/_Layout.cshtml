@@ -46,7 +46,7 @@
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav">
                         <li class="dropdown user user-menu">
-                            <a href="javascript:void(0)">
+                            <a href="@Url.Action("Edit", "Pessoa", new { id = Session["IdPessoa"]})">
                                 @if (@Session["FotoPerfil"] != null)
                                 {
                                 <img src="~/Content/images/upload/@Session["FotoPerfil"]" class="user-image" alt="User Image">

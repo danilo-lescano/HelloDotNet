@@ -60,7 +60,7 @@ namespace TaCertoForms.Models {
                     return new Endereco()
                     {
                         IdEndereco = this.IdEnderecoPrincipal == this.IdEnderecoCobranca ? 0 : this.IdEnderecoCobranca,
-                        Pais = this.PaisCobranca,
+                        Pais = this.PaisCobranca, 
                         UF = this.UFCobranca,
                         Cidade = this.CidadeCobranca,
                         Numero = this.NumeroCobranca,

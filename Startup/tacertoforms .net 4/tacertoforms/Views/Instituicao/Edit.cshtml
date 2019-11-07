@@ -53,7 +53,7 @@
                             <div class="form-group col-xs-12 col-md-6">
                                 @Html.Label("CNPJ")
                                 @Html.EditorFor(model => model.CNPJ, new { htmlAttributes = new { @class = "form-control cnpj", @required = "required" } })
-                                @Html.ValidationMessageFor(model => model.CNPJ, "", new { @class = "text-danger" })
+                                @Html.ValidationMessageFor(model => model.CNPJ, "Por favor, forneça um CNPJ válido.", new { @class = "help-block" })
 
                             </div>
 
@@ -100,7 +100,8 @@
                             </div>
                             <div class="form-group col-xs-12 col-md-3">
                                 @Html.Label("País")
-                                @Html.TextBox("PaisPrincipal", null, new { @class = "form-control", @id = "pais-principal", @required = "required" })
+                                <select class="paises form-control" name="PaisPrincipal">
+                                </select>
                             </div>
                             <div class="form-group col-xs-12 col-md-3">
                                 @Html.Label("Logradouro")
@@ -143,7 +144,8 @@
                                 </div>
                                 <div class="form-group col-xs-12 col-md-3">
                                     @Html.Label("País")
-                                    @Html.TextBox("PaisCobranca", null, new { @class = "form-control", @id = "pais-cobranca" })
+                                    <select class="pais-cobranca form-control" name="PaisCobranca">
+                                    </select>
                                 </div>
                                 <div class="form-group col-xs-12 col-md-3">
                                     @Html.Label("Logradouro")
@@ -192,6 +194,16 @@
 <script>
     var hasEnderecoCobranca = "@ViewBag.enderecoCobranca";
 
+    for (var i = 0; i < paises.length; i++) {
+       $('.paises').append(new Option(paises[i], paises[i], false, paises[i] == "@Html.Raw(ViewBag.enderecoPrincipal.Pais)" ? true : false));
+
+        if (hasEnderecoCobranca) {
+            $('.pais-cobranca').append(new Option(paises[i], paises[i], false, paises[i] == "@if (ViewBag.enderecoCobranca != null) { @Html.Raw(ViewBag.enderecoCobranca.Pais) } " ? true : false));
+        } else {
+            $('.pais-cobranca').append(new Option(paises[i], paises[i], false, paises[i] == "Brasil" ? true : false));
+        }
+    }
+
     new dgCidadesEstados({
         estado: $('#estado-principal')[0],
         cidade: $('#cidade-principal')[0],
@@ -214,13 +226,13 @@
             cidade: $('#cidade-cobranca')[0]
         });
     }
-
-    $('.cep').inputmask("99.999-999");
     $('.cnpj').inputmask("99.999.999/9999-99");
     $('.cnpj').on('blur', function () {
-        if (!validar_cnpj($(this).val())) {
-            $(this).val('');
-            alert('O CNPJ informado é inválido!');
+        if ($(this).val() != '' && !validar_cnpj($(this).val())) {
+            $(this).val('');            
+            mensagensValidacao(false, $(this).parents('.form-group'), "O CNPJ informado é inválido!");
+        } else {
+            mensagensValidacao(true, $(this).parents('.form-group'));
         }
     });
     $('.telefone').inputmask("(99) 9999-9999");
@@ -298,24 +310,24 @@
         $.ajax({
             url: '@Url.Action("Delete", "Midia")',
             data: {
-                id: $(this).attr('id')                
+                id: $(this).attr('id')
             },
-            cache: false,                        
-            success: function (data) {                
+            cache: false,
+            success: function (data) {
                 if (data == "True") {
                     $('.logo-empresa').html('');
                 } else {
                     alert('Falha ao deletar imagem. Por favor, entre em contato com o administrador do sistema.');
                 }
             },
-            error: function () {                
+            error: function () {
                 alert('Ocorreu algum erro de conexão. Por favor, tente novamente mais tarde');
             }
-        });    
-    });  
+        });
+    });
 
     $('#input-file').on('change', function (e) {
-        var files = e.target.files;            
+        var files = e.target.files;
         if (files.length > 0) {
            if (window.FormData !== undefined) {
                var data = new FormData();
@@ -328,7 +340,7 @@
                    contentType: false,
                    processData: false,
                    data: data,
-                   success: function (result) {                            
+                   success: function (result) {
                        midiaCreateSingleImage($('.logo-empresa'), result[0]);
                    },
                    error: function (xhr, status, p3, p4){
@@ -337,7 +349,7 @@
                            err = JSON.parse(xhr.responseText).Message;
                            console.log(err);
                         }
-                    });               
+                    });
             } else {
                 alert("O seu browser não suporta o upload de arquivos. Por favor, utilize outro navegador.");
             }

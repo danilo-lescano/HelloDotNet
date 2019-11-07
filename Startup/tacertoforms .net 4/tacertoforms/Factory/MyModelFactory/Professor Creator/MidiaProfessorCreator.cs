@@ -88,8 +88,10 @@ namespace TaCertoForms.Factory {
 
                 db.Dispose();
                 return true;
-            } 
-            return false; //A tabela que o usuário está tentando capturar mídia, não foi tratada nenhuma regra de permissão.
+            } else if(Tabela == "Pessoa") {
+                return pessoa.IdPessoa == IdOrigem;
+            }
+            return false; //A tabela que o usuário está tentando capturar mídia, não foi tratada nenhuma regra de permissão.                       
         }
 
         public List<Midia> MidiaList(int? IdOrigem, string Tabela){

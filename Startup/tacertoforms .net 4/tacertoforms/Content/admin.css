@@ -135,3 +135,7 @@ ul.sidebar-menu.tree > li a {
 .nav-tabs-custom > ul > li > a{
     color: #000 !important;
 }
+
+.help-block {
+    display: none;
+}

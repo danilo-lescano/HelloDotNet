@@ -62,6 +62,9 @@ namespace TaCertoForms.Factory {
         public TurmaDisciplinaAutor CreateTurmaDisciplinaAutor(TurmaDisciplinaAutor turmaDisciplinaAutor) {
             Context db = new Context();
 
+            TurmaDisciplinaAutor tda = db.TurmaDisciplinaAutor.Where(x => x.IdDisciplinaTurma == turmaDisciplinaAutor.IdDisciplinaTurma && x.IdAutor == turmaDisciplinaAutor.IdAutor).FirstOrDefault();
+            if(tda != null) return null;
+
             DisciplinaTurma disciplinaTurma = db.DisciplinaTurma.Find(turmaDisciplinaAutor.IdDisciplinaTurma);
             if(disciplinaTurma == null) return null;
 

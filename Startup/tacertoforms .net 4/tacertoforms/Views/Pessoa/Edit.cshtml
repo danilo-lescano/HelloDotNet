@@ -42,11 +42,23 @@
 
                             <div class="form-group col-xs-12 col-md-3">
                                 @Html.Label("Perfil")
-                                @Html.EnumDropDownListFor(
-                                 model => model.Perfil,
-                                 "Perfil",
-                                 new { @class = "form-control", @id = "perfil-select", @required = "required" })
+                                @if (Session["Perfil"].Equals(Perfil.Administrador))
+                                {
+                                    @Html.EnumDropDownListFor(
+                                     model => model.Perfil,
+                                     "Perfil",
+                                     new { @class = "form-control", @id = "perfil-select", @required = "required" })
+                                }
+                                else if (Session["Perfil"].Equals(Perfil.Autor))
+                                {
+                                    @Html.DropDownListFor(model => model.Perfil,
+                                   new List<SelectListItem> {
+                                        new SelectListItem() { Text = "Autor", Value = "Autor"},
+                                    }
+                                   , "Perfil", new { @class = "form-control", @required = "required" })
+                                }
                             </div>
+                            
 
                             <div class="form-group col-xs-12 col-md-3">
                                 @Html.Label("Nome")
@@ -57,12 +69,12 @@
                             <div class="form-group col-xs-12 col-md-3">
                                 @Html.Label("CPF")
                                 @Html.EditorFor(model => model.CPF, new { htmlAttributes = new { @class = "form-control cpf", @required = "required" } })
-                                @Html.ValidationMessageFor(model => model.CPF, "", new { @class = "text-danger" })
+                                @Html.ValidationMessageFor(model => model.CPF, "Por favor, forneça um CPF válido.", new { @class = "help-block" })
                             </div>
 
                             <div class="form-group col-xs-12 col-md-3">
                                 @Html.Label("Email")
-                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @required = "required", @type = "email" } })
                                 @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
                             </div>
 
@@ -89,53 +101,55 @@
                                     </div>
                                 </div>
                             </div>
+                            @if (Session["Perfil"].Equals(Perfil.Administrador))
+                            {
+                                <div class="autor-fields" style="display: none">
+                                    <div class="form-group col-xs-12">
+                                        <h3 class="box-title">Vínculo de disciplinas</h3>
+                                    </div>
+                                    <div class="form-group col-xs-12 col-md-3">
+                                        <div class="turmas">
+                                            @Html.Label("Turma")
+                                            @Html.DropDownList("Turma",
+                                         new SelectList(new List<String>()),
+                                         "Turma",
+                                         new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-xs-12 col-md-3">
+                                        <div class="disciplinas">
+                                            @Html.Label("Disciplina")
+                                            @Html.DropDownList("Disciplina",
+                                         new SelectList(new List<String>()),
+                                         "Disciplina",
+                                         new { @class = "form-control" })
+                                        </div>
+                                        <button class="btn btn-flat btn-success pull-right" style="margin-top: 20px" id="btn-vincular-disciplina">Vincular</button>
+                                    </div>
+                                    <div class="form-group col-xs-12 col-md-6">
+                                        <div class="turmas-disciplinas"></div>
+                                    </div>
+                                </div>
 
-                            <div class="autor-fields" style="display: none">
-                                <div class="form-group col-xs-12">
-                                    <h3 class="box-title">Vínculo de disciplinas</h3>
-                                </div>
-                                <div class="form-group col-xs-12 col-md-3">
-                                    <div class="turmas">
-                                        @Html.Label("Turma")
-                                        @Html.DropDownList("Turma",
-                                        new SelectList(new List<String>()),
-                                        "Turma",
-                                        new { @class = "form-control" })
+                                <div class="alunos-fields" style="display: none">
+                                    <div class="form-group col-xs-12">
+                                        <h3 class="box-title">Vínculo de turmas</h3>
+                                    </div>
+                                    <div class="form-group col-xs-12 col-md-6">
+                                        <div class="turmas">
+                                            @Html.Label("Turma")
+                                            @Html.DropDownList("Turma",
+                                         new SelectList(new List<String>()),
+                                         "Turma",
+                                         new { @class = "form-control" })
+                                        </div>
+                                        <button class="btn btn-flat btn-success pull-right" style="margin-top: 20px" id="btn-vincular-turma">Vincular</button>
+                                    </div>
+                                    <div class="form-group col-xs-12 col-md-6">
+                                        <div class="turmas-alunos"></div>
                                     </div>
                                 </div>
-                                <div class="form-group col-xs-12 col-md-3">
-                                    <div class="disciplinas">
-                                        @Html.Label("Disciplina")
-                                        @Html.DropDownList("Disciplina",
-                                        new SelectList(new List<String>()),
-                                        "Disciplina",
-                                        new { @class = "form-control" })
-                                    </div>
-                                    <button class="btn btn-flat btn-success pull-right" style="margin-top: 20px" id="btn-vincular-disciplina">Vincular</button>
-                                </div>
-                                <div class="form-group col-xs-12 col-md-6">
-                                    <div class="turmas-disciplinas"></div>
-                                </div>
-                            </div>
-
-                            <div class="alunos-fields" style="display: none">
-                                <div class="form-group col-xs-12">
-                                    <h3 class="box-title">Vínculo de turmas</h3>
-                                </div>
-                                <div class="form-group col-xs-12 col-md-6">
-                                    <div class="turmas">
-                                        @Html.Label("Turma")
-                                        @Html.DropDownList("Turma",
-                                        new SelectList(new List<String>()),
-                                        "Turma",
-                                        new { @class = "form-control" })
-                                    </div>
-                                    <button class="btn btn-flat btn-success pull-right" style="margin-top: 20px" id="btn-vincular-turma">Vincular</button>
-                                </div>
-                                <div class="form-group col-xs-12 col-md-6">
-                                    <div class="turmas-alunos"></div>
-                                </div>
-                            </div>
+                            }
                         </div>
                     </div>
                 </div>
@@ -148,115 +162,154 @@
 </div>   
 
 <script>
-    $(document).ready(function () {
-        //******************* Validações *******************
-        $('.cpf').inputmask("999.999.999-99");
-        $('#perfil-select').on('change', function () {
-            if ($(this).val() == 1) {
-                $('.alunos-fields').hide();
-                $('.autor-fields').show();
-            } else if ($(this).val() == 2) {
-                $('.alunos-fields').show();
-                $('.autor-fields').hide();
+$(document).ready(function () {
+    //******************* Validações *******************
+    $('.cpf').inputmask("999.999.999-99");
+    $('.cpf').on('blur', function () {            
+        var value = $('.cpf').val(); 
+        if (value != '') {
+            if (!valida_cpf(value) || value == '11111111111' || value == '22222222222' || value == '33333333333' || value == '44444444444' || value == '55555555555' || value == '66666666666' || value == '77777777777' || value == '88888888888' || value == '99999999999' || value == '00000000000') {
+                $(this).val('');
+                mensagensValidacao(false, $(this).parents('.form-group'), "CPF Inválido.");
             } else {
-                $('.alunos-fields').hide();
-                $('.autor-fields').hide();
+                mensagensValidacao(true, $(this).parents('.form-group'));                    
             }
-        }).change();
-
-        function validacoes_autores() {
-            var turmas = $('#turmas-select').val();
-            var disciplinas = $('#disciplinas-select').val();
-            if (turmas == '' || disciplinas == '') {
-                alert('Por favor, preencha o vínculo de turma e disciplina.');
-                return false;
-            }
-            return true;
         }
+    });
 
-        function validacoes_alunos() {
-            var turmas = $('#turmas-select').val();            
-            if (turmas == '') {
-                alert('Por favor, preencha o vínculo de turma.');
-                return false;
-            }
-            return true;
+    $('#perfil-select').on('change', function () {
+        if ($(this).val() == 1) {
+            $('.alunos-fields').hide();
+            $('.autor-fields').show();
+        } else if ($(this).val() == 2) {
+            $('.alunos-fields').show();
+            $('.autor-fields').hide();
+        } else {
+            $('.alunos-fields').hide();
+            $('.autor-fields').hide();
         }
+    }).change();
 
-        //******************* Ajax Autores *******************
-        $('#instituicao-select').on('change', function () {
-            if ($(this).val() != '') {
-                atualizar_turmas($(this).val());
-            } else {
-                $('#turmas-select').find('option').remove().end().append('<option value="">Turma</option>').val('');
-            }
-        }).change();
+    function validacoes_autores() {
+        //Validando se o usuário selecionou uma turma e uma disciplina
+        var turmas_select = $('#turmas-select').val();
+        var disciplinas_select = $('#disciplinas-select').val();
+        if (turmas_select == '' || disciplinas_select == '') {
+            alert('Por favor, preencha o vínculo de turma e disciplina.');
+            return false;
+        }
+        //Validando se o usuário está tentando adicionar uma turma e disciplina que já foi inserida
 
-        $('.turmas').on('change', '#turmas-select', function () {
-            if ($(this).val() != '') {
-                atualizar_disciplinas($(this).val());
-            } else {
-                $('#disciplinas-select').find('option').remove().end().append('<option value="">Disciplina</option>').val('');
+
+        return true;
+    }
+
+    function validacoes_alunos() {
+        var turmas = $('.alunos-fields').find('#turmas-select').val();                  
+        if (turmas == '') {
+            alert('Por favor, preencha o vínculo de turma.');
+            return false;
+        }
+        return true;
+    }        
+
+    //******************* Ajax Autores *******************
+    $('#instituicao-select').on('change', function () {
+        if ($(this).val() != '') {
+            atualizar_turmas($(this).val());
+        } else {
+            $('#turmas-select').find('option').remove().end().append('<option value="">Turma</option>').val('');
+        }
+    }).change();
+
+    $('.turmas').on('change', '#turmas-select', function () {        
+        if ($(this).val() != '') {
+            atualizar_disciplinas($(this).val());
+        } else {
+            $('#disciplinas-select').find('option').remove().end().append('<option value="">Disciplina</option>').val('');
+        }
+    });
+
+    function atualizar_turmas(IdInstituicao) {
+            $.ajax({
+            url: '@Url.Action("AjaxTurmas", "Turma")',
+                data: {
+                    IdInstituicao: IdInstituicao
+            },
+            cache: false,
+            dataType: 'html',
+            success: function (data) {
+                $('.turmas').html(data);
+            },
+            error: function () {
+                alert('Ocorreu algum erro de conexão. Por favor, tente novamente mais tarde');
             }
         });
+    }
 
-        function atualizar_turmas(IdInstituicao) {
-             $.ajax({
-                url: '@Url.Action("AjaxTurmas", "Turma")',
-                 data: {
-                     IdInstituicao: IdInstituicao
-                },
-                cache: false,
-                dataType: 'html',
-                success: function (data) {
-                    $('.turmas').html(data);
-                },
-                error: function () {
-                    alert('Ocorreu algum erro de conexão. Por favor, tente novamente mais tarde');
-                }
-            });
-        }
-
-        function atualizar_disciplinas(IdTurma) {
-             $.ajax({
-                url: '@Url.Action("AjaxDisciplinas", "Disciplina")',
-                 data: {
-                     IdTurma: IdTurma
-                },
-                cache: false,
-                dataType: 'html',
-                success: function (data) {
-                    $('.disciplinas').html(data);
-                },
-                error: function () {
-                    alert('Ocorreu algum erro de conexão. Por favor, tente novamente mais tarde');
-                }
-            });
-        }
-
-        function atualizar_turmas_disciplinas() {
-             $.ajax({
-                url: '@Url.Action("AjaxTurmasDisciplinas", "Turma")',
+    function atualizar_disciplinas(IdTurma) {
+            $.ajax({
+            url: '@Url.Action("AjaxDisciplinas", "Disciplina")',
                 data: {
-                     IdAutor: "@Html.Raw(Model.IdPessoa)"
-                },
-                cache: false,
-                success: function (data) {
-                    $('.turmas-disciplinas').html(data);
-                },
-                error: function () {
-                    alert('Ocorreu algum erro de conexão. Por favor, tente novamente mais tarde');
-                }
-            });
-        }
-        atualizar_turmas_disciplinas();
+                    IdTurma: IdTurma
+            },
+            cache: false,
+            dataType: 'html',
+            success: function (data) {
+                $('.disciplinas').html(data);
+            },
+            error: function () {
+                alert('Ocorreu algum erro de conexão. Por favor, tente novamente mais tarde');
+            }
+        });
+    }
 
-        function salvar_turma_disciplina(IdAutor, IdDisciplinaTurma) {
-             $.ajax({
-                url: '@Url.Action("SalvarTurmaDisciplina", "Turma")',
-                 data: {
-                     IdAutor: IdAutor,
-                     IdDisciplinaTurma: IdDisciplinaTurma
+    function atualizar_turmas_disciplinas() {
+       $.ajax({
+           url: '@Url.Action("AjaxTurmasDisciplinas", "Turma")' + '?IdAutor='+"@Html.Raw(Model.IdPessoa)",           
+           cache: false,           
+           success: function (data) {                       
+              $('.turmas-disciplinas').html(data);
+           },
+           error: function () {
+              alert('Ocorreu algum erro de conexão. Por favor, tente novamente mais tarde');
+           }
+       });
+    }
+    atualizar_turmas_disciplinas();
+
+    function salvar_turma_disciplina(IdAutor, IdDisciplinaTurma) {
+            $.ajax({
+            url: '@Url.Action("SalvarTurmaDisciplina", "Turma")',
+                data: {
+                    IdAutor: IdAutor,
+                    IdDisciplinaTurma: IdDisciplinaTurma
+            },
+            cache: false,
+             type: 'post',
+            success: function () {
+                atualizar_turmas_disciplinas();
+            },
+            error: function () {
+                alert('Ocorreu algum erro de conexão. Por favor, tente novamente mais tarde');
+            }
+        });
+    }
+
+    $('#btn-vincular-disciplina').on('click', function (e) {
+        e.preventDefault();
+        validacoes_autores();
+        //TODO validar seleção turma e disciplina já cadastrada
+        var IdAutor = "@Html.Raw(Model.IdPessoa)";
+        var IdDisciplinaTurma = $('.autor-fields').find('#disciplinas-select').val();        
+        salvar_turma_disciplina(IdAutor, IdDisciplinaTurma);
+    });
+
+    $('.turmas-disciplinas').on('click', '.btn-remover-tdp', function () {              
+            $.ajax({
+                url: '@Url.Action("AjaxDesvincularTurmaDisciplina", "Turma")',
+                data: {
+                    id: $(this).attr('idtdp')
                 },
                 cache: false,
                 type: 'post',
@@ -266,97 +319,70 @@
                 error: function () {
                     alert('Ocorreu algum erro de conexão. Por favor, tente novamente mais tarde');
                 }
-            });
-        }
-
-        $('#btn-vincular-disciplina').on('click', function (e) {
-            e.preventDefault();
-            validacoes_autores();
-            //TODO validar seleção turma e disciplina já cadastrada
-            var IdAutor = "@Html.Raw(Model.IdPessoa)";
-            var IdDisciplinaTurma = $('.autor-fields').find('#disciplinas-select').val();
-            salvar_turma_disciplina(IdAutor, IdDisciplinaTurma);
         });
+    });
 
-        $('.turmas-disciplinas').on('click', '.btn-remover-tdp', function () {              
-              $.ajax({
-                  url: '@Url.Action("AjaxDesvincularTurmaDisciplina", "Turma")',
-                  data: {
-                      id: $(this).attr('idtdp')
-                  },
-                  cache: false,
-                  type: 'post',
-                  success: function () {
-                      atualizar_turmas_disciplinas();
-                  },
-                  error: function () {
-                      alert('Ocorreu algum erro de conexão. Por favor, tente novamente mais tarde');
-                  }
-            });
+    //******************* Ajax Alunos *******************
+        function atualizar_turmas_alunos() {
+            $.ajax({
+            url: '@Url.Action("AjaxTurmasAlunos", "Turma")',
+            data: {
+                    IdPessoa: "@Html.Raw(Model.IdPessoa)"
+            },
+            cache: false,
+            success: function (data) {
+                $('.turmas-alunos').html(data);
+            },
+            error: function () {
+                alert('Ocorreu algum erro de conexão. Por favor, tente novamente mais tarde');
+            }
         });
+    }
+    atualizar_turmas_alunos();
 
-        //******************* Ajax Alunos *******************
-         function atualizar_turmas_alunos() {
-             $.ajax({
-                url: '@Url.Action("AjaxTurmasAlunos", "Turma")',
+    function salvar_turma_aluno(IdPessoa, IdTurma) {
+            $.ajax({
+            url: '@Url.Action("SalvarTurmaAluno", "Turma")',
                 data: {
-                     IdPessoa: "@Html.Raw(Model.IdPessoa)"
-                },
-                cache: false,
-                success: function (data) {
-                    $('.turmas-alunos').html(data);
-                },
-                error: function () {
-                    alert('Ocorreu algum erro de conexão. Por favor, tente novamente mais tarde');
-                }
-            });
-        }
-        atualizar_turmas_alunos();
-
-        function salvar_turma_aluno(IdPessoa, IdTurma) {
-             $.ajax({
-                url: '@Url.Action("SalvarTurmaAluno", "Turma")',
-                 data: {
-                     IdPessoa: IdPessoa,
-                     IdTurma: IdTurma
-                },
-                cache: false,
-                type: 'post',
-                success: function () {
-                   atualizar_turmas_alunos();
-                },
-                error: function () {
-                    alert('Ocorreu algum erro de conexão. Por favor, tente novamente mais tarde');
-                }
-            });
-        }
-        $('#btn-vincular-turma').on('click', function (e) {
-            e.preventDefault();
-            validacoes_alunos();
-            //TODO validar seleção turma já cadastrada
-            var IdPessoa = "@Html.Raw(Model.IdPessoa)";
-            var IdTurma = $('.alunos-fields').find('#turmas-select').val();
-            salvar_turma_aluno(IdPessoa, IdTurma);
+                    IdPessoa: IdPessoa,
+                    IdTurma: IdTurma
+            },
+            cache: false,
+            type: 'post',
+            success: function () {
+                atualizar_turmas_alunos();
+            },
+            error: function () {
+                alert('Ocorreu algum erro de conexão. Por favor, tente novamente mais tarde');
+            }
         });
+    }
+    $('#btn-vincular-turma').on('click', function (e) {
+        e.preventDefault();
+        validacoes_alunos();
+        //TODO validar seleção turma já cadastrada
+        var IdPessoa = "@Html.Raw(Model.IdPessoa)";
+        var IdTurma = $('.alunos-fields').find('#turmas-select').val();
+        salvar_turma_aluno(IdPessoa, IdTurma);
+    });
 
-         $('.turmas-alunos').on('click', '.btn-remover-ta', function () {              
-              $.ajax({
-                  url: '@Url.Action("AjaxDesvincularTurmaAluno", "Turma")',
-                  data: {
-                      id: $(this).attr('idta')
-                  },
-                  cache: false,
-                  type: 'post',
-                  success: function () {
-                      atualizar_turmas_alunos();
-                  },
-                  error: function () {
-                      alert('Ocorreu algum erro de conexão. Por favor, tente novamente mais tarde');
-                  }
-            });
-         });
-
-         //Deletando imagem logo empresa
+    $('.turmas-alunos').on('click', '.btn-remover-ta', function () {              
+        $.ajax({
+            url: '@Url.Action("AjaxDesvincularTurmaAluno", "Turma")',
+            data: {
+                id: $(this).attr('idta')
+            },
+            cache: false,
+            type: 'post',
+            success: function () {
+                atualizar_turmas_alunos();
+            },
+            error: function () {
+                alert('Ocorreu algum erro de conexão. Por favor, tente novamente mais tarde');
+            }
+        });
+    });
+    //Deletando imagem
     $('.foto-perfil').on('click', '.btn-single-remove', function () {
         $.ajax({
             url: '@Url.Action("Delete", "Midia")',
@@ -405,6 +431,6 @@
                 alert("This browser doesn't support HTML5 file uploads!");
               }
          }
-    });
-    });
+    });        
+});
 </script>

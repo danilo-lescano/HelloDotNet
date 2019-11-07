@@ -81,6 +81,7 @@ namespace TaCertoForms.Controllers {
             return View();
         }
 
+        /*
         [HttpGet]
         [Perfil(Perfil.Administrador)]
         public ActionResult AjaxTurmasDisciplinas(int IdAutor) {
@@ -90,6 +91,28 @@ namespace TaCertoForms.Controllers {
             foreach(var td in turmaDisciplinaProf) {
                 List<DisciplinaTurma> dt = Collection.DisciplinaTurmaList()?.Where(dta => dta.IdDisciplinaTurma == td.IdDisciplinaTurma).ToList();
                 foreach(var discTurm in dt) {
+                    Disciplina disciplina = Collection.FindDisciplina(discTurm.IdDisciplina);
+                    ViewModelDisciplina vmDisc = new ViewModelDisciplina() { Nome = disciplina.Nome, IdTurmaDisciplinaAutor = td.IdTurmaDisciplinaAutor };
+                    vmDisc.Turmas.Add(Collection.FindTurma(discTurm.IdTurma));
+                    disciplinaTurma.Add(vmDisc);
+                }
+            }
+            return View(disciplinaTurma);
+        }
+        */
+
+        [HttpGet]
+        [Perfil(Perfil.Administrador)]
+        public ActionResult AjaxTurmasDisciplinas(int IdAutor)
+        {
+            List<ViewModelDisciplina> disciplinaTurma = new List<ViewModelDisciplina>();
+            List<TurmaDisciplinaAutor> turmaDisciplinaProf = Collection.TurmaDisciplinaAutorList()?.Where(tda => tda.IdAutor == IdAutor).ToList();
+
+            foreach (var td in turmaDisciplinaProf)
+            {
+                List<DisciplinaTurma> dt = Collection.DisciplinaTurmaList()?.Where(dta => dta.IdDisciplinaTurma == td.IdDisciplinaTurma).ToList();
+                foreach (var discTurm in dt)
+                {
                     Disciplina disciplina = Collection.FindDisciplina(discTurm.IdDisciplina);
                     ViewModelDisciplina vmDisc = new ViewModelDisciplina() { Nome = disciplina.Nome, IdTurmaDisciplinaAutor = td.IdTurmaDisciplinaAutor };
                     vmDisc.Turmas.Add(Collection.FindTurma(discTurm.IdTurma));
@@ -118,7 +141,7 @@ namespace TaCertoForms.Controllers {
         public void SalvarTurmaAluno(TurmaAluno turmaAluno) {
             Collection.CreateTurmaAluno(turmaAluno);
         }
-
+            
         [HttpGet]
         [Perfil(Perfil.Administrador)]
         public ActionResult AjaxTurmasAlunos(int IdPessoa) {

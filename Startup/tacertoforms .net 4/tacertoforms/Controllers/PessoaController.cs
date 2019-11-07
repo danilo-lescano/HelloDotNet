@@ -41,10 +41,10 @@ namespace TaCertoForms.Controllers {
                 return RedirectToAction("Edit", "Pessoa", new { id = pessoa.IdPessoa });
             return View(pessoa);
         }
-
-        public ActionResult Edit(int? id) {
-            if(id == null)
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        [Perfil(Perfil.Administrador, Perfil.Autor)]
+        public ActionResult Edit(int? id){
+            if(id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            if(Session["Perfil"].Equals(Perfil.Autor) && (int)Session["IdPessoa"] != id) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);            
             Pessoa pessoa = Collection.FindPessoa(id);
             if(pessoa == null) return HttpNotFound();
             List<Instituicao> list = Collection.InstituicaoList();
@@ -57,6 +57,7 @@ namespace TaCertoForms.Controllers {
         }
 
         [HttpPost]
+        [Perfil(Perfil.Administrador, Perfil.Autor)]
         public ActionResult Edit(Pessoa pessoa) {
             if(Collection.EditPessoa(pessoa) != null)
                 return RedirectToAction("Index");
