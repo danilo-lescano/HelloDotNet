@@ -9,6 +9,7 @@ namespace TaCertoForms.Factory{
     public class FactoryCollectionMatriz : IFactoryCollection{
 
         AtividadeMatrizCreator atividadeMatrizCreator { get; set; }
+        AtividadeRespostaAlunoMatrizCreator atividadeRespostaAlunoMatrizCreator { get; set; }
         DisciplinaMatrizCreator disciplinaMatrizCreator { get; set; }
         DisciplinaTurmaMatrizCreator disciplinaTurmaMatrizCreator { get; set; }
         EnderecoMatrizCreator enderecoMatrizCreator { get; set; }
@@ -16,11 +17,13 @@ namespace TaCertoForms.Factory{
         MidiaMatrizCreator midiaMatrizCreator { get; set; }
         PessoaMatrizCreator pessoaMatrizCreator { get; set; }
         QuestaoMatrizCreator questaoMatrizCreator { get; set; }
+        QuestaoRespostaAlunoMatrizCreator questaoRespostaAlunoMatrizCreator { get; set; }
         TurmaMatrizCreator turmaMatrizCreator { get; set; }
         TurmaAlunoMatrizCreator turmaAlunoMatrizCreator { get; set; }
         TurmaDisciplinaAutorMatrizCreator turmaDisciplinaAutorMatrizCreator { get; set; }
         public FactoryCollectionMatriz(HttpSessionStateBase session){
             atividadeMatrizCreator = new AtividadeMatrizCreator(session);
+            atividadeRespostaAlunoMatrizCreator = new AtividadeRespostaAlunoMatrizCreator(session);
             disciplinaMatrizCreator = new DisciplinaMatrizCreator(session);
             disciplinaTurmaMatrizCreator = new DisciplinaTurmaMatrizCreator(session);
             enderecoMatrizCreator = new EnderecoMatrizCreator(session);
@@ -28,9 +31,10 @@ namespace TaCertoForms.Factory{
             midiaMatrizCreator = new MidiaMatrizCreator(session);
             pessoaMatrizCreator = new PessoaMatrizCreator(session);
             questaoMatrizCreator = new QuestaoMatrizCreator(session);
+            questaoRespostaAlunoMatrizCreator = new QuestaoRespostaAlunoMatrizCreator(session);
             turmaMatrizCreator = new TurmaMatrizCreator(session);
             turmaAlunoMatrizCreator = new TurmaAlunoMatrizCreator(session);
-            turmaDisciplinaAutorMatrizCreator = new TurmaDisciplinaAutorMatrizCreator(session);
+            turmaDisciplinaAutorMatrizCreator = new TurmaDisciplinaAutorMatrizCreator(session);            
         }
 
         public List<Atividade> AtividadeList() => atividadeMatrizCreator.AtividadeList();
@@ -38,6 +42,12 @@ namespace TaCertoForms.Factory{
         public Atividade CreateAtividade(Atividade atividade) => atividadeMatrizCreator.CreateAtividade(atividade);
         public Atividade EditAtividade(Atividade atividade) => atividadeMatrizCreator.EditAtividade(atividade);
         public bool DeleteAtividade(int? id) => atividadeMatrizCreator.DeleteAtividade(id);
+
+        public List<AtividadeRespostaAluno> AtividadeRespostaAlunoList() => atividadeRespostaAlunoMatrizCreator.AtividadeRespostaAlunoList();
+        public AtividadeRespostaAluno FindAtividadeRespostaAluno(int? id) => atividadeRespostaAlunoMatrizCreator.FindAtividadeRespostaAluno(id);
+        public AtividadeRespostaAluno CreateAtividadeRespostaAluno(AtividadeRespostaAluno atividadeRespostaAluno) => atividadeRespostaAlunoMatrizCreator.CreateAtividadeRespostaAluno(atividadeRespostaAluno);
+        public AtividadeRespostaAluno EditAtividadeRespostaAluno(AtividadeRespostaAluno atividadeRespostaAluno) => atividadeRespostaAlunoMatrizCreator.EditAtividadeRespostaAluno(atividadeRespostaAluno);
+        public bool DeleteAtividadeRespostaAluno(int? id) => atividadeRespostaAlunoMatrizCreator.DeleteAtividadeRespostaAluno(id);
 
         public List<Disciplina> DisciplinaList() => disciplinaMatrizCreator.DisciplinaList();
         public Disciplina FindDisciplina(int? id) => disciplinaMatrizCreator.FindDisciplina(id);
@@ -84,7 +94,13 @@ namespace TaCertoForms.Factory{
         public Questao CreateQuestao(Questao questao) => questaoMatrizCreator.CreateQuestao(questao);
         public Questao EditQuestao(Questao questao) => questaoMatrizCreator.EditQuestao(questao);
         public bool DeleteQuestao(int? id) => questaoMatrizCreator.DeleteQuestao(id);
-        
+
+        public List<QuestaoRespostaAluno> QuestaoRespostaAlunoList() => questaoRespostaAlunoMatrizCreator.QuestaoRespostaAlunoList();
+        public QuestaoRespostaAluno FindQuestaoRespostaAluno(int? id) => questaoRespostaAlunoMatrizCreator.FindQuestaoRespostaAluno(id);
+        public QuestaoRespostaAluno CreateQuestaoRespostaAluno(QuestaoRespostaAluno questaoRespostaAluno) => questaoRespostaAlunoMatrizCreator.CreateQuestaoRespostaAluno(questaoRespostaAluno);
+        public QuestaoRespostaAluno EditQuestaoRespostaAluno(QuestaoRespostaAluno questaoRespostaAluno) => questaoRespostaAlunoMatrizCreator.EditQuestaoRespostaAluno(questaoRespostaAluno);
+        public bool DeleteQuestaoRespostaAluno(int? id) => questaoRespostaAlunoMatrizCreator.DeleteQuestaoRespostaAluno(id);
+
         public List<Turma> TurmaList() => turmaMatrizCreator.TurmaList();
         public Turma FindTurma(int? id) => turmaMatrizCreator.FindTurma(id);
         public Turma CreateTurma(Turma turma) => turmaMatrizCreator.CreateTurma(turma);

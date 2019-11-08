@@ -8,6 +8,7 @@ namespace TaCertoForms.Factory{
     //CLASSE FactoryCollectionProfessor - Responsavel pelas regras de negocio de seleção do banco dedos. Essa classe pega todos os modelos relacionados a Professor de requisição atual
     public class FactoryCollectionProfessor : IFactoryCollection{
         AtividadeProfessorCreator atividadeProfessorCreator { get; set; }
+        AtividadeRespostaAlunoProfessorCreator atividadeRespostaAlunoProfessorCreator { get; set; }
         DisciplinaProfessorCreator disciplinaProfessorCreator { get; set; }
         DisciplinaTurmaProfessorCreator disciplinaTurmaProfessorCreator { get; set; }
         EnderecoProfessorCreator enderecoProfessorCreator { get; set; }
@@ -15,12 +16,14 @@ namespace TaCertoForms.Factory{
         MidiaProfessorCreator midiaProfessorCreator { get; set; }
         PessoaProfessorCreator pessoaProfessorCreator { get; set; }
         QuestaoProfessorCreator questaoProfessorCreator { get; set; }
+        QuestaoRespostaAlunoProfessorCreator questaoRespostaAlunoProfessorCreator { get; set; }
         TurmaProfessorCreator turmaProfessorCreator { get; set; }
         TurmaAlunoProfessorCreator turmaAlunoProfessorCreator { get; set; }
         TurmaDisciplinaAutorProfessorCreator turmaDisciplinaAutorProfessorCreator { get; set; }
 
         public FactoryCollectionProfessor(HttpSessionStateBase session){
             atividadeProfessorCreator = new AtividadeProfessorCreator(session);
+            atividadeRespostaAlunoProfessorCreator = new AtividadeRespostaAlunoProfessorCreator(session);
             disciplinaProfessorCreator = new DisciplinaProfessorCreator(session);
             disciplinaTurmaProfessorCreator = new DisciplinaTurmaProfessorCreator(session);
             enderecoProfessorCreator = new EnderecoProfessorCreator(session);
@@ -28,6 +31,7 @@ namespace TaCertoForms.Factory{
             midiaProfessorCreator = new MidiaProfessorCreator(session);
             pessoaProfessorCreator = new PessoaProfessorCreator(session);
             questaoProfessorCreator = new QuestaoProfessorCreator(session);
+            questaoRespostaAlunoProfessorCreator = new QuestaoRespostaAlunoProfessorCreator(session);
             turmaProfessorCreator = new TurmaProfessorCreator(session);
             turmaAlunoProfessorCreator = new TurmaAlunoProfessorCreator(session);
             turmaDisciplinaAutorProfessorCreator = new TurmaDisciplinaAutorProfessorCreator(session);
@@ -38,6 +42,12 @@ namespace TaCertoForms.Factory{
         public Atividade CreateAtividade(Atividade atividade) => atividadeProfessorCreator.CreateAtividade(atividade);
         public Atividade EditAtividade(Atividade atividade) => atividadeProfessorCreator.EditAtividade(atividade);
         public bool DeleteAtividade(int? id) => atividadeProfessorCreator.DeleteAtividade(id);
+
+        public List<AtividadeRespostaAluno> AtividadeRespostaAlunoList() => atividadeRespostaAlunoProfessorCreator.AtividadeRespostaAlunoList();
+        public AtividadeRespostaAluno FindAtividadeRespostaAluno(int? id) => atividadeRespostaAlunoProfessorCreator.FindAtividadeRespostaAluno(id);
+        public AtividadeRespostaAluno CreateAtividadeRespostaAluno(AtividadeRespostaAluno atividadeRespostaAluno) => atividadeRespostaAlunoProfessorCreator.CreateAtividadeRespostaAluno(atividadeRespostaAluno);
+        public AtividadeRespostaAluno EditAtividadeRespostaAluno(AtividadeRespostaAluno atividadeRespostaAluno) => atividadeRespostaAlunoProfessorCreator.EditAtividadeRespostaAluno(atividadeRespostaAluno);
+        public bool DeleteAtividadeRespostaAluno(int? id) => atividadeRespostaAlunoProfessorCreator.DeleteAtividadeRespostaAluno(id);
 
         public List<Disciplina> DisciplinaList() => disciplinaProfessorCreator.DisciplinaList();
         public Disciplina FindDisciplina(int? id) => disciplinaProfessorCreator.FindDisciplina(id);
@@ -86,6 +96,13 @@ namespace TaCertoForms.Factory{
         public Questao EditQuestao(Questao questao) => questaoProfessorCreator.EditQuestao(questao);
         public bool DeleteQuestao(int? id) => questaoProfessorCreator.DeleteQuestao(id);
 
+        public List<QuestaoRespostaAluno> QuestaoRespostaAlunoList() => questaoRespostaAlunoProfessorCreator.QuestaoRespostaAlunoList();
+        public QuestaoRespostaAluno FindQuestaoRespostaAluno(int? id) => questaoRespostaAlunoProfessorCreator.FindQuestaoRespostaAluno(id);
+        public QuestaoRespostaAluno CreateQuestaoRespostaAluno(QuestaoRespostaAluno questaoRespostaAluno) => questaoRespostaAlunoProfessorCreator.CreateQuestaoRespostaAluno(questaoRespostaAluno);
+        public QuestaoRespostaAluno EditQuestaoRespostaAluno(QuestaoRespostaAluno questaoRespostaAluno) => questaoRespostaAlunoProfessorCreator.EditQuestaoRespostaAluno(questaoRespostaAluno);
+        public bool DeleteQuestaoRespostaAluno(int? id) => questaoRespostaAlunoProfessorCreator.DeleteQuestaoRespostaAluno(id);
+
+
         public List<Turma> TurmaList() => turmaProfessorCreator.TurmaList();
         public Turma FindTurma(int? id) => turmaProfessorCreator.FindTurma(id);
         public Turma CreateTurma(Turma turma) => turmaProfessorCreator.CreateTurma(turma);
@@ -103,5 +120,6 @@ namespace TaCertoForms.Factory{
         public TurmaDisciplinaAutor CreateTurmaDisciplinaAutor(TurmaDisciplinaAutor turmaDisciplinaAutor) => turmaDisciplinaAutorProfessorCreator.CreateTurmaDisciplinaAutor(turmaDisciplinaAutor);
         public TurmaDisciplinaAutor EditTurmaDisciplinaAutor(TurmaDisciplinaAutor turmaDisciplinaAutor) => turmaDisciplinaAutorProfessorCreator.EditTurmaDisciplinaAutor(turmaDisciplinaAutor);
         public bool DeleteTurmaDisciplinaAutor(int? id) => turmaDisciplinaAutorProfessorCreator.DeleteTurmaDisciplinaAutor(id);
+      
     }
 }

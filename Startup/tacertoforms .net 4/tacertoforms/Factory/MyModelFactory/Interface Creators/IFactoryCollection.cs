@@ -12,6 +12,8 @@ namespace TaCertoForms.Factory{
     //IFactoryTipoQuestao,
     IFactoryTurma,
     IFactoryTurmaAluno,
-    IFactoryTurmaDisciplinaAutor
+    IFactoryTurmaDisciplinaAutor,
+    IFactoryAtividadeRespostaAluno,
+    IFactoryQuestaoRespostaAluno
     { }
 }

@@ -16,6 +16,8 @@ namespace TaCertoForms.Contexts {
         public DbSet<Questao> Questao { get; set; }
         public DbSet<TipoQuestao> TipoQuestao { get; set; }
         public DbSet<Turma> Turma { get; set; }
+        public DbSet<AtividadeRespostaAluno> AtividadeRespostaAluno { get; set; }
+        public DbSet<QuestaoRespostaAluno> QuestaoRespostaAluno { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder) {
             Database.SetInitializer<Context>(null);
             modelBuilder.HasDefaultSchema("TaCerto");
@@ -99,7 +101,6 @@ namespace TaCertoForms.Contexts {
                 .WithMany()
                 .HasForeignKey(T => T.IdPessoa)
                 .WillCascadeOnDelete(false);
-
             base.OnModelCreating(modelBuilder);
         }
     }

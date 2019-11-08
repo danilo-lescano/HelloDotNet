@@ -60,6 +60,9 @@ namespace TaCertoForms.Factory {
         }
 
         public bool DeleteInstituicao(int? id) {
+            //##### Para essa primeira versão, não será implementado a funcionalide de exclusão de instituição.
+            return false;
+            /*             
             if(id == null) return false;
             Context db = new Context();
             Instituicao instituicao = db.Instituicao.Find(id);
@@ -69,6 +72,7 @@ namespace TaCertoForms.Factory {
             db.SaveChanges();
             db.Dispose();
             return true;
+            */
         }
     }
 }

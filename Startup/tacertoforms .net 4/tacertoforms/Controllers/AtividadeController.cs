@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -67,6 +68,18 @@ namespace TaCertoForms.Controllers {
 
             ViewBag.Turma = turma;
             ViewBag.Disciplina = disciplina;
+
+            //Validações para permissão de edição
+            bool edicaoLiberada = true;
+            if (vmAtividade.Atividade.IsProva) {
+                if (vmAtividade.DataInicio <= DateTime.Now) {
+                    edicaoLiberada = false; //Caso o professor esteja tentando editar uma prova que já iniciou, será bloqueado sua edição.
+                }
+                List<Questao> questoes = Collection.FindQuestaoByTypeAndActivity(id, null);
+
+                
+            }
+            ViewBag.EdicaoLiberada = edicaoLiberada;
 
             return View(vmAtividade);
         }
