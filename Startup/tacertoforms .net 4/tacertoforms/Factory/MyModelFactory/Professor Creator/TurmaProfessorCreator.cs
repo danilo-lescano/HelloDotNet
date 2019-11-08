@@ -44,7 +44,7 @@ namespace TaCertoForms.Factory {
             idAuxList = new List<int>();
             foreach(var tda in turmaDisciplinaAutorList) idAuxList.Add(tda.IdDisciplinaTurma);
 
-            List<DisciplinaTurma> disciplinaTurmaList = db.DisciplinaTurma.Where(dt => idAuxList.Contains(dt.IdDisciplinaTurma)).ToList();
+            List<DisciplinaTurma> disciplinaTurmaList = db.DisciplinaTurma.Where(dt  => idAuxList.Contains(dt.IdDisciplinaTurma)).ToList();
             if(disciplinaTurmaList == null || disciplinaTurmaList.Count == 0) return null;
             idAuxList = new List<int>();
             foreach(var dt in disciplinaTurmaList) idAuxList.Add(dt.IdTurma);
