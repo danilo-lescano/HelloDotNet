@@ -259,8 +259,18 @@
                 isTexto: true,
                 texto: frase_aux.substring(0, CL.Fragmentos[0].origem)
             }
+            
+            /*console.log(111111111111111);
+            for(var ii = 0; ii < Lacuna.alternativa.length; ii++){
+                console.log(Lacuna.alternativa[ii]);
+            }
+            console.log("--");
+            for(var ii = 0; ii < Lacuna.frase.length; ii++){
+                console.log(Lacuna.frase[ii]);
+            }*/
         }
-        for (let i = 0; i < CL.Fragmentos.length; i++) {
+
+        for(let i = 0; i < CL.Fragmentos.length; i++) {
             Lacuna.alternativa[Lacuna.alternativa.length] = {
                 index: [Lacuna.frase.length],
                 texto: frase_aux.substring(CL.Fragmentos[i].origem, CL.Fragmentos[i].fim+1)
@@ -271,18 +281,34 @@
             }
             Lacuna.frase[Lacuna.frase.length] = {
                 isTexto: true,
-                texto: frase_aux.substring(CL.Fragmentos[0].fim + 1, CL.Fragmentos[i+1] !== undefined ? CL.Fragmentos[i+1].origem : frase_aux.length)
+                texto: frase_aux.substring(CL.Fragmentos[i].fim + 1, CL.Fragmentos[i+1] !== undefined ? CL.Fragmentos[i+1].origem : frase_aux.length)
             }
+            /*console.log(222222222222);
+            for(var ii = 0; ii < Lacuna.alternativa.length; ii++){
+                console.log(Lacuna.alternativa[ii]);
+            }
+            console.log("--");
+            for(var ii = 0; ii < Lacuna.frase.length; ii++){
+                console.log(Lacuna.frase[ii]);
+            }*/
         }
+
         for (let i = 0; i < palavras_erradas.length; i++) {
             Lacuna.alternativa[Lacuna.alternativa.length] = {
                 index: [-1],
                 texto: palavras_erradas[i].innerText.substring(1, palavras_erradas[i].innerText.length)
             }
+            
+            /*console.log(3333333333333);
+            for(var ii = 0; ii < Lacuna.alternativa.length; ii++){
+                console.log(Lacuna.alternativa[ii]);
+            }
+            console.log("--");
+            for(var ii = 0; ii < Lacuna.frase.length; ii++){
+                console.log(Lacuna.frase[ii]);
+            }*/
         }
 
-
-        console.log(Lacuna);
         return Lacuna;
     }
 
@@ -298,7 +324,7 @@
     }
     CL.PovoaLacuna = function(q){
         CL.LacunaReset();
-        CL._Frase = (()=>{
+        document.getElementById("tabela-de-lacunaFrase").innerHTML = CL._Frase = (()=>{
             var aux = "";
             for (let i = 0; i < q.frase.length; i++) {
                 if(q.frase[i].isTexto)
@@ -316,12 +342,14 @@
         })();
 
         var aux = "";
+        var fragmentorCount = 0;
         for(let i = 0; i < q.frase.length; i++){
             if(!q.frase[i].isTexto){
                 for(let j = 0; j < q.alternativa.length; j++){
                     for(let k = 0; k < q.alternativa[j].index.length; k++){
                         if(q.alternativa[j].index[k] == i){
                             CL.setFragmento(aux.length, aux.length + q.alternativa[j].texto.length - 1);
+                            aux += q.alternativa[j].texto;
                         }
                     }
                 }
@@ -332,8 +360,10 @@
         }
 
         for(let i = 0; i < q.alternativa.length; i++){
-            if(q.alternativa[i].index.length == 1 && q.alternativa[i].index[0] == -1)
+            if(q.alternativa[i].index.length == 1 && q.alternativa[i].index[0] == -1){
+                console.log(q.alternativa[i].texto);
                 CL.AddPalavraErrada(q.alternativa[i].texto)
+            }
         }
     }
 </script>
