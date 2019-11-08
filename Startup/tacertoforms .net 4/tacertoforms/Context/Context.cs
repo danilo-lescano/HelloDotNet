@@ -6,6 +6,7 @@ namespace TaCertoForms.Contexts {
     public class Context : DbContext {
         public DbSet<Midia> Midia { get; set; }
         public DbSet<Atividade> Atividade { get; set; }
+        public DbSet<AtividadeRespostaAluno> AtividadeRespostaAluno { get; set; }
         public DbSet<Disciplina> Disciplina { get; set; }
         public DbSet<DisciplinaTurma> DisciplinaTurma { get; set; }
         public DbSet<TurmaDisciplinaAutor> TurmaDisciplinaAutor { get; set; }
@@ -14,10 +15,9 @@ namespace TaCertoForms.Contexts {
         public DbSet<Instituicao> Instituicao { get; set; }
         public DbSet<Pessoa> Pessoa { get; set; }
         public DbSet<Questao> Questao { get; set; }
+        public DbSet<QuestaoRespostaAluno> QuestaoRespostaAluno { get; set; }
         public DbSet<TipoQuestao> TipoQuestao { get; set; }
         public DbSet<Turma> Turma { get; set; }
-        public DbSet<AtividadeRespostaAluno> AtividadeRespostaAluno { get; set; }
-        public DbSet<QuestaoRespostaAluno> QuestaoRespostaAluno { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder) {
             Database.SetInitializer<Context>(null);
             modelBuilder.HasDefaultSchema("TaCerto");
@@ -26,6 +26,16 @@ namespace TaCertoForms.Contexts {
                 .HasRequired(A => A.TurmaDisciplinaAutor)
                 .WithMany()
                 .HasForeignKey(A => A.IdTurmaDisciplinaAutor)
+                .WillCascadeOnDelete(false);
+            modelBuilder.Entity<AtividadeRespostaAluno>()
+                .HasRequired(A => A.Atividade)
+                .WithMany()
+                .HasForeignKey(A => A.IdAtividade)
+                .WillCascadeOnDelete(false);
+            modelBuilder.Entity<AtividadeRespostaAluno>()
+                .HasRequired(A => A.Pessoa)
+                .WithMany()
+                .HasForeignKey(A => A.IdPessoa)
                 .WillCascadeOnDelete(false);
             modelBuilder.Entity<Disciplina>()
                 .HasRequired(D => D.Matriz)
@@ -75,6 +85,16 @@ namespace TaCertoForms.Contexts {
                 .HasRequired(Q => Q.TipoQuestao)
                 .WithMany()
                 .HasForeignKey(Q => Q.IdTipoQuestao)
+                .WillCascadeOnDelete(false);
+            modelBuilder.Entity<QuestaoRespostaAluno>()
+                .HasRequired(Q => Q.Questao)
+                .WithMany()
+                .HasForeignKey(Q => Q.IdQuestao)
+                .WillCascadeOnDelete(false);
+            modelBuilder.Entity<QuestaoRespostaAluno>()
+                .HasRequired(Q => Q.AtividadeRespostaAluno)
+                .WithMany()
+                .HasForeignKey(Q => Q.IdAtividadeRespostaAluno)
                 .WillCascadeOnDelete(false);
             modelBuilder.Entity<Turma>()
                 .HasRequired(T => T.Instituicao)

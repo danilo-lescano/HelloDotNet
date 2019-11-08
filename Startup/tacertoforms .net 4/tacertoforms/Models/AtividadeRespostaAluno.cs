@@ -2,11 +2,9 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace TaCertoForms.Models
-{
+namespace TaCertoForms.Models {
     [Table("AtividadeRespostaAluno")]
-    public class AtividadeRespostaAluno
-    {
+    public class AtividadeRespostaAluno {
         [Key]
         public int IdAtividadeRespostaAluno { get; set; }
         public int IdAtividade { get; set; }
@@ -17,6 +15,6 @@ namespace TaCertoForms.Models
 
         //NAVIGATION PROPERTY
         public Atividade Atividade { get; set; }
-        public QuestaoRespostaAluno QuestaoRespostaAluno { get; set; }
+        public Pessoa Pessoa { get; set; }
     }
 }

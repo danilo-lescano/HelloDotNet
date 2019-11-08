@@ -1,11 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace TaCertoForms.Models
-{
+namespace TaCertoForms.Models {
     [Table("QuestaoRespostaAluno")]
-    public class QuestaoRespostaAluno
-    {
+    public class QuestaoRespostaAluno {
         [Key]
         public int IdQuestaoRespostaAluno { get; set; }
         public int IdAtividadeRespostaAluno { get; set; }

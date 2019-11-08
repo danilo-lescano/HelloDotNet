@@ -207,6 +207,7 @@
     <Compile Include="Factory\MyModelFactory\FactoryCollectionMatriz.cs" />
     <Compile Include="Factory\MyModelFactory\FactoryCollectionProfessor.cs" />
     <Compile Include="Factory\MyModelFactory\Interface Creators\IFactoryAtividade.cs" />
+    <Compile Include="Factory\MyModelFactory\Interface Creators\IFactoryAtividadeRespostaAluno.cs" />
     <Compile Include="Factory\MyModelFactory\Interface Creators\IFactoryCollection.cs" />
     <Compile Include="Factory\MyModelFactory\Interface Creators\IFactoryDisciplina.cs" />
     <Compile Include="Factory\MyModelFactory\Interface Creators\IFactoryDisciplinaTurma.cs" />
@@ -216,11 +217,13 @@
     <Compile Include="Factory\MyModelFactory\Interface Creators\IFactoryMidia.cs" />
     <Compile Include="Factory\MyModelFactory\Interface Creators\IFactoryPessoa.cs" />
     <Compile Include="Factory\MyModelFactory\Interface Creators\IFactoryQuestao.cs" />
+    <Compile Include="Factory\MyModelFactory\Interface Creators\IFactoryQuestaoRespostaAluno.cs" />
     <Compile Include="Factory\MyModelFactory\Interface Creators\IFactoryTipoQuestao.cs" />
     <Compile Include="Factory\MyModelFactory\Interface Creators\IFactoryTurma.cs" />
     <Compile Include="Factory\MyModelFactory\Interface Creators\IFactoryTurmaAluno.cs" />
     <Compile Include="Factory\MyModelFactory\Interface Creators\IFactoryTurmaDisciplinaAutor.cs" />
     <Compile Include="Factory\MyModelFactory\Matriz Creator\AtividadeMatrizCreator.cs" />
+    <Compile Include="Factory\MyModelFactory\Matriz Creator\AtividadeRespostaAlunoMatrizCreator.cs" />
     <Compile Include="Factory\MyModelFactory\Matriz Creator\DisciplinaTurmaMatrizCreator.cs" />
     <Compile Include="Factory\MyModelFactory\Matriz Creator\EnderecoMatrizCreator.cs" />
     <Compile Include="Factory\MyModelFactory\Matriz Creator\InstituicaoMatrizCreator.cs" />
@@ -228,10 +231,12 @@
     <Compile Include="Factory\MyModelFactory\Matriz Creator\MidiaMatrizCreator.cs" />
     <Compile Include="Factory\MyModelFactory\Matriz Creator\PessoaMatrizCreator.cs" />
     <Compile Include="Factory\MyModelFactory\Matriz Creator\QuestaoMatrizCreator.cs" />
+    <Compile Include="Factory\MyModelFactory\Matriz Creator\QuestaoRespostaAlunoMatrizCreator.cs" />
     <Compile Include="Factory\MyModelFactory\Matriz Creator\TurmaAlunoMatrizCreator.cs" />
     <Compile Include="Factory\MyModelFactory\Matriz Creator\TurmaDisciplinaAutorMatrizCreator.cs" />
     <Compile Include="Factory\MyModelFactory\Matriz Creator\TurmaMatrizCreator.cs" />
     <Compile Include="Factory\MyModelFactory\Professor Creator\AtividadeProfessorCreator.cs" />
+    <Compile Include="Factory\MyModelFactory\Professor Creator\AtividadeRespostaAlunoProfessorCreator.cs" />
     <Compile Include="Factory\MyModelFactory\Professor Creator\DisciplinaProfessorCreator.cs" />
     <Compile Include="Factory\MyModelFactory\Professor Creator\DisciplinaTurmaProfessorCreator.cs" />
     <Compile Include="Factory\MyModelFactory\Professor Creator\EnderecoProfessorCreator.cs" />
@@ -239,6 +244,7 @@
     <Compile Include="Factory\MyModelFactory\Professor Creator\MidiaProfessorCreator.cs" />
     <Compile Include="Factory\MyModelFactory\Professor Creator\PessoaProfessorCreator.cs" />
     <Compile Include="Factory\MyModelFactory\Professor Creator\QuestaoProfessorCreator.cs" />
+    <Compile Include="Factory\MyModelFactory\Professor Creator\QuestaoRespostaAlunoProfessorCreator.cs" />
     <Compile Include="Factory\MyModelFactory\Professor Creator\TurmaAlunoProfessorCreator.cs" />
     <Compile Include="Factory\MyModelFactory\Professor Creator\TurmaDisciplinaAutorProfessorCreator.cs" />
     <Compile Include="Factory\MyModelFactory\Professor Creator\TurmaProfessorCreator.cs" />
@@ -274,7 +280,12 @@
     <Compile Include="Migrations\201911011534000_Atividade nome titulo.designer.cs">
       <DependentUpon>201911011534000_Atividade nome titulo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201911082007303_Resposta Aluno.cs" />
+    <Compile Include="Migrations\201911082007303_Resposta Aluno.designer.cs">
+      <DependentUpon>201911082007303_Resposta Aluno.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\AtividadeRespostaAluno.cs" />
     <Compile Include="Models\DisciplinaTurma.cs" />
     <Compile Include="Context\Context.cs" />
     <Compile Include="Models\Atividade.cs" />
@@ -289,6 +300,7 @@
     <Compile Include="Models\Endereco.cs" />
     <Compile Include="Models\Instituicao.cs" />
     <Compile Include="Models\Disciplina.cs" />
+    <Compile Include="Models\QuestaoRespostaAluno.cs" />
     <Compile Include="Models\TipoQuestao.cs" />
     <Compile Include="Models\Turma.cs" />
     <Compile Include="Models\TurmaAluno.cs" />
@@ -3325,6 +3337,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201911011534000_Atividade nome titulo.resx">
       <DependentUpon>201911011534000_Atividade nome titulo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911082007303_Resposta Aluno.resx">
+      <DependentUpon>201911082007303_Resposta Aluno.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
