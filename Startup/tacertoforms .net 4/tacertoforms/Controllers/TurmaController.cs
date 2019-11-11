@@ -52,7 +52,7 @@ namespace TaCertoForms.Controllers {
             return View(turma);
         }
 
-        [Perfil(Perfil.Administrador)]
+        /*[Perfil(Perfil.Administrador)]
         public ActionResult Delete(int? id) {
             if(id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             Turma turma = Collection.FindTurma(id);
@@ -69,7 +69,7 @@ namespace TaCertoForms.Controllers {
         public ActionResult DeleteConfirmed(int id) {
             Collection.DeleteTurma(id);
             return RedirectToAction("Index");
-        }
+        }*/
 
         //######################### AJAX (Turma Disciplina) #########################
         [HttpGet]

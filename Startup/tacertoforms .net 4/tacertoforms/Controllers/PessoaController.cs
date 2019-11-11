@@ -64,7 +64,7 @@ namespace TaCertoForms.Controllers {
             return View(pessoa);
         }
 
-        [Perfil(Perfil.Administrador)]
+        /*[Perfil(Perfil.Administrador)]
         public ActionResult Delete(int? id) {
             Pessoa pessoa = Collection.FindPessoa(id);
             if(pessoa == null)
@@ -77,6 +77,6 @@ namespace TaCertoForms.Controllers {
         public ActionResult DeleteConfirmed(int id) {
             Collection.DeletePessoa(id);
             return RedirectToAction("Index");
-        }
+        }*/
     }
 }

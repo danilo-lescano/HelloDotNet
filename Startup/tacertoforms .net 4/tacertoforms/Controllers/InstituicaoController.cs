@@ -97,7 +97,7 @@ namespace TaCertoForms.Controllers {
             return RedirectToAction("Index");
         }
 
-        [Perfil(Perfil.Administrador)]
+        /*[Perfil(Perfil.Administrador)]
         public ActionResult Delete(int? id) {
             if(id == null)
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -120,6 +120,6 @@ namespace TaCertoForms.Controllers {
         public ActionResult DeleteConfirmed(int id) {
             Collection.DeleteInstituicao(id);
             return RedirectToAction("Index");
-        }
+        }*/
     }
 }

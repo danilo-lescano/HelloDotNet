@@ -56,7 +56,9 @@
                                 <td>@(item.IsProva ? "Sim" : "Não")</td>
                                 <td>
                                     <a href="@Url.Action("Edit", "Atividade", new { id = item.IdAtividade })" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a>
+                                    <!--
                                     <a href="@Url.Action("Delete", "Atividade", new { id = item.IdAtividade })" class="btn btn-danger btn-xs"><i class="fa fa-remove"></i></a>
+                                    -->
                                 </td>
                             </tr>
                         }
