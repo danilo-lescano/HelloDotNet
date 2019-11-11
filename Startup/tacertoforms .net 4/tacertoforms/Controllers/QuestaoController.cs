@@ -47,6 +47,12 @@ namespace TaCertoForms.Controllers {
         [Perfil(Perfil.Autor)]
         public bool Delete(int? id) {
             if(id == null) return false;
+            Questao questao = Collection.FindQuestao(id);
+            if(questao == null) return false;
+            List<QuestaoRespostaAluno> questaoRespostaALunoList = Collection.QuestaoRespostaAlunoList()?.Where(qra => qra.IdQuestao == id).ToList();
+            if(questaoRespostaALunoList != null)
+                foreach (var qra in questaoRespostaALunoList)
+                    Collection.DeleteQuestaoRespostaAluno(qra.IdQuestaoRespostaAluno);
             return Collection.DeleteQuestao(id);
         }
     }
