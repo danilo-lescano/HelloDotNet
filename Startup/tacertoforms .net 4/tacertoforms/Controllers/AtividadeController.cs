@@ -31,7 +31,7 @@ namespace TaCertoForms.Controllers {
         public ActionResult Create() {
             return View();
         }
-
+        
         [HttpPost]
         [Perfil(Perfil.Autor)]
         public ActionResult Create(ViewModelAtividade vmAtividade) {
@@ -71,13 +71,15 @@ namespace TaCertoForms.Controllers {
 
             //Validações para permissão de edição
             bool edicaoLiberada = true;
-            if (vmAtividade.Atividade.IsProva) {
-                if (vmAtividade.DataInicio <= DateTime.Now) {
-                    edicaoLiberada = false; //Caso o professor esteja tentando editar uma prova que já iniciou, será bloqueado sua edição.
-                }
+            if (vmAtividade.Atividade.IsProva) {               
                 List<Questao> questoes = Collection.FindQuestaoByTypeAndActivity(id, null);
-
-                
+                foreach(var questao in questoes) { 
+                    List<QuestaoRespostaAluno> questaoRespostaAluno = Collection.FindQuestaoRespostaAlunoByQuestao(questao.IdQuestao);
+                    if (questaoRespostaAluno != null && questaoRespostaAluno.Count != 0) {
+                        edicaoLiberada = false;
+                        break;
+                    }
+                }
             }
             ViewBag.EdicaoLiberada = edicaoLiberada;
 
@@ -87,6 +89,18 @@ namespace TaCertoForms.Controllers {
         [HttpPost]
         [Perfil(Perfil.Autor)]
         public ActionResult Edit(ViewModelAtividade vmAtividade) {
+            Atividade atividadeBanco = Collection.FindAtividade(vmAtividade.Atividade.IdAtividade);
+            if (atividadeBanco.IsProva) {                
+                List<Questao> questoes = Collection.FindQuestaoByTypeAndActivity(atividadeBanco.IdAtividade, null);
+                if(questoes != null) { 
+                    foreach (var questao in questoes) {
+                        List<QuestaoRespostaAluno> questaoRespostaAluno = Collection.FindQuestaoRespostaAlunoByQuestao(questao.IdQuestao);
+                        if (questaoRespostaAluno != null && questaoRespostaAluno.Count != 0) { 
+                            return RedirectToAction("Index");                        
+                        }
+                    }
+                }
+            }
             Atividade atividade = vmAtividade.Atividade;
             if(Collection.EditAtividade(atividade) != null)
                 return RedirectToAction("Index");

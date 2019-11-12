@@ -97,6 +97,7 @@ namespace TaCertoForms.Factory{
 
         public List<QuestaoRespostaAluno> QuestaoRespostaAlunoList() => questaoRespostaAlunoMatrizCreator.QuestaoRespostaAlunoList();
         public QuestaoRespostaAluno FindQuestaoRespostaAluno(int? id) => questaoRespostaAlunoMatrizCreator.FindQuestaoRespostaAluno(id);
+        public List<QuestaoRespostaAluno> FindQuestaoRespostaAlunoByQuestao(int? idQuestao) => questaoRespostaAlunoMatrizCreator.FindQuestaoRespostaAlunoByQuestao(idQuestao);        
         public QuestaoRespostaAluno CreateQuestaoRespostaAluno(QuestaoRespostaAluno questaoRespostaAluno) => questaoRespostaAlunoMatrizCreator.CreateQuestaoRespostaAluno(questaoRespostaAluno);
         public QuestaoRespostaAluno EditQuestaoRespostaAluno(QuestaoRespostaAluno questaoRespostaAluno) => questaoRespostaAlunoMatrizCreator.EditQuestaoRespostaAluno(questaoRespostaAluno);
         public bool DeleteQuestaoRespostaAluno(int? id) => questaoRespostaAlunoMatrizCreator.DeleteQuestaoRespostaAluno(id);

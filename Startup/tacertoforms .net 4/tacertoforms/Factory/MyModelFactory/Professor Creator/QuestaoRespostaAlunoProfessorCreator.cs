@@ -2,8 +2,8 @@
 using System.Linq;
 using System.Web;
 
-using TaCertoForms.Models;
 using TaCertoForms.Contexts;
+using TaCertoForms.Models;
 
 namespace TaCertoForms.Factory {
     //CLASSE QuestaoRespostaAlunoProfessorCreator - Responsavel por pegar no banco de dados apenas as QuestaoRespostaAlunos relacionadas a uma determinada matriz
@@ -48,6 +48,33 @@ namespace TaCertoForms.Factory {
 
         public QuestaoRespostaAluno FindQuestaoRespostaAluno(int? id) {
             throw new System.NotImplementedException();
+        }
+
+        public List<QuestaoRespostaAluno> FindQuestaoRespostaAlunoByQuestao(int? idQuestao) {
+            Context db = new Context();
+
+            Pessoa pessoa = db.Pessoa.Find(IdPessoa);
+            List<QuestaoRespostaAluno> questaoRespostaAluno = db.QuestaoRespostaAluno.Where(x => x.IdQuestao == idQuestao).ToList();
+            if (pessoa == null || questaoRespostaAluno == null || questaoRespostaAluno.Count == 0) return null;
+
+            List<int> idAuxList = new List<int>();
+            List<TurmaDisciplinaAutor> turmaDisciplinaAutorList = db.TurmaDisciplinaAutor.Where(tda => tda.IdAutor == pessoa.IdPessoa).ToList();
+            if (turmaDisciplinaAutorList == null || turmaDisciplinaAutorList.Count == 0) return null;
+            foreach (var tda in turmaDisciplinaAutorList) idAuxList.Add(tda.IdTurmaDisciplinaAutor);
+
+            List<Atividade> atividadeList = db.Atividade.Where(dt => idAuxList.Contains(dt.IdTurmaDisciplinaAutor)).ToList();
+            if (atividadeList == null || atividadeList.Count == 0) return null;
+            idAuxList = new List<int>();
+            foreach (var at in atividadeList) idAuxList.Add(at.IdAtividade);
+
+            List<Questao> questaoList = db.Questao.Where(dt => idAuxList.Contains(dt.IdAtividade)).ToList();
+            if (questaoList == null || questaoList.Count == 0) return null;
+            idAuxList = new List<int>();
+            foreach (var q in questaoList) idAuxList.Add(q.IdQuestao);     
+
+            db.Dispose();
+            if (idAuxList.Contains((int)idQuestao)) return questaoRespostaAluno;
+            return null;
         }
 
         public List<QuestaoRespostaAluno> QuestaoRespostaAlunoList() {

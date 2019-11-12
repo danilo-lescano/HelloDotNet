@@ -30,6 +30,11 @@ namespace TaCertoForms.Factory
             throw new System.NotImplementedException();
         }
 
+        public List<QuestaoRespostaAluno> FindQuestaoRespostaAlunoByQuestao(int? idQuestao)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public List<QuestaoRespostaAluno> QuestaoRespostaAlunoList()
         {
             throw new System.NotImplementedException();

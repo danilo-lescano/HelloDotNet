@@ -54,38 +54,91 @@
                             </div>
                             <div class="form-group col-xs-12 col-md-3">
                                 @Html.Label("Período")
-                                @Html.TextBox("Periodo", null, new { @class = "form-control", @type = "text", @id = "periodo", @onchange = "changePeriodo(this.value)" })
+                                @if (ViewBag.EdicaoLiberada)
+                                {
+                                    @Html.TextBox("Periodo", null, new { @class = "form-control", @type = "text", @id = "periodo", @onchange = "changePeriodo(this.value)" })
+                                }
+                                else
+                                {
+                                    @Html.TextBox("Periodo", null, new { @class = "form-control", @type = "text", @id = "periodo-disabled", @onchange = "changePeriodo(this.value)", @disabled = "disabled" })
+                                    @Html.TextBox("Periodo", null, new { @class = "form-control", @type = "hidden", @id = "periodo", @onchange = "changePeriodo(this.value)"})
+                                }
                                 @Html.ValidationMessageFor(model => model.DataInicio, "", new { @class = "text-danger" })
                             </div>
                             <div class="form-group col-xs-12 col-md-3">
                                 @Html.Label("Número de tentativas")
-                                @Html.EditorFor(model => model.NumeroTentativas, new { htmlAttributes = new { @min = 1, @max = 9999999, @class = "form-control" } })
+                                @if (ViewBag.EdicaoLiberada)
+                                {
+                                    @Html.EditorFor(model => model.NumeroTentativas, new { htmlAttributes = new { @min = 1, @max = 9999999, @class = "form-control" } })
+                                }
+                                else
+                                {
+                                    @Html.EditorFor(model => model.NumeroTentativas, new { htmlAttributes = new { @min = 1, @max = 9999999, @class = "form-control", @disabled = "disabled" } })
+                                    @Html.EditorFor(model => model.NumeroTentativas, new { htmlAttributes = new { @min = 1, @max = 9999999, @class = "form-control", @type="hidden"} })
+                                }
                                 @Html.ValidationMessageFor(model => model.NumeroTentativas, "", new { @class = "text-danger" })
                             </div>
                             <div class="form-group col-xs-12 col-md-6">
                                 @Html.Label("Título")
-                                @Html.EditorFor(model => model.Titulo, new { htmlAttributes = new { @class = "form-control" } })
+                                @if (ViewBag.EdicaoLiberada)
+                                {
+                                    @Html.EditorFor(model => model.Titulo, new { htmlAttributes = new { @class = "form-control" } })
+                                }
+                                else
+                                {
+                                    @Html.EditorFor(model => model.Titulo, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+                                    @Html.EditorFor(model => model.Titulo, new { htmlAttributes = new { @class = "form-control", type = "hidden" } })
+                                }
                                 @Html.ValidationMessageFor(model => model.Titulo, "", new { @class = "text-danger" })
                             </div>
                             <div class="form-group col-xs-12 col-md-3">
                                 @Html.Label("É aleatório?")
-                                @Html.DropDownList("IsAleatorio",
-                                new List<SelectListItem> {
-                                    new SelectListItem() { Text = "Sim", Value = true.ToString()},
-                                    new SelectListItem() { Text = "Não", Value = false.ToString()}
-                                },
-                                null,
-                                new { @class = "form-control", @id = "tabela-de-certo-erradoResposta" })
+                                @if (ViewBag.EdicaoLiberada)
+                                {
+                                    @Html.DropDownList("IsAleatorio",
+                                    new List<SelectListItem> {
+                                        new SelectListItem() { Text = "Sim", Value = true.ToString()},
+                                        new SelectListItem() { Text = "Não", Value = false.ToString()}
+                                    },
+                                    null,
+                                    new { @class = "form-control", @id = "tabela-de-certo-erradoIsAleatorio" })
+                                }
+                                else
+                                {
+                                    @Html.DropDownList("IsAleatorio",
+                                   new List<SelectListItem> {
+                                       new SelectListItem() { Text = "Sim", Value = true.ToString()},
+                                       new SelectListItem() { Text = "Não", Value = false.ToString()}
+                                   },
+                                   null,
+                                   new { @class = "form-control", @id = "tabela-de-certo-erradoIsAleatorio", @disabled = "disabled" })
+
+                                    @Html.EditorFor(model => model.IsAleatorio, new { htmlAttributes = new { @class = "form-control", type = "hidden" } })
+                                }
                             </div>
                             <div class="form-group col-xs-12 col-md-3">
                                 @Html.Label("É prova?")
-                                @Html.DropDownList("IsProva",
-                                new List<SelectListItem> {
-                                    new SelectListItem() { Text = "Sim", Value = true.ToString()},
-                                    new SelectListItem() { Text = "Não", Value = false.ToString()}
-                                },
-                                null,
-                                new { @class = "form-control", @id = "tabela-de-certo-erradoResposta" })
+                                @if (ViewBag.EdicaoLiberada)
+                                {
+                                    @Html.DropDownList("IsProva",
+                                    new List<SelectListItem> {
+                                        new SelectListItem() { Text = "Sim", Value = true.ToString()},
+                                        new SelectListItem() { Text = "Não", Value = false.ToString()}
+                                    },
+                                    null,
+                                    new { @class = "form-control", @id = "tabela-de-certo-erradoIsProva" })
+                                }
+                                else
+                                {
+                                    @Html.DropDownList("IsProva",
+                                    new List<SelectListItem> {
+                                        new SelectListItem() { Text = "Sim", Value = true.ToString()},
+                                        new SelectListItem() { Text = "Não", Value = false.ToString()}
+                                    },
+                                    null,
+                                    new { @class = "form-control", @id = "tabela-de-certo-erradoIsProva", @disabled = "disabled" })
+                                    @Html.EditorFor(model => model.IsProva, new { htmlAttributes = new { @class = "form-control", type = "hidden" } })
+                                }
                             </div>
                         </div>
                     </div>
@@ -122,7 +175,7 @@
                                         </li>
                                         <li class="pull-left header"><i class="fa fa-th"></i> Cadastro de Questões</li>
                                     </ul>
-                                    <div class="tab-content">
+                                    <div class="tab-content" style="position: relative">
                                         <!-- tab Listagem de Questões -->
                                         <div class="tab-pane active" id="tab-listagem">
                                             @Html.Partial("QuestoesListagem", @Model)
@@ -144,7 +197,15 @@
                                             @Html.Partial("QuestoesAssociacao", @Model)
                                         </div>
                                         <!-- /.tab-content -->
+                                        @if (!ViewBag.EdicaoLiberada) { 
+                                            <div class="edicao-bloqueada">
+                                                <div class="text">
+                                                    Não é possível editar atividade.
+                                                </div>
+                                            </div>
+                                        }
                                     </div>
+                                    
                                 </div>
                                 <!-- nav-tabs-custom -->
                             </div>
@@ -158,10 +219,6 @@
 }
     </section>
 </div>
-
-<style>
-    .select2-container--default .select2-selection--multiple .select2-selection__choice{color: #000 !important}
-</style>
 <script>
     function changePeriodo(val) {
     }

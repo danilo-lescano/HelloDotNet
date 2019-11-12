@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,6 +11,21 @@ namespace TaCertoForms.Factory {
     public class AtividadeProfessorCreator : BaseCreator, IFactoryAtividade {
         public AtividadeProfessorCreator(HttpSessionStateBase session) : base(session) { }
 
+        private bool HasPermission(Atividade atividade) {
+            Context db = new Context();
+            if (atividade.IsProva) {                
+                List<Questao> questoes = db.Questao.Where(q => q.IdAtividade == atividade.IdAtividade).ToList();
+                if (questoes == null) return true;
+                foreach (var questao in questoes) {
+                    List<QuestaoRespostaAluno> questaoRespostaAluno = db.QuestaoRespostaAluno.Where(x => x.IdQuestao == questao.IdQuestao).ToList();
+                    if (questaoRespostaAluno != null && questaoRespostaAluno.Count != 0) {
+                        return false;                        
+                    }
+                }                
+            }
+            db.Dispose();
+            return true;
+        }
         public List<Atividade> AtividadeList() {
             Context db = new Context();
             List<int> idAuxList;
@@ -47,12 +63,14 @@ namespace TaCertoForms.Factory {
             foreach(var t in tda) idAuxList.Add(t.IdTurmaDisciplinaAutor);
 
             if(!idAuxList.Contains(atividade.IdTurmaDisciplinaAutor)) return null;
-                        
-            db.Atividade.Add(atividade);
-            db.SaveChanges();
-            db.Dispose();
 
-            return atividade;
+            if (HasPermission(atividade)) { 
+                db.Atividade.Add(atividade);
+                db.SaveChanges();
+                db.Dispose();
+                return atividade;
+            }
+            return null;            
         }
 
         public bool DeleteAtividade(int? id) {
@@ -71,7 +89,12 @@ namespace TaCertoForms.Factory {
             if(turmaDisciplinaAutorList == null || turmaDisciplinaAutorList.Count == 0) return null;
             foreach(var tda in turmaDisciplinaAutorList) idAuxList.Add(tda.IdTurmaDisciplinaAutor);
                         
-            if(idAuxList.Contains(atividade.IdTurmaDisciplinaAutor)) {
+            List<Questao> questoes = db.Questao.Where(x => x.IdAtividade == atividade.IdAtividade).ToList();
+            if (questoes != null && questoes.Count > 0) {
+                if (!HasPermission(atividade)) return null;
+            }
+            
+            if (idAuxList.Contains(atividade.IdTurmaDisciplinaAutor)) {
                 db.Dispose();
                 db = new Context();
                 db.Entry(atividade).State = System.Data.Entity.EntityState.Modified;
