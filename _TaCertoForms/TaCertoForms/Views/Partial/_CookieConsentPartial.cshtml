@@ -1,0 +1,30 @@
+﻿@using Microsoft.AspNetCore.Http.Features
+
+@{
+    var consentFeature = Context.Features.Get<ITrackingConsentFeature>();
+    var showBanner = !consentFeature?.CanTrack ?? false;
+    var cookieString = consentFeature?.CreateConsentCookie();
+}
+
+@if(showBanner){
+    <nav id="cookieConsent" class="navbar navbar-default navbar-fixed-top" role="alert">
+        <div class="container">
+            <div class="collapse navbar-collapse">
+                <p class="navbar-text">
+                    Algumas páginas do Tá Certo Forms usam cookies para servi-lo melhor quando você voltar ao site. Você pode aceitar ou recusar o recebimento de cookies. Mas se você recusar, algumas áreas do site podem não funcionar devidamente.
+                </p>
+                <div class="right-align botaoAceitarCookie">
+                    <button type="button" class="btn btn-default navbar-btn" data-cookie-string="@cookieString">Aceitar</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <script>
+        (function () {
+            document.querySelector("#cookieConsent button[data-cookie-string]").addEventListener("click", function (el) {
+                document.cookie = el.target.dataset.cookieString;
+                document.querySelector("#cookieConsent").classList.add("hidden");
+            }, false);
+        })();
+    </script>
+}
