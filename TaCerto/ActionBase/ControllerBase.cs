@@ -8,7 +8,7 @@ using TaCerto.Models;
 
 namespace TaCerto.Forms.Controllers {
     public class ControllerBase : Controller {
-        public List<Type> GetAllEntities(){
+        /*public List<Type> GetAllEntities(){
             string ControllerName = this.GetType().Name.Replace("Controller", "");
             return AppDomain.CurrentDomain.GetAssemblies().SelectMany(x => x.GetTypes())
                 .Where(x => {
@@ -26,6 +26,10 @@ namespace TaCerto.Forms.Controllers {
                     return true;
                 })
                 .Select(x => x).ToList();
+        }*/
+
+        public string GetPath(string controllerName, string viewName){
+            return "~/Proj. " + controllerName + "/Views/" + view + ".cshtml";
         }
     }
 }
