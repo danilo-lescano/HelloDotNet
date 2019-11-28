@@ -31,5 +31,9 @@ namespace TaCerto.Forms.Controllers {
         public string GetPath(string controllerName, string viewName){
             return "~/Proj. " + controllerName + "/Views/" + viewName + ".cshtml";
         }
+        public string GetPath(string viewName){
+            string controllerName = this.GetType().Name.Replace("Controller", "");
+            return GetPath(controllerName, viewName);
+        }
     }
 }

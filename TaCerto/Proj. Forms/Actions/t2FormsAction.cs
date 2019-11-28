@@ -8,8 +8,8 @@ using TaCerto.Models;
 
 namespace TaCerto.Forms.Controllers {
     public partial class FormsController {
-        public string t2(){
-            return "t2";
+        public IActionResult t2(){
+            return View(GetPath("t2"));
         }
     }
 }
