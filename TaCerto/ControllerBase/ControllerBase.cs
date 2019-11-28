@@ -29,7 +29,7 @@ namespace TaCerto.Forms.Controllers {
         }*/
 
         public string GetPath(string controllerName, string viewName){
-            return "~/Proj. " + controllerName + "/Views/" + view + ".cshtml";
+            return "~/Proj. " + controllerName + "/Views/" + viewName + ".cshtml";
         }
     }
 }
